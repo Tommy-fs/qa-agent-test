@@ -12,7 +12,7 @@ class Item(BaseModel):
     content: str
 
 
-@app.get("/test-case")
+@app.get("/test_case")
 def develop(item: Item):
     QAAgent().run(item.id, item.content)
     return {"message": "end"}

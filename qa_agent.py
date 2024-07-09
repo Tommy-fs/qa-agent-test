@@ -2,9 +2,8 @@ import uuid
 
 from core import util
 from core.log_handler import LoggingHandler
-from processes.generate_test_case import GenerateTestCase
-from processes.test_case_review import TestCaseReview
-from processes.test_case_update import TestCaseUpdate
+from processes.test_case.test_case_generate import TestCaseGenerate
+from processes.test_case.test_case_review import TestCaseReview
 
 
 class QAAgent:
@@ -21,7 +20,7 @@ class QAAgent:
                          desc='Generate test case workflow')
 
         jira_request = inputs
-        test_cases = GenerateTestCase().execute(jira_request, log)
+        test_cases = TestCaseGenerate().execute(jira_request, log)
 
         test_cases_review = TestCaseReview().execute(test_cases, jira_request, log)
 

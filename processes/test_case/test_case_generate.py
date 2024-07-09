@@ -9,7 +9,7 @@ from knowledges.project_document import PROJECT_DOCUMENT
 from processes.process import Process
 
 
-class GenerateTestCase(Process):
+class TestCaseGenerate(Process):
 
     def __init__(self):
         super().__init__("generate test case")
