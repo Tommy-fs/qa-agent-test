@@ -3,7 +3,6 @@ import uuid
 from core.llm_chat import LLMChat
 from knowledges.test_case_review import TEST_CASE_REVIEW
 from knowledges.project_document import PROJECT_DOCUMENT
-from knowledges.existing_test_case import EXISTING_TEST_CASE
 from processes.process import Process
 
 
@@ -12,13 +11,13 @@ class TestCaseReview(Process):
     def __init__(self):
         super().__init__("review test case")
 
-    def execute(self, inputs, jira_request, log):
+    def execute(self, inputs, jira_request, existing_test_cases, log):
         generate_id = uuid.uuid1()
         log.on_log_start(generate_id, 'Review test case',
                          desc='Review test case, compare with previous test cases to see if updates or additions are needed.')
 
         parameters = {
-            "existing_test_case": EXISTING_TEST_CASE,
+            "existing_test_case": existing_test_cases,
             "project_document": PROJECT_DOCUMENT,
             "generated_test_cases": inputs,
             "jira_content": jira_request

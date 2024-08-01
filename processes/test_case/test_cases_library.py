@@ -5,7 +5,7 @@ import torch
 from pymilvus.milvus_client import IndexParams
 from transformers import BertModel, BertTokenizer
 
-from pymilvus import MilvusClient, CollectionSchema, FieldSchema, DataType, IndexType
+from pymilvus import MilvusClient, CollectionSchema, FieldSchema, DataType
 
 from core.config import Config
 
@@ -21,7 +21,6 @@ class TestCasesLibrary:
         self.tokenizer = BertTokenizer.from_pretrained('bert-base-uncased')
         self.bert_model = BertModel.from_pretrained('bert-base-uncased')
 
-        client.drop_collection(collection_name=collection_name)
         if not client.has_collection(collection_name=collection_name):
             fields = [
                 FieldSchema(name="id", dtype=DataType.VARCHAR, max_length=256),
@@ -102,7 +101,7 @@ class TestCasesLibrary:
             print(f"Error deleting test case: {e}")
 
     def search_test_cases(self, query_text):
-        topk = 1
+        topk = 2
 
         # tfidf = TfidfVectorizer()
         # query_vector = tfidf.fit_transform([query_text]).toarray()[0]
@@ -125,7 +124,7 @@ class TestCasesLibrary:
             results = []
             for result in search_response:
                 for hit in result:
-                    print(str(hit.get("distance")) + str(hit.get("entity").get("test_case")))
+                    # print(str(hit.get("distance")) + str(hit.get("entity").get("test_case")))
                     results.append(json.loads(hit.get("entity").get("test_case")))
 
             return results[:topk]
@@ -180,6 +179,27 @@ class TestCasesLibrary:
 
         test_case["steps"] = steps
         return test_case
+
+    def reverse_parse_test_case(self, test_case):
+        lines = []
+
+        if "name" in test_case:
+            lines.append(f"Name: {test_case['name']}")
+
+        if "summary" in test_case:
+            lines.append(f"Summary: {test_case['summary']}")
+
+        if "priority" in test_case:
+            lines.append(f"Priority: {test_case['priority']}")
+
+        if "steps" in test_case:
+            lines.append("")
+            lines.append("| No | Step | Data | Expected |")
+            lines.append("|----|------|------|----------|")
+            for step in test_case["steps"]:
+                lines.append(f"| {step['no']} | {step['step']} | {step['data']} | {step['expected']} |")
+
+        return "\n".join(lines)
 
     def get_bert_vector(self, text):
         inputs = self.tokenizer(text, return_tensors='pt')
