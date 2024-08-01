@@ -1,0 +1,292 @@
+
+[test-qa-start 2024-07-11 16:00:22]
+[9fd26344-3f5b-11ef-867b-3c58c25c58c7-start 2024-07-11 16:00:22] step ==> Generate test case workflow ==> Generate test case workflow
+[9fd26345-3f5b-11ef-81ed-3c58c25c58c7-start 2024-07-11 16:00:22] step ==> Generate test case ==> Generate test case base on JIRA Description
+[939470f7-35a7-437d-b400-cbda03fdceb2-start 2024-07-11 16:00:25] step ==> Generate test case ==> Generate test case base on JIRA Description
+
+{"input":"Human: 
+# CONTEXT #
+
+We are a software company, and you are our software test expert, your responsibility is to create test cases.
+
+
+#############
+
+# OBJECTIVE #
+
+I need you create function test cases by project documents and JIRA request, follow below steps:
+1. Read project documents to understand whole project's goals, features, and user expectations.
+2. Review JIRA requests to understand the specific functionalities or changes, you only need to create test cases to test this JIRA request, not for whole project document
+3. Identify the components or modules of the software that need to be tested based on the project documentation and JIRA requests. Categorize them based on their functional areas
+4. Based on the identified components and objectives, create test scenarios. Test scenarios outline the high-level functionality that needs to be tested. Each scenario typically consists of a sequence of steps, inputs, and expected outcomes
+5. Break down each test scenario into detailed test cases. Test cases should cover various possible inputs, configurations, boundary conditions, and potential error scenarios. Ensure that each test case is unambiguous and independent
+6. Determine the necessary test data for executing the test cases. This may involve identifying specific inputs, preconditions, and expected results for each test case. Test data should cover both typical and edge cases.
+7. Test case should have Priority, Name, Summary, Steps.
+8. Write Test Steps as table with  table heads : |No.| Test Step | Test Data | Expected Result |, Test Data means the input in Test Step
+
+
+#############
+
+# PROJECT DOCUMENT #
+
+Ticketing Logic
+In order  to auto create ticket within APAC Loan email management application following 2 steps are required:
+1.Loan Ops Processing queue/DL should be on-boarded  has an ACTIVE Rule created.
+2.Loan Ops has added Prod DL (or UAT DL)as a sub-DL within Loan Ops Prod DL.
+Once above 2 steps are completed, an incoming email on Loan Op Prod DL with auto-create a ticket and will be
+shown under Processing Queue in the left rail within Open Tickets sub-folder
+
+C1-Create new ticket ID:
+New tickets logic DL + Subject + first email body
+detect new ticket logic is :Receiver Email Address + subject (exclude "RE"/"FW") + first email body, example, you send email 1 to CA UAT, will create ticket 001;
+if you reply or forward(don't change subject or email 1 body) won't create new ticket will update in one ticket;
+if you change subject or email 1 body will create new ticket;
+if you send email 1 with subject 1 to CA UAT will create ticket ,
+if you send email 2 with same body and subject to CA UAT, will create new ticket, because you don't reply or FW email, you totally new one email
+1. Send email 1 to Email Address1 with Subject 1, will create new ticket XL001 in Test APP
+2. Reply or forward email 1 with change Subject to Subject 2, will create ticket XL002 in Test APP
+3. After ticket closed in Test APP, reply and forward email will create new ticket in Test APP
+C2-Follow previous ticket ID:
+4.Reply email 1 with subject 1 will follow in same ticket XL001
+5.Forward email and email to/email CC contain DL1 will be captured in same ticket XL001
+C3-BCC Logic:
+6.Ticket logic of BCC will in solution study progress, cover in future version
+
+
+#############
+
+# JIRA REQUEST #
+
+Summary: Ticketing Logic - reply email to create new Ticket 1
+Description: 
+    Reply email 1 with change Subject to Subject 2, will create ticket XL002 in Test APP
+    Steps to Reproduce: 
+        1. Send email with Subject1 to create new ticket XL001
+        2. Reply email with change Subject1 to Subject 2
+    Expected Result: 
+        1. Ticket XL001 is not update
+        2. Ticket XL002 is created with Subject2
+
+
+#############
+
+# TEST PURPOSE #
+Regression Functional testing
+
+#############
+
+# TEST DATA #
+Mock test data by your understanding
+
+#############
+
+# LIMITATION #
+For test data, Email Subject must use this format: Subject-001, Subject-002
+
+#############
+
+# STYLE #
+Style refer to the successful software company, such Google, Microsoft.
+You need to refer to existing Test Cases,  take them as Example, learn writing habit and format to write test case:
+
+#############
+
+#Test Case Example#
+
+Priority: Critical
+Name: TicketingLogic-001
+Summary: Send new email with same body and subject as existing ticket should create new ticket
+Steps：
+|No.| Test Step | Test Data | Expected Result |
+| 1 | Send New Email to DL1 with Subject1 and Body1 | DL1, Subject1, Body1| Create new ticket XL001 in Test APP |
+| 2 | Open Test APP WebUI to check ticket XL001 | XL001 | Ticket XL001 is created with Subject1 and Body1 |
+| 3 | Send New Email to DL1 with Subject1 and Body1 | DL1, Subject1, Body1| Create new ticket XL002 in Test APP |
+| 4 | Open Test APP WebUI to check ticket XL001 | XL001 | Ticket XL001 is not updated |
+| 5 | Open Test APP WebUI to check ticket XL002 | XL002 | Ticket XL002 is created with Subject1 and Body1 |
+
+
+# TONE #
+Professional, technical
+
+#############
+
+# AUDIENCE #
+Test cases should be detailed and easy to understood, junior tester will test system step by step, follow your test case.
+
+#############
+
+# RESPONSE #
+Output test cases steps as table with  table heads : |No.| Test Step | Test Data | Expected Result |, Test Data means the input in Test Step
+
+#############
+
+"}
+
+{"output":"Priority: High
+Name: TicketingLogic-002
+Summary: Reply email with change Subject to create new ticket
+Steps:
+|No.| Test Step | Test Data | Expected Result |
+| 1 | Send email with Subject-001 to create new ticket XL001 | Subject-001 | Create new ticket XL001 in Test APP |
+| 2 | Reply email with change Subject-001 to Subject-002 | Subject-002 | Create new ticket XL002 in Test APP |
+| 3 | Open Test APP WebUI to check ticket XL001 | XL001 | Ticket XL001 is not updated |
+| 4 | Open Test APP WebUI to check ticket XL002 | XL002 | Ticket XL002 is created with Subject-002 |"}
+
+[939470f7-35a7-437d-b400-cbda03fdceb2-end 2024-07-11 16:00:32]
+
+[9fd26345-3f5b-11ef-81ed-3c58c25c58c7-end 2024-07-11 16:00:32]
+[ba502895-3f5b-11ef-98ca-3c58c25c58c7-start 2024-07-11 16:01:07] step ==> Review test case ==> Review test case, compare with previous test cases to see if updates or additions are needed.
+[b4d4e66c-57b5-444a-871d-5b36dee08a74-start 2024-07-11 16:01:09] step ==> Review test case ==> Review test case, compare with previous test cases to see if updates or additions are needed.
+
+{"input":"Human: 
+# CONTEXT #
+We are a software company, and you are our software test expert. There are now some test cases that have just been generated base on Jira request, and you need to compare them with previous test cases to see if they need to be updated or added.
+
+#############
+
+# PROJECT DOCUMENT #
+
+Ticketing Logic
+In order  to auto create ticket within APAC Loan email management application following 2 steps are required:
+1.Loan Ops Processing queue/DL should be on-boarded  has an ACTIVE Rule created.
+2.Loan Ops has added Prod DL (or UAT DL)as a sub-DL within Loan Ops Prod DL.
+Once above 2 steps are completed, an incoming email on Loan Op Prod DL with auto-create a ticket and will be
+shown under Processing Queue in the left rail within Open Tickets sub-folder
+
+C1-Create new ticket ID:
+New tickets logic DL + Subject + first email body
+detect new ticket logic is :Receiver Email Address + subject (exclude "RE"/"FW") + first email body, example, you send email 1 to CA UAT, will create ticket 001;
+if you reply or forward(don't change subject or email 1 body) won't create new ticket will update in one ticket;
+if you change subject or email 1 body will create new ticket;
+if you send email 1 with subject 1 to CA UAT will create ticket ,
+if you send email 2 with same body and subject to CA UAT, will create new ticket, because you don't reply or FW email, you totally new one email
+1. Send email 1 to Email Address1 with Subject 1, will create new ticket XL001 in Test APP
+2. Reply or forward email 1 with change Subject to Subject 2, will create ticket XL002 in Test APP
+3. After ticket closed in Test APP, reply and forward email will create new ticket in Test APP
+C2-Follow previous ticket ID:
+4.Reply email 1 with subject 1 will follow in same ticket XL001
+5.Forward email and email to/email CC contain DL1 will be captured in same ticket XL001
+C3-BCC Logic:
+6.Ticket logic of BCC will in solution study progress, cover in future version
+
+
+#############
+
+# JIRA REQUEST #
+
+Summary: Ticketing Logic - reply email to create new Ticket 1
+Description: 
+    Reply email 1 with change Subject to Subject 2, will create ticket XL002 in Test APP
+    Steps to Reproduce: 
+        1. Send email with Subject1 to create new ticket XL001
+        2. Reply email with change Subject1 to Subject 2
+    Expected Result: 
+        1. Ticket XL001 is not update
+        2. Ticket XL002 is created with Subject2
+
+
+#############
+
+#############
+# EXISTING TEST CASE #
+Name: TicketingLogic-003
+Summary: Reply email with change Subject to create new ticket
+Priority: High
+
+| No | Step | Data | Expected |
+|----|------|------|----------|
+| No. | Test Step | Test Data | Expected Result |
+| 1 | Send email with Subject-001 to create new ticket XL001 | Subject-001 | New ticket XL001 is created in Test APP |
+| 2 | Reply to email XL001 with change Subject-001 to Subject-002 | Subject-002 | New ticket XL002 is created in Test APP |
+| 3 | Open Test APP WebUI to check ticket XL001 | XL001 | Ticket XL001 remains unchanged |
+| 4 | Open Test APP WebUI to check ticket XL002 | XL002 | Ticket XL002 is created with Subject-002 |
+Name: TicketingLogic-002
+Summary: Reply email with changed subject of existing ticket should update old ticket
+Priority: Critical
+
+| No | Step | Data | Expected |
+|----|------|------|----------|
+| No. | Test Step | Test Data | Expected Result |
+| 1 | Send New Email to DL1 with Subject1 and Body1 | DL1, Subject1, Body1 | Create new ticket XL001 in Test APP |
+| 2 | Open Test APP WebUI to check ticket XL001 | XL001 | Ticket XL001 is created with Subject1 and Body1 |
+| 3 | Reply this Email to DL1 with Subject2 | DL1, Subject2 | Update  ticket XL001 in Test APP |
+| 5 | Open Test APP WebUI to check ticket XL001 | XL001 | Ticket XL001 is updated from Subject1 to Subject2 |
+
+# GENERATED TEST CASES #
+Priority: High
+Name: TicketingLogic-002
+Summary: Reply email with change Subject to create new ticket
+Steps:
+|No.| Test Step | Test Data | Expected Result |
+| 1 | Send email with Subject-001 to create new ticket XL001 | Subject-001 | Create new ticket XL001 in Test APP |
+| 2 | Reply email with change Subject-001 to Subject-002 | Subject-002 | Create new ticket XL002 in Test APP |
+| 3 | Open Test APP WebUI to check ticket XL001 | XL001 | Ticket XL001 is not updated |
+| 4 | Open Test APP WebUI to check ticket XL002 | XL002 | Ticket XL002 is created with Subject-002 |
+
+# OBJECTIVE #
+Review test cases by below steps:
+a. Read project document, JIRA request, test summary and test steps of existing test case to understand the logic and requirements
+b. Check the existing test cases and new generated test cases one by one, if the new generated case already exists in the original test case and the logic is the same, then use the original test case
+c. Check the existing test cases and new generated test cases one by one, If the existing test case does not have a similar one with new generated test case, add a new test case
+d. Check the existing test cases and new generated test cases one by one, if the new generated case already exists in the original test case, but the logic is different, the original test case should be updated based on the generated test case
+
+# RESPONSE #
+
+a. The output is divided into three parts. The first part is the original test case that can be reused in this JIRA request. The second part is what was not originally available and needs to be added. The third part is what was originally available but the logic needs to be modified
+b. Output the generated test case which already exists in the original test case library and the logic is the same, which can be used in this JIRA REQUEST
+b. Output the generated test cases that do not exist in the original test cases and need to be added
+c. Output the generated test cases that need to be updated on the original test cases, and provide the updated test cases
+#############
+"}
+
+{"output":"# REUSABLE TEST CASES #
+
+Name: TicketingLogic-002
+Summary: Reply email with change Subject to create new ticket
+Priority: High
+
+| No | Step | Data | Expected |
+|----|------|------|----------|
+| No. | Test Step | Test Data | Expected Result |
+| 1 | Send email with Subject-001 to create new ticket XL001 | Subject-001 | Create new ticket XL001 in Test APP |
+| 2 | Reply email with change Subject-001 to Subject-002 | Subject-002 | Create new ticket XL002 in Test APP |
+| 3 | Open Test APP WebUI to check ticket XL001 | XL001 | Ticket XL001 is not updated |
+| 4 | Open Test APP WebUI to check ticket XL002 | XL002 | Ticket XL002 is created with Subject-002 |
+
+# NEW TEST CASES TO BE ADDED #
+
+Name: TicketingLogic-004
+Summary: Reply email with change Subject to create new ticket
+Priority: High
+
+| No | Step | Data | Expected |
+|----|------|------|----------|
+| No. | Test Step | Test Data | Expected Result |
+| 1 | Send email with Subject-001 to create new ticket XL001 | Subject-001 | Create new ticket XL001 in Test APP |
+| 2 | Reply email with change Subject-001 to Subject-002 | Subject-002 | Create new ticket XL002 in Test APP |
+| 3 | Open Test APP WebUI to check ticket XL001 | XL001 | Ticket XL001 is not updated |
+| 4 | Open Test APP WebUI to check ticket XL002 | XL002 | Ticket XL002 is created with Subject-002 |
+
+# TEST CASES TO BE UPDATED #
+
+Name: TicketingLogic-003
+Summary: Reply email with change Subject to create new ticket
+Priority: High
+
+| No | Step | Data | Expected |
+|----|------|------|----------|
+| No. | Test Step | Test Data | Expected Result |
+| 1 | Send email with Subject-001 to create new ticket XL001 | Subject-001 | New ticket XL001 is created in Test APP |
+| 2 | Reply to email XL001 with change Subject-001 to Subject-002 | Subject-002 | New ticket XL002 is created in Test APP |
+| 3 | Open Test APP WebUI to check ticket XL001 | XL001 | Ticket XL001 remains unchanged |
+| 4 | Open Test APP WebUI to check ticket XL002 | XL002 | Ticket XL002 is created with Subject-002 |"}
+
+[b4d4e66c-57b5-444a-871d-5b36dee08a74-end 2024-07-11 16:01:16]
+
+[ba502895-3f5b-11ef-98ca-3c58c25c58c7-end 2024-07-11 16:01:16]
+[9fd26344-3f5b-11ef-867b-3c58c25c58c7-end 2024-07-11 16:01:16]
+[test-qa-end 2024-07-11 16:01:16]
+[test-qa-start 2024-08-01 11:31:08]
+[7db93a14-4fb6-11ef-8c78-3c58c25c58c7-start 2024-08-01 11:31:08] step ==> Generate test case workflow ==> Generate test case workflow
+[test-qa-start 2024-08-01 11:41:54]
+[fec89f8c-4fb7-11ef-8a14-3c58c25c58c7-start 2024-08-01 11:41:54] step ==> Generate test case workflow ==> Generate test case workflow
