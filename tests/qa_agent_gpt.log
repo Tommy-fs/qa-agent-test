@@ -1,8 +1,21 @@
 
-[test-qa-start 2024-07-11 16:00:22]
-[9fd26344-3f5b-11ef-867b-3c58c25c58c7-start 2024-07-11 16:00:22] step ==> Generate test case workflow ==> Generate test case workflow
-[9fd26345-3f5b-11ef-81ed-3c58c25c58c7-start 2024-07-11 16:00:22] step ==> Generate test case ==> Generate test case base on JIRA Description
-[939470f7-35a7-437d-b400-cbda03fdceb2-start 2024-07-11 16:00:25] step ==> Generate test case ==> Generate test case base on JIRA Description
+[test-qa-start 2024-08-01 16:30:16]
+[47d19d19-4fe0-11ef-b726-3c58c25c58c7-start 2024-08-01 16:30:16] step ==> Generate test case workflow ==> Generate test case workflow
+[47d1c411-4fe0-11ef-a564-3c58c25c58c7-start 2024-08-01 16:30:16] step ==> Generate test case ==> Generate test case base on JIRA Description
+[test-qa-start 2024-08-01 16:31:00]
+[619f1394-4fe0-11ef-82d3-3c58c25c58c7-start 2024-08-01 16:31:00] step ==> Generate test case workflow ==> Generate test case workflow
+[619f1395-4fe0-11ef-b515-3c58c25c58c7-start 2024-08-01 16:31:00] step ==> Generate test case ==> Generate test case base on JIRA Description
+[test-qa-start 2024-08-01 16:31:37]
+[77a00af5-4fe0-11ef-87cd-3c58c25c58c7-start 2024-08-01 16:31:37] step ==> Generate test case workflow ==> Generate test case workflow
+[77a00af6-4fe0-11ef-8845-3c58c25c58c7-start 2024-08-01 16:31:37] step ==> Generate test case ==> Generate test case base on JIRA Description
+[test-qa-start 2024-08-01 16:34:31]
+[dfc183b2-4fe0-11ef-8cf3-3c58c25c58c7-start 2024-08-01 16:34:31] step ==> Generate test case workflow ==> Generate test case workflow
+[dfc183b3-4fe0-11ef-b95e-3c58c25c58c7-start 2024-08-01 16:34:31] step ==> Generate test case ==> Generate test case base on JIRA Description
+[test-qa-start 2024-08-01 16:34:59]
+[f02cb420-4fe0-11ef-9e18-3c58c25c58c7-start 2024-08-01 16:34:59] step ==> Generate test case workflow ==> Generate test case workflow
+[f02cb421-4fe0-11ef-a5d1-3c58c25c58c7-start 2024-08-01 16:34:59] step ==> Generate test case ==> Generate test case base on JIRA Description
+[f9ee7cfd-4fe0-11ef-a73c-3c58c25c58c7-start 2024-08-01 16:35:15] step ==> Modules Identify ==> Modules Identify
+[9baa2a4d-d615-4ab2-a139-257333180804-start 2024-08-01 16:35:17] step ==> Modules Identify ==> Modules Identify
 
 {"input":"Human: 
 # CONTEXT #
@@ -56,91 +69,89 @@ C3-BCC Logic:
 #############
 
 # JIRA REQUEST #
-
-Summary: Ticketing Logic - reply email to create new Ticket 1
-Description: 
-    Reply email 1 with change Subject to Subject 2, will create ticket XL002 in Test APP
-    Steps to Reproduce: 
-        1. Send email with Subject1 to create new ticket XL001
-        2. Reply email with change Subject1 to Subject 2
-    Expected Result: 
-        1. Ticket XL001 is not update
-        2. Ticket XL002 is created with Subject2
-
+Detailed description of jira requirements
 
 #############
 
-# TEST PURPOSE #
-Regression Functional testing
+# OVERALL ARCHITECTURE MODULES#
+One sentence describing the overall architecture modules of the project and the modules related to the Ticketing Logic functionality
 
 #############
 
-# TEST DATA #
-Mock test data by your understanding
+Based on the project documentation and JIRA request, identify the components or modules of the software that need to be tested. Categorize them based on their functional areas.
 
-#############
-
-# LIMITATION #
-For test data, Email Subject must use this format: Subject-001, Subject-002
-
-#############
-
-# STYLE #
-Style refer to the successful software company, such Google, Microsoft.
-You need to refer to existing Test Cases,  take them as Example, learn writing habit and format to write test case:
-
-#############
-
-#Test Case Example#
-
-Priority: Critical
-Name: TicketingLogic-001
-Summary: Send new email with same body and subject as existing ticket should create new ticket
-Steps：
-|No.| Test Step | Test Data | Expected Result |
-| 1 | Send New Email to DL1 with Subject1 and Body1 | DL1, Subject1, Body1| Create new ticket XL001 in Test APP |
-| 2 | Open Test APP WebUI to check ticket XL001 | XL001 | Ticket XL001 is created with Subject1 and Body1 |
-| 3 | Send New Email to DL1 with Subject1 and Body1 | DL1, Subject1, Body1| Create new ticket XL002 in Test APP |
-| 4 | Open Test APP WebUI to check ticket XL001 | XL001 | Ticket XL001 is not updated |
-| 5 | Open Test APP WebUI to check ticket XL002 | XL002 | Ticket XL002 is created with Subject1 and Body1 |
-
-
-# TONE #
-Professional, technical
-
-#############
-
-# AUDIENCE #
-Test cases should be detailed and easy to understood, junior tester will test system step by step, follow your test case.
-
-#############
-
-# RESPONSE #
-Output test cases steps as table with  table heads : |No.| Test Step | Test Data | Expected Result |, Test Data means the input in Test Step
-
-#############
-
+Output the identified components and objectives
 "}
 
-{"output":"Priority: High
-Name: TicketingLogic-002
-Summary: Reply email with change Subject to create new ticket
-Steps:
-|No.| Test Step | Test Data | Expected Result |
-| 1 | Send email with Subject-001 to create new ticket XL001 | Subject-001 | Create new ticket XL001 in Test APP |
-| 2 | Reply email with change Subject-001 to Subject-002 | Subject-002 | Create new ticket XL002 in Test APP |
-| 3 | Open Test APP WebUI to check ticket XL001 | XL001 | Ticket XL001 is not updated |
-| 4 | Open Test APP WebUI to check ticket XL002 | XL002 | Ticket XL002 is created with Subject-002 |"}
+{"output":"Components/Modules to be tested:
+1. Ticket Creation Logic
+2. Ticket Follow-up Logic
+3. BCC Logic
 
-[939470f7-35a7-437d-b400-cbda03fdceb2-end 2024-07-11 16:00:32]
+Objectives:
+1. Test the auto-creation of tickets based on specific criteria
+2. Test the updating and following of existing tickets
+3. Study and plan for future implementation of BCC logic in ticketing system"}
 
-[9fd26345-3f5b-11ef-81ed-3c58c25c58c7-end 2024-07-11 16:00:32]
-[ba502895-3f5b-11ef-98ca-3c58c25c58c7-start 2024-07-11 16:01:07] step ==> Review test case ==> Review test case, compare with previous test cases to see if updates or additions are needed.
-[b4d4e66c-57b5-444a-871d-5b36dee08a74-start 2024-07-11 16:01:09] step ==> Review test case ==> Review test case, compare with previous test cases to see if updates or additions are needed.
+[9baa2a4d-d615-4ab2-a139-257333180804-end 2024-08-01 16:35:19]
+
+[f9ee7cfd-4fe0-11ef-a73c-3c58c25c58c7-end 2024-08-01 16:35:19]
+[test-qa-start 2024-08-01 17:28:41]
+[710c09d7-4fe8-11ef-80f9-3c58c25c58c7-start 2024-08-01 17:28:41] step ==> Generate test case workflow ==> Generate test case workflow
+[710c09d8-4fe8-11ef-8597-3c58c25c58c7-start 2024-08-01 17:28:41] step ==> Generate test case ==> Generate test case base on JIRA Description
+[test-qa-start 2024-08-01 17:33:19]
+[1674a11a-4fe9-11ef-a1bf-3c58c25c58c7-start 2024-08-01 17:33:19] step ==> Generate test case workflow ==> Generate test case workflow
+[1674a11b-4fe9-11ef-a13f-3c58c25c58c7-start 2024-08-01 17:33:19] step ==> Generate test case ==> Generate test case base on JIRA Description
+[test-qa-start 2024-08-01 17:37:30]
+[ac551837-4fe9-11ef-8061-3c58c25c58c7-start 2024-08-01 17:37:30] step ==> Generate test case workflow ==> Generate test case workflow
+[ac551838-4fe9-11ef-884d-3c58c25c58c7-start 2024-08-01 17:37:30] step ==> Generate test case ==> Generate test case base on JIRA Description
+[test-qa-start 2024-08-01 17:38:37]
+[d404d7aa-4fe9-11ef-9b59-3c58c25c58c7-start 2024-08-01 17:38:37] step ==> Generate test case workflow ==> Generate test case workflow
+[d404d7ab-4fe9-11ef-880a-3c58c25c58c7-start 2024-08-01 17:38:37] step ==> Generate test case ==> Generate test case base on JIRA Description
+[test-qa-start 2024-08-01 17:40:52]
+[247c2529-4fea-11ef-bf2c-3c58c25c58c7-start 2024-08-01 17:40:52] step ==> Generate test case workflow ==> Generate test case workflow
+[247c252a-4fea-11ef-b6e2-3c58c25c58c7-start 2024-08-01 17:40:52] step ==> Generate test case ==> Generate test case base on JIRA Description
+[test-qa-start 2024-08-01 17:42:00]
+[4d387b69-4fea-11ef-b1c6-3c58c25c58c7-start 2024-08-01 17:42:00] step ==> Generate test case workflow ==> Generate test case workflow
+[4d387b6a-4fea-11ef-b1ca-3c58c25c58c7-start 2024-08-01 17:42:00] step ==> Generate test case ==> Generate test case base on JIRA Description
+[test-qa-start 2024-08-01 17:42:55]
+[6da54ff1-4fea-11ef-b34d-3c58c25c58c7-start 2024-08-01 17:42:55] step ==> Generate test case workflow ==> Generate test case workflow
+[6da54ff2-4fea-11ef-8af2-3c58c25c58c7-start 2024-08-01 17:42:55] step ==> Generate test case ==> Generate test case base on JIRA Description
+[test-qa-start 2024-08-01 17:44:24]
+[a30498ff-4fea-11ef-b4c2-3c58c25c58c7-start 2024-08-01 17:44:24] step ==> Generate test case workflow ==> Generate test case workflow
+[a3049900-4fea-11ef-b553-3c58c25c58c7-start 2024-08-01 17:44:24] step ==> Generate test case ==> Generate test case base on JIRA Description
+[test-qa-start 2024-08-01 17:45:07]
+[bc91ae0b-4fea-11ef-99ab-3c58c25c58c7-start 2024-08-01 17:45:07] step ==> Generate test case workflow ==> Generate test case workflow
+[bc91ae0c-4fea-11ef-b822-3c58c25c58c7-start 2024-08-01 17:45:07] step ==> Generate test case ==> Generate test case base on JIRA Description
+[d6ea3f1c-4fea-11ef-9bcf-3c58c25c58c7-start 2024-08-01 17:45:51] step ==> Modules Identify ==> Modules Identify
+[feba3971-0fef-4a58-8b6f-ff90e9ad5d43-start 2024-08-01 17:45:53] step ==> Modules Identify ==> Modules Identify
 
 {"input":"Human: 
 # CONTEXT #
-We are a software company, and you are our software test expert. There are now some test cases that have just been generated base on Jira request, and you need to compare them with previous test cases to see if they need to be updated or added.
+
+We are a software company, and you are our software test expert, your responsibility is to create test cases.
+
+
+#############
+
+# OBJECTIVE #
+
+I need you create function test cases by project documents and JIRA request:
+1. Read project documents to understand whole project's goals, features, and user expectations.
+2. Review JIRA requests to understand the specific functionalities or changes, you only need to create test cases to test this JIRA request, not for whole project document
+3. Identify the components or modules of the software that need to be tested based on the project documentation and JIRA requests. Categorize them based on their functional areas
+4. Based on the identified components and objectives, create test scenarios. Test scenarios outline the high-level functionality that needs to be tested. Each scenario typically consists of a sequence of steps, inputs, and expected outcomes
+5. Break down each test scenario into detailed test cases. Test cases should cover various possible inputs, configurations, boundary conditions, and potential error scenarios. Ensure that each test case is unambiguous and independent
+6. Determine the necessary test data for executing the test cases. This may involve identifying specific inputs, preconditions, and expected results for each test case. Test data should cover both typical and edge cases.
+7. Prioritize the test cases based on factors like criticality, risk, and dependencies to 5 levels. Organize them into test suites to facilitate efficient test execution order by priority
+8. Output test suites with test cases as a table
+9. Test case should have Priority, Name, Summary, Steps.
+10. Write Test Steps as table with  table heads : |No.| Test Step | Test Data | Expected Result |, Test Data means the input in Test Step
+11. Review existing test cases by below steps:
+	a. Read test summary and test steps of existing test case to understand the logic and requirements
+	b. Check the existing test cases one by one, if test case logic is updated by this JIRA, update test case with new JIRA requirements, then report the update details
+	c. Check new generated test cases one by one, if new generated test case is same as existing test case, then use the existing test case and remove new test generated test case
+
 
 #############
 
@@ -173,120 +184,405 @@ C3-BCC Logic:
 #############
 
 # JIRA REQUEST #
-
-Summary: Ticketing Logic - reply email to create new Ticket 1
-Description: 
-    Reply email 1 with change Subject to Subject 2, will create ticket XL002 in Test APP
-    Steps to Reproduce: 
-        1. Send email with Subject1 to create new ticket XL001
-        2. Reply email with change Subject1 to Subject 2
-    Expected Result: 
-        1. Ticket XL001 is not update
-        2. Ticket XL002 is created with Subject2
-
+Detailed description of jira requirements
 
 #############
 
+# OVERALL ARCHITECTURE MODULES#
+One sentence describing the overall architecture modules of the project and the modules related to this JIRA requirement
+
 #############
-# EXISTING TEST CASE #
-Name: TicketingLogic-003
-Summary: Reply email with change Subject to create new ticket
-Priority: High
 
-| No | Step | Data | Expected |
-|----|------|------|----------|
-| No. | Test Step | Test Data | Expected Result |
-| 1 | Send email with Subject-001 to create new ticket XL001 | Subject-001 | New ticket XL001 is created in Test APP |
-| 2 | Reply to email XL001 with change Subject-001 to Subject-002 | Subject-002 | New ticket XL002 is created in Test APP |
-| 3 | Open Test APP WebUI to check ticket XL001 | XL001 | Ticket XL001 remains unchanged |
-| 4 | Open Test APP WebUI to check ticket XL002 | XL002 | Ticket XL002 is created with Subject-002 |
-Name: TicketingLogic-002
-Summary: Reply email with changed subject of existing ticket should update old ticket
-Priority: Critical
+Based on the project documentation and JIRA request, identify the components or modules of the software that need to be tested. Categorize them based on their functional areas.
 
-| No | Step | Data | Expected |
-|----|------|------|----------|
-| No. | Test Step | Test Data | Expected Result |
-| 1 | Send New Email to DL1 with Subject1 and Body1 | DL1, Subject1, Body1 | Create new ticket XL001 in Test APP |
-| 2 | Open Test APP WebUI to check ticket XL001 | XL001 | Ticket XL001 is created with Subject1 and Body1 |
-| 3 | Reply this Email to DL1 with Subject2 | DL1, Subject2 | Update  ticket XL001 in Test APP |
-| 5 | Open Test APP WebUI to check ticket XL001 | XL001 | Ticket XL001 is updated from Subject1 to Subject2 |
-
-# GENERATED TEST CASES #
-Priority: High
-Name: TicketingLogic-002
-Summary: Reply email with change Subject to create new ticket
-Steps:
-|No.| Test Step | Test Data | Expected Result |
-| 1 | Send email with Subject-001 to create new ticket XL001 | Subject-001 | Create new ticket XL001 in Test APP |
-| 2 | Reply email with change Subject-001 to Subject-002 | Subject-002 | Create new ticket XL002 in Test APP |
-| 3 | Open Test APP WebUI to check ticket XL001 | XL001 | Ticket XL001 is not updated |
-| 4 | Open Test APP WebUI to check ticket XL002 | XL002 | Ticket XL002 is created with Subject-002 |
-
-# OBJECTIVE #
-Review test cases by below steps:
-a. Read project document, JIRA request, test summary and test steps of existing test case to understand the logic and requirements
-b. Check the existing test cases and new generated test cases one by one, if the new generated case already exists in the original test case and the logic is the same, then use the original test case
-c. Check the existing test cases and new generated test cases one by one, If the existing test case does not have a similar one with new generated test case, add a new test case
-d. Check the existing test cases and new generated test cases one by one, if the new generated case already exists in the original test case, but the logic is different, the original test case should be updated based on the generated test case
-
-# RESPONSE #
-
-a. The output is divided into three parts. The first part is the original test case that can be reused in this JIRA request. The second part is what was not originally available and needs to be added. The third part is what was originally available but the logic needs to be modified
-b. Output the generated test case which already exists in the original test case library and the logic is the same, which can be used in this JIRA REQUEST
-b. Output the generated test cases that do not exist in the original test cases and need to be added
-c. Output the generated test cases that need to be updated on the original test cases, and provide the updated test cases
-#############
+Output the identified components and objectives
 "}
 
-{"output":"# REUSABLE TEST CASES #
+{"output":"Components/Modules to be tested:
+1. Ticketing Logic Module
+2. Email Management Module
 
-Name: TicketingLogic-002
-Summary: Reply email with change Subject to create new ticket
-Priority: High
+Objectives:
+1. Test the auto-creation of tickets within the APAC Loan email management application based on specific criteria
+2. Verify the creation of new ticket IDs based on email content and subject
+3. Validate the logic for following previous ticket IDs
+4. Test the BCC logic for ticket creation (to be covered in future versions)"}
 
-| No | Step | Data | Expected |
-|----|------|------|----------|
-| No. | Test Step | Test Data | Expected Result |
-| 1 | Send email with Subject-001 to create new ticket XL001 | Subject-001 | Create new ticket XL001 in Test APP |
-| 2 | Reply email with change Subject-001 to Subject-002 | Subject-002 | Create new ticket XL002 in Test APP |
-| 3 | Open Test APP WebUI to check ticket XL001 | XL001 | Ticket XL001 is not updated |
-| 4 | Open Test APP WebUI to check ticket XL002 | XL002 | Ticket XL002 is created with Subject-002 |
+[feba3971-0fef-4a58-8b6f-ff90e9ad5d43-end 2024-08-01 17:45:55]
 
-# NEW TEST CASES TO BE ADDED #
+[d6ea3f1c-4fea-11ef-9bcf-3c58c25c58c7-end 2024-08-01 17:45:55]
+[test-qa-start 2024-08-01 17:48:30]
+[352fd852-4feb-11ef-9073-3c58c25c58c7-start 2024-08-01 17:48:30] step ==> Generate test case workflow ==> Generate test case workflow
+[352fd853-4feb-11ef-83a0-3c58c25c58c7-start 2024-08-01 17:48:30] step ==> Generate test case ==> Generate test case base on JIRA Description
+[3bb94b83-4feb-11ef-b66b-3c58c25c58c7-start 2024-08-01 17:48:40] step ==> Modules Identify ==> Modules Identify
+[8c5b2f11-e6e5-42c7-a787-cab546e10a8f-start 2024-08-01 17:48:42] step ==> Modules Identify ==> Modules Identify
 
-Name: TicketingLogic-004
-Summary: Reply email with change Subject to create new ticket
-Priority: High
+{"input":"Human: 
+# CONTEXT #
 
-| No | Step | Data | Expected |
-|----|------|------|----------|
-| No. | Test Step | Test Data | Expected Result |
-| 1 | Send email with Subject-001 to create new ticket XL001 | Subject-001 | Create new ticket XL001 in Test APP |
-| 2 | Reply email with change Subject-001 to Subject-002 | Subject-002 | Create new ticket XL002 in Test APP |
-| 3 | Open Test APP WebUI to check ticket XL001 | XL001 | Ticket XL001 is not updated |
-| 4 | Open Test APP WebUI to check ticket XL002 | XL002 | Ticket XL002 is created with Subject-002 |
+We are a software company, and you are our software test expert, your responsibility is to create test cases.
 
-# TEST CASES TO BE UPDATED #
 
-Name: TicketingLogic-003
-Summary: Reply email with change Subject to create new ticket
-Priority: High
+#############
 
-| No | Step | Data | Expected |
-|----|------|------|----------|
-| No. | Test Step | Test Data | Expected Result |
-| 1 | Send email with Subject-001 to create new ticket XL001 | Subject-001 | New ticket XL001 is created in Test APP |
-| 2 | Reply to email XL001 with change Subject-001 to Subject-002 | Subject-002 | New ticket XL002 is created in Test APP |
-| 3 | Open Test APP WebUI to check ticket XL001 | XL001 | Ticket XL001 remains unchanged |
-| 4 | Open Test APP WebUI to check ticket XL002 | XL002 | Ticket XL002 is created with Subject-002 |"}
+# OBJECTIVE #
 
-[b4d4e66c-57b5-444a-871d-5b36dee08a74-end 2024-07-11 16:01:16]
+I need you create function test cases by project documents and JIRA request:
+1. Read project documents to understand whole project's goals, features, and user expectations.
+2. Review JIRA requests to understand the specific functionalities or changes, you only need to create test cases to test this JIRA request, not for whole project document
+3. Identify the components or modules of the software that need to be tested based on the project documentation and JIRA requests. Categorize them based on their functional areas
+4. Based on the identified components and objectives, create test scenarios. Test scenarios outline the high-level functionality that needs to be tested. Each scenario typically consists of a sequence of steps, inputs, and expected outcomes
+5. Break down each test scenario into detailed test cases. Test cases should cover various possible inputs, configurations, boundary conditions, and potential error scenarios. Ensure that each test case is unambiguous and independent
+6. Determine the necessary test data for executing the test cases. This may involve identifying specific inputs, preconditions, and expected results for each test case. Test data should cover both typical and edge cases.
+7. Prioritize the test cases based on factors like criticality, risk, and dependencies to 5 levels. Organize them into test suites to facilitate efficient test execution order by priority
+8. Output test suites with test cases as a table
+9. Test case should have Priority, Name, Summary, Steps.
+10. Write Test Steps as table with  table heads : |No.| Test Step | Test Data | Expected Result |, Test Data means the input in Test Step
+11. Review existing test cases by below steps:
+	a. Read test summary and test steps of existing test case to understand the logic and requirements
+	b. Check the existing test cases one by one, if test case logic is updated by this JIRA, update test case with new JIRA requirements, then report the update details
+	c. Check new generated test cases one by one, if new generated test case is same as existing test case, then use the existing test case and remove new test generated test case
 
-[ba502895-3f5b-11ef-98ca-3c58c25c58c7-end 2024-07-11 16:01:16]
-[9fd26344-3f5b-11ef-867b-3c58c25c58c7-end 2024-07-11 16:01:16]
-[test-qa-end 2024-07-11 16:01:16]
-[test-qa-start 2024-08-01 11:31:08]
-[7db93a14-4fb6-11ef-8c78-3c58c25c58c7-start 2024-08-01 11:31:08] step ==> Generate test case workflow ==> Generate test case workflow
-[test-qa-start 2024-08-01 11:41:54]
-[fec89f8c-4fb7-11ef-8a14-3c58c25c58c7-start 2024-08-01 11:41:54] step ==> Generate test case workflow ==> Generate test case workflow
+
+#############
+
+# PROJECT DOCUMENT #
+
+Ticketing Logic
+In order  to auto create ticket within APAC Loan email management application following 2 steps are required:
+1.Loan Ops Processing queue/DL should be on-boarded  has an ACTIVE Rule created.
+2.Loan Ops has added Prod DL (or UAT DL)as a sub-DL within Loan Ops Prod DL.
+Once above 2 steps are completed, an incoming email on Loan Op Prod DL with auto-create a ticket and will be
+shown under Processing Queue in the left rail within Open Tickets sub-folder
+
+C1-Create new ticket ID:
+New tickets logic DL + Subject + first email body
+detect new ticket logic is :Receiver Email Address + subject (exclude "RE"/"FW") + first email body, example, you send email 1 to CA UAT, will create ticket 001;
+if you reply or forward(don't change subject or email 1 body) won't create new ticket will update in one ticket;
+if you change subject or email 1 body will create new ticket;
+if you send email 1 with subject 1 to CA UAT will create ticket ,
+if you send email 2 with same body and subject to CA UAT, will create new ticket, because you don't reply or FW email, you totally new one email
+1. Send email 1 to Email Address1 with Subject 1, will create new ticket XL001 in Test APP
+2. Reply or forward email 1 with change Subject to Subject 2, will create ticket XL002 in Test APP
+3. After ticket closed in Test APP, reply and forward email will create new ticket in Test APP
+C2-Follow previous ticket ID:
+4.Reply email 1 with subject 1 will follow in same ticket XL001
+5.Forward email and email to/email CC contain DL1 will be captured in same ticket XL001
+C3-BCC Logic:
+6.Ticket logic of BCC will in solution study progress, cover in future version
+
+
+#############
+
+# JIRA REQUEST #
+Detailed description of jira requirements
+
+#############
+
+# OVERALL ARCHITECTURE MODULES#
+One sentence describing the overall architecture modules of the project and the modules related to this JIRA requirement
+
+#############
+
+Based on the project documentation and JIRA request, identify the components or modules of the software that need to be tested. Categorize them based on their functional areas.
+
+Output the identified components and objectives
+"}
+
+{"output":"Components/Modules to be tested:
+1. Ticketing Logic Module
+2. Email Management Module
+
+Objectives:
+1. Test the auto-creation of tickets within the APAC Loan email management application based on specific criteria
+2. Validate the creation of new tickets based on email content and subject
+3. Verify the follow-up functionality for existing tickets
+4. Test the handling of BCC logic in ticket creation
+
+Functional Areas:
+1. Ticket Creation
+2. Ticket Follow-up
+3. BCC Logic"}
+
+[8c5b2f11-e6e5-42c7-a787-cab546e10a8f-end 2024-08-01 17:48:44]
+
+[3bb94b83-4feb-11ef-b66b-3c58c25c58c7-end 2024-08-01 17:48:44]
+[test-qa-start 2024-08-01 17:49:05]
+[4a7627a2-4feb-11ef-bd3d-3c58c25c58c7-start 2024-08-01 17:49:05] step ==> Generate test case workflow ==> Generate test case workflow
+[4a7627a3-4feb-11ef-8977-3c58c25c58c7-start 2024-08-01 17:49:05] step ==> Generate test case ==> Generate test case base on JIRA Description
+[a7dc690f-4feb-11ef-804a-3c58c25c58c7-start 2024-08-01 17:51:42] step ==> Modules Identify ==> Modules Identify
+[0e941853-e8d3-469a-9a05-0cc55a198088-start 2024-08-01 17:51:44] step ==> Modules Identify ==> Modules Identify
+
+{"input":"Human: 
+# CONTEXT #
+
+We are a software company, and you are our software test expert, your responsibility is to create test cases.
+
+
+#############
+
+# OBJECTIVE #
+
+I need you create function test cases by project documents and JIRA request:
+1. Read project documents to understand whole project's goals, features, and user expectations.
+2. Review JIRA requests to understand the specific functionalities or changes, you only need to create test cases to test this JIRA request, not for whole project document
+3. Identify the components or modules of the software that need to be tested based on the project documentation and JIRA requests. Categorize them based on their functional areas
+4. Based on the identified components and objectives, create test scenarios. Test scenarios outline the high-level functionality that needs to be tested. Each scenario typically consists of a sequence of steps, inputs, and expected outcomes
+5. Break down each test scenario into detailed test cases. Test cases should cover various possible inputs, configurations, boundary conditions, and potential error scenarios. Ensure that each test case is unambiguous and independent
+6. Determine the necessary test data for executing the test cases. This may involve identifying specific inputs, preconditions, and expected results for each test case. Test data should cover both typical and edge cases.
+7. Prioritize the test cases based on factors like criticality, risk, and dependencies to 5 levels. Organize them into test suites to facilitate efficient test execution order by priority
+8. Output test suites with test cases as a table
+9. Test case should have Priority, Name, Summary, Steps.
+10. Write Test Steps as table with  table heads : |No.| Test Step | Test Data | Expected Result |, Test Data means the input in Test Step
+11. Review existing test cases by below steps:
+	a. Read test summary and test steps of existing test case to understand the logic and requirements
+	b. Check the existing test cases one by one, if test case logic is updated by this JIRA, update test case with new JIRA requirements, then report the update details
+	c. Check new generated test cases one by one, if new generated test case is same as existing test case, then use the existing test case and remove new test generated test case
+
+
+#############
+
+# PROJECT DOCUMENT #
+
+Ticketing Logic
+In order  to auto create ticket within APAC Loan email management application following 2 steps are required:
+1.Loan Ops Processing queue/DL should be on-boarded  has an ACTIVE Rule created.
+2.Loan Ops has added Prod DL (or UAT DL)as a sub-DL within Loan Ops Prod DL.
+Once above 2 steps are completed, an incoming email on Loan Op Prod DL with auto-create a ticket and will be
+shown under Processing Queue in the left rail within Open Tickets sub-folder
+
+C1-Create new ticket ID:
+New tickets logic DL + Subject + first email body
+detect new ticket logic is :Receiver Email Address + subject (exclude "RE"/"FW") + first email body, example, you send email 1 to CA UAT, will create ticket 001;
+if you reply or forward(don't change subject or email 1 body) won't create new ticket will update in one ticket;
+if you change subject or email 1 body will create new ticket;
+if you send email 1 with subject 1 to CA UAT will create ticket ,
+if you send email 2 with same body and subject to CA UAT, will create new ticket, because you don't reply or FW email, you totally new one email
+1. Send email 1 to Email Address1 with Subject 1, will create new ticket XL001 in Test APP
+2. Reply or forward email 1 with change Subject to Subject 2, will create ticket XL002 in Test APP
+3. After ticket closed in Test APP, reply and forward email will create new ticket in Test APP
+C2-Follow previous ticket ID:
+4.Reply email 1 with subject 1 will follow in same ticket XL001
+5.Forward email and email to/email CC contain DL1 will be captured in same ticket XL001
+C3-BCC Logic:
+6.Ticket logic of BCC will in solution study progress, cover in future version
+
+
+#############
+
+# JIRA REQUEST #
+Detailed description of jira requirements
+
+#############
+
+# OVERALL ARCHITECTURE MODULES#
+One sentence describing the overall architecture modules of the project and the modules related to this JIRA requirement
+
+#############
+
+Based on the project documentation and JIRA request, identify the components or modules of the software that need to be tested. Categorize them based on their functional areas.
+
+Output the identified components and objectives
+"}
+
+{"output":"Components/Modules to be tested:
+1. Ticketing Logic Module
+2. Email Management Module
+
+Objectives:
+1. Test the auto-creation of tickets within the APAC Loan email management application based on specific criteria
+2. Validate the creation of new tickets based on email content and subject
+3. Verify the logic for following previous ticket IDs
+4. Test the BCC logic for tickets (future version)"}
+
+[0e941853-e8d3-469a-9a05-0cc55a198088-end 2024-08-01 17:51:46]
+
+[a7dc690f-4feb-11ef-804a-3c58c25c58c7-end 2024-08-01 17:51:46]
+[test-qa-start 2024-08-01 17:52:40]
+[cab54276-4feb-11ef-a9db-3c58c25c58c7-start 2024-08-01 17:52:40] step ==> Generate test case workflow ==> Generate test case workflow
+[cab54277-4feb-11ef-9613-3c58c25c58c7-start 2024-08-01 17:52:40] step ==> Generate test case ==> Generate test case base on JIRA Description
+[d965da45-4feb-11ef-9c80-3c58c25c58c7-start 2024-08-01 17:53:05] step ==> Modules Identify ==> Modules Identify
+[6fbe6ebd-fd8b-4960-a7a8-b56aa04f6cec-start 2024-08-01 17:53:07] step ==> Modules Identify ==> Modules Identify
+
+{"input":"Human: 
+# CONTEXT #
+
+We are a software company, and you are our software test expert, your responsibility is to create test cases.
+
+
+#############
+
+# OBJECTIVE #
+
+I need you create function test cases by project documents and JIRA request:
+1. Read project documents to understand whole project's goals, features, and user expectations.
+2. Review JIRA requests to understand the specific functionalities or changes, you only need to create test cases to test this JIRA request, not for whole project document
+3. Identify the components or modules of the software that need to be tested based on the project documentation and JIRA requests. Categorize them based on their functional areas
+4. Based on the identified components and objectives, create test scenarios. Test scenarios outline the high-level functionality that needs to be tested. Each scenario typically consists of a sequence of steps, inputs, and expected outcomes
+5. Break down each test scenario into detailed test cases. Test cases should cover various possible inputs, configurations, boundary conditions, and potential error scenarios. Ensure that each test case is unambiguous and independent
+6. Determine the necessary test data for executing the test cases. This may involve identifying specific inputs, preconditions, and expected results for each test case. Test data should cover both typical and edge cases.
+7. Prioritize the test cases based on factors like criticality, risk, and dependencies to 5 levels. Organize them into test suites to facilitate efficient test execution order by priority
+8. Output test suites with test cases as a table
+9. Test case should have Priority, Name, Summary, Steps.
+10. Write Test Steps as table with  table heads : |No.| Test Step | Test Data | Expected Result |, Test Data means the input in Test Step
+11. Review existing test cases by below steps:
+	a. Read test summary and test steps of existing test case to understand the logic and requirements
+	b. Check the existing test cases one by one, if test case logic is updated by this JIRA, update test case with new JIRA requirements, then report the update details
+	c. Check new generated test cases one by one, if new generated test case is same as existing test case, then use the existing test case and remove new test generated test case
+
+
+#############
+
+# PROJECT DOCUMENT #
+
+Ticketing Logic
+In order  to auto create ticket within APAC Loan email management application following 2 steps are required:
+1.Loan Ops Processing queue/DL should be on-boarded  has an ACTIVE Rule created.
+2.Loan Ops has added Prod DL (or UAT DL)as a sub-DL within Loan Ops Prod DL.
+Once above 2 steps are completed, an incoming email on Loan Op Prod DL with auto-create a ticket and will be
+shown under Processing Queue in the left rail within Open Tickets sub-folder
+
+C1-Create new ticket ID:
+New tickets logic DL + Subject + first email body
+detect new ticket logic is :Receiver Email Address + subject (exclude "RE"/"FW") + first email body, example, you send email 1 to CA UAT, will create ticket 001;
+if you reply or forward(don't change subject or email 1 body) won't create new ticket will update in one ticket;
+if you change subject or email 1 body will create new ticket;
+if you send email 1 with subject 1 to CA UAT will create ticket ,
+if you send email 2 with same body and subject to CA UAT, will create new ticket, because you don't reply or FW email, you totally new one email
+1. Send email 1 to Email Address1 with Subject 1, will create new ticket XL001 in Test APP
+2. Reply or forward email 1 with change Subject to Subject 2, will create ticket XL002 in Test APP
+3. After ticket closed in Test APP, reply and forward email will create new ticket in Test APP
+C2-Follow previous ticket ID:
+4.Reply email 1 with subject 1 will follow in same ticket XL001
+5.Forward email and email to/email CC contain DL1 will be captured in same ticket XL001
+C3-BCC Logic:
+6.Ticket logic of BCC will in solution study progress, cover in future version
+
+
+#############
+
+# JIRA REQUEST #
+Detailed description of jira requirements
+
+#############
+
+# OVERALL ARCHITECTURE MODULES#
+One sentence describing the overall architecture modules of the project and the modules related to this JIRA requirement
+
+#############
+
+Based on the project documentation and JIRA request, identify the components or modules of the software that need to be tested. Categorize them based on their functional areas.
+
+Output the identified components and objectives
+"}
+
+{"output":"Components/Modules to be tested:
+1. Ticketing Logic Module
+2. Email Management Module
+
+Objectives:
+1. Test the auto-creation of tickets within the APAC Loan email management application based on specific criteria
+2. Validate the creation of new tickets based on email content and subject
+3. Verify the logic for following previous ticket IDs
+4. Test the BCC logic for ticket creation (future version)"}
+
+[6fbe6ebd-fd8b-4960-a7a8-b56aa04f6cec-end 2024-08-01 17:53:09]
+
+[d965da45-4feb-11ef-9c80-3c58c25c58c7-end 2024-08-01 17:53:09]
+[test-qa-start 2024-08-01 17:55:56]
+[3f1e1b46-4fec-11ef-9c65-3c58c25c58c7-start 2024-08-01 17:55:56] step ==> Generate test case workflow ==> Generate test case workflow
+[3f1e1b47-4fec-11ef-9b0a-3c58c25c58c7-start 2024-08-01 17:55:56] step ==> Generate test case ==> Generate test case base on JIRA Description
+[4a24eb75-4fec-11ef-8d7a-3c58c25c58c7-start 2024-08-01 17:56:14] step ==> Modules Identify ==> Modules Identify
+[3f940e80-b8a6-4663-a7f7-684249e4fb58-start 2024-08-01 17:56:16] step ==> Modules Identify ==> Modules Identify
+
+{"input":"Human: 
+# CONTEXT #
+
+We are a software company, and you are our software test expert, your responsibility is to create test cases.
+
+
+#############
+
+# OBJECTIVE #
+
+I need you create function test cases by project documents and JIRA request:
+1. Read project documents to understand whole project's goals, features, and user expectations.
+2. Review JIRA requests to understand the specific functionalities or changes, you only need to create test cases to test this JIRA request, not for whole project document
+3. Identify the components or modules of the software that need to be tested based on the project documentation and JIRA requests. Categorize them based on their functional areas
+4. Based on the identified components and objectives, create test scenarios. Test scenarios outline the high-level functionality that needs to be tested. Each scenario typically consists of a sequence of steps, inputs, and expected outcomes
+5. Break down each test scenario into detailed test cases. Test cases should cover various possible inputs, configurations, boundary conditions, and potential error scenarios. Ensure that each test case is unambiguous and independent
+6. Determine the necessary test data for executing the test cases. This may involve identifying specific inputs, preconditions, and expected results for each test case. Test data should cover both typical and edge cases.
+7. Prioritize the test cases based on factors like criticality, risk, and dependencies to 5 levels. Organize them into test suites to facilitate efficient test execution order by priority
+8. Output test suites with test cases as a table
+9. Test case should have Priority, Name, Summary, Steps.
+10. Write Test Steps as table with  table heads : |No.| Test Step | Test Data | Expected Result |, Test Data means the input in Test Step
+11. Review existing test cases by below steps:
+	a. Read test summary and test steps of existing test case to understand the logic and requirements
+	b. Check the existing test cases one by one, if test case logic is updated by this JIRA, update test case with new JIRA requirements, then report the update details
+	c. Check new generated test cases one by one, if new generated test case is same as existing test case, then use the existing test case and remove new test generated test case
+
+
+#############
+
+# PROJECT DOCUMENT #
+
+Ticketing Logic
+In order  to auto create ticket within APAC Loan email management application following 2 steps are required:
+1.Loan Ops Processing queue/DL should be on-boarded  has an ACTIVE Rule created.
+2.Loan Ops has added Prod DL (or UAT DL)as a sub-DL within Loan Ops Prod DL.
+Once above 2 steps are completed, an incoming email on Loan Op Prod DL with auto-create a ticket and will be
+shown under Processing Queue in the left rail within Open Tickets sub-folder
+
+C1-Create new ticket ID:
+New tickets logic DL + Subject + first email body
+detect new ticket logic is :Receiver Email Address + subject (exclude "RE"/"FW") + first email body, example, you send email 1 to CA UAT, will create ticket 001;
+if you reply or forward(don't change subject or email 1 body) won't create new ticket will update in one ticket;
+if you change subject or email 1 body will create new ticket;
+if you send email 1 with subject 1 to CA UAT will create ticket ,
+if you send email 2 with same body and subject to CA UAT, will create new ticket, because you don't reply or FW email, you totally new one email
+1. Send email 1 to Email Address1 with Subject 1, will create new ticket XL001 in Test APP
+2. Reply or forward email 1 with change Subject to Subject 2, will create ticket XL002 in Test APP
+3. After ticket closed in Test APP, reply and forward email will create new ticket in Test APP
+C2-Follow previous ticket ID:
+4.Reply email 1 with subject 1 will follow in same ticket XL001
+5.Forward email and email to/email CC contain DL1 will be captured in same ticket XL001
+C3-BCC Logic:
+6.Ticket logic of BCC will in solution study progress, cover in future version
+
+
+#############
+
+# JIRA REQUEST #
+Detailed description of jira requirements
+
+#############
+
+# OVERALL ARCHITECTURE MODULES#
+One sentence describing the overall architecture modules of the project and the modules related to this JIRA requirement
+
+#############
+
+Based on the project documentation and JIRA request, identify the components or modules of the software that need to be tested. Categorize them based on their functional areas.
+
+Output the identified components and objectives
+"}
+
+{"output":"Components/Modules to be tested:
+1. Ticketing Logic Module
+2. Email Management Module
+
+Objectives:
+1. Test the auto-creation of tickets within the APAC Loan email management application based on specific criteria
+2. Validate the creation of new tickets based on email content and subject
+3. Verify the logic for following previous ticket IDs
+4. Test the BCC logic for tickets (to be covered in future versions)"}
+
+[3f940e80-b8a6-4663-a7f7-684249e4fb58-end 2024-08-01 17:56:18]
+
+[4a24eb75-4fec-11ef-8d7a-3c58c25c58c7-end 2024-08-01 17:56:18]
+[test-qa-start 2024-08-01 17:59:18]
+[b800dcd9-4fec-11ef-9050-3c58c25c58c7-start 2024-08-01 17:59:18] step ==> Generate test case workflow ==> Generate test case workflow
+[b800dcda-4fec-11ef-99a2-3c58c25c58c7-start 2024-08-01 17:59:18] step ==> Generate test case ==> Generate test case base on JIRA Description
+[test-qa-start 2024-08-01 18:06:43]
+[c12528f6-4fed-11ef-99de-3c58c25c58c7-start 2024-08-01 18:06:43] step ==> Generate test case workflow ==> Generate test case workflow
+[c12528f7-4fed-11ef-b2c8-3c58c25c58c7-start 2024-08-01 18:06:43] step ==> Generate test case ==> Generate test case base on JIRA Description

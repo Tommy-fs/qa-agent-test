@@ -5,7 +5,6 @@ GENERATE_TEST_CASE_KNOWLEDGE = """
 #############
 
 # OBJECTIVE #
-{qa_object}
 
 #############
 
@@ -42,6 +41,8 @@ You need to refer to existing Test Cases,  take them as Example, learn writing h
 
 #Test Case Example#
 {test_case_example}
+
+#############
 
 # TONE #
 Professional, technical
