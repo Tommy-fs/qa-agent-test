@@ -36,7 +36,7 @@ class ContextManager:
     def context_to_str(self):
         contextStr = "<context>\n"
         for key, value in self.context.items():
-            contextStr += f"<{key}>\n{value}\n</{key}>\n"
+            contextStr += f"\n<{key}>\n{value}\n</{key}>\n"
         contextStr += "</context>"
         return contextStr
 

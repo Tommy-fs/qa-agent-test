@@ -25,10 +25,10 @@ class Planner:
         plan_content += PLAN_FORMAT
 
         chat = LLMChat()
-        
+
         response = chat.prompt_respond(request, plan_content).replace("```json", '').replace("```", '')
         steps_data = json.loads(response)["steps"]
         for step_data in steps_data:
-            step = Step(step_data["step_name"], step_data["step_description"])
+            step = Step(step_data["step_name"], step_data["step_description"], step_data['step_output'])
             self.steps.append(step)
         return self.steps

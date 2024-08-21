@@ -14,7 +14,7 @@ client = MilvusClient(Config.MILVUS_URL)
 collection_name = "test_cases_library"
 
 
-class TestCasesLibrary:
+class TestCasesLibraryOld:
 
     def __init__(self):
         # Initialize BERT tokenizer and model

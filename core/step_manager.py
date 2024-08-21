@@ -1,7 +1,8 @@
 class Step:
-    def __init__(self, name, description):
+    def __init__(self, name, description, output=None):
         self.name = name
         self.description = description
+        self.output = output
         self.sub_steps = []
 
     def add_sub_step(self, sub_step):
@@ -15,7 +16,7 @@ class Step:
             self.sub_steps.remove(sub_step)
 
     def __repr__(self):
-        return f"Step(name='{self.name}', description='{self.description}', sub_steps={self.sub_steps})"
+        return f"Step(name='{self.name}', description='{self.description}', output={self.output}, sub_steps={self.sub_steps})"
 
 
 class StepManager:

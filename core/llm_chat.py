@@ -143,6 +143,7 @@ class LLMChat:
         return response
 
     def context_respond_with_tools(self, context_str, tools, messages_str):
+
         prompt = ChatPromptTemplate.from_messages(
             [
                 (
@@ -177,19 +178,80 @@ class LLMChat:
         ).assign(
             answer=context_chain,
         )
-        result = retrieval_chain.invoke(
-            {
-                "messages": messages,
-            }
-        )
 
-        tool_name_to_tool = {tool.name: tool for tool in tools}
-        answer_data = json.loads(result['answer'])
-        name = answer_data['name']
-        arguments = answer_data['arguments']
-        requested_tool = tool_name_to_tool[name]
-        response = requested_tool.invoke(arguments)
-        return response
+        used_tools_info = []
+
+        attempt = 0
+        while attempt < 4:
+            result = retrieval_chain.invoke(
+                {
+                    "messages": messages,
+                }
+            )
+            try:
+                try:
+                    answer_data = json.loads(result['answer'])
+                except json.JSONDecodeError:
+                    answer_data = result['answer']
+
+                answer_string = json.dumps(answer_data)
+                if "\"inputs\": {" in answer_string:
+                    tool_name_to_tool = {tool.name: tool for tool in tools}
+                    name = answer_data['name']
+
+                    tool_name_to_arguments = {tool.name: tool.args for tool in tools}
+                    arg_definition = tool_name_to_arguments[name]
+
+                    arguments = answer_data['inputs']
+                    input_args = arguments
+                    print(f"arg_definition: {arg_definition}")
+                    print(f"input_args: {input_args}")
+                    if not self._validate_arguments(input_args, arg_definition):
+                        message_str = messages[0]
+                        input_args_str = json.dumps(input_args)
+                        new_message_str = message_str + "\n (Do not generate arguments [" + input_args_str + "] which is incorrect, generate different one)"
+                        messages[0] = new_message_str
+                        raise ValueError("Arguments do not match")
+
+                    try:
+                        requested_tool = tool_name_to_tool[name]
+                        response = requested_tool.invoke(arguments)
+                        used_tools_info.append({
+                            "tool_name": name,
+                            "arguments": input_args,
+                        })
+                    except Exception as e:
+                        print(f"Error invoking tool {name}: {e}")
+                        attempt += 1
+                        print(f"Attempt {attempt}: Retrying...")
+                        message_str = messages[0]
+                        input_args_str = json.dumps(input_args)
+                        new_message_str = (
+                                    message_str + "\nDo not generate inputs - " + input_args_str + " which type - " + str(
+                                type(arguments)) + "is incorrect, generate different one)")
+                        messages[0] = new_message_str
+                        continue
+                else:
+                    response = answer_string
+                return {
+                    "response": response,
+                    "used_tools": used_tools_info
+                }
+            except ValueError as error:
+                attempt += 1
+                print("An error occurred:", error)
+                print(f"Attempt {attempt}: Invalid response, retrying...")
+        return "Failed to get a valid response after several attempts."
+
+    def _validate_arguments(self, input_args, arg_definition):
+        if len(arg_definition) != 0:
+            for key, value in arg_definition.items():
+                if key not in input_args:
+                    return False
+        else:
+            if input_args:
+                return False
+        return True
 
     def _convert(self, data: Dict[str, Any], docs: str):
         return docs

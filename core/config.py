@@ -3,6 +3,7 @@ import os
 
 class Config:
 
+    WEAVIATE_HOST = '149.28.241.76'
     MILVUS_URL = 'http://149.28.241.76:19530'
     OPENAI_MODEL_3 = 'gpt-3.5-turbo-0125'
     OPENAI_MODEL_4 = 'gpt-4o'

@@ -2,6 +2,17 @@ QA_CONTEXT = """
 We are a software company, and you are our software test expert, your responsibility is to create test cases.
 """
 
+QA_KNOWLEDGE = """
+To create test cases, you need to follow the following steps:
+1. Understand project and QA knowledge: Learn knowledge related to projects, qa_object, qa_context and test_case_example.
+2. Generate test cases: Generate corresponding test cases base on JIRA requirements, project documents and QA Object.
+3. Search similar test cases: Review test case, Find similar test cases in the vector database.
+4. Review test cases: Compare the newly produced test cases with similar test cases. Provide suggestions for using the original test case, modifying the original test case, or adding a new test case.
+5. Store test cases: Add, modify or delete the test case of the vector database according to the modification suggestions.
+# 4. Generate automated testing scripts:
+# 5. Review automated testing scripts:
+"""
+
 QA_OBJECT = """
 I need you create function test cases by project documents and JIRA request:
 1. Read project documents to understand whole project's goals, features, and user expectations.
@@ -14,8 +25,4 @@ I need you create function test cases by project documents and JIRA request:
 8. Output test suites with test cases as a table
 9. Test case should have Priority, Name, Summary, Steps.
 10. Write Test Steps as table with  table heads : |No.| Test Step | Test Data | Expected Result |, Test Data means the input in Test Step
-11. Review existing test cases by below steps:
-	a. Read test summary and test steps of existing test case to understand the logic and requirements
-	b. Check the existing test cases one by one, if test case logic is updated by this JIRA, update test case with new JIRA requirements, then report the update details
-	c. Check new generated test cases one by one, if new generated test case is same as existing test case, then use the existing test case and remove new test generated test case
 """

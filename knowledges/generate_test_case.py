@@ -55,6 +55,7 @@ Test cases should be detailed and easy to understood, junior tester will test sy
 #############
 
 # RESPONSE #
+Output test cases with name, summary, priority and steps.
 Output test cases steps as table with  table heads : |No.| Test Step | Test Data | Expected Result |, Test Data means the input in Test Step
 
 #############

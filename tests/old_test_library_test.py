@@ -1,6 +1,6 @@
-from processes.test_case.test_cases_library import TestCasesLibrary
+from processes.test_case.test_cases_library_old import TestCasesLibraryOld
 
-libray = TestCasesLibrary()
+libray = TestCasesLibraryOld()
 
 # libray.store_test_case(test_case_example.TEST_CASE_EXAMPLE)
 

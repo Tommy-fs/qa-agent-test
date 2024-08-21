@@ -1,7 +1,7 @@
 import uuid
 
 from core.llm_chat import LLMChat
-from knowledges.test_case_review import TEST_CASE_REVIEW
+from knowledges.test_case_suggestion import TEST_CASE_REVIEW
 from knowledges.project_document import PROJECT_DOCUMENT
 from processes.process import Process
 
