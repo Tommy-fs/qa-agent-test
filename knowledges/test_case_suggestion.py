@@ -37,7 +37,7 @@ c. Analyse the new generated test cases one by one. Provide modification suggest
 # RESPONSE #
 The output is divided into three parts. 
 a. The first part is the <existing test case can be used>.
-b. The second part is the <existing test case needs to be modified>, with existing test case, modification suggestions and comparisons before and after the modification
+b. The second part is the <existing test case needs to be modified>. Give Modification Plan, then give the original test case without making any changes, and then give the modified test case based on the original test case
 c. The third part is <new test cases needs to be added>.
 
 #############

@@ -112,13 +112,15 @@ class TestCasesManager:
                     "params": {"topk": topk},
                     "anns_field": "summary_vector"
                 },
-                output_fields=["test_case"]
+                output_fields=["id", "test_case"]
             )
 
             results = []
             for result in search_response:
                 for hit in result:
-                    results.append(json.loads(hit.get("entity").get("test_case")))
+                    test_case = json.loads(hit.get("entity").get("test_case"))
+                    test_case['id'] = hit.get("entity").get("id")
+                    results.append(test_case)
 
             return results[:topk]
         except Exception as e:
@@ -170,6 +172,8 @@ class TestCasesManager:
 
     def reverse_parse_test_case(self, test_case):
         lines = []
+        if "id" in test_case:
+            lines.append(f"id: {test_case['id']}")
 
         if "name" in test_case:
             lines.append(f"Name: {test_case['name']}")
@@ -183,7 +187,7 @@ class TestCasesManager:
         if "steps" in test_case:
             lines.append("")
             lines.append("| No | Step | Data | Expected |")
-            lines.append("|----|------|------|----------|")
+            # lines.append("|----|------|------|----------|")
             for step in test_case["steps"]:
                 lines.append(f"| {step['no']} | {step['step']} | {step['data']} | {step['expected']} |")
 

@@ -16,7 +16,7 @@ Here are the names and descriptions for each tool:
 {tools}
 
 Given the user input, return the name and input of the tool to use. 
-Return your response as a JSON blob with 'name' and 'inputs' keys.
+Return your response as a JSON dictionary with 'name' and 'inputs' keys.
 
 The `inputs` should be a dictionary, represent the specific parameter values required by the tool. You need to pass them as input to the tool.
 

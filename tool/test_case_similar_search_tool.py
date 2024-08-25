@@ -1,13 +1,10 @@
-import uuid
 import re
+import uuid
 
 from langchain.pydantic_v1 import BaseModel, Field
 
-from core.llm_chat import LLMChat
 from core.log_handler import LoggingHandler
 from core.test_case_manager import TestCasesManager
-from knowledges.project_document import PROJECT_DOCUMENT
-from knowledges.test_case_suggestion import TEST_CASE_REVIEW
 
 
 class Searcher(BaseModel):
@@ -64,7 +61,7 @@ Steps:
     for test_case in test_case_list:
         test_case_json = test_case_manager.parse_test_case(test_case_text=test_case)
         summary = test_case_json["summary"]
-        similar_cases_in_library.append(test_case_manager.search_test_cases(summary))
+        similar_cases_in_library.append(test_case_manager.search_test_cases(test_case))
 
     unique_similar_cases = similar_cases_in_library
 
@@ -76,18 +73,6 @@ Steps:
     delimiter = "\n"
 
     similar_test_cases = delimiter.join(unique_similar_cases_txt)
-
-    # parameters = {
-    #     # "existing_test_case": existing_test_cases,
-    #     "project_document": PROJECT_DOCUMENT,
-    #     "generated_test_cases": generated_test_cases,
-    #     "jira_content": jira_request
-    # }
-    #
-    # test_case = (
-    #     LLMChat().prompt_with_parameters(TEST_CASE_REVIEW, parameters, 'Review test case',
-    #                                      desc='Review test case, compare with previous test cases to see if updates or additions are needed.')
-    #     .replace("```json", '').replace("```", ''))
 
     log.on_log_end(generate_id)
     return similar_test_cases

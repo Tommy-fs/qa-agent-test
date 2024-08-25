@@ -190,12 +190,12 @@ class LLMChat:
             )
             try:
                 try:
-                    answer_data = json.loads(result['answer'])
+                    answer_data = json.loads(result['answer'].replace("```json", '').replace("```", ''))
                 except json.JSONDecodeError:
                     answer_data = result['answer']
 
                 answer_string = json.dumps(answer_data)
-                if "\"inputs\": {" in answer_string:
+                if "inputs" in answer_data:
                     tool_name_to_tool = {tool.name: tool for tool in tools}
                     name = answer_data['name']
 
@@ -227,8 +227,8 @@ class LLMChat:
                         message_str = messages[0]
                         input_args_str = json.dumps(input_args)
                         new_message_str = (
-                                    message_str + "\nDo not generate inputs - " + input_args_str + " which type - " + str(
-                                type(arguments)) + "is incorrect, generate different one)")
+                                message_str + "\nDo not generate inputs - " + input_args_str + " which type - " + str(
+                            type(arguments)) + "is incorrect, generate different one)")
                         messages[0] = new_message_str
                         continue
                 else:

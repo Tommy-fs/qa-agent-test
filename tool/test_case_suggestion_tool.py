@@ -20,12 +20,14 @@ class Suggestion(BaseModel):
 
 def test_cases_suggestion(generated_test_cases, similar_test_cases, jira_request, project_document):
     similar_test_cases ="""
-    Priority: Critical
+id: 6ea06bd2-0bdb-41e6-a352-0f970d008b46
 Name: TicketingLogic-002
 Summary: Reply email with changed subject of existing ticket should update ticket
-Steps：
-|No.| Test Step | Test Data | Expected Result |
-| 1 | Send New Email to DL1 with Subject1 and Body1 | DL1, Subject1, Body1| Create new ticket XL001 in Test APP |
+Priority: Critical
+
+| No | Step | Data | Expected |
+| No. | Test Step | Test Data | Expected Result |
+| 1 | Send New Email to DL1 with Subject1 and Body1 | DL1, Subject1, Body1 | Create new ticket XL001 in Test APP |
 | 2 | Open Test APP WebUI to check ticket XL001 | XL001 | Ticket XL001 is created with Subject1 and Body1 |
 | 3 | Reply this Email to DL1 with Subject2 | DL1, Subject2 | Update  ticket XL001 in Test APP |
 | 5 | Open Test APP WebUI to check ticket XL001 | XL001 | Ticket XL001 is updated from Subject1 to Subject2 |
@@ -37,7 +39,6 @@ Steps：
     Summary: Reply email with change Subject to create new Ticket
     Steps:
     | No. | Test Step                                      | Test Data                  | Expected Result                                      |
-    |-----|-------------------------------------------------|----------------------------|------------------------------------------------------|
     | 1   | Send email to DL1 with Subject1 and Body1       | DL1, Subject1, Body1       | Create new ticket XL001 in Test APP                  |
     | 2   | Reply to email with Subject1 and change to Subject2 | Subject2                   | Create new ticket XL002 in Test APP                  |
     | 3   | Open Test APP WebUI to check ticket XL001        | XL001                      | Ticket XL001 is created with Subject1 and Body1      |

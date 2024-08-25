@@ -49,8 +49,8 @@ class TestCaseGenerateProcess(Process):
         context_manager = ContextManager()
         context_manager.get_new_context()
         context_manager.add_context("JIRA requirements", inputs)
-
         chat = LLMChat()
+        # chat = LLMChat(model_type='ADVANCED')
         tools = tool_management.generate_tools()
 
         for index, step in enumerate(steps, start=1):
@@ -59,8 +59,8 @@ class TestCaseGenerateProcess(Process):
                                                                step.description)
 
             step_response = context_response.get('response', 'No response')
-            used_tools_info = context_response.get('used_tools', [])
-            tool_name = used_tools_info[0].get('tool_name', 'Unknown Tool')
+            # used_tools_info = context_response.get('used_tools', [])
+            # tool_name = used_tools_info[0].get('tool_name', 'Unknown Tool')
 
             step_response_name = f"{step.output}"
 
