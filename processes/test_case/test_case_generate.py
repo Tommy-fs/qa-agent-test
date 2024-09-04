@@ -1,14 +1,9 @@
-import re
 import uuid
 
 from core.context_manager import ContextManager
 from core.llm_chat import LLMChat
 from core.planner import Planner
-from knowledges.generate_test_case import GENERATE_TEST_CASE_KNOWLEDGE
-from knowledges.project_document import PROJECT_DOCUMENT
 from knowledges.qa_context import QA_CONTEXT, QA_KNOWLEDGE
-from knowledges.qa_context import QA_OBJECT
-from knowledges.test_case_example import TEST_CASE_EXAMPLE
 from processes.process import Process
 from tool import tool_management
 
@@ -17,26 +12,6 @@ class TestCaseGenerateProcess(Process):
 
     def __init__(self):
         super().__init__("generate test case")
-
-    def execute(self, inputs, log):
-        generate_id = uuid.uuid1()
-        log.on_log_start(generate_id, 'Generate test case', desc='Generate test case base on JIRA Description')
-
-        parameters = {
-            "qa_context": QA_CONTEXT,
-            "qa_object": QA_OBJECT,
-            "jira_content": inputs,
-            "project_document": PROJECT_DOCUMENT,
-            "test_case_example": TEST_CASE_EXAMPLE
-        }
-
-        test_case = (
-            LLMChat().prompt_with_parameters(GENERATE_TEST_CASE_KNOWLEDGE, parameters, 'Generate test case',
-                                             desc='Generate test case base on JIRA Description')
-            .replace("```json", '').replace("```", ''))
-
-        log.on_log_end(generate_id)
-        return test_case
 
     def execute_by_step(self, inputs, log):
         generate_id = uuid.uuid1()
@@ -49,8 +24,8 @@ class TestCaseGenerateProcess(Process):
         context_manager = ContextManager()
         context_manager.get_new_context()
         context_manager.add_context("JIRA requirements", inputs)
-        chat = LLMChat()
-        # chat = LLMChat(model_type='ADVANCED')
+        # chat = LLMChat()
+        chat = LLMChat(model_type='ADVANCED')
         tools = tool_management.generate_tools()
 
         for index, step in enumerate(steps, start=1):

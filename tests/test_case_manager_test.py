@@ -2,7 +2,7 @@ from pymilvus import MilvusClient
 
 from core.config import Config
 from core.test_case_manager import TestCasesManager
-
+from tool.test_case_similar_search_tool import test_cases_similar_search
 client = MilvusClient(Config.MILVUS_URL)
 collection_name = "test_cases_library"
 client.drop_collection(collection_name=collection_name)
@@ -55,24 +55,28 @@ if query_result and len(query_result) > 0:
     for entity in query_result:
         print("ALL" + str(entity))
 
-query = "Reply email 1 with change Subject to Subject 2, will create new ticket in Test APP"
-search_results = libray.search_test_cases(query)
 
-if search_results and len(search_results) > 0:
-    for result in search_results:
-        print("MATCH" + str(result))
+res = test_cases_similar_search("","")
 
-query = "Psend email 1, will create ticket  in Test APP"
-search_results = libray.search_test_cases(query)
-if search_results and len(search_results) > 0:
-    for result in search_results:
-        print("MATCH" + str(result))
-
-query = "Reply email, update ticket"
-search_results = libray.search_test_cases(query)
-
-if search_results and len(search_results) > 0:
-    for result in search_results:
-        print("MATCH" + str(result))
-
-print("end")
+print(res)
+# query = "Reply email 1 with change Subject to Subject 2, will create new ticket in Test APP"
+# search_results = libray.search_test_cases(query)
+#
+# if search_results and len(search_results) > 0:
+#     for result in search_results:
+#         print("MATCH" + str(result))
+#
+# query = "Psend email 1, will create ticket  in Test APP"
+# search_results = libray.search_test_cases(query)
+# if search_results and len(search_results) > 0:
+#     for result in search_results:
+#         print("MATCH" + str(result))
+#
+# query = "Reply email, update ticket"
+# search_results = libray.search_test_cases(query)
+#
+# if search_results and len(search_results) > 0:
+#     for result in search_results:
+#         print("MATCH" + str(result))
+#
+# print("end")

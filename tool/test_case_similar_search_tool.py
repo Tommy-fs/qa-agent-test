@@ -5,6 +5,7 @@ from langchain.pydantic_v1 import BaseModel, Field
 
 from core.log_handler import LoggingHandler
 from core.test_case_manager import TestCasesManager
+from knowledges.test_case_search import TEST_CASE_SEARCH_PROMPT
 
 
 class Searcher(BaseModel):
@@ -24,30 +25,6 @@ def split_test_cases(inputs):
 
 
 def test_cases_similar_search(generated_test_cases, jira_request):
-    generated_test_cases = """
-    #Test Case 1#
-Priority: Critical
-Name: TicketingLogic-002
-Summary: Reply email with change Subject to create new Ticket
-Steps:
-| No. | Test Step                                      | Test Data                  | Expected Result                                      |
-|-----|-------------------------------------------------|----------------------------|------------------------------------------------------|
-| 1   | Send email to DL1 with Subject1 and Body1       | DL1, Subject1, Body1       | Create new ticket XL001 in Test APP                  |
-| 2   | Reply to email with Subject1 and change to Subject2 | Subject2                   | Create new ticket XL002 in Test APP                  |
-| 3   | Open Test APP WebUI to check ticket XL001        | XL001                      | Ticket XL001 is created with Subject1 and Body1      |
-| 4   | Open Test APP WebUI to check ticket XL002        | XL002                      | Ticket XL002 is created with Subject2                |
-    """
-    jira_request = """
-    Summary: Ticketing Logic - reply email to create new Ticket 1
-    Description: 
-    Reply email 1 with change Subject to Subject 2, will create ticket XL002 in Test APP
-    Steps to Reproduce: 
-        1. Send email with Subject1 to create new ticket XL001
-        2. Reply email with change Subject1 to Subject 2
-    Expected Result: 
-        1. Ticket XL001 is not update
-        2. Ticket XL002 is created with Subject2
-    """
     generate_id = uuid.uuid1()
     log = LoggingHandler()
     log.on_log_start(generate_id, 'Search test case',
@@ -59,9 +36,10 @@ Steps:
     test_case_list = split_test_cases(generated_test_cases)
 
     for test_case in test_case_list:
-        test_case_json = test_case_manager.parse_test_case(test_case_text=test_case)
-        summary = test_case_json["summary"]
-        similar_cases_in_library.append(test_case_manager.search_test_cases(test_case))
+        # test_case_json = test_case_manager.parse_test_case(test_case_text=test_case)
+        # summary = test_case_json["summary"]
+        similar_cases_in_library.append(
+            test_case_manager.search_test_cases(TEST_CASE_SEARCH_PROMPT.format(generated_test=test_case)))
 
     unique_similar_cases = similar_cases_in_library
 

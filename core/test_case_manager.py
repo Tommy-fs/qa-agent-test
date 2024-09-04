@@ -1,12 +1,12 @@
 import json
 import re
 import uuid
-from pymilvus import MilvusClient, CollectionSchema, FieldSchema, DataType
+
 from langchain_community.embeddings import OpenAIEmbeddings
+from pymilvus import MilvusClient, CollectionSchema, FieldSchema, DataType
 from pymilvus.milvus_client import IndexParams
 
 from core.config import Config
-from knowledges.test_case_search import TEST_CASE_SEARCH_PROMPT
 
 client = MilvusClient(Config.MILVUS_URL)
 collection_name = "test_cases_library"
@@ -101,7 +101,7 @@ class TestCasesManager:
 
     def search_test_cases(self, query_text):
         topk = 1
-        query_vector = self.get_openai_vector(TEST_CASE_SEARCH_PROMPT.format(generated_test=query_text))
+        query_vector = self.get_openai_vector(query_text)
         try:
             client.load_collection(collection_name=collection_name)
             search_response = client.search(

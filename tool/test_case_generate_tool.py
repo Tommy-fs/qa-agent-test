@@ -15,7 +15,7 @@ class Generator(BaseModel):
     test_case_example: str = Field(description='A paragraph about TEST CASE EXAMPLE, The format is str.')
 
 
-def generate_test_cases(jira_request, project_document, qa_context, qa_object, test_case_example):
+def test_cases_generate(jira_request, project_document, qa_context, qa_object, test_case_example):
     generate_id = uuid.uuid1()
     log = LoggingHandler()
     log.on_log_start(generate_id, 'Generate test case', desc='Generate test case base on JIRA Description')
