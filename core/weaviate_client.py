@@ -1,6 +1,6 @@
 import weaviate
 from core.config import Config
-from langchain_community.embeddings import OpenAIEmbeddings
+from langchain_openai import OpenAIEmbeddings
 
 
 def singleton(cls, *args, **kwargs):

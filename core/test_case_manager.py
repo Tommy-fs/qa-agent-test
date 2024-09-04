@@ -2,7 +2,7 @@ import json
 import re
 import uuid
 
-from langchain_community.embeddings import OpenAIEmbeddings
+from langchain_openai import OpenAIEmbeddings
 from pymilvus import MilvusClient, CollectionSchema, FieldSchema, DataType
 from pymilvus.milvus_client import IndexParams
 

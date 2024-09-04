@@ -26,7 +26,7 @@ def test_cases_store(test_cases_reviewed_suggestion):
         LLMChat().prompt_with_parameters(STORE_TEST_CASE_PROMPT, parameters, 'Store test case',
                                          desc='Store test case in vector db'))
 
-    db_change_plan_dict = json.loads(db_change_plan)
+    db_change_plan_dict = json.loads(db_change_plan.replace("```json", '').replace("```", ''))
     added_test_cases = db_change_plan_dict['added_test_cases']
     modified_test_cases = db_change_plan_dict['modified_test_cases']
     test_case_manager = TestCasesManager()

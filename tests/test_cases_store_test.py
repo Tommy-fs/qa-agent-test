@@ -1,4 +1,4 @@
-from tool.test_case_store_tool import store_test_cases
+from tool.test_case_store_tool import test_cases_store
 
 example = """
 "a. The first part is the <existing test case can be used>:
@@ -31,6 +31,6 @@ c. The third part is <new test cases needs to be added>:
 No new test cases need to be added based on the comparison with the existing test cases."
 
 """
-res = store_test_cases(example)
+res = test_cases_store(example)
 
 print(res)

@@ -233,10 +233,7 @@ class LLMChat:
                         continue
                 else:
                     response = answer_string
-                return {
-                    "response": response,
-                    "used_tools": used_tools_info
-                }
+                return response
             except ValueError as error:
                 attempt += 1
                 print("An error occurred:", error)

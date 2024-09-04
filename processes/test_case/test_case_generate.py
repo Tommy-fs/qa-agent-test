@@ -33,7 +33,8 @@ class TestCaseGenerateProcess(Process):
             context_response = chat.context_respond_with_tools(context_manager.context_to_str(), tools,
                                                                step.description)
 
-            step_response = context_response.get('response', 'No response')
+            step_response = context_response
+            # step_response = context_response.get('response', 'No response')
             # used_tools_info = context_response.get('used_tools', [])
             # tool_name = used_tools_info[0].get('tool_name', 'Unknown Tool')
 
