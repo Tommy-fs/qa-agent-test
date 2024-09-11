@@ -61,14 +61,15 @@ class TestCasesManager:
 
                 modified_test_case = self.parse_test_case(modified_test_case_text)
                 existing_test_case.update(modified_test_case)
+                modified_test_case_str = json.dumps(existing_test_case)
 
-                summary_vector = self.get_openai_vector(existing_test_case["summary"])
+                summary_vector = self.get_openai_vector(modified_test_case_str)
                 # steps_text = "\n".join([step["step"] for step in existing_test_case["steps"]])
                 # steps_vector = self.get_openai_vector(steps_text)
 
                 updated_entity = {
                     "id": existing_entity["id"],
-                    "test_case": json.dumps(existing_test_case),
+                    "test_case": modified_test_case_str,
                     "summary_vector": summary_vector,
                     # "steps_vector": steps_vector
                 }
@@ -186,8 +187,6 @@ class TestCasesManager:
 
         if "steps" in test_case:
             lines.append("")
-            lines.append("| No | Step | Data | Expected |")
-            # lines.append("|----|------|------|----------|")
             for step in test_case["steps"]:
                 lines.append(f"| {step['no']} | {step['step']} | {step['data']} | {step['expected']} |")
 
@@ -203,7 +202,6 @@ class TestCasesManager:
         result += f"Name: {case['name']}\n"
         result += f"Summary: {case['summary']}\n"
         result += "Steps:\n"
-        result += "| No. | Test Step | Test Data | Expected Result |\n"
 
         for step in case['steps']:
             result += f"| {step['no']} | {step['step']} | {step['data']} | {step['expected']} |\n"

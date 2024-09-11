@@ -1,3 +1,4 @@
+import time
 import uuid
 
 from core.context_manager import ContextManager
@@ -40,10 +41,23 @@ class TestCaseGenerateProcess(Process):
 
             step_response_name = f"{step.output}"
 
-            if isinstance(step_response, dict):
-                context = f"{step_response['messages'][0]}: \n{step_response['answer']}"
-            else:
-                context = f"{step_response}"
+            # if isinstance(step_response, dict):
+            #     context = f"{step_response['messages'][0]}: \n{step_response['answer']}"
+            # else:
+            context = f"{step_response}"
+
             context_manager.add_context(step_response_name, context)
+
+            with open('step-result.txt', 'a', encoding='utf-8') as log_file:
+                timestamp = time.strftime('%Y-%m-%d %H:%M:%S')
+                log_entry = (
+                    f"{'=' * 40}\n"  # 分隔线
+                    f"Step {index} : {step.description} | {timestamp}\n"  # 步骤编号和时间戳
+                    f"{'-' * 40}\n"  # 分隔线
+                    f"Result: \n{context}\n"  # 步骤结果
+                    f"{'=' * 40}\n\n"  # 分隔线
+                )
+                log_file.write(log_entry)
+                log_file.flush()
 
         log.on_log_end(generate_id)

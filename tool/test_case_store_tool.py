@@ -37,4 +37,4 @@ def test_cases_store(test_cases_reviewed_suggestion):
     for case in modified_test_cases:
         test_case_manager.modify_test_case(case['id'], case['test_case'])
     log.on_log_end(generate_id)
-    return db_change_plan
+    return json.dumps(db_change_plan_dict)

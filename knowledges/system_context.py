@@ -5,7 +5,9 @@ If the context doesn't contain any relevant information to the question, don't m
 """
 
 SYSTEM_CONTEXT_WITH_TOOLS = """
-Answer the user's questions based on the below context. 
+Answer the human's question using the following context and tools:
+
+Context:
 {context}
 
 Use tools with context to answer questions.
@@ -13,6 +15,7 @@ Use tools with context to answer questions.
 You have access to the following set of tools. 
 Here are the names and descriptions for each tool:
 
+Available Tools:
 {tools}
 
 Given the user input, return the name and input of the tool to use. 
@@ -28,7 +31,6 @@ The format of `input` value must conform to the type of argument defined in tool
 
 If the tool to be used no arguments defined, then don't generate arguments as output.
 
-If no tools is relevant to use, don't make something up and just say "I don't know".
 """
 
 PLAN_FORMAT = """
