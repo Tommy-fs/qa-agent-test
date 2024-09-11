@@ -1,8 +1,8 @@
 from pymilvus import MilvusClient
 
-from qa_agent import QAAgent
 from core.config import Config
 from core.test_case_manager import TestCasesManager
+from qa_agent import QAAgent
 
 client = MilvusClient(Config.MILVUS_URL)
 collection_name = "test_cases_library"
@@ -49,3 +49,9 @@ Description:
         1. Ticket XL001 is not update
         2. Ticket XL002 is created with Subject2
 """)
+
+query_result = libray.get_all_test_cases()
+
+if query_result and len(query_result) > 0:
+    for item in query_result:
+        print("CASE:" + libray.format_case_info(item['test_case']))

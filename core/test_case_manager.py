@@ -50,13 +50,13 @@ class TestCasesManager:
     def modify_test_case(self, test_case_id, modified_test_case_text):
         try:
             query_result = client.query(collection_name=collection_name,
-                                        filter=f'id="{test_case_id}"',
+                                        filter=f'id in ["{test_case_id}"]',
                                         output_fields=None,
                                         timeout=None,
                                         limit=1)
 
             if query_result:
-                existing_entity = query_result[0][0].entity
+                existing_entity = query_result[0]
                 existing_test_case = json.loads(existing_entity["test_case"])
 
                 modified_test_case = self.parse_test_case(modified_test_case_text)
@@ -83,13 +83,13 @@ class TestCasesManager:
     def delete_test_case(self, test_case_id):
         try:
             query_result = client.query(collection_name=collection_name,
-                                        filter=f'id="{test_case_id}"',
+                                        filter=f'id in ["{test_case_id}"]',
                                         output_fields=None,
                                         timeout=None,
                                         limit=1)
 
             if query_result:
-                existing_entity = query_result[0][0].entity
+                existing_entity = query_result[0]
 
                 client.delete(collection_name=collection_name, id_array=[existing_entity["id"]])
                 print(f"Test case '{existing_entity['test_case']['name']}' deleted successfully.")
@@ -195,3 +195,17 @@ class TestCasesManager:
 
     def get_openai_vector(self, text):
         return self.embedding_model.embed_query(text)
+
+    def format_case_info(self, original_str):
+        case = json.loads(original_str)
+
+        result = f"Priority: {case['priority']}\n"
+        result += f"Name: {case['name']}\n"
+        result += f"Summary: {case['summary']}\n"
+        result += "Steps:\n"
+        result += "| No. | Test Step | Test Data | Expected Result |\n"
+
+        for step in case['steps']:
+            result += f"| {step['no']} | {step['step']} | {step['data']} | {step['expected']} |\n"
+
+        return result

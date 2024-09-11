@@ -3,12 +3,29 @@ from pymilvus import MilvusClient
 from core.config import Config
 from core.test_case_manager import TestCasesManager
 from tool.test_case_similar_search_tool import test_cases_similar_search
-client = MilvusClient(Config.MILVUS_URL)
-collection_name = "test_cases_library"
-client.drop_collection(collection_name=collection_name)
+
+# client = MilvusClient(Config.MILVUS_URL)
+# collection_name = "test_cases_library"
+#
+#
+# client.drop_collection(collection_name=collection_name)
+
 
 libray = TestCasesManager()
 
+allCasesBefore = libray.get_all_test_cases()
+libray.modify_test_case('0f0b38a4-2ca7-4a73-96f9-834668e07bc2', """
+Priority: te
+Name: tes-001
+Summary: test
+Steps：
+|No.| Test Step | Test Data | Expected Result |
+| 1 | Send New Email to DL1 with Subject1 and Body1 | DL1, Subject1, Body1| Create new ticket XL001 in Test APP |
+""")
+allCases = libray.get_all_test_cases()
+
+for item in allCases:
+    print(f"CASE:" + libray.format_case_info(item['test_case']))
 # libray.store_test_case(test_case_example.TEST_CASE_EXAMPLE)
 
 test_case_text_1 = """
@@ -51,14 +68,12 @@ libray.store_test_case(test_case_text_3)
 
 query_result = libray.get_all_test_cases()
 
-if query_result and len(query_result) > 0:
-    for entity in query_result:
-        print("ALL" + str(entity))
+for item in query_result:
+    print(f"CASE:" + libray.format_case_info(item['test_case']))
 
-
-res = test_cases_similar_search("","")
-
-print(res)
+# res = test_cases_similar_search("","")
+#
+# print(res)
 # query = "Reply email 1 with change Subject to Subject 2, will create new ticket in Test APP"
 # search_results = libray.search_test_cases(query)
 #
