@@ -9,7 +9,7 @@
     <option name="namespacePackageFolders">
       <list>
         <option value="$MODULE_DIR$/processes" />
-        <option value="$MODULE_DIR$/tests" />
+        <option value="$MODULE_DIR$/qa_tests" />
         <option value="$MODULE_DIR$/core" />
         <option value="$MODULE_DIR$/knowledges" />
       </list>

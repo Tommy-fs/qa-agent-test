@@ -7,7 +7,7 @@ Please output a db change plan based on the modification suggestions. The format
 The dictionary contains two parts: added_test_cases, modified_test_cases. Find the related test cases from the modification suggestion
 
 added_test_cases is new test cases needs to be added. format is list.
-modified_test_cases is test cases needs to be modified, format is list. The data in the list contains id and test case
+modified_test_cases is test cases needs to be modified, format is list. The data in the list contains id and test case. test case should cover all related information.
 
 Please provide test cases in the form of str
 

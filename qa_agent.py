@@ -10,7 +10,7 @@ class QAAgent:
     def __init__(self):
         self.name = "QA_Agent"
 
-    def run(self, session_id, inputs):
+    def run(self, session_id, inputs, log_update=None):
         LoggingHandler().on_text(f"\n[{session_id}-start {util.get_local_time()}]")
         log = LoggingHandler()
 
@@ -19,6 +19,6 @@ class QAAgent:
                          desc='Generate test case workflow')
 
         jira_request = inputs
-        test_cases = TestCaseGenerateProcess().execute_by_step(jira_request, log)
+        test_cases = TestCaseGenerateProcess().execute_by_step(jira_request, log, log_update)
 
         return None

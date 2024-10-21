@@ -14,10 +14,12 @@ class TestCaseGenerateProcess(Process):
     def __init__(self):
         super().__init__("generate test case")
 
-    def execute_by_step(self, inputs, log):
+    def execute_by_step(self, inputs, log, log_update=None):
         generate_id = uuid.uuid1()
         log.on_log_start(generate_id, 'Generate test case', desc='Generate test case base on JIRA Description')
 
+        if log_update:
+            log_update(step="Generate test steps")
         planner = Planner()
         request = f"Generate test cases for the JIRA requirement\n"
         steps = planner.plan(request, background=QA_CONTEXT, knowledge=QA_KNOWLEDGE)
@@ -31,6 +33,9 @@ class TestCaseGenerateProcess(Process):
 
         for index, step in enumerate(steps, start=1):
             print(step)
+            if log_update:
+                log_update(step='Step' + str(index) + ': ' + step.description)
+
             context_response = chat.context_respond_with_tools(context_manager.context_to_str(), tools,
                                                                step.description)
 
@@ -48,14 +53,17 @@ class TestCaseGenerateProcess(Process):
 
             context_manager.add_context(step_response_name, context)
 
+            if log_update:
+                log_update(result=context)
+
             with open('step-result.txt', 'a', encoding='utf-8') as log_file:
                 timestamp = time.strftime('%Y-%m-%d %H:%M:%S')
                 log_entry = (
-                    f"{'=' * 40}\n"  # 分隔线
-                    f"Step {index} : {step.description} | {timestamp}\n"  # 步骤编号和时间戳
-                    f"{'-' * 40}\n"  # 分隔线
-                    f"Result: \n{context}\n"  # 步骤结果
-                    f"{'=' * 40}\n\n"  # 分隔线
+                    f"{'=' * 40}\n"
+                    f"Step {index} : {step.description} | {timestamp}\n"
+                    f"{'-' * 40}\n"
+                    f"Result: \n{context}\n"
+                    f"{'=' * 40}\n\n"
                 )
                 log_file.write(log_entry)
                 log_file.flush()

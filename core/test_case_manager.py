@@ -8,33 +8,45 @@ from pymilvus.milvus_client import IndexParams
 
 from core.config import Config
 
-client = MilvusClient(Config.MILVUS_URL)
 collection_name = "test_cases_library"
+client = MilvusClient(Config.MILVUS_URL, timeout=30)
+try:
+    print("Check connection...")
+    collections = client.list_collections()
+    print(f"Connection success")
+except Exception as e:
+    print(f"Connection error")
 
 
 class TestCasesManager:
+    client = MilvusClient(Config.MILVUS_URL)
+    collection_name = "test_cases_library"
 
     def __init__(self):
         # Initialize OpenAIEmbeddings
         self.embedding_model = OpenAIEmbeddings()
-
+        print("Checking if collection exists...")
         if not client.has_collection(collection_name=collection_name):
+            print("Collection does not exist, proceeding to create it.")
             fields = [
                 FieldSchema(name="id", dtype=DataType.VARCHAR, max_length=256),
                 FieldSchema(name="test_case", dtype=DataType.JSON),
-                # FieldSchema(name="test_case_summary", dtype=DataType.JSON),
-                # FieldSchema(name="test_case_step", dtype=DataType.JSON),
                 FieldSchema(name="summary_vector", dtype=DataType.FLOAT_VECTOR, dim=1536),
-                # FieldSchema(name="steps_vector", dtype=DataType.FLOAT_VECTOR, dim=1536)
             ]
-
             schema = CollectionSchema(collection_name=collection_name, fields=fields, primary_field="id")
+            print("Creating collection...")
             client.create_collection(collection_name=collection_name, schema=schema)
+            print("Collection created.")
+
             index_params = IndexParams(
                 index_name="summary_vector_index",
                 field_name="summary_vector"
             )
+            print("Creating index...")
             client.create_index(collection_name=collection_name, index_params=index_params)
+            print("Index created.")
+        else:
+            print("Collection already exists.")
 
     def get_all_test_cases(self):
         try:
@@ -197,8 +209,8 @@ class TestCasesManager:
 
     def format_case_info(self, original_str):
         case = json.loads(original_str)
-
-        result = f"Priority: {case['priority']}\n"
+        result = "\n"
+        # result += f"Priority: {case['priority']}\n"
         result += f"Name: {case['name']}\n"
         result += f"Summary: {case['summary']}\n"
         result += "Steps:\n"

@@ -29,11 +29,16 @@ Review test cases by below steps:
 a. Read project document, JIRA request to understand the logic and requirements
 b. Read GENERATED TEST CASES and EXISTING TEST CASES one by one, understand the summary and each step
 c. Analyse the new generated test cases one by one. Provide modification suggestions according to the following logic. 
-   condition1: If the summary of the newly generated test case is consistent with the existing test case and the logic of each step is the same, all step of existing test case meet the needs of Jira request, then it is considered that the <existing test case can be used>. And this new generated test case is not to be added.
-   condition2: If the summary of the newly generated test case is similar to the existing test case, but the step logic is inconsistent, and the existing case does not satisfy this jira request, then it is considered that the <existing test case needs to be modified>. Provide a modification plan based on existing test case. And this new generated test case is not to be added.
-   condition3: If the newly generated test case does not have a similar one with existing test cases. That is considered as the <new test cases needs to be added>.
-   If any condition is met, there is no need to continue analyzing other conditions, just skip other conditions. a generated test case cannot satisfy two conditions at the same time and can only exist in one part of the output.
-  
+   condition1: If the summary of the newly generated test case is consistent with the existing test case and the logic of each step is the same, all step of existing test case meet the needs of Jira request,
+               then it is considered that the <existing test case can be used>. And this new generated test case is not to be added.
+   condition2: If the summary of the newly generated test case is similar to the existing test case, but the step logic is inconsistent, and the existing case does not satisfy this jira request, 
+               then it is considered that the <existing test case needs to be modified>. Provide a modification plan based on existing test case. And this new generated test case is not to be added.
+   condition3: If the newly generated test case does not have a similar one with existing test cases.
+               That is considered as the <new test cases needs to be added>.
+d. If any condition is met, there is no need to continue analyzing other conditions, just skip other conditions. 
+   A generated test case cannot satisfy two conditions at the same time and can only exist in one part of the output.
+e: If there is a test case that needs to be modified, please modify the original test case according to the logic of the newly produced test case, so that the modified test case meets the new Jira requirements
+
 # RESPONSE #
 The output is divided into three parts. 
 a. The first part is the <existing test case can be used>.

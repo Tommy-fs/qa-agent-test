@@ -357,3 +357,27 @@ Please return the result in JSON format
 
 [d68e50cc-6ae1-11ef-8025-5084929cb7e8-end 2024-09-05 01:19:35]
 [a6ce61e6-6ae1-11ef-b305-5084929cb7e8-end 2024-09-05 01:19:35]
+[test-qa-start 2024-09-25 22:20:26]
+[4f923547-7b49-11ef-8919-5084929cb7e8-start 2024-09-25 22:20:26] step ==> Generate test case workflow ==> Generate test case workflow
+[4f925b64-7b49-11ef-bcc7-5084929cb7e8-start 2024-09-25 22:20:26] step ==> Generate test case ==> Generate test case base on JIRA Description
+[test-qa-start 2024-09-25 22:26:03]
+[1831b3f0-7b4a-11ef-b912-5084929cb7e8-start 2024-09-25 22:26:03] step ==> Generate test case workflow ==> Generate test case workflow
+[1831b3f1-7b4a-11ef-adda-5084929cb7e8-start 2024-09-25 22:26:03] step ==> Generate test case ==> Generate test case base on JIRA Description
+[test-qa-start 2024-09-25 22:32:14]
+[f5934db8-7b4a-11ef-9d15-5084929cb7e8-start 2024-09-25 22:32:14] step ==> Generate test case workflow ==> Generate test case workflow
+[f5934db9-7b4a-11ef-9fd7-5084929cb7e8-start 2024-09-25 22:32:14] step ==> Generate test case ==> Generate test case base on JIRA Description
+[test-qa-start 2024-09-25 22:51:35]
+[a926314c-7b4d-11ef-8d60-5084929cb7e8-start 2024-09-25 22:51:35] step ==> Generate test case workflow ==> Generate test case workflow
+[a926314d-7b4d-11ef-a72b-5084929cb7e8-start 2024-09-25 22:51:35] step ==> Generate test case ==> Generate test case base on JIRA Description
+[test-qa-start 2024-09-25 23:42:08]
+[b8f5e9a1-7b54-11ef-8136-5084929cb7e8-start 2024-09-25 23:42:08] step ==> Generate test case workflow ==> Generate test case workflow
+[b8f5e9a2-7b54-11ef-b124-5084929cb7e8-start 2024-09-25 23:42:08] step ==> Generate test case ==> Generate test case base on JIRA Description
+[test-qa-start 2024-09-25 23:44:04]
+[fe73b261-7b54-11ef-bc00-5084929cb7e8-start 2024-09-25 23:44:04] step ==> Generate test case workflow ==> Generate test case workflow
+[fe73b262-7b54-11ef-bc53-5084929cb7e8-start 2024-09-25 23:44:04] step ==> Generate test case ==> Generate test case base on JIRA Description
+[test-qa-start 2024-09-25 23:48:40]
+[a2f76f81-7b55-11ef-b5c3-5084929cb7e8-start 2024-09-25 23:48:40] step ==> Generate test case workflow ==> Generate test case workflow
+[a2f76f82-7b55-11ef-922d-5084929cb7e8-start 2024-09-25 23:48:40] step ==> Generate test case ==> Generate test case base on JIRA Description
+[test-qa-start 2024-09-25 23:50:53]
+[f1e100bc-7b55-11ef-aa84-5084929cb7e8-start 2024-09-25 23:50:53] step ==> Generate test case workflow ==> Generate test case workflow
+[f1e100bd-7b55-11ef-9c96-5084929cb7e8-start 2024-09-25 23:50:53] step ==> Generate test case ==> Generate test case base on JIRA Description
