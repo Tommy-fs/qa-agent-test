@@ -56,7 +56,7 @@ class TestCaseGenerateProcess(Process):
             if log_update:
                 log_update(result=context)
 
-            with open('step-result.txt', 'a', encoding='utf-8') as log_file:
+            with open('./result/step-result.txt', 'w', encoding='utf-8') as log_file:
                 timestamp = time.strftime('%Y-%m-%d %H:%M:%S')
                 log_entry = (
                     f"{'=' * 40}\n"

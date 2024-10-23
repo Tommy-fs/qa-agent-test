@@ -7,7 +7,7 @@ from core.log_handler import LoggingHandler
 from knowledges.generate_test_case import GENERATE_TEST_CASE_KNOWLEDGE
 
 
-class Generator(BaseModel):
+class TestCaseGenerator(BaseModel):
     jira_request: str = Field(description='A paragraph about the specific Jira requirement, including summary and description, The format is str.')
     project_document: str = Field(description='A paragraph about Detailed project documentation, The format is str.')
     qa_context: str = Field(description='A paragraph about QA CONTEXT, The format is str.')

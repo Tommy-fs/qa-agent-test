@@ -3,7 +3,7 @@ from typing import Callable, Any
 from langchain_core.tools import StructuredTool
 
 from tool.project_understand_tool import understand_project
-from tool.test_case_generate_tool import Generator
+from tool.test_case_generate_tool import TestCaseGenerator
 from tool.test_case_generate_tool import test_cases_generate
 from tool.test_case_similar_search_tool import Searcher
 from tool.test_case_similar_search_tool import test_cases_similar_search
@@ -22,7 +22,7 @@ def generate_tools() -> list[Callable[..., Any]]:
             func=test_cases_generate,
             name='Generate test cases tool',
             description='Generate corresponding test cases based on JIRA requirements, project documentation, test case examples, and QA_OBJECT.',
-            args_schema=Generator
+            args_schema=TestCaseGenerator
         ),
         StructuredTool.from_function(
             func=test_cases_similar_search,

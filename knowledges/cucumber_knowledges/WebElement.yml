@@ -29,8 +29,8 @@ qcRemarks:
 firstInboxListItemBySubject:
 
 #Workflow Actions Button
-commentsButton1:
-commentsButton2:
+commentsButton1: you can use this button to add comments and reply email
+commentsButton2: you can use this button to add comments
 assignButton:
 assignToMeButton:
 assignToUserButton:
@@ -82,4 +82,4 @@ flexcubeRefnoText:
 cosmosRefnoText:
 branchDropdownList:
 clientSegmentDropdownList:
-paymentTypeDropdownList:
+paymentTypeDropdownList:

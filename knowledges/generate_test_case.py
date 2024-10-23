@@ -5,6 +5,7 @@ GENERATE_TEST_CASE_KNOWLEDGE = """
 #############
 
 # OBJECTIVE #
+{qa_object}
 
 #############
 

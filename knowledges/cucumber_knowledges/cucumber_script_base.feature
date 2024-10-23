@@ -7,7 +7,7 @@ Feature:INDIA EM WORKFLOW
   @indiaemail
   Scenario Outline:C162742-11276 INDIA_Booking_Workflow With Reject
 
-    Given WebAgent open "SxmcIndiaLoginPage"url
+    Given WebAgent open "$testAPPWebUIURL"url
 #**************************************************************
 #  STEP 1:Operation Manager Create New Message in SYSTEM Web
 #*************************************************************
@@ -18,7 +18,7 @@ Feature:INDIA EM WORKFLOW
     And Wait 5 seconds
     Then WebAgent change to next tab
 
-    And Select "*ICG APAC IND SYSTEM DL"from mailFrompropdownlist
+    And Select "*ICG APAC IND SYSTEM DL"from mailFromDropdownlist
     And WebAgent type "Guo,Qihua Jevons [TECH]"into mailToText
     Then WebAgent click on mailAddressoption
     And Wait 1 seconds
@@ -33,7 +33,7 @@ Feature:INDIA EM WORKFLOW
 #***************************************************************
 #  STEP 2:Operation Manager Save Ticket ID
 #***************************************************************
-    Given WebAgent open "$xmcIndiaLoginPage"url
+    Given WebAgent open "$testAPPWebUIURL"url
     When Login as "$Operation_Manager_India"
     Then WebAgent is on InboxModule
     Then WebAgent click on inboxIcon
@@ -99,7 +99,7 @@ Feature:INDIA EM WORKFLOW
 #*******率率**********************************************
 #  STEP 6:Operation Reviewer Reject
 #****率率****************************************************
-    Given WebAgent open "$xmcIndiaLoginPage"url
+    Given WebAgent open "$testAPPWebUIURL"url
     When Login as "$Operation Reviewer_India"
     Then WebAgent is on InboxModule
     Then WebAgent click on inboxIcon
@@ -127,7 +127,7 @@ Feature:INDIA EM WORKFLOW
 #***************************************************************
 #  STEP 7:Operation Manager Send For Review
 #**************************************************************济
-    Given WebAgent open "$xmcIndiaLoginPage"url
+    Given WebAgent open "$testAPPWebUIURL"url
     When Login as "$Operation_Manager_India"
     Then WebAgent is on InboxModule
     Then WebAgent click on inboxIcon
@@ -153,7 +153,7 @@ Feature:INDIA EM WORKFLOW
 #**************************************************************
 #  STEP 8:Operation Reviewer Send For OC Review
 #*************************************************************
-    Given WebAgent open "$xmcIndiaLoginPage"url
+    Given WebAgent open "$testAPPWebUIURL"url
     When Login as "$Operation Reviewer India"
     Then WebAgent is on InboxModule
     Then WebAgent click on inboxIcon
@@ -178,7 +178,7 @@ Feature:INDIA EM WORKFLOW
 #***************************************************************
 #  STEP 9:Operation OC Reject To Checker
 #***************************************************************
-    Given WebAgent open "$xmcIndiaLoginPage"url
+    Given WebAgent open "$testAPPWebUIURL"url
     When Login as "$Operation OC India"
     Then WebAgent is on InboxModule
     Then WebAgent click on inboxIcon
@@ -202,7 +202,7 @@ Feature:INDIA EM WORKFLOW
 #***************************************************************
 #  STEP 10:Operation Reviewer Send For OC Review again
 #***************************************************************
-    Given WebAgent open "$xmcIndiaLoginPage"url
+    Given WebAgent open "$testAPPWebUIURL"url
     When Login as "$Operation Reviewer India"
     Then WebAgent is on InboxModule
     Then WebAgent click on inboxIcon
@@ -229,7 +229,7 @@ Feature:INDIA EM WORKFLOW
 #*************************************************************
 #  STEP 11:Operation OC Perform Review
 #**************************************************************
-    Given WebAgent open "$xmcIndiaLoginPage"url
+    Given WebAgent open "$testAPPWebUIURL"url
     When Login as "$Operation QC India"
     Then WebAgent is on InboxModule
     Then WebAgent click on inboxIcon
@@ -253,7 +253,7 @@ Feature:INDIA EM WORKFLOW
 #**************************************************************
 #  STEP 12:Operation Reviewer Close Ticket
 #***************************************************************
-    Given WebAgent open "$xmcIndiaLoginPage"url
+    Given WebAgent open "$testAPPWebUIURL"url
     When Login as "$Operation Reviewer India"
     Then WebAgent is on InboxModule
     Then WebAgent click on inboxIcon
