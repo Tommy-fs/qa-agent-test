@@ -1,4 +1,4 @@
-from tool.cucumber_script_generate_tool import test_cases_generate, readFile
+from tool.cucumber_script_generate_tool import cucumber_script_generate, readFile
 
 test_cases = """
 id: 4d319c0b-4378-48e4-abf5-3ecce88401c7
@@ -22,7 +22,7 @@ available_webui_cucumber_system_steps = readFile(
 available_webui_cucumber_project_steps = readFile(
     "../knowledges/cucumber_knowledges/fast_webui_cucumber_project_steps.txt")
 
-res = test_cases_generate(test_cases, cucumber_script_base, available_web_elements,
+res = cucumber_script_generate(test_cases, cucumber_script_base, available_web_elements,
                           available_webui_cucumber_system_steps, available_webui_cucumber_project_steps)
 
 print(res)

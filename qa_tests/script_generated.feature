@@ -78,6 +78,10 @@ Feature: Ticketing Logic
   # | @And("^Check ticket Subject is \"([^\"]*)\"$") | Check ticket Subject is "([^"]*)" |
   # | @And("^Check ticket Body is \"([^\"]*)\"$") | Check ticket Body is "([^"]*)" |
 
+    Examples:
+      | testAPPWebUIURL | User | DL1 | Subject1 | Body1 | Subject2 |
+      | http://testapp.com | TestUser | DL1@example.com | Initial Subject | Initial Body | Updated Subject |
+
 
 ### Explanation:
 - **Test Case ID**: A unique identifier for the test case is provided.

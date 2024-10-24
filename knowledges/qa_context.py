@@ -10,7 +10,7 @@ To create test cases, you need to follow the following steps:
 4. Review test cases: Compare the newly produced test cases with similar test cases. Provide suggestions for using the original test case, modifying the original test case, or adding a new test case.
 5. Store test cases: Add, modify or delete the test case of the vector database according to the modification suggestions.
 6. Understand cucumber script knowledge base: Learn knowledge related to basic example, available web elements, available webui cucumber steps.
-7. Generate automated testing scripts: Generate cucumber script base on generated test cases.
+7. Generate cucumber scripts: Generate cucumber script base on generated test cases.
 """
 
 QA_OBJECT = """
