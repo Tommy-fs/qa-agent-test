@@ -22,11 +22,11 @@ class CucumberScriptGenerator(BaseModel):
         description='A paragraph about the webui cucumber project steps that can use in the cucumber scripts., The format is str.')
 
 
-def test_cases_generate(generated_test_cases, cucumber_script_basic_example, available_web_elements,
+def cucumber_script_generate(generated_test_cases, cucumber_script_basic_example, available_web_elements,
                         available_webui_cucumber_system_steps, available_webui_cucumber_project_steps):
     generate_id = uuid.uuid1()
     log = LoggingHandler()
-    log.on_log_start(generate_id, 'Generate test case', desc='Generate test case base on JIRA Description')
+    log.on_log_start(generate_id, 'Generate cucumber script', desc='Generate cucumber script on TEST CASES')
 
     parameters = {
         "generated_test_cases": generated_test_cases,

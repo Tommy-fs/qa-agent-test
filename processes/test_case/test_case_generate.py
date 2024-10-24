@@ -24,6 +24,17 @@ class TestCaseGenerateProcess(Process):
         request = f"Generate test cases for the JIRA requirement\n"
         steps = planner.plan(request, background=QA_CONTEXT, knowledge=QA_KNOWLEDGE)
 
+        with open('./result/step-result.txt', 'a', encoding='utf-8') as log_file:
+            timestamp = time.strftime('%Y-%m-%d %H:%M:%S')
+            log_entry = (
+                f"{'=' * 40}\n"
+                f" {timestamp}\n"
+                f"Plan: \n{steps}\n"
+                f"{'=' * 40}\n\n"
+            )
+            log_file.write(log_entry)
+            log_file.flush()
+
         context_manager = ContextManager()
         context_manager.get_new_context()
         context_manager.add_context("JIRA requirements", inputs)
@@ -56,7 +67,7 @@ class TestCaseGenerateProcess(Process):
             if log_update:
                 log_update(result=context)
 
-            with open('./result/step-result.txt', 'w', encoding='utf-8') as log_file:
+            with open('./result/step-result.txt', 'a', encoding='utf-8') as log_file:
                 timestamp = time.strftime('%Y-%m-%d %H:%M:%S')
                 log_entry = (
                     f"{'=' * 40}\n"

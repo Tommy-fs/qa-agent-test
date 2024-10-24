@@ -33,5 +33,9 @@ def test_cases_generate(jira_request, project_document, qa_context, qa_object, t
                                          desc='Generate test case base on JIRA Description')
         .replace("```json", '').replace("```", ''))
 
+    file_path="./result/test_case_generated.txt"
+    with open(file_path, 'w', encoding='utf-8') as file:
+        file.write(test_case)
+
     log.on_log_end(generate_id)
     return test_case

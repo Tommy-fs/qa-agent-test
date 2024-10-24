@@ -2,6 +2,8 @@ from typing import Callable, Any
 
 from langchain_core.tools import StructuredTool
 
+from tool.cucumber_script_base_knowledge_tool import understand_cucumber_script_knowledge
+from tool.cucumber_script_generate_tool import cucumber_script_generate, CucumberScriptGenerator
 from tool.project_understand_tool import understand_project
 from tool.test_case_generate_tool import TestCaseGenerator
 from tool.test_case_generate_tool import test_cases_generate
@@ -32,14 +34,25 @@ def generate_tools() -> list[Callable[..., Any]]:
         ),
         StructuredTool.from_function(
             func=test_cases_suggestion,
-            name='test cases suggestion  tool',
+            name='Test cases suggestion  tool',
             description='Review test case, Compare the newly produced test cases with similar test cases. Provide suggestions for using the original test case, modifying the original test case, or adding a new test case.',
             args_schema=Suggester
         ),
         StructuredTool.from_function(
             func=test_cases_store,
-            name='test cases store  tool',
+            name='Test cases store  tool',
             description='Modify the test cases in the vector database based on the recommendations of the test case view.',
             args_schema=Storer
+        ),
+        StructuredTool.from_function(
+            func=understand_cucumber_script_knowledge,
+            name='Understand cucumber script knowledge Tool',
+            description='Understand cucumber script knowledge.'
+        ),
+        StructuredTool.from_function(
+            func=cucumber_script_generate,
+            name='Generate cucumber script tool',
+            description='Generate cucumber script base on test cases.',
+            args_schema=CucumberScriptGenerator
         )
     ]

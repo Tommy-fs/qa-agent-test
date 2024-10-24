@@ -19,6 +19,6 @@ class QAAgent:
                          desc='Generate test case workflow')
 
         jira_request = inputs
-        test_cases = TestCaseGenerateProcess().execute_by_step(jira_request, log, log_update)
+        TestCaseGenerateProcess().execute_by_step(jira_request, log, log_update)
 
         return None

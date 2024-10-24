@@ -1,0 +1,9 @@
+Priority: Critical 
+Name: TicketingLogic-002 
+Summary: Reply email with change Subject to create new ticket 
+Steps: 
+| No. | Test Step | Test Data | Expected Result | 
+| 1 | Send email with Subject1 to create new ticket XL001 | Subject1 | Create new ticket XL001 in Test APP | 
+| 2 | Reply email with change Subject1 to Subject 2 | Subject1, Subject2 | Create new ticket XL002 in Test APP | 
+| 3 | Open Test APP WebUI to check ticket XL001 | XL001 | Ticket XL001 is not updated | 
+| 4 | Open Test APP WebUI to check ticket XL002 | XL002 | Ticket XL002 is created with Subject2 |
