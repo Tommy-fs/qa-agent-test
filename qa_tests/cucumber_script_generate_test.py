@@ -22,7 +22,6 @@ available_webui_cucumber_system_steps = readFile(
 available_webui_cucumber_project_steps = readFile(
     "../knowledges/cucumber_knowledges/fast_webui_cucumber_project_steps.txt")
 
-res = cucumber_script_generate(test_cases, cucumber_script_base, available_web_elements,
-                          available_webui_cucumber_system_steps, available_webui_cucumber_project_steps)
+res = cucumber_script_generate(test_cases)
 
 print(res)

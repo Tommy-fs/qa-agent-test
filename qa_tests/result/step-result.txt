@@ -1,11 +1,11 @@
 ========================================
- 2024-10-24 16:05:06
+ 2024-10-28 21:53:15
 Plan: 
-[Step(name='Understand project and QA knowledge', description='Learn knowledge related to projects, qa_object, qa_context and test_case_example', output=Understood the project and QA knowledge, sub_steps=[]), Step(name='Generate test cases', description='Generate corresponding test cases base on JIRA requirements, project documents and QA Object', output=Generated test cases for the JIRA requirement, sub_steps=[]), Step(name='Search similar test cases', description='Review test case, Find similar test cases in the vector database', output=Reviewed and found similar test cases in the vector database, sub_steps=[]), Step(name='Review test cases', description='Compare the newly produced test cases with similar test cases. Provide suggestions for using the original test case, modifying the original test case, or adding a new test case', output=Reviewed and provided suggestions for test cases, sub_steps=[]), Step(name='Store test cases', description='Add, modify or delete the test case of the vector database according to the modification suggestions', output=Stored test cases in the vector database, sub_steps=[]), Step(name='Understand cucumber script knowledge base', description='Learn knowledge related to basic example, available web elements, available webui cucumber steps', output=Understood cucumber script knowledge base, sub_steps=[]), Step(name='Generate cucumber scripts', description='Generate cucumber script base on generated test cases', output=Generated cucumber scripts for the test cases, sub_steps=[])]
+[Step(name='Understand project and QA knowledge', description='Learn knowledge related to projects, qa_object, qa_context and test_case_example', output=Understood the project and QA knowledge, sub_steps=[]), Step(name='Generate test cases', description='Generate corresponding test cases base on JIRA requirements, project documents and QA Object', output=Generated test cases for the JIRA requirement, sub_steps=[]), Step(name='Search similar test cases', description='Review test case, Find similar test cases in the vector database', output=Reviewed and found similar test cases in the vector database, sub_steps=[]), Step(name='Review test cases', description='Compare the newly produced test cases with similar test cases. Provide suggestions for using the original test case, modifying the original test case, or adding a new test case', output=Reviewed and provided suggestions for test cases, sub_steps=[]), Step(name='Store test cases', description='Add, modify or delete the test case of the vector database according to the modification suggestions', output=Stored the test cases in the vector database, sub_steps=[]), Step(name='Understand cucumber script knowledge base', description='Learn knowledge related to basic example, available web elements, available webui cucumber steps', output=Understood cucumber script knowledge base, sub_steps=[]), Step(name='Generate cucumber scripts', description='Generate cucumber script base on generated test cases', output=Generated cucumber scripts based on the test cases, sub_steps=[])]
 ========================================
 
 ========================================
-Step 1 : Learn knowledge related to projects, qa_object, qa_context and test_case_example | 2024-10-24 16:05:16
+Step 1 : Learn knowledge related to projects, qa_object, qa_context and test_case_example | 2024-10-28 21:53:19
 ----------------------------------------
 Result: 
 
@@ -76,14 +76,14 @@ Steps：
 ========================================
 
 ========================================
-Step 2 : Generate corresponding test cases base on JIRA requirements, project documents and QA Object | 2024-10-24 16:05:40
+Step 2 : Generate corresponding test cases base on JIRA requirements, project documents and QA Object | 2024-10-28 21:53:42
 ----------------------------------------
 Result: 
 Priority: Critical 
 Name: TicketingLogic-002 
 Summary: Reply email with change Subject to create new ticket 
 Steps: 
-|No.| Test Step | Test Data | Expected Result | 
+| No. | Test Step | Test Data | Expected Result | 
 | 1 | Send email with Subject1 to create new ticket XL001 | Subject1 | Create new ticket XL001 in Test APP | 
 | 2 | Reply email with change Subject1 to Subject 2 | Subject1, Subject2 | Create new ticket XL002 in Test APP | 
 | 3 | Open Test APP WebUI to check ticket XL001 | XL001 | Ticket XL001 is not updated | 
@@ -91,10 +91,10 @@ Steps:
 ========================================
 
 ========================================
-Step 3 : Review test case, Find similar test cases in the vector database | 2024-10-24 16:05:51
+Step 3 : Review test case, Find similar test cases in the vector database | 2024-10-28 21:53:52
 ----------------------------------------
 Result: 
-id: 5d7ed2f4-0b3d-4007-b0e3-9489187cbc5a
+id: 8afe8ab4-4fc7-430f-bbbb-5615b0490415
 Name: TicketingLogic-002
 Summary: Reply email with changed subject of existing ticket should update ticket
 Priority: Critical
@@ -108,7 +108,7 @@ Priority: Critical
 ========================================
 
 ========================================
-Step 4 : Compare the newly produced test cases with similar test cases. Provide suggestions for using the original test case, modifying the original test case, or adding a new test case | 2024-10-24 16:06:17
+Step 4 : Compare the newly produced test cases with similar test cases. Provide suggestions for using the original test case, modifying the original test case, or adding a new test case | 2024-10-28 21:54:17
 ----------------------------------------
 Result: 
 # <existing test case can be used> #
@@ -118,10 +118,10 @@ No existing test cases can be used based on the comparison with the newly genera
 # <existing test case needs to be modified> #
 
 Modification Plan:
-- Update Test Step 3 in existing test case "TicketingLogic-002" to reflect the correct expected result for the scenario described in the Jira request.
+- Update Test Step 3 in the existing test case "TicketingLogic-002" to match the Jira request requirements.
 
 Original Test Case:
-id: 5d7ed2f4-0b3d-4007-b0e3-9489187cbc5a
+id: 8afe8ab4-4fc7-430f-bbbb-5615b0490415
 Name: TicketingLogic-002
 Summary: Reply email with changed subject of existing ticket should update ticket
 Priority: Critical
@@ -130,11 +130,11 @@ Priority: Critical
 | ----- | ------------------------------------------------ | ---------------------------- | ------------------------------------------------------ |
 | 1 | Send New Email to DL1 with Subject1 and Body1 | DL1, Subject1, Body1 | Create new ticket XL001 in Test APP |
 | 2 | Open Test APP WebUI to check ticket XL001 | XL001 | Ticket XL001 is created with Subject1 and Body1 |
-| 3 | Reply this Email to DL1 with Subject2 | DL1, Subject2 | Update  ticket XL001 in Test APP |
+| 3 | Reply this Email to DL1 with Subject2 | DL1, Subject2 | Update ticket XL001 in Test APP |
 | 4 | Open Test APP WebUI to check ticket XL001 | XL001 | Ticket XL001 is updated from Subject1 to Subject2 |
 
 Modified Test Case:
-id: 5d7ed2f4-0b3d-4007-b0e3-9489187cbc5a
+id: 8afe8ab4-4fc7-430f-bbbb-5615b0490415
 Name: TicketingLogic-002
 Summary: Reply email with changed subject of existing ticket should update ticket
 Priority: Critical
@@ -143,8 +143,8 @@ Priority: Critical
 | ----- | ------------------------------------------------ | ---------------------------- | ------------------------------------------------------ |
 | 1 | Send New Email to DL1 with Subject1 and Body1 | DL1, Subject1, Body1 | Create new ticket XL001 in Test APP |
 | 2 | Open Test APP WebUI to check ticket XL001 | XL001 | Ticket XL001 is created with Subject1 and Body1 |
-| 3 | Reply this Email to DL1 with Subject2 | DL1, Subject2 | Update  ticket XL001 in Test APP |
-| 4 | Open Test APP WebUI to check ticket XL001 | XL001 | Ticket XL001 is updated from Subject1 to Subject2 |
+| 3 | Reply this Email to DL1 with Subject2 | DL1, Subject2 | Create new ticket XL002 in Test APP |
+| 4 | Open Test APP WebUI to check ticket XL001 | XL001 | Ticket XL001 is not updated |
 
 # <new test cases needs to be added> #
 
@@ -152,462 +152,154 @@ No new test cases need to be added based on the comparison with the existing tes
 ========================================
 
 ========================================
-Step 5 : Add, modify or delete the test case of the vector database according to the modification suggestions | 2024-10-24 16:06:48
+Step 5 : Add, modify or delete the test case of the vector database according to the modification suggestions | 2024-10-28 21:54:39
 ----------------------------------------
 Result: 
-{"added_test_cases": [], "modified_test_cases": [{"id": "5d7ed2f4-0b3d-4007-b0e3-9489187cbc5a", "test_case": "Name: TicketingLogic-002\nSummary: Reply email with changed subject of existing ticket should update ticket\nPriority: Critical\n\n| No. | Test Step | Test Data | Expected Result |\n| ----- | ------------------------------------------------ | ---------------------------- | ------------------------------------------------------ |\n| 1 | Send New Email to DL1 with Subject1 and Body1 | DL1, Subject1, Body1 | Create new ticket XL001 in Test APP |\n| 2 | Open Test APP WebUI to check ticket XL001 | XL001 | Ticket XL001 is created with Subject1 and Body1 |\n| 3 | Reply this Email to DL1 with Subject2 | DL1, Subject2 | Update  ticket XL001 in Test APP |\n| 4 | Open Test APP WebUI to check ticket XL001 | XL001 | Ticket XL001 is updated from Subject1 to Subject2 |"}]}
+{"added_test_cases": [], "modified_test_cases": [{"id": "8afe8ab4-4fc7-430f-bbbb-5615b0490415", "test_case": "id: 8afe8ab4-4fc7-430f-bbbb-5615b0490415\nName: TicketingLogic-002\nSummary: Reply email with changed subject of existing ticket should update ticket\nPriority: Critical\n\n| No. | Test Step | Test Data | Expected Result |\n| ----- | ------------------------------------------------ | ---------------------------- | ------------------------------------------------------ |\n| 1 | Send New Email to DL1 with Subject1 and Body1 | DL1, Subject1, Body1 | Create new ticket XL001 in Test APP |\n| 2 | Open Test APP WebUI to check ticket XL001 | XL001 | Ticket XL001 is created with Subject1 and Body1 |\n| 3 | Reply this Email to DL1 with Subject2 | DL1, Subject2 | Create new ticket XL002 in Test APP |\n| 4 | Open Test APP WebUI to check ticket XL001 | XL001 | Ticket XL001 is not updated |"}]}
 ========================================
 
 ========================================
-Step 6 : Learn knowledge related to basic example, available web elements, available webui cucumber steps | 2024-10-24 16:06:51
+Step 6 : Learn knowledge related to basic example, available web elements, available webui cucumber steps | 2024-10-28 21:54:43
 ----------------------------------------
 Result: 
 
-<CUCUMBER_SCRIPT_BASIC_EXAMPLE>
-Feature:INDIA EM WORKFLOW
-  Workflow Detail:
-  1)Author:Jevons
-  2)Workflow Type:Booking Workflow
-  3)DL:*ICG APAC IND SYSTEM DL
+<QA_CONTEXT>
 
-  @indiaemail
-  Scenario Outline:C162742-11276 INDIA_Booking_Workflow With Reject
+We are a software company, and you are our software test expert, your responsibility is to create test cases.
 
-    Given WebAgent open "$testAPPWebUIURL"url
-#**************************************************************
-#  STEP 1:Operation Manager Create New Message in SYSTEM Web
-#*************************************************************
-    When Login as "$Operation Manager India"
+</QA_CONTEXT>
+
+<QA_OBJECT>
+
+I need you create function test cases by project documents and JIRA request:
+1. Read project documents to understand whole project's goals, features, and user expectations.
+2. Review JIRA requests to understand the specific functionalities or changes, you only need to create test cases to test this JIRA request, not for whole project document
+3. Identify the components or modules of the software that need to be tested based on the project documentation and JIRA requests. Categorize them based on their functional areas
+4. Based on the identified components and objectives, create test scenarios. Test scenarios outline the high-level functionality that needs to be tested. Each scenario typically consists of a sequence of steps, inputs, and expected outcomes
+5. Break down each test scenario into detailed test cases. Test cases should cover various possible inputs, configurations, boundary conditions, and potential error scenarios. Ensure that each test case is unambiguous and independent
+6. Determine the necessary test data for executing the test cases. This may involve identifying specific inputs, preconditions, and expected results for each test case. Test data should cover both typical and edge cases.
+7. Prioritize the test cases based on factors like criticality, risk, and dependencies to 5 levels. Organize them into test suites to facilitate efficient test execution order by priority
+8. Output test suites with test cases as a table
+9. Test case should have Priority, Name, Summary, Steps.
+10. Write Test Steps as table with  table heads : |No.| Test Step | Test Data | Expected Result |, Test Data means the input in Test Step
+
+</QA_OBJECT>
+
+<PROJECT_DOCUMENT>
+
+Ticketing Logic
+In order  to auto create ticket within APAC Loan email management application following 2 steps are required:
+1.Loan Ops Processing queue/DL should be on-boarded  has an ACTIVE Rule created.
+2.Loan Ops has added Prod DL (or UAT DL)as a sub-DL within Loan Ops Prod DL.
+Once above 2 steps are completed, an incoming email on Loan Op Prod DL with auto-create a ticket and will be
+shown under Processing Queue in the left rail within Open Tickets sub-folder
+
+C1-Create new ticket ID:
+New tickets logic DL + Subject + first email body
+detect new ticket logic is :Receiver Email Address + subject (exclude "RE"/"FW") + first email body, example, you send email 1 to CA UAT, will create ticket 001;
+if you reply or forward(don't change subject or email 1 body) won't create new ticket will update in one ticket;
+if you change subject or email 1 body will create new ticket;
+if you send email 1 with subject 1 to CA UAT will create ticket ,
+if you send email 2 with same body and subject to CA UAT, will create new ticket, because you don't reply or FW email, you totally new one email
+1. Send email 1 to Email Address1 with Subject 1, will create new ticket XL001 in Test APP
+2. Reply or forward email 1 with change Subject to Subject 2, will create ticket XL002 in Test APP
+3. After ticket closed in Test APP, reply and forward email will create new ticket in Test APP
+C2-Follow previous ticket ID:
+4.Reply email 1 with subject 1 will follow in same ticket XL001
+5.Forward email and email to/email CC contain DL1 will be captured in same ticket XL001
+C3-BCC Logic:
+6.Ticket logic of BCC will in solution study progress, cover in future version
+
+</PROJECT_DOCUMENT>
+
+<TEST_CASE_EXAMPLE>
+
+Priority: Critical
+Name: TicketingLogic-001
+Summary: Send new email with same body and subject as existing ticket should create new ticket
+Steps：
+|No.| Test Step | Test Data | Expected Result |
+| 1 | Send New Email to DL1 with Subject1 and Body1 | DL1, Subject1, Body1| Create new ticket XL001 in Test APP |
+| 2 | Open Test APP WebUI to check ticket XL001 | XL001 | Ticket XL001 is created with Subject1 and Body1 |
+| 3 | Send New Email to DL1 with Subject1 and Body1 | DL1, Subject1, Body1| Create new ticket XL002 in Test APP |
+| 4 | Open Test APP WebUI to check ticket XL001 | XL001 | Ticket XL001 is not updated |
+| 5 | Open Test APP WebUI to check ticket XL002 | XL002 | Ticket XL002 is created with Subject1 and Body1 |
+
+</TEST_CASE_EXAMPLE>
+
+========================================
+
+========================================
+Step 7 : Generate cucumber script base on generated test cases | 2024-10-28 21:54:56
+----------------------------------------
+Result: 
+Certainly! Below is a Cucumber script for the provided test case "TicketingLogic-002". This script is written in Gherkin format and follows the guidelines and structure you've provided.
+
+gherkin
+Feature: Ticketing System - Email Reply with Changed Subject
+
+  @critical
+  Scenario Outline: TicketingLogic-002 - Reply email with change Subject to create new ticket
+    Given WebAgent open "<testAPPWebUIURL>" url
+    When Login as "<User>"
     Then WebAgent is on InboxModule
-    Then WebAgent click on createButton
+
+    # Step 1: Send email with Subject1 to create new ticket XL001
+    When WebAgent click on createButton
     And WebAgent click on newMessageItem
-    And Wait 5 seconds
-    Then WebAgent change to next tab
-
-    And Select "*ICG APAC IND SYSTEM DL"from mailFromDropdownlist
-    And WebAgent type "Guo,Qihua Jevons [TECH]"into mailToText
-    Then WebAgent click on mailAddressoption
-    And Wait 1 seconds
-    And WebAgent click on mailContentText
-
-    And WebAgent type "Mail Content,send from Web by script ---India Booking Workflow"into mailContentText
-    And WebAgent type "[SYSTEM Test]Auto-India Booking Workflow with Reject $TodayDate $RN3"into mailSubjectText
+    And WebAgent type "<Subject1>" into mailSubjectText
+    And WebAgent type "Initial email content" into mailContentText
     Then WebAgent click on mailSendButton
     And Wait 5 seconds
-    Then Close Browser
 
-#***************************************************************
-#  STEP 2:Operation Manager Save Ticket ID
-#***************************************************************
-    Given WebAgent open "$testAPPWebUIURL"url
-    When Login as "$Operation_Manager_India"
+    # Step 2: Reply email with change Subject1 to Subject2
+    When WebAgent click on inboxIcon
+    And Wait 5 seconds
+    And WebAgent click on firstInboxListItemBySubject
+    And WebAgent click on commentsButton1
+    And WebAgent type "<Subject2>" into mailSubjectText
+    And WebAgent type "Reply email content" into mailContentText
+    Then WebAgent click on mailSendButton
+    And Wait 5 seconds
+
+    # Step 3: Open Test APP WebUI to check ticket XL001
+    Given WebAgent open "<testAPPWebUIURL>" url
+    When Login as "<User>"
     Then WebAgent is on InboxModule
-    Then WebAgent click on inboxIcon
-    Then Wait 20 seconds
-    And Get Ticket ID by Subject "[SYSTEM Test]Auto-India Booking Workflow With Reject"and save into @ticketId
-#**************************************************************
-#  STEP 3:Operation Manager Update Ticket
-#*************************************************************
-    When Open ticket by ID "@ticketId.Value"
-    Then Wait 5 seconds
-    Then WebAgent change to next tab
-    And WebAgent click on updateTicketButton
-    Then Wait 3 seconds
+    And WebAgent click on inboxIcon
+    And Wait 5 seconds
+    And Open ticket by ID "XL001"
+    Then Check ticket Status is "Not Updated"
 
-    Then Select "<Request Type>"from requestTypeDropdownlist
-    Then Select "<Currency>"from currencyDropdownList
-    And WebAgent type "<Amount>"into amountText
-    And WebAgent type "<Base No>"into baseNoText
-    And WebAgent type "<Client Name>"into clientNameText
-    And WebAgent type "<Flexcube Ref no>"into flexcubeRefnoText
-    And WebAgent type "<Cosmos Ref no>"into cosmosRefnoText
-    Then Select "<Branch>"from branchDropdownList
-    Then Select "<Client Segment>"from clientSegmentDropdownList
-    Then Select "<Payment Type>"from paymentTypeDropdownList
-
-    Then WebAgent click on submitButton
-    Then Wait 3 seconds
-    Then Check ticket Sub Status is "Assigned to Maker"
-
-
-#***************************************************************
-#  STEP 4:Operation Manager Assign To User
-#**************************************************************
-    Then WebAgent click on assignButton
-    Then Wait 2 seconds
-    Then WebAgent click on assignToMeButton
-    Then Wait 2 seconds
-
-    Then Select "<Request Type>"from requestTypeDropdownlist
-    Then Wait 2 seconds
-    Then WebAgent click on submitButton
-    Then Wait 10 seconds
-
-    Then WebAgent click on confirmNotificationButton if exist
-    Then Wait 2 seconds
-    Then Check ticket Sub Status is "Assigned to Maker"
-#****************************************************
-#  STEP 5:Operation Manager Send For Review
-#********************************************************
-    Then WebAgent click on reviewButton
-    Then WebAgent click on sendForReviewButton
-
-    And WebAgent type "Send For Review to Nola"into mailContentText
-    And WebAgent type "Send For Review to Nola"into markerRemarks
-    Then Select "No exception"from statusRemarkDropdownList
-    Then Select "Chai,Nola [TECH]"from checkerDropdownList
-    Then Wait 2 seconds
-    Then WebAgent click on sendForReviewButton
-
-    Then Wait 3 seconds
-    Then Check ticket Sub Status is "Pending Checker Review"
-    Then Close Browser
-#*******率率**********************************************
-#  STEP 6:Operation Reviewer Reject
-#****率率****************************************************
-    Given WebAgent open "$testAPPWebUIURL"url
-    When Login as "$Operation Reviewer_India"
+    # Step 4: Open Test APP WebUI to check ticket XL002
+    Given WebAgent open "<testAPPWebUIURL>" url
+    When Login as "<User>"
     Then WebAgent is on InboxModule
-    Then WebAgent click on inboxIcon
-    Then Wait 10 seconds
+    And WebAgent click on inboxIcon
+    And Wait 5 seconds
+    And Open ticket by ID "XL002"
+    Then Check ticket Status is "Created with <Subject2>"
 
-    When Open ticket by ID "@ticketId.Value"
-    Then Wait 5 seconds
-    Then WebAgent change to next tab
-    Then WebAgent click on reviewButton
-    Then Wait 1 seconds
-    Then WebAgent click on rejectButton
-    Then Wait 2 seconds
-
-    And WebAgent type "Checker Reject the ticket"into checkerRemarks
-    Then Wait 1 seconds
-    Then WebAgent click on typeEmailCommentsRadio
-    Then Wait 1 seconds
-    And Select "No exception"from statusRemarkDropdownList
-    Then Wait 1 seconds
-
-    Then WebAgent click on rejectButton
-    Then Wait 3 seconds
-    Then Check ticket Sub Status is "Checker Rejected"
-    Then Close Browser
-#***************************************************************
-#  STEP 7:Operation Manager Send For Review
-#**************************************************************济
-    Given WebAgent open "$testAPPWebUIURL"url
-    When Login as "$Operation_Manager_India"
-    Then WebAgent is on InboxModule
-    Then WebAgent click on inboxIcon
-    Then Wait 10 seconds
-
-    When Open ticket by ID "@ticketId.Value"
-    Then Wait 5 seconds
-    Then WebAgent change to next tab
-    Then WebAgent click on reviewButton
-    Then WebAgent click on sendForReviewButton
-
-    And WebAgent type "Send For Review to Nola again"into mailContentText
-    And WebAgent type ",Send For Review to Nola again"into markerRemarks
-    Then SeLect "No exception"from statusRemarkDropdownList
-    Then Select "Chai,Nola [TECH]"from checkerDropdownList
-    Then Wait 2 seconds
-
-    Then WebAgent click on sendForReviewButton
-    Then Wait 3 seconds
-    Then Check ticket Sub Status is "Pending Checker Review"
     Then Close Browser
 
-#**************************************************************
-#  STEP 8:Operation Reviewer Send For OC Review
-#*************************************************************
-    Given WebAgent open "$testAPPWebUIURL"url
-    When Login as "$Operation Reviewer India"
-    Then WebAgent is on InboxModule
-    Then WebAgent click on inboxIcon
-    Then Wait 10 seconds
-    When Open ticket by ID "@ticketId.Value"
-    Then Wait 5 seconds
-    Then WebAgent change to next tab
+  Examples:
+    | testAPPWebUIURL | User  | Subject1 | Subject2 |
+    | http://testapp.com | TestUser | Subject1 | Subject2 |
 
-    Then WebAgent click on reviewButton
-    Then WebAgent click on sendForQCReviewButton
+# Comments:
+# If any web elements or steps are missing, define them here:
+# | Annotation Condition | Matching Condition |
+# | @And("^Check ticket Status is \"([^\"]*)\"$") | Check ticket status by ID |
 
-    And WebAgent type "Send For QC Review to Jimmy"into mailContentText
-    And WebAgent type ",Send For QC Review to Jimmy"into checkerRemarks
-    Then Select "No exception"from statusRemarkDropdownList
-    Then Select "Chen,Jimmy [TECH NE]"from qcpropdownlist
-    Then Wait 2 seconds
 
-    Then WebAgent click on sendForQCReviewButton
-    Then Wait 3 seconds
-    Then Check ticket Sub Status is "Pending QC Review"
-    Then Close Browser
-#***************************************************************
-#  STEP 9:Operation OC Reject To Checker
-#***************************************************************
-    Given WebAgent open "$testAPPWebUIURL"url
-    When Login as "$Operation OC India"
-    Then WebAgent is on InboxModule
-    Then WebAgent click on inboxIcon
-    Then Wait 10 seconds
+### Explanation:
 
-    When Open ticket by ID "@ticketId.Value"
-    Then Wait 5 seconds
-    Then WebAgent change to next tab
+- **Feature**: Describes the high-level functionality being tested.
+- **Scenario Outline**: Provides a detailed description of the test scenario.
+- **Given/When/Then**: These are the Gherkin keywords used to describe the steps of the test case.
+- **Examples**: This section provides the data that will be used in the scenario outline.
+- **Comments**: If there are any missing web elements or steps, they can be defined here for future reference.
 
-    Then WebAgent click on reviewButton
-    Then WebAgent click on rejectToCheckerButton
-
-    And WebAgent type "Jimmy Reject To Checker"into mailContentText
-    And WebAgent type "Jimmy Reject To Checker"into qcRemarks
-    Then Wait 2 seconds
-
-    Then WebAgent click on rejectToCheckerButton
-    Then Wait 3 seconds
-    Then Check ticket Sub Status is "QC Rejected To Checker"
-    Then Close Browser
-#***************************************************************
-#  STEP 10:Operation Reviewer Send For OC Review again
-#***************************************************************
-    Given WebAgent open "$testAPPWebUIURL"url
-    When Login as "$Operation Reviewer India"
-    Then WebAgent is on InboxModule
-    Then WebAgent click on inboxIcon
-    Then Wait 10 seconds
-    When Open ticket by ID "@ticketId.Value"
-
-    Then Wait 5 seconds
-    Then WebAgent change to next tab
-    Then WebAgent click on reviewButton
-    Then WebAgent click on sendForoCReviewButton
-
-    And WebAgent type "Send For QC Review to Jimmy again"into mailContentText
-    And WebAgent type ",Send For QC Review to Jimmy again"into checkerRemarks
-
-    Then Select "No exception"from statusRemarkDropdownList
-    Then Select "Chen,Jimmy [TECH NE]"from qcDropdownlist
-    Then Wait 2 seconds
-
-    Then WebAgent click on sendForQCReviewButton
-    Then Wait 3 seconds
-    Then Check ticket Sub Status is "Pending QC Review"
-    Then Close Browser
-
-#*************************************************************
-#  STEP 11:Operation OC Perform Review
-#**************************************************************
-    Given WebAgent open "$testAPPWebUIURL"url
-    When Login as "$Operation QC India"
-    Then WebAgent is on InboxModule
-    Then WebAgent click on inboxIcon
-    Then Wait 15 seconds
-
-    When Open ticket by ID "@ticketId.Value"
-    Then Wait 5 seconds
-    Then WebAgent change to next tab
-
-    Then WebAgent click on reviewButton
-    Then WebAgent click on performReviewButton
-
-    And WebAgent type "Jimmy Performed Review"into mailContentText
-    And WebAgent type ",Jimmy Performed Review"into qcRemarks
-
-    Then Wait 2 seconds
-    Then WebAgent click on performReviewButton
-    Then Wait 3 seconds
-    Then Check ticket Sub Status is "QC Confirmed"
-    Then Close Browser
-#**************************************************************
-#  STEP 12:Operation Reviewer Close Ticket
-#***************************************************************
-    Given WebAgent open "$testAPPWebUIURL"url
-    When Login as "$Operation Reviewer India"
-    Then WebAgent is on InboxModule
-    Then WebAgent click on inboxIcon
-    Then Wait 15 seconds
-    When Open ticket by ID "@ticketId.Value"
-    Then Wait 5 seconds
-    Then WebAgent change to next tab
-
-    Then WebAgent click on closeTicketButton1
-    Then Wait 2 seconds
-    Then WebAgent click on typeEmailCommentsRadio
-    Then Wait 1 seconds
-    And WebAgent type "Close ticket"into mailContentText
-    Then Wait 1 seconds
-    Then Wait 1 seconds
-
-    And Select "No exception"from statusRemarkDropdownList
-    Then WebAgent click on closeTicketButton2
-    Then Wait 3 seconds
-    Then Check ticket Sub Status is "Closed"
-    Then Close Browser
-
-    Examples:
-      |Request Type   | Currency| Amount        |Base No    |Client Name      |Flexcube Ref no      |Cosmos Ref no        |Branch client  | Segment |Payment Type             |
-      |Booking Process| USD     | 1,540,000.00  |IN0123456  |Auto client Name |Auto Flexcube REf no | Auto Cosmos Ref no  |Mumbai         |TILC     |Internal -client account |
-</CUCUMBER_SCRIPT_BASIC_EXAMPLE>
-
-<AVAILABLE_WEB_ELEMENTS>
-#Common
-createButton:
-newMessageltem:
-inboxIcon:
-statusRemarkValueNotCorrectMessage:
-auditTrailTab:
-correctAllTheErrorsBeforeSubmitMessage:
-removeExternalAddressMessage:
-
-#New Message
-mailFromDropdownlist:
-mailFromText:
-mailToText:
-mailCcText:
-mailBccText:
-mailSubjectText:
-mailContentText:
-mailSendButton:
-mailAddressoption:
-
-#Workflow Fields
-checkerDropdownList:
-statusRemarkDropdownList:
-makerRemarks:
-checkerRemarks:
-qcRemarks:
-
-#Inbox List Item
-firstInboxListItemBySubject:
-
-#Workflow Actions Button
-commentsButton1: you can use this button to add comments and reply email
-commentsButton2: you can use this button to add comments
-assignButton:
-assignToMeButton:
-assignToUserButton:
-processingTeamDropdownList:
-requestTypeDropdownlist:
-submitButton:
-confirmNotificationButton:
-reviewButton:
-sendForReviewButton:
-sendForTMReviewButton:
-sendForoCReviewButton:
-performReviewButton:
-sendForKLButton1:
-sendForKLButton2:
-rejectButton1:
-rejectButton2:
-rejectButton:
-rejectToMakerButton:
-rejectToCheckerButton:
-cancelButton:
-cancelReasonText:
-reopenButton:
-unassignButton:
-closeTicketButton1:
-closeTicketButton2:
-reviewerDropdownlist:
-tmReviewerDropdownlist:
-qcDropdownlist:
-typeAddCommentsRadio:
-typeEmailCommentsRadio:
-clientInternalReplyAllRadio:
-forwardButton1:
-forwardButton2:
-
-#Link Ticket
-linkButton:
-addLinkButton:
-searchTicketToLinkText:
-searchTicketButton:
-availableIcon:
-
-#Update Ticket
-updateTicketButton:
-currencyDropdownList:
-amountText:
-baseNoText:
-clientNameText:
-flexcubeRefnoText:
-cosmosRefnoText:
-branchDropdownList:
-clientSegmentDropdownList:
-paymentTypeDropdownList:
-
-</AVAILABLE_WEB_ELEMENTS>
-
-<AVAILABLE_WEBUI_CUCUMBER_SYSTEM_STEPS>
-//Browser click on @webElement
-@When("^(\\w+) click on (@?[\\W\\.]+)")
-
-//Browser type text into @inputbox
-@When("^(\\w+) type \"([\"]*)\" into (@?[\\w\\.]+)")
-
-//Browser select item from @dropdownlist
-@When("^(\w+) select \"([\"]*)\" from (@?[\\w\.]+)")
-
-//Browser check on @checkbox
-@When("(\\w+) check on (@?[\\W\\.]*)")
-
-//Browser uncheck on @checkbox
-@When("(\\w+)uncheck on (@?[W\\.]*)")
-
-//Browser get text of webElement and save to @variable
-@Then("^(\\w+) read text from (@?[\w\\.]+) into (@\\w+)$")
-
-//Browser open url
-@When("^(\\w+) open \"([\"]*)\”url$")
-
-//Browser get url of opened page
-@Then("^(\\w+) get current url$")
-
-//Browser check if @page is opened
-@Then("^(\\w+) (am|is) on (@?[\\w\\.]+)")
-
-//Browser check @webElement exist
-@Then("^(\w+) see (@?[\\w\\.]+)")
-
-//Browser refresh page
-@Then("^(\w+)refresh$)")
-</AVAILABLE_WEBUI_CUCUMBER_SYSTEM_STEPS>
-
-<AVAILABLE_WEBUI_CUCUMBER_PROJECT_STEPS>
-@Given("^Print Log \"([^\"]*)\"$")
-@Given("^Login as \"([^\"]*)\"$")
-@Then("Switch Platform to \"([^\"]*)\"$")
-@Then("^Switch Queue to \"([^\"]*)\"$")
-@Then("^Sign Out$")
-@Then("^Close Browser$")
-@And("^(\\w+) Check on (@?[\\W\\.]+) if exist$")
-@Then("^(\\w+) click on (?[\\W\\.]+) if exist$")
-@When("^Select\"([^\"]*)\" from (@?[\\w\\.]+)$")
-@When("^Search and Select instruction id \"([^\"]*)\" from list$")
-@And("^Check Process Status is \"([^\"]*)\"$")
-@And("^(w+)check(@?[\w\.]+) value is \"([^\"]*)\"$")
-@And("^(\\w+)check (@?[\\W\\.]+) value contain \"([^\"]*)\"$")
-@And("^Save instruction Id and URL with prefix \"([^\"]*)\" from (?[\W\\.]+) into (\\w+)and (\\w+)$")
-@And("^Save Change Request Id from (?[\w\\.]+) into (\\w+)$")
-@And("^Get Ticket ID by Subject \"([^\"]*)\" and save into (\\w+)$")
-@And("^Open ticket by ID \"([^\"]*)\"$")
-@And("^Select Account Change Request by Request_ID \"([^\"]*)\"$")
-@And("^Select Account by Account_Number \"([^\"]*)\"$")
-@Given("^Send key CtrlV$")
-@Given("^Send key Enter$")
-@Given("^Copy \"([^\"]*)\ into clipboard$")
-@Given("^Select Local file with \"([^\"]*)\"$")
-@And("^Check ticket Sub Status is \"([^\"]*)\"$")
-@And("^Check ticket Status is \"([^\"]*)\"$")
-@And("^Check ticket Processing Team is \"([^\"]*)\"$")
-@And("^Check Latest Activity in Audit Trail is \"([^\"]*)\"$")
-@And("^Print login user \"([^\"]*)\"$")
-@And("^Get instruction Id")
-@Then("^Wait page loading$")
-@When("^([w\\.]+)not exist$")
-@Given("^read file \"([^\"]*)\" into (\\w+)$")
-@Given("^get attribute \"(.*)\" from (\\w+)into (\\w+)$")
-@Given("^get xpath \"([^\"]*)\" value from \"(.*?)\into (\\w+)$")
-@Given("^get jsonpath \"([^\"]*)\" value from \"(.*?)\into (\\w+)$")
-</AVAILABLE_WEBUI_CUCUMBER_PROJECT_STEPS>
-
+This script is designed to be clear and concise, following the professional and technical tone suitable for a software company. It ensures that each step is covered and aligns with the expected results from the test case.
 ========================================
 

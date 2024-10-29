@@ -44,11 +44,11 @@ def generate_tools() -> list[Callable[..., Any]]:
             description='Modify the test cases in the vector database based on the recommendations of the test case view.',
             args_schema=Storer
         ),
-        StructuredTool.from_function(
-            func=understand_cucumber_script_knowledge,
-            name='Understand cucumber script knowledge Tool',
-            description='Understand cucumber script knowledge.'
-        ),
+        # StructuredTool.from_function(
+        #     func=understand_cucumber_script_knowledge,
+        #     name='Understand cucumber script knowledge Tool',
+        #     description='Understand cucumber script knowledge.'
+        # ),
         StructuredTool.from_function(
             func=cucumber_script_generate,
             name='Generate cucumber script tool',
