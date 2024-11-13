@@ -4,6 +4,7 @@ from langchain.pydantic_v1 import BaseModel, Field
 
 from core.llm_chat import LLMChat
 from core.log_handler import LoggingHandler
+from knowledges import project_document
 from knowledges.generate_cucumber_script import GENERATE_CUCUMBER_SCRIPT_KNOWLEDGE
 
 script_result_path = "./result/script_generated.feature"
@@ -39,7 +40,8 @@ def cucumber_script_generate(generated_test_cases):
         "cucumber_script_basic_example": cucumber_script_basic_example,
         "available_web_elements": available_web_elements,
         "available_webui_cucumber_system_steps": available_webui_cucumber_system_steps,
-        "available_webui_cucumber_project_steps": available_webui_cucumber_project_steps
+        "available_webui_cucumber_project_steps": available_webui_cucumber_project_steps,
+        "project_document": project_document
     }
 
     cucumber_script = (

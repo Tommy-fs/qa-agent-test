@@ -16,9 +16,11 @@ if you send email 2 with same body and subject to CA UAT, will create new ticket
 1. Send email 1 to Email Address1 with Subject 1, will create new ticket XL001 in Test APP
 2. Reply or forward email 1 with change Subject to Subject 2, will create ticket XL002 in Test APP
 3. After ticket closed in Test APP, reply and forward email will create new ticket in Test APP
+
 C2-Follow previous ticket ID:
 4.Reply email 1 with subject 1 will follow in same ticket XL001
 5.Forward email and email to/email CC contain DL1 will be captured in same ticket XL001
+
 C3-BCC Logic:
 6.Ticket logic of BCC will in solution study progress, cover in future version
 """

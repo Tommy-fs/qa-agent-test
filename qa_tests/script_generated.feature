@@ -2,91 +2,93 @@ gherkin
 Feature: Ticketing Logic
 
   # Test Case ID: 4d319c0b-4378-48e4-abf5-3ecce88401c7
-  # Scenario Outline: TicketingLogic-002 - Reply email with changed subject of existing ticket should update ticket
-  # Preconditions: User must have access to Test APP WebUI and email client.
+  # Scenario Outline: Reply email with changed subject of existing ticket should update ticket
+  # Preconditions: Ensure that the Test APP WebUI is accessible and the email distribution list DL1 is configured.
 
   @critical
-  Scenario: Reply email with changed subject of existing ticket should update ticket
-    Given WebAgent open "Test APP WebUI URL"
-    When Login as "Test User"
-    Then WebAgent is on InboxModule
+  Scenario Outline: TicketingLogic-002 Reply email with changed subject of existing ticket should update ticket
 
-    # Step 1: Send New Email to DL1 with Subject1 and Body1
-    When WebAgent click on createButton
-    And WebAgent click on newMessageItem
+    Given WebAgent open "<testAPPWebUIURL>" url
+    #**************************************************************
+    # STEP 1: Send New Email to DL1 with Subject1 and Body1
+    #**************************************************************
+    When Login as "<User>"
+    Then WebAgent is on InboxModule
+    Then WebAgent click on createButton
+    And WebAgent click on newMessageltem
     And Wait 5 seconds
     Then WebAgent change to next tab
-    And Select "DL1" from mailFromDropdownlist
-    And WebAgent type "DL1" into mailToText
-    And WebAgent type "Subject1" into mailSubjectText
-    And WebAgent type "Body1" into mailContentText
+
+    And Select "<DL1>" from mailFromDropdownlist
+    And WebAgent type "<DL1>" into mailToText
+    Then WebAgent click on mailAddressoption
+    And Wait 1 seconds
+    And WebAgent click on mailContentText
+
+    And WebAgent type "<Body1>" into mailContentText
+    And WebAgent type "<Subject1>" into mailSubjectText
     Then WebAgent click on mailSendButton
     And Wait 5 seconds
     Then Close Browser
 
-    # Step 2: Open Test APP WebUI to check ticket XL001
-    Given WebAgent open "Test APP WebUI URL"
-    When Login as "Test User"
+    #**************************************************************
+    # STEP 2: Open Test APP WebUI to check ticket XL001
+    #**************************************************************
+    Given WebAgent open "<testAPPWebUIURL>" url
+    When Login as "<User>"
     Then WebAgent is on InboxModule
     Then WebAgent click on inboxIcon
-    And Wait 20 seconds
-    And Get Ticket ID by Subject "Subject1" and save into @ticketId
-    When Open ticket by ID "@ticketId.Value"
-    Then Check ticket Subject is "Subject1"
-    And Check ticket Body is "Body1"
-    Then Close Browser
+    Then Wait 20 seconds
+    And Get Ticket ID by Subject "<Subject1>" and save into @ticketId
 
-    # Step 3: Reply this Email to DL1 with Subject2
-    Given WebAgent open "Test APP WebUI URL"
-    When Login as "Test User"
-    Then WebAgent is on InboxModule
-    Then WebAgent click on inboxIcon
-    And Wait 20 seconds
+    #**************************************************************
+    # STEP 3: Reply this Email to DL1 with Subject2
+    #**************************************************************
     When Open ticket by ID "@ticketId.Value"
-    Then WebAgent click on commentsButton1
-    And WebAgent type "Subject2" into mailSubjectText
-    Then WebAgent click on mailSendButton
+    Then Wait 5 seconds
+    Then WebAgent change to next tab
+    Then WebAgent click on typeEmailCommentsRadio
+    And WebAgent type "<Subject2>" into mailSubjectText
+    Then WebAgent click on commentsButton2
     And Wait 5 seconds
-    Then Close Browser
 
-    # Step 4: Open Test APP WebUI to check ticket XL001
-    Given WebAgent open "Test APP WebUI URL"
-    When Login as "Test User"
+    #**************************************************************
+    # STEP 4: Open Test APP WebUI to check ticket XL001
+    #**************************************************************
+    Given WebAgent open "<testAPPWebUIURL>" url
+    When Login as "<User>"
     Then WebAgent is on InboxModule
     Then WebAgent click on inboxIcon
-    And Wait 20 seconds
-    When Open ticket by ID "@ticketId.Value"
-    Then Check ticket Subject is "Subject1"
-    And Check ticket Body is "Body1"
-    Then Close Browser
+    Then Wait 20 seconds
+    And Open ticket by ID "@ticketId.Value"
+    Then Check ticket Subject is "<Subject1>"
 
-    # Step 5: Open Test APP WebUI to check ticket XL002
-    Given WebAgent open "Test APP WebUI URL"
-    When Login as "Test User"
+    #**************************************************************
+    # STEP 5: Open Test APP WebUI to check ticket XL002
+    #**************************************************************
+    Given WebAgent open "<testAPPWebUIURL>" url
+    When Login as "<User>"
     Then WebAgent is on InboxModule
     Then WebAgent click on inboxIcon
-    And Wait 20 seconds
-    And Get Ticket ID by Subject "Subject2" and save into @newTicketId
-    When Open ticket by ID "@newTicketId.Value"
-    Then Check ticket Subject is "Subject2"
-    Then Close Browser
-
-  # Comments:
-  # If there are no available webui cucumber steps or web elements that you want to use, you can customize a new one and display it in a table.
-  # | Annotation Condition | Matching Condition |
-  # |----------------------|--------------------|
-  # | @And("^Check ticket Subject is \"([^\"]*)\"$") | Check ticket Subject is "([^"]*)" |
-  # | @And("^Check ticket Body is \"([^\"]*)\"$") | Check ticket Body is "([^"]*)" |
+    Then Wait 20 seconds
+    And Get Ticket ID by Subject "<Subject2>" and save into @newTicketId
+    And Open ticket by ID "@newTicketId.Value"
+    Then Check ticket Subject is "<Subject2>"
 
     Examples:
-      | testAPPWebUIURL | User | DL1 | Subject1 | Body1 | Subject2 |
-      | http://testapp.com | TestUser | DL1@example.com | Initial Subject | Initial Body | Updated Subject |
+      | testAPPWebUIURL | User   | DL1   | Subject1 | Body1 | Subject2 |
+      | http://testapp  | Admin  | DL1   | Subject1 | Body1 | Subject2 |
+
+  # Comments:
+  # If there are no available webui cucumber steps or web elements that you want to use, please define them here.
+  # For example, you might need a step to check the ticket subject:
+  # @And("^Check ticket Subject is \"([^\"]*)\"$")
 
 
 ### Explanation:
 - **Test Case ID**: A unique identifier for the test case is provided.
-- **Scenario Outline**: Describes the purpose of the test case.
-- **Preconditions**: Lists any prerequisites needed before executing the test.
-- **Steps**: Detailed actions to be performed, using the available web elements and cucumber steps.
-- **Expected Results**: The expected outcomes are checked using custom steps if necessary.
-- **Comments**: Provides a table for any custom steps that need to be defined.
+- **Scenario Outline**: Describes the scenario being tested.
+- **Preconditions**: Lists any prerequisites for the test.
+- **Steps**: Detailed steps are provided using Given, When, Then, and And statements.
+- **Examples**: Defines the parameters used in the scenario.
+- **Comments**: Allows for customization if necessary web elements or steps are not available.

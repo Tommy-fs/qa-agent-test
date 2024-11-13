@@ -1,68 +1,94 @@
-Certainly! Below is a Cucumber script for the provided test case "TicketingLogic-002". This script is written in Gherkin format and follows the guidelines and structure you've provided.
-
 gherkin
-Feature: Ticketing System - Email Reply with Changed Subject
+Feature: Ticketing Logic
 
+  # Test Case ID: 4d319c0b-4378-48e4-abf5-3ecce88401c7
+  # Scenario Outline: Reply email with changed subject of existing ticket should update ticket
+  # Preconditions: Ensure that the Test APP WebUI is accessible and the email distribution list DL1 is configured.
+  
   @critical
-  Scenario Outline: TicketingLogic-002 - Reply email with change Subject to create new ticket
+  Scenario Outline: TicketingLogic-002 Reply email with changed subject of existing ticket should update ticket
+
     Given WebAgent open "<testAPPWebUIURL>" url
+    #**************************************************************
+    # STEP 1: Send New Email to DL1 with Subject1 and Body1
+    #**************************************************************
     When Login as "<User>"
     Then WebAgent is on InboxModule
+    Then WebAgent click on createButton
+    And WebAgent click on newMessageltem
+    And Wait 5 seconds
+    Then WebAgent change to next tab
 
-    # Step 1: Send email with Subject1 to create new ticket XL001
-    When WebAgent click on createButton
-    And WebAgent click on newMessageItem
+    And Select "<DL1>" from mailFromDropdownlist
+    And WebAgent type "<DL1>" into mailToText
+    Then WebAgent click on mailAddressoption
+    And Wait 1 seconds
+    And WebAgent click on mailContentText
+
+    And WebAgent type "<Body1>" into mailContentText
     And WebAgent type "<Subject1>" into mailSubjectText
-    And WebAgent type "Initial email content" into mailContentText
     Then WebAgent click on mailSendButton
     And Wait 5 seconds
-
-    # Step 2: Reply email with change Subject1 to Subject2
-    When WebAgent click on inboxIcon
-    And Wait 5 seconds
-    And WebAgent click on firstInboxListItemBySubject
-    And WebAgent click on commentsButton1
-    And WebAgent type "<Subject2>" into mailSubjectText
-    And WebAgent type "Reply email content" into mailContentText
-    Then WebAgent click on mailSendButton
-    And Wait 5 seconds
-
-    # Step 3: Open Test APP WebUI to check ticket XL001
-    Given WebAgent open "<testAPPWebUIURL>" url
-    When Login as "<User>"
-    Then WebAgent is on InboxModule
-    And WebAgent click on inboxIcon
-    And Wait 5 seconds
-    And Open ticket by ID "XL001"
-    Then Check ticket Status is "Not Updated"
-
-    # Step 4: Open Test APP WebUI to check ticket XL002
-    Given WebAgent open "<testAPPWebUIURL>" url
-    When Login as "<User>"
-    Then WebAgent is on InboxModule
-    And WebAgent click on inboxIcon
-    And Wait 5 seconds
-    And Open ticket by ID "XL002"
-    Then Check ticket Status is "Created with <Subject2>"
-
     Then Close Browser
 
-  Examples:
-    | testAPPWebUIURL | User  | Subject1 | Subject2 |
-    | http://testapp.com | TestUser | Subject1 | Subject2 |
+    #**************************************************************
+    # STEP 2: Open Test APP WebUI to check ticket XL001
+    #**************************************************************
+    Given WebAgent open "<testAPPWebUIURL>" url
+    When Login as "<User>"
+    Then WebAgent is on InboxModule
+    Then WebAgent click on inboxIcon
+    Then Wait 20 seconds
+    And Get Ticket ID by Subject "<Subject1>" and save into @ticketId
 
-# Comments:
-# If any web elements or steps are missing, define them here:
-# | Annotation Condition | Matching Condition |
-# | @And("^Check ticket Status is \"([^\"]*)\"$") | Check ticket status by ID |
+    #**************************************************************
+    # STEP 3: Reply this Email to DL1 with Subject2
+    #**************************************************************
+    When Open ticket by ID "@ticketId.Value"
+    Then Wait 5 seconds
+    Then WebAgent change to next tab
+    Then WebAgent click on typeEmailCommentsRadio
+    And WebAgent type "<Subject2>" into mailSubjectText
+    Then WebAgent click on commentsButton2
+    And Wait 5 seconds
+
+    #**************************************************************
+    # STEP 4: Open Test APP WebUI to check ticket XL001
+    #**************************************************************
+    Given WebAgent open "<testAPPWebUIURL>" url
+    When Login as "<User>"
+    Then WebAgent is on InboxModule
+    Then WebAgent click on inboxIcon
+    Then Wait 20 seconds
+    And Open ticket by ID "@ticketId.Value"
+    Then Check ticket Subject is "<Subject1>"
+
+    #**************************************************************
+    # STEP 5: Open Test APP WebUI to check ticket XL002
+    #**************************************************************
+    Given WebAgent open "<testAPPWebUIURL>" url
+    When Login as "<User>"
+    Then WebAgent is on InboxModule
+    Then WebAgent click on inboxIcon
+    Then Wait 20 seconds
+    And Get Ticket ID by Subject "<Subject2>" and save into @newTicketId
+    And Open ticket by ID "@newTicketId.Value"
+    Then Check ticket Subject is "<Subject2>"
+
+    Examples:
+      | testAPPWebUIURL | User   | DL1   | Subject1 | Body1 | Subject2 |
+      | http://testapp  | Admin  | DL1   | Subject1 | Body1 | Subject2 |
+
+  # Comments:
+  # If there are no available webui cucumber steps or web elements that you want to use, please define them here.
+  # For example, you might need a step to check the ticket subject:
+  # @And("^Check ticket Subject is \"([^\"]*)\"$")
 
 
 ### Explanation:
-
-- **Feature**: Describes the high-level functionality being tested.
-- **Scenario Outline**: Provides a detailed description of the test scenario.
-- **Given/When/Then**: These are the Gherkin keywords used to describe the steps of the test case.
-- **Examples**: This section provides the data that will be used in the scenario outline.
-- **Comments**: If there are any missing web elements or steps, they can be defined here for future reference.
-
-This script is designed to be clear and concise, following the professional and technical tone suitable for a software company. It ensures that each step is covered and aligns with the expected results from the test case.
+- **Test Case ID**: A unique identifier for the test case is provided.
+- **Scenario Outline**: Describes the scenario being tested.
+- **Preconditions**: Lists any prerequisites for the test.
+- **Steps**: Detailed steps are provided using Given, When, Then, and And statements.
+- **Examples**: Defines the parameters used in the scenario.
+- **Comments**: Allows for customization if necessary web elements or steps are not available.

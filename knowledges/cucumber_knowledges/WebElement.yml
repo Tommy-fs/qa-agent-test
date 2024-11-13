@@ -1,85 +1,84 @@
 #Common
-createButton:
-newMessageltem:
-inboxIcon:
-statusRemarkValueNotCorrectMessage:
-auditTrailTab:
-correctAllTheErrorsBeforeSubmitMessage:
-removeExternalAddressMessage:
+createButton: # Click "Create" button, will load second level buttons which contains "New Message"
+newMessageltem: # "New Message" button, after click this will create a new browser tab which include new message section
+inboxIcon: # Inbox Icon, click this will switch to Inbox Module.
+statusRemarkValueNotCorrectMessage: # Validation message if Status Remark value not correct
+auditTrailTab: # Audit Trail Tab
+correctAllTheErrorsBeforeSubmitMessage: # Validation message if any error exist when submit message
+removeExternalAddressMessage: # Validation Message remind user to remove the external email address in the TO/CC/BCC field
 
 #New Message
-mailFromDropdownlist:
-mailFromText:
-mailToText:
-mailCcText:
-mailBccText:
-mailSubjectText:
-mailContentText:
-mailSendButton:
-mailAddressoption:
+mailFromDropdownlist: # "Mail From" dropdown list in the new message section
+mailFromText: # "Mail From" text field in the new message section
+mailToText: # "Mail To" text field in the new message section
+mailCcText: # "Mail CC" text field in the new message section
+mailBccText: # "Mail BCC" text field in the new message section
+mailSubjectText: # "Mail Subject" text field in the new message section
+mailContentText: # "Mail Content" text field in the new message section
+mailSendButton: # "Mail Send" button only in the new message section. You can only use it when sending a new email, not when replying an email
+mailAddressoption: # "Mail Address Option" in the new message section
 
 #Workflow Fields
-checkerDropdownList:
-statusRemarkDropdownList:
-makerRemarks:
-checkerRemarks:
-qcRemarks:
+checkerDropdownList: # "Checker" dropdown list which is checker name
+statusRemarkDropdownList: # "Status Remark" dropdown list which value contains "Pending customer", "Clarification/Request", "Pending approvals", "Pending OT Resolution", "Others" and "No exception".
+makerRemarks: # "Maker Remarks" field which user can input text
+checkerRemarks: # "Checker Remarks" field which Checker can input text
+qcRemarks: # "QC Remarks" field which QC can input text
 
 #Inbox List Item
-firstInboxListItemBySubject:
+firstInboxListItemBySubject: # The 1st ticket which contains the given Subject.
 
 #Workflow Actions Button
-commentsButton1: you can use this button to add comments and reply email
-commentsButton2: you can use this button to add comments
-assignButton:
-assignToMeButton:
-assignToUserButton:
-processingTeamDropdownList:
-requestTypeDropdownlist:
-submitButton:
-confirmNotificationButton:
-reviewButton:
-sendForReviewButton:
-sendForTMReviewButton:
-sendForoCReviewButton:
-performReviewButton:
-sendForKLButton1:
-sendForKLButton2:
-rejectButton1:
-rejectButton2:
-rejectButton:
-rejectToMakerButton:
-rejectToCheckerButton:
-cancelButton:
-cancelReasonText:
-reopenButton:
-unassignButton:
-closeTicketButton1:
-closeTicketButton2:
-reviewerDropdownlist:
-tmReviewerDropdownlist:
-qcDropdownlist:
-typeAddCommentsRadio:
-typeEmailCommentsRadio:
-clientInternalReplyAllRadio:
-forwardButton1:
-forwardButton2:
+commentsButton1: # Click the "Comment 1" button will load comment section
+commentsButton2: # Click the "Comment 2" button will perform the Comment action, the SUb Status will change to "Updated". If you need to add a comment or reply this email with comment, you can click this button.
+assignButton: # Click the "Assign" button will load second level assign button which contains "Assign to Me" and "Assign To User"
+assignToMeButton: # Click the "Assign To Me" button will pop up window of "Assign To Me"
+assignToUserButton: # Click the "Assign to User" button will pop up window of "Assign To User"
+processingTeamDropdownList: # "Processing Team" dropdown list which contains related Processing Team Name
+requestTypeDropdownlist: # "Request Type" dropdown list which contains aviliable Request Type
+submitButton: # Click the "Submit" Button will perform the Submit action
+confirmNotificationButton: # When the ticket be updated, it will pop up the Notification. After click the "Confirm" Button of notification, it will be closed, then the page will be freshed.
+reviewButton: # Click the "Review" Button will load second level review button which contains "Send For Review", "Perform Review", "Reject", "Send For QC Review", "Reject To Maker" and "Reject To Checker".
+sendForReviewButton: # Click the "Send For Reivew" button, the ticket Sub Status will change to "Pending Checker Review"
+sendForTMReviewButton: # Click the "Send For TM Reivew" button, the ticket Sub Status will change to "Pending TM Review"
+sendForoCReviewButton: # Click the "Send For QC" button, the ticket Sub Status will change to "Pending QC Review"
+performReviewButton: # Click the "Perform Review" button, the ticket Sub Status will change to "Reviewed Pass"
+sendForKLButton1: # Click the "Send For KL 1" button will load Send For KL section
+sendForKLButton2: # Click the "Send For KL 2" button will perform the Send For KL action, the Sub Status will change to "Send For KL"
+rejectButton1: # Click the "Reject 1" button will load Reject section
+rejectButton2: # Click the “Reject 2" button will perform the Reject action, the Sub Status will change to "Rejected"
+rejectButton: # Click the "Reject" Button will load second level reject button which contains "Reject To Maker" and "Reject to Checker"
+rejectToMakerButton: # Click the "Reject To Maker" button, ticket will return to Maker, and the Sub Status will change to "Rejected To Maker"
+rejectToCheckerButton: # Click the "Reject To Checker" button, ticket will return to Checker, and the Sub Status will change to "Rejected To Checker"
+cancelButton: # Click the "Cancel" button, it will pop up a "Cancel Window" and let user to input Cancel Reason
+cancelReasonText: # The text field which allow user to input reason of cancel ticket
+reopenButton: # Click the "Reopen" button, ticket Sub Status will change to "Reopen"
+unassignButton: # Click the "Unassign" button, ticket Sub Status will change to "Unassign"
+closeTicketButton1: # Click the "Close Ticket 1" button will load Close Ticket section
+closeTicketButton2: # Click the ”Close Ticket 2" button will perform the Close action, the Sub Status will change to "Closed"
+reviewerDropdownlist: # "Reviewer" dropdown list which is reviewer name
+tmReviewerDropdownlist: # "TM Reviewer" dropdown list which is tm reviewer name
+qcDropdownlist: # "QC" dropdown list which is qc name
+typeAddCommentsRadio: # If choose the "Add Comments" raido button, when user perform any action, it will only add comment without email
+typeEmailCommentsRadio: # If choose the "Email Comments" raido button, when user perform any action, it will add comment and reply email.If you want to reply to this email, you need to click this button first
+clientInternalReplyAllRadio: # If choose the "Reply All" raido button, the "Email To" will load all email addresses
+forwardButton1: # Click the "Forward 1" button will load Forward Ticket section
+forwardButton2: # Click the ”Forward 2" button will perform the Forward action, the Sub Status will change to "Forwarded"
 
 #Link Ticket
-linkButton:
-addLinkButton:
-searchTicketToLinkText:
-searchTicketButton:
-availableIcon:
+linkButton: # Click the "Link" button will load second level link button which contains "Add Link" and "Delete Link"
+addLinkButton: # Click the "Add Link" button will pop up "Add Link" window
+searchTicketToLinkText: # "Search Ticket To Link" text field allow user input what to search
+searchTicketButton: # Click the "Search Ticket" button will load the ticket list base on text of field "Search Ticket To Link"
 
 #Update Ticket
-updateTicketButton:
-currencyDropdownList:
-amountText:
-baseNoText:
-clientNameText:
-flexcubeRefnoText:
-cosmosRefnoText:
-branchDropdownList:
-clientSegmentDropdownList:
-paymentTypeDropdownList:
+updateTicketButton: # Click the "Update Ticket" button will pop up the "Update Ticket" window
+currencyDropdownList: # "Currency" dropdown list field in "Update Ticket" window
+amountText: # "Amount" text field in "Update Ticket" window
+baseNoText: # "Base No." text field in "Update Ticket" window
+clientNameText: # "Client Name" text field in "Update Ticket" window
+flexcubeRefnoText: # "Flexcube Ref no." text field in "Update Ticket" window
+cosmosRefnoText: # "Cosmos Ref no." text field in "Update Ticket" window
+branchDropdownList: # "Branch" dropdown list field in "Update Ticket" window contains India city name
+clientSegmentDropdownList: # "Client Segment" dropdown list field in "Update Ticket" window contains "CRE", "CFIL", “CCB” and "TTLC"
+paymentTypeDropdownList: # "Payment Type" dropdown list field in "Update Ticket" window contains "NEFT/RTGS/Third Party" and "Internal - Client account"
