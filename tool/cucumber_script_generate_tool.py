@@ -40,8 +40,8 @@ def cucumber_script_generate(generated_test_cases):
         "cucumber_script_basic_example": cucumber_script_basic_example,
         "available_web_elements": available_web_elements,
         "available_webui_cucumber_system_steps": available_webui_cucumber_system_steps,
-        "available_webui_cucumber_project_steps": available_webui_cucumber_project_steps,
-        "project_document": project_document
+        "available_webui_cucumber_project_steps": available_webui_cucumber_project_steps
+        # "project_document": project_document
     }
 
     cucumber_script = (

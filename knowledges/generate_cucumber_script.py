@@ -11,7 +11,7 @@ I need you create cucumber scripts for the generated test cases and cucumber kno
 3. Read available web elements to understand web elements that you can use in the cucumber scripts.
 4. Read available webui cucumber system and project steps to understand the step scripts that you can use in the cucumber scripts.
 5. Write script files related to test cases based on the provided examples, steps, web elements, and your knowledge.
-6. The generated script must be strongly associated with the test case and an explanation related to the test case must be added above step
+6. The generated script must be strongly associated with the test case and an explanation related to the test case must be added above each step
 7. Do not generate any scripts that do not comply with syntax standards.
 #############
 
@@ -21,11 +21,6 @@ Please follow these guidelines:
 2. Ensure that each step is clear and concise, using plain language.
 3. If applicable, include And statements to combine steps for improved readability.
 4. Use tags for scenarios that require specific conditions or environments.
-
-#############
-
-# PROJECT DOCUMENT #
-{project_document}
 
 #############
 
@@ -87,7 +82,7 @@ Scenario Outline(mandatory): A brief description of what the test case is intend
 Preconditions(mandatory): Any prerequisites that must be met before executing the test case.
 Steps(mandatory): A detailed list of actions to be performed in the test case.
 Expected Results(optional): The expected outcome after executing the steps.
-Examples(mandatory): The defined parameters you need to use.
+Examples(mandatory): The defined parameters you need to use. These parameters need to be used in <>
 Comments(optional): If there are no available webui cucumber steps or web elements that you want to use. You can customize a new one and display it in a table
 
 #############

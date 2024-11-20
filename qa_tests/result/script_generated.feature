@@ -1,94 +1,84 @@
-gherkin
-Feature: Ticketing Logic
+ gherkin
+Feature: Ticketing System Email Reply Logic
+  This feature verifies that replying to an email with a changed subject creates a new ticket in the system.
 
-  # Test Case ID: 4d319c0b-4378-48e4-abf5-3ecce88401c7
-  # Scenario Outline: Reply email with changed subject of existing ticket should update ticket
-  # Preconditions: Ensure that the Test APP WebUI is accessible and the email distribution list DL1 is configured.
-  
-  @critical
+  @ticketing
   Scenario Outline: TicketingLogic-002 Reply email with changed subject of existing ticket should update ticket
-
     Given WebAgent open "<testAPPWebUIURL>" url
-    #**************************************************************
-    # STEP 1: Send New Email to DL1 with Subject1 and Body1
-    #**************************************************************
+    # Step 1: Send a new email to DL1 with Subject1 and Body1
     When Login as "<User>"
     Then WebAgent is on InboxModule
     Then WebAgent click on createButton
-    And WebAgent click on newMessageltem
+    And WebAgent click on newMessageItem
     And Wait 5 seconds
     Then WebAgent change to next tab
-
     And Select "<DL1>" from mailFromDropdownlist
     And WebAgent type "<DL1>" into mailToText
     Then WebAgent click on mailAddressoption
     And Wait 1 seconds
     And WebAgent click on mailContentText
-
     And WebAgent type "<Body1>" into mailContentText
     And WebAgent type "<Subject1>" into mailSubjectText
     Then WebAgent click on mailSendButton
     And Wait 5 seconds
     Then Close Browser
 
-    #**************************************************************
-    # STEP 2: Open Test APP WebUI to check ticket XL001
-    #**************************************************************
+    # Step 2: Open Test APP WebUI to check ticket XL001
     Given WebAgent open "<testAPPWebUIURL>" url
     When Login as "<User>"
     Then WebAgent is on InboxModule
     Then WebAgent click on inboxIcon
     Then Wait 20 seconds
-    And Get Ticket ID by Subject "<Subject1>" and save into @ticketId
+    And Get Ticket ID by Subject "<Subject1>" and save into @ticketId1
+    When Open ticket by ID "@ticketId1.Value"
+    Then Check ticket Subject is "<Subject1>"
+    And Check ticket Body is "<Body1>"
 
-    #**************************************************************
-    # STEP 3: Reply this Email to DL1 with Subject2
-    #**************************************************************
-    When Open ticket by ID "@ticketId.Value"
-    Then Wait 5 seconds
-    Then WebAgent change to next tab
-    Then WebAgent click on typeEmailCommentsRadio
+    # Step 3: Reply to this email to DL1 with Subject2
+    Given WebAgent open "<testAPPWebUIURL>" url
+    When Login as "<User>"
+    Then WebAgent is on InboxModule
+    Then WebAgent click on inboxIcon
+    Then Wait 20 seconds
+    When Open ticket by ID "@ticketId1.Value"
+    Then WebAgent click on commentsButton1
     And WebAgent type "<Subject2>" into mailSubjectText
     Then WebAgent click on commentsButton2
     And Wait 5 seconds
+    Then Close Browser
 
-    #**************************************************************
-    # STEP 4: Open Test APP WebUI to check ticket XL001
-    #**************************************************************
+    # Step 4: Open Test APP WebUI to check ticket XL001
     Given WebAgent open "<testAPPWebUIURL>" url
     When Login as "<User>"
     Then WebAgent is on InboxModule
     Then WebAgent click on inboxIcon
     Then Wait 20 seconds
-    And Open ticket by ID "@ticketId.Value"
+    When Open ticket by ID "@ticketId1.Value"
     Then Check ticket Subject is "<Subject1>"
 
-    #**************************************************************
-    # STEP 5: Open Test APP WebUI to check ticket XL002
-    #**************************************************************
+    # Step 5: Open Test APP WebUI to check ticket XL002
     Given WebAgent open "<testAPPWebUIURL>" url
     When Login as "<User>"
     Then WebAgent is on InboxModule
     Then WebAgent click on inboxIcon
     Then Wait 20 seconds
-    And Get Ticket ID by Subject "<Subject2>" and save into @newTicketId
-    And Open ticket by ID "@newTicketId.Value"
+    And Get Ticket ID by Subject "<Subject2>" and save into @ticketId2
+    When Open ticket by ID "@ticketId2.Value"
     Then Check ticket Subject is "<Subject2>"
 
     Examples:
-      | testAPPWebUIURL | User   | DL1   | Subject1 | Body1 | Subject2 |
-      | http://testapp  | Admin  | DL1   | Subject1 | Body1 | Subject2 |
+      | testAPPWebUIURL | User    | DL1   | Subject1 | Body1   | Subject2 |
+      | http://testapp  | Tester1 | DL1   | Subject1 | Body1   | Subject2 |
 
-  # Comments:
-  # If there are no available webui cucumber steps or web elements that you want to use, please define them here.
-  # For example, you might need a step to check the ticket subject:
-  # @And("^Check ticket Subject is \"([^\"]*)\"$")
+# Comments:
+# - If there are no available webui cucumber steps or web elements that you want to use, you can customize a new one and display it in a table.
+# - Ensure that the script can run normally and meets each step and expected result in the test cases.
 
 
 ### Explanation:
-- **Test Case ID**: A unique identifier for the test case is provided.
-- **Scenario Outline**: Describes the scenario being tested.
-- **Preconditions**: Lists any prerequisites for the test.
-- **Steps**: Detailed steps are provided using Given, When, Then, and And statements.
-- **Examples**: Defines the parameters used in the scenario.
-- **Comments**: Allows for customization if necessary web elements or steps are not available.
+- **Test Case ID**: The scenario outline is labeled with the test case ID `TicketingLogic-002`.
+- **Scenario Outline**: Describes the scenario to verify the functionality of replying to an email with a changed subject.
+- **Preconditions**: The user must be logged in and have access to the Test APP WebUI.
+- **Steps**: Detailed actions are provided for sending a new email, checking the ticket, replying with a changed subject, and verifying the creation of a new ticket.
+- **Examples**: Parameters such as `testAPPWebUIURL`, `User`, `DL1`, `Subject1`, `Body1`, and `Subject2` are defined for use in the scenario.
+- **Comments**: Additional notes are provided for customization and ensuring the script's functionality.

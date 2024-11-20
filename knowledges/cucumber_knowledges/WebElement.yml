@@ -29,8 +29,10 @@ qcRemarks: # "QC Remarks" field which QC can input text
 firstInboxListItemBySubject: # The 1st ticket which contains the given Subject.
 
 #Workflow Actions Button
-commentsButton1: # Click the "Comment 1" button will load comment section
+commentsButton1: # Click the "Comment 1" button will load comment section. After clicking this button, you should choose typeAddCommentsRadio or typeEmailCommentsRadio firstly.
 commentsButton2: # Click the "Comment 2" button will perform the Comment action, the SUb Status will change to "Updated". If you need to add a comment or reply this email with comment, you can click this button.
+typeAddCommentsRadio: # This button in comment section. If choose the "Add Comments" raido button, when user perform any action, it will only add comment without email.
+typeEmailCommentsRadio: # This button in comment section. If choose the "Email Comments" raido button, when user perform any action, it will add comment and reply email.
 assignButton: # Click the "Assign" button will load second level assign button which contains "Assign to Me" and "Assign To User"
 assignToMeButton: # Click the "Assign To Me" button will pop up window of "Assign To Me"
 assignToUserButton: # Click the "Assign to User" button will pop up window of "Assign To User"
@@ -59,8 +61,6 @@ closeTicketButton2: # Click the ”Close Ticket 2" button will perform the Close
 reviewerDropdownlist: # "Reviewer" dropdown list which is reviewer name
 tmReviewerDropdownlist: # "TM Reviewer" dropdown list which is tm reviewer name
 qcDropdownlist: # "QC" dropdown list which is qc name
-typeAddCommentsRadio: # If choose the "Add Comments" raido button, when user perform any action, it will only add comment without email
-typeEmailCommentsRadio: # If choose the "Email Comments" raido button, when user perform any action, it will add comment and reply email.If you want to reply to this email, you need to click this button first
 clientInternalReplyAllRadio: # If choose the "Reply All" raido button, the "Email To" will load all email addresses
 forwardButton1: # Click the "Forward 1" button will load Forward Ticket section
 forwardButton2: # Click the ”Forward 2" button will perform the Forward action, the Sub Status will change to "Forwarded"
@@ -70,7 +70,7 @@ linkButton: # Click the "Link" button will load second level link button which c
 addLinkButton: # Click the "Add Link" button will pop up "Add Link" window
 searchTicketToLinkText: # "Search Ticket To Link" text field allow user input what to search
 searchTicketButton: # Click the "Search Ticket" button will load the ticket list base on text of field "Search Ticket To Link"
-
+n
 #Update Ticket
 updateTicketButton: # Click the "Update Ticket" button will pop up the "Update Ticket" window
 currencyDropdownList: # "Currency" dropdown list field in "Update Ticket" window
