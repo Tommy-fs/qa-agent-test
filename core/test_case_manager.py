@@ -76,7 +76,7 @@ class TestCasesManager:
                 modified_test_case_str = json.dumps(existing_test_case)
 
                 summary_vector = self.get_openai_vector(modified_test_case_str)
-                # steps_text = "\n".join([step["step"] for step in existing_test_case["steps"]])
+                # steps_text = "\n".join([steps["steps"] for steps in existing_test_case["steps"]])
                 # steps_vector = self.get_openai_vector(steps_text)
 
                 updated_entity = {
@@ -143,7 +143,7 @@ class TestCasesManager:
         test_case = self.parse_test_case(test_case_text)
 
         summary_vector = self.get_openai_vector(test_case_text)
-        steps_text = "\n".join([step["step"] for step in test_case["steps"]])
+        steps_text = "\n".join([step["steps"] for step in test_case["steps"]])
         steps_vector = self.get_openai_vector(steps_text)
 
         try:
@@ -169,7 +169,7 @@ class TestCasesManager:
                 if len(parts) == 4:
                     steps.append({
                         "no": parts[0],
-                        "step": parts[1],
+                        "steps": parts[1],
                         "data": parts[2],
                         "expected": parts[3]
                     })
@@ -200,7 +200,7 @@ class TestCasesManager:
         if "steps" in test_case:
             lines.append("")
             for step in test_case["steps"]:
-                lines.append(f"| {step['no']} | {step['step']} | {step['data']} | {step['expected']} |")
+                lines.append(f"| {step['no']} | {step['steps']} | {step['data']} | {step['expected']} |")
 
         return "\n".join(lines)
 
@@ -216,6 +216,6 @@ class TestCasesManager:
         result += "Steps:\n"
 
         for step in case['steps']:
-            result += f"| {step['no']} | {step['step']} | {step['data']} | {step['expected']} |\n"
+            result += f"| {step['no']} | {step['steps']} | {step['data']} | {step['expected']} |\n"
 
         return result

@@ -9,16 +9,16 @@ I need you create cucumber scripts for the generated test cases and cucumber kno
 1. Read cucumber knowledge basic example to understand grammar, format, and standard.
 2. Review test cases to understand the specific functionalities and learn each Test Step Test Data and Expected Result. You only need to create cucumber scripts for generated test cases, not for whole project document
 3. Read available web elements to understand web elements that you can use in the cucumber scripts.
-4. Read available webui cucumber system and project steps to understand the step scripts that you can use in the cucumber scripts.
+4. Read available webui cucumber system and project steps to understand the steps scripts that you can use in the cucumber scripts.
 5. Write script files related to test cases based on the provided examples, steps, web elements, and your knowledge.
-6. The generated script must be strongly associated with the test case and an explanation related to the test case must be added above each step
+6. The generated script must be strongly associated with the test case and an explanation related to the test case must be added above each steps
 7. Do not generate any scripts that do not comply with syntax standards.
 #############
 
 # GUIDELINES #
 Please follow these guidelines:
 1. Convert each test case into a Gherkin format, which includes Given, When, and Then statements.
-2. Ensure that each step is clear and concise, using plain language.
+2. Ensure that each steps is clear and concise, using plain language.
 3. If applicable, include And statements to combine steps for improved readability.
 4. Use tags for scenarios that require specific conditions or environments.
 
@@ -69,7 +69,7 @@ Professional, technical
 #############
 
 # AUDIENCE #
-The generated cucumber scripts should be detailed and meet the requirements, meet each step and expected result in the test cases, and ensure that the script can run normally
+The generated cucumber scripts should be detailed and meet the requirements, meet each steps and expected result in the test cases, and ensure that the script can run normally
 
 #############
 

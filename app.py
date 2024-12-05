@@ -31,7 +31,7 @@ def start_process():
 
 
 def log_update(step=None, result=None):
-    socketio.emit('log_update', {'step': step, 'result': result}, broadcast=True)
+    socketio.emit('log_update', {'steps': step, 'result': result}, broadcast=True)
 
 
 if __name__ == '__main__':

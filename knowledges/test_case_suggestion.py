@@ -27,11 +27,11 @@ We are a software company, and you are our software test expert. There are now s
 # OBJECTIVE #
 Review test cases by below steps:
 a. Read project document, JIRA request to understand the logic and requirements
-b. Read GENERATED TEST CASES and EXISTING TEST CASES one by one, understand the summary and each step
+b. Read GENERATED TEST CASES and EXISTING TEST CASES one by one, understand the summary and each steps
 c. Analyse the new generated test cases one by one. Provide modification suggestions according to the following logic. 
-   condition1: If the summary of the newly generated test case is consistent with the existing test case and the logic of each step is the same, all step of existing test case meet the needs of Jira request,
+   condition1: If the summary of the newly generated test case is consistent with the existing test case and the logic of each steps is the same, all steps of existing test case meet the needs of Jira request,
                then it is considered that the <existing test case can be used>. And this new generated test case is not to be added.
-   condition2: If the summary of the newly generated test case is similar to the existing test case, but the step logic is inconsistent, and the existing case does not satisfy this jira request, 
+   condition2: If the summary of the newly generated test case is similar to the existing test case, but the steps logic is inconsistent, and the existing case does not satisfy this jira request, 
                then it is considered that the <existing test case needs to be modified>. Provide a modification plan based on existing test case. And this new generated test case is not to be added.
    condition3: If the newly generated test case does not have a similar one with existing test cases.
                That is considered as the <new test cases needs to be added>.

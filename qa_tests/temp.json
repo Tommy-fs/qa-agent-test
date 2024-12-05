@@ -1,10 +1,14 @@
 {
-  "added_test_cases": [],
-  "modified_test_cases": [
+  'missing_steps': [
     {
-      "id": "0feebe1a-6b79-4eac-bbd2-6b8986a707bb",
-      "test_case": "id: 0feebe1a-6b79-4eac-bbd2-6b8986a707bb\n Name: TicketingLogic-002\nSummary: Reply email with changed subject of existing ticket should update ticket\nPriority: Critical\n\n| No. | Test Step | Test Data | Expected Result |\n| ----- | ------------------------------------------------ | ---------------------------- | ------------------------------------------------------ |\n| 1 | Send New Email to DL1 with Subject1 and Body1 | DL1, Subject1, Body1 | Create new ticket XL001 in Test APP |\n| 2 | Open Test APP WebUI to check ticket XL001 | XL001 | Ticket XL001 is created with Subject1 and Body1 |\n| 3 | Reply this Email to DL1 with Subject2 | DL1, Subject2 | Ticket XL001 is not updated |\n| 4 | Open Test APP WebUI to check ticket XL001 | XL001 | Ticket XL001 is updated from Subject1 to Subject2 |",
-
+      'step': 'Reply this Email to DL1 with Subject2',
+      'reason': 'The Gherkin script does not correctly represent the expected result of creating a new ticket XL002. The script only changes the subject of the existing ticket but does not verify the creation of a new ticket with Subject2. The expected result should include checking for the creation of a new ticket with the updated subject.'
+    },
+    {
+      'step': 'Open Test APP WebUI to check ticket XL002',
+      'reason': 'The Gherkin script does not include a step to verify that a new ticket XL002 is created with Subject2. The script should include a step to check the existence of ticket XL002 with Subject2 to match the expected result.'
     }
-  ]
+  ],
+  'matched_steps': 3,
+  'score': 60.0
 }

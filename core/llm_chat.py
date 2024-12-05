@@ -53,7 +53,7 @@ class LLMChat:
         )
         return response
 
-    def prompt_with_parameters(self, request, parameters=None, name='', action_type='step', desc=''):
+    def prompt_with_parameters(self, request, parameters=None, name='', action_type='steps', desc=''):
         if parameters is None:
             parameters = {}
         output_parser = StrOutputParser()

@@ -51,7 +51,7 @@ Professional, technical
 #############
 
 # AUDIENCE #
-Test cases should be detailed and easy to understood, junior tester will test system step by step, follow your test case.
+Test cases should be detailed and easy to understood, junior tester will test system steps by steps, follow your test case.
 
 #############
 

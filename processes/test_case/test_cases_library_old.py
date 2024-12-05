@@ -64,7 +64,7 @@ class TestCasesLibraryOld:
                 existing_test_case.update(modified_test_case)
 
                 summary_vector = self.get_bert_vector(existing_test_case["summary"])
-                # steps_text = "\n".join([step["step"] for step in existing_test_case["steps"]])
+                # steps_text = "\n".join([steps["steps"] for steps in existing_test_case["steps"]])
                 # steps_vector = self.get_bert_vector(steps_text)
 
                 updated_entity = {
@@ -135,7 +135,7 @@ class TestCasesLibraryOld:
         test_case = self.parse_test_case(test_case_text)
 
         # tfidf = TfidfVectorizer()
-        steps_text = "\n".join([step["step"] for step in test_case["steps"]])
+        steps_text = "\n".join([step["steps"] for step in test_case["steps"]])
 
         # summary_vector = tfidf.fit_transform([test_case["summary"]]).toarray()[0]
         # steps_vector = tfidf.fit_transform([steps_text]).toarray()[0]
@@ -166,7 +166,7 @@ class TestCasesLibraryOld:
                 if len(parts) == 4:
                     steps.append({
                         "no": parts[0],
-                        "step": parts[1],
+                        "steps": parts[1],
                         "data": parts[2],
                         "expected": parts[3]
                     })
@@ -197,7 +197,7 @@ class TestCasesLibraryOld:
             lines.append("| No | Step | Data | Expected |")
             lines.append("|----|------|------|----------|")
             for step in test_case["steps"]:
-                lines.append(f"| {step['no']} | {step['step']} | {step['data']} | {step['expected']} |")
+                lines.append(f"| {step['no']} | {step['steps']} | {step['data']} | {step['expected']} |")
 
         return "\n".join(lines)
 

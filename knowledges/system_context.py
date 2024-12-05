@@ -34,7 +34,7 @@ If the tool to be used no arguments defined, then don't generate arguments as ou
 """
 
 PLAN_FORMAT = """
-Based on background and knowledge above to generate a plan, put each step in the json format as the output, step has attribute step_name, step_description, and step_output, all steps are under 'steps' root attribute.
+Based on background and knowledge above to generate a plan, put each steps in the json format as the output, steps has attribute step_name, step_description, and step_output, all steps are under 'steps' root attribute.
 ex: step_name: Prepare eggs, step_description: Get the eggs from the fridge and put on the table, step_output: Prepared eggs on table
 """
 

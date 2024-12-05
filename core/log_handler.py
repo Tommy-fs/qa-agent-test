@@ -55,7 +55,7 @@ class LoggingHandler(BaseCallbackHandler):
         print_text(text, color=color or self.color, end=end, file=self.file)
 
     def on_log_start(
-        self, run_id: UUID, name: str, action_type: str = 'step', desc: str = ''
+        self, run_id: UUID, name: str, action_type: str = 'steps', desc: str = ''
     ) -> None:
         text = f"\n[{run_id}-start {util.get_local_time()}] {action_type} ==> {name} ==> {desc}"
         self.on_text(text)
