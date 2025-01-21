@@ -1,0 +1,1162 @@
+========================================
+ 2025-01-17 14:44:21
+Plan: 
+[Step(name='Understand project and QA knowledge', description='Learn knowledge related to projects, qa_object, qa_context and test_case_example.', output=Understood the project and QA knowledge., sub_steps=[]), Step(name='Generate test cases', description='Generate corresponding test cases base on JIRA requirements, project documents and QA Object.', output=Generated test cases for the JIRA requirement., sub_steps=[]), Step(name='Generate cucumber scripts', description='Generate cucumber script base on generated test cases.', output=Generated cucumber scripts based on the test cases., sub_steps=[])]
+========================================
+
+========================================
+Step 1 : Learn knowledge related to projects, qa_object, qa_context and test_case_example. | 2025-01-17 14:44:25
+----------------------------------------
+Result: 
+
+<QA_CONTEXT>
+
+We are a software company, and you are our software test expert, your responsibility is to create test cases.
+
+</QA_CONTEXT>
+
+<QA_OBJECT>
+
+I need you create function test cases by project documents and JIRA request:
+1. Read project documents to understand whole project's goals, features, and user expectations.
+2. Review JIRA requests to understand the specific functionalities or changes, you only need to create test cases to test this JIRA request, not for whole project document
+3. Identify the components or modules of the software that need to be tested based on the project documentation and JIRA requests. Categorize them based on their functional areas
+4. Based on the identified components and objectives, create test scenarios. Test scenarios outline the high-level functionality that needs to be tested. Each scenario typically consists of a sequence of steps, inputs, and expected outcomes
+5. Break down each test scenario into detailed test cases. Test cases should cover various possible inputs, configurations, boundary conditions, and potential error scenarios. Ensure that each test case is unambiguous and independent
+6. Determine the necessary test data for executing the test cases. This may involve identifying specific inputs, preconditions, and expected results for each test case. Test data should cover both typical and edge cases.
+7. Prioritize the test cases based on factors like criticality, risk, and dependencies to 5 levels. Organize them into test suites to facilitate efficient test execution order by priority
+8. Output test suites with test cases as a table
+9. Test case should have Priority, Name, Summary, Steps.
+10. Write Test Steps as table with  table heads : |No.| Test Step | Test Data | Expected Result |, Test Data means the input in Test Step
+
+</QA_OBJECT>
+
+<PROJECT_DOCUMENT>
+
+Ticketing Logic
+In order  to auto create ticket within APAC Loan email management application following 2 steps are required:
+1.Loan Ops Processing queue/DL should be on-boarded  has an ACTIVE Rule created.
+2.Loan Ops has added Prod DL (or UAT DL)as a sub-DL within Loan Ops Prod DL.
+Once above 2 steps are completed, an incoming email on Loan Op Prod DL with auto-create a ticket and will be
+shown under Processing Queue in the left rail within Open Tickets sub-folder
+
+C1-Create new ticket ID:
+New tickets logic DL + Subject + first email body
+detect new ticket logic is :Receiver Email Address + subject (exclude "RE"/"FW") + first email body, example, you send email 1 to CA UAT, will create ticket 001;
+if you reply or forward(don't change subject or email 1 body) won't create new ticket will update in one ticket;
+if you change subject or email 1 body will create new ticket;
+if you send email 1 with subject 1 to CA UAT will create ticket ,
+if you send email 2 with same body and subject to CA UAT, will create new ticket, because you don't reply or FW email, you totally new one email
+1. Send email 1 to Email Address1 with Subject 1, will create new ticket XL001 in Test APP
+2. Reply or forward email 1 with change Subject to Subject 2, will create ticket XL002 in Test APP
+3. After ticket closed in Test APP, reply and forward email will create new ticket in Test APP
+
+C2-Follow previous ticket ID:
+4.Reply email 1 with subject 1 will follow in same ticket XL001
+5.Forward email and email to/email CC contain DL1 will be captured in same ticket XL001
+
+C3-BCC Logic:
+6.Ticket logic of BCC will in solution study progress, cover in future version
+
+</PROJECT_DOCUMENT>
+
+<TEST_CASE_EXAMPLE>
+
+Priority: Critical
+Name: TicketingLogic-001
+Summary: Send new email with same body and subject as existing ticket should create new ticket
+Steps：
+|No.| Test Step | Test Data | Expected Result |
+| 1 | Send New Email to DL1 with Subject1 and Body1 | DL1, Subject1, Body1| Create new ticket XL001 in Test APP |
+| 2 | Open Test APP WebUI to check ticket XL001 | XL001 | Ticket XL001 is created with Subject1 and Body1 |
+| 3 | Send New Email to DL1 with Subject1 and Body1 | DL1, Subject1, Body1| Create new ticket XL002 in Test APP |
+| 4 | Open Test APP WebUI to check ticket XL001 | XL001 | Ticket XL001 is not updated |
+| 5 | Open Test APP WebUI to check ticket XL002 | XL002 | Ticket XL002 is created with Subject1 and Body1 |
+
+</TEST_CASE_EXAMPLE>
+
+========================================
+
+========================================
+Step 2 : Generate corresponding test cases base on JIRA requirements, project documents and QA Object. | 2025-01-17 14:45:00
+----------------------------------------
+Result: 
+Priority: Critical 
+Name: TicketingLogic-002 
+Summary: Reply email with change Subject to create new Ticket 
+Steps: 
+| No. | Test Step | Test Data | Expected Result | 
+| 1 | Send email with Subject1 to create new ticket XL001 | Subject1 | Create new ticket XL001 in Test APP | 
+| 2 | Reply email with change Subject1 to Subject 2 | Subject1, Subject2 | Create new ticket XL002 in Test APP | 
+| 3 | Open Test APP WebUI to check ticket XL001 | XL001 | Ticket XL001 is not updated | 
+| 4 | Open Test APP WebUI to check ticket XL002 | XL002 | Ticket XL002 is created with Subject2 |
+========================================
+
+========================================
+Step 3 : Generate cucumber script base on generated test cases. | 2025-01-17 14:45:27
+----------------------------------------
+Result: 
+gherkin
+Feature: Ticketing System - Email Reply with Subject Change
+
+  # Test Case ID: TicketingLogic-002
+  # Scenario Outline: Verify that replying to an email with a changed subject creates a new ticket
+  # Preconditions: User must have access to the email system and Test APP WebUI.
+  # Steps: Follow the steps to send an email, reply with a changed subject, and verify ticket creation.
+  # Expected Results: A new ticket is created with the changed subject, and the original ticket remains unchanged.
+
+  @ticketing @email @subjectChange
+  Scenario Outline: Reply email with change Subject to create new Ticket
+
+    Given WebAgent open "<testAPPWebUIURL>" url
+    #**************************************************************
+    # STEP 1: Send an email with Subject1 to create a new ticket XL001
+    #**************************************************************
+    When Login as "<User>"
+    Then WebAgent is on InboxModule
+    Then WebAgent click on createButton
+    And WebAgent click on newMessageltem
+    And Wait 5 seconds
+    Then WebAgent change to next tab
+
+    And Select "<MailFrom>" from mailFromDropdownlist
+    And WebAgent type "<Recipient>" into mailToText
+    Then WebAgent click on mailAddressoption
+    And Wait 1 second
+    And WebAgent click on mailContentText
+
+    And WebAgent type "<MailContent>" into mailContentText
+    And WebAgent type "<Subject1>" into mailSubjectText
+    Then WebAgent click on mailSendButton
+    And Wait 5 seconds
+    Then Close Browser
+
+    #**************************************************************
+    # STEP 2: Reply to the email with a changed subject to create a new ticket XL002
+    #**************************************************************
+    Given WebAgent open "<testAPPWebUIURL>" url
+    When Login as "<User>"
+    Then WebAgent is on InboxModule
+    Then WebAgent click on inboxIcon
+    Then Wait 20 seconds
+    And Get Ticket ID by Subject "<Subject1>" and save into @ticketId
+
+    When Open ticket by ID "@ticketId.Value"
+    Then Wait 5 seconds
+    Then WebAgent change to next tab
+    And WebAgent click on typeEmailCommentsRadio
+    And WebAgent type "<Subject2>" into mailSubjectText
+    Then WebAgent click on mailSendButton
+    And Wait 5 seconds
+    Then Close Browser
+
+    #**************************************************************
+    # STEP 3: Verify that ticket XL001 is not updated
+    #**************************************************************
+    Given WebAgent open "<testAPPWebUIURL>" url
+    When Login as "<User>"
+    Then WebAgent is on InboxModule
+    Then WebAgent click on inboxIcon
+    Then Wait 10 seconds
+
+    When Open ticket by ID "XL001"
+    Then Wait 5 seconds
+    Then WebAgent change to next tab
+    Then Check ticket Status is "Not Updated"
+    Then Close Browser
+
+    #**************************************************************
+    # STEP 4: Verify that ticket XL002 is created with Subject2
+    #**************************************************************
+    Given WebAgent open "<testAPPWebUIURL>" url
+    When Login as "<User>"
+    Then WebAgent is on InboxModule
+    Then WebAgent click on inboxIcon
+    Then Wait 10 seconds
+
+    When Open ticket by ID "XL002"
+    Then Wait 5 seconds
+    Then WebAgent change to next tab
+    Then Check ticket Status is "Created"
+    And Check ticket Subject is "<Subject2>"
+    Then Close Browser
+
+  Examples:
+    | testAPPWebUIURL | User    | MailFrom          | Recipient        | MailContent                       | Subject1 | Subject2 |
+    | http://testapp.com | TestUser | noreply@testapp.com | user@testapp.com | Initial email content for ticket | Subject1 | Subject2 |
+
+# Comments:
+# If there are no available webui cucumber steps or web elements that you want to use, you can customize a new one and display it in a table.
+# For example, if you need a step to verify the ticket subject, you can define it as:
+# @And("^Check ticket Subject is \"([^\"]*)\"$")
+
+
+This script follows the guidelines and structure provided, converting the test case into a Cucumber script using Gherkin syntax. It includes the necessary steps, preconditions, and expected results, along with examples for parameterization.
+========================================
+
+========================================
+ 2025-01-21 15:18:21
+Plan: 
+[Step(name='Understand project and QA knowledge', description='Learn knowledge related to projects, qa_object, qa_context and test_case_example', output=Understood the project and QA knowledge, sub_steps=[]), Step(name='Generate test cases', description='Generate corresponding test cases base on JIRA requirements, project documents and QA Object', output=Generated test cases for the JIRA requirement, sub_steps=[]), Step(name='Generate cucumber scripts', description='Generate cucumber script base on generated test cases', output=Generated cucumber scripts based on the test cases, sub_steps=[])]
+========================================
+
+========================================
+Step 1 : Learn knowledge related to projects, qa_object, qa_context and test_case_example | 2025-01-21 15:18:26
+----------------------------------------
+Result: 
+
+<QA_CONTEXT>
+
+We are a software company, and you are our software test expert, your responsibility is to create test cases.
+
+</QA_CONTEXT>
+
+<QA_OBJECT>
+
+I need you create function test cases by project documents and JIRA request:
+1. Read project documents to understand whole project's goals, features, and user expectations.
+2. Review JIRA requests to understand the specific functionalities or changes, you only need to create test cases to test this JIRA request, not for whole project document
+3. Identify the components or modules of the software that need to be tested based on the project documentation and JIRA requests. Categorize them based on their functional areas
+4. Based on the identified components and objectives, create test scenarios. Test scenarios outline the high-level functionality that needs to be tested. Each scenario typically consists of a sequence of steps, inputs, and expected outcomes
+5. Break down each test scenario into detailed test cases. Test cases should cover various possible inputs, configurations, boundary conditions, and potential error scenarios. Ensure that each test case is unambiguous and independent
+6. Determine the necessary test data for executing the test cases. This may involve identifying specific inputs, preconditions, and expected results for each test case. Test data should cover both typical and edge cases.
+7. Prioritize the test cases based on factors like criticality, risk, and dependencies to 5 levels. Organize them into test suites to facilitate efficient test execution order by priority
+8. Output test suites with test cases as a table
+9. Test case should have Priority, Name, Summary, Steps.
+10. Write Test Steps as table with  table heads : |No.| Test Step | Test Data | Expected Result |, Test Data means the input in Test Step
+
+</QA_OBJECT>
+
+<PROJECT_DOCUMENT>
+
+This system is an operational workflow application utilized by the Global Loans Operations team to source all workflow 
+items, including client requests and daily processing items in support of BAU activities and special remediation projects.
+The ticket as main entity in this application was created by email. Ticket carries business fields to offer Operation users 
+filling out loan transaction information. Then, ticket will go to workflow and pend for reviewing. After all Approval is done, 
+the ticket lifecycle is ended. Ticket will be closed as archived data
+
+</PROJECT_DOCUMENT>
+
+<TEST_CASE_EXAMPLE>
+
+Priority: Critical
+Name: TicketingLogic-001
+Summary: Send new email with same body and subject as existing ticket should create new ticket
+Steps：
+|No.| Test Step | Test Data | Expected Result |
+| 1 | Send New Email to DL1 with Subject1 and Body1 | DL1, Subject1, Body1| Create new ticket XL001 in Test APP |
+| 2 | Open Test APP WebUI to check ticket XL001 | XL001 | Ticket XL001 is created with Subject1 and Body1 |
+| 3 | Send New Email to DL1 with Subject1 and Body1 | DL1, Subject1, Body1| Create new ticket XL002 in Test APP |
+| 4 | Open Test APP WebUI to check ticket XL001 | XL001 | Ticket XL001 is not updated |
+| 5 | Open Test APP WebUI to check ticket XL002 | XL002 | Ticket XL002 is created with Subject1 and Body1 |
+
+</TEST_CASE_EXAMPLE>
+
+========================================
+
+========================================
+Step 2 : Generate corresponding test cases base on JIRA requirements, project documents and QA Object | 2025-01-21 15:18:53
+----------------------------------------
+Result: 
+Priority: Critical
+Name: XMC-FundingDashboard-001
+Summary: Verify that the new Auto Test Ref# field is non-mandatory and located under Contract # or RID in all Workflow and Update Ticket Areas
+Steps:
+|No.| Test Step | Test Data | Expected Result |
+| 1 | Access XMC application | N/A | Successfully log in to the XMC application |
+| 2 | Navigate to a DLS, document, or normal DL ticket | Ticket ID | Verify that the Auto Test Ref# field is present under Contract # or RID |
+| 3 | Try to submit the ticket without filling in the Auto Test Ref# field | Ticket ID, Auto Test Ref# field empty | Ticket is successfully submitted without any errors |
+| 4 | Verify that the new Auto Test Ref# field is displayed in the Additional Details section of a Normal DL ticket | Ticket ID | Confirm that the field is visible and marked as non-mandatory |
+| 5 | Update a ticket in the XMC application and check if the Auto Test Ref# field is available | Ticket ID | Ensure that the field is present and can be filled in if needed |
+========================================
+
+========================================
+Step 3 : Generate cucumber script base on generated test cases | 2025-01-21 15:19:29
+----------------------------------------
+Result: 
+gherkin
+Feature: XMC Funding Dashboard
+
+# Test Case ID: XMC-FundingDashboard-001
+# Scenario Outline: Verify that the new Auto Test Ref# field is non-mandatory and located under Contract # or RID in all Workflow and Update Ticket Areas
+# Preconditions: User must have access to the XMC application and be logged in.
+
+@XMC @FundingDashboard @Critical
+Scenario Outline: Verify Auto Test Ref# field presence and functionality
+  Given WebAgent open "<xmcLoginPage>" url
+  And Login as "<username>"
+  And Wait page loading
+  # Step 1: Access XMC application
+  Then WebAgent is on "<xmcHomePage>"
+  
+  # Step 2: Navigate to a DLS, document, or normal DL ticket
+  When WebAgent type "<ticketId>" into searchTicketText
+  And WebAgent click on searchValueItem
+  Then WebAgent see "<autoTestRefField>" under "<contractNoOrRidText>"
+  
+  # Step 3: Try to submit the ticket without filling in the Auto Test Ref# field
+  When WebAgent click on "<submitTicketButton>"
+  Then WebAgent see "<submissionSuccessMessage>"
+  
+  # Step 4: Verify that the new Auto Test Ref# field is displayed in the Additional Details section of a Normal DL ticket
+  When WebAgent click on additionalDetailsNotesAction
+  Then WebAgent see "<autoTestRefField>" marked as non-mandatory
+  
+  # Step 5: Update a ticket in the XMC application and check if the Auto Test Ref# field is available
+  When WebAgent click on updateTicketAction
+  Then WebAgent see "<autoTestRefField>" and it can be filled in if needed
+
+Examples:
+  | xmcLoginPage       | username | xmcHomePage | ticketId | autoTestRefField | contractNoOrRidText | submitTicketButton | submissionSuccessMessage |
+  | "http://xmc-login" | "user1"  | "XMC Home"  | "12345"  | "Auto Test Ref#" | "Contract # or RID" | "Submit"           | "Ticket submitted successfully" |
+
+# Comments:
+# If there are no available webui cucumber steps or web elements that you want to use, please define them here.
+# | Annotation Condition | Matching Condition |
+# |----------------------|--------------------|
+# | @And("^Check Auto Test Ref# field is present under Contract # or RID$") | Check if Auto Test Ref# field is present under Contract # or RID |
+# | @Then("^Verify Auto Test Ref# field is non-mandatory$") | Verify if Auto Test Ref# field is non-mandatory |
+
+
+### Explanation:
+- **Test Case ID**: XMC-FundingDashboard-001 is used as a unique identifier.
+- **Scenario Outline**: Describes the purpose of the test case.
+- **Preconditions**: User must be logged into the XMC application.
+- **Steps**: Each step corresponds to the actions described in the test case, using the available web elements and cucumber steps.
+- **Expected Results**: Described within the steps using `Then` statements.
+- **Examples**: Provides the parameters used in the scenario outline.
+- **Comments**: Placeholder for any custom steps or elements that need to be defined.
+========================================
+
+========================================
+ 2025-01-21 15:30:57
+Plan: 
+[Step(name='Understand project and QA knowledge', description='Learn knowledge related to projects, qa_object, qa_context and test_case_example.', output=Understood the project and QA knowledge., sub_steps=[]), Step(name='Generate test cases', description='Generate corresponding test cases based on JIRA requirements, project documents and QA Object.', output=Generated test cases for the JIRA requirement., sub_steps=[]), Step(name='Generate cucumber scripts', description='Generate cucumber script based on generated test cases.', output=Generated cucumber scripts for the test cases., sub_steps=[])]
+========================================
+
+========================================
+Step 1 : Learn knowledge related to projects, qa_object, qa_context and test_case_example. | 2025-01-21 15:31:01
+----------------------------------------
+Result: 
+
+<QA_CONTEXT>
+
+We are a software company, and you are our software test expert, your responsibility is to create test cases.
+
+</QA_CONTEXT>
+
+<QA_OBJECT>
+
+I need you create function test cases by project documents and JIRA request:
+1. Read project documents to understand whole project's goals, features, and user expectations.
+2. Review JIRA requests to understand the specific functionalities or changes, you only need to create test cases to test this JIRA request, not for whole project document
+3. Identify the components or modules of the software that need to be tested based on the project documentation and JIRA requests. Categorize them based on their functional areas
+4. Based on the identified components and objectives, create test scenarios. Test scenarios outline the high-level functionality that needs to be tested. Each scenario typically consists of a sequence of steps, inputs, and expected outcomes
+5. Break down each test scenario into detailed test cases. Test cases should cover various possible inputs, configurations, boundary conditions, and potential error scenarios. Ensure that each test case is unambiguous and independent
+6. Determine the necessary test data for executing the test cases. This may involve identifying specific inputs, preconditions, and expected results for each test case. Test data should cover both typical and edge cases.
+7. Prioritize the test cases based on factors like criticality, risk, and dependencies to 5 levels. Organize them into test suites to facilitate efficient test execution order by priority
+8. Output test suites with test cases as a table
+9. Test case should have Priority, Name, Summary, Steps.
+10. Write Test Steps as table with  table heads : |No.| Test Step | Test Data | Expected Result |, Test Data means the input in Test Step
+
+</QA_OBJECT>
+
+<PROJECT_DOCUMENT>
+
+This system is an operational workflow application utilized by the Global Loans Operations team to source all workflow 
+items, including client requests and daily processing items in support of BAU activities and special remediation projects.
+The ticket as main entity in this application was created by email. Ticket carries business fields to offer Operation users 
+filling out loan transaction information. Then, ticket will go to workflow and pend for reviewing. After all Approval is done, 
+the ticket lifecycle is ended. Ticket will be closed as archived data
+
+</PROJECT_DOCUMENT>
+
+<TEST_CASE_EXAMPLE>
+
+Priority: Critical
+Name: TicketingLogic-001
+Summary: Function - update(change request type) Ticket
+Steps：
+|No.| Test Step | Test Data | Expected Result |
+1. Operation Manager login XMC Loan Web.                                     | A: *GT CN  DevTest       | Processing Team: *GT CN DevTest
+2. Create a Ticket for DL A and select OTHER as Request Type by New Message. | Request Type value: 3PDL | Status: Unassigned
+3. Opetn Ticket A.                                                           |                          | Sub Status: New
+4. Check Processing Team, Statusl Sub Status, Request Type.                  |                          | Request Type: OTHER
+5. Click Update Ticket Action.                                               |                          | Request Type: 3P
+6. Select Request Type value from Request Type dropdown list.                |                          |
+7. Click Update Ticket button.                                               |                          |
+8. Check Request Type                                                        |                          |
+
+</TEST_CASE_EXAMPLE>
+
+========================================
+
+========================================
+Step 2 : Generate corresponding test cases based on JIRA requirements, project documents and QA Object. | 2025-01-21 15:31:30
+----------------------------------------
+Result: 
+Priority: Critical
+Name: XMC-FundingDashboard-001
+Summary: Function - Add Auto Test Ref# field to XMC for Funding Dashboard
+Steps:
+|No.| Test Step | Test Data | Expected Result |
+1. Log in to XMC system as a user with admin privileges. | Username: admin, Password: ********* | User successfully logged in.
+2. Navigate to the Ticket Workflow section in XMC. | Click on Ticket Workflow tab in the main menu. | Ticket Workflow page is displayed.
+3. Identify the location of the new Auto Test Ref# field. | Check under Contract # or RID in all Workflow and Update Ticket areas. | Auto Test Ref# field is located as specified.
+4. Verify that the Auto Test Ref# field is non-mandatory. | Check if the field is not marked as mandatory. | Field is not mandatory and can be left blank.
+5. Ensure the new field is added for Normal DLs in the Additional Details section. | Check the left area of the Ticket Detail page for the new field. | New field is displayed in the Additional Details section.
+6. Create a new ticket for a Normal DL and observe the presence of the Auto Test Ref# field. | Create a new ticket and check for the Auto Test Ref# field. | Field is visible and can be filled out if needed.
+7. Update an existing ticket for a DLS, document, or normal DL and verify the presence of the Auto Test Ref# field. | Select an existing ticket and check for the Auto Test Ref# field during update. | Field is present and can be modified if required.
+========================================
+
+========================================
+Step 3 : Generate cucumber script based on generated test cases. | 2025-01-21 15:32:11
+----------------------------------------
+Result: 
+gherkin
+Feature: XMC Funding Dashboard
+
+# Test Case ID: XMC-FundingDashboard-001
+# Scenario Outline: Verify the addition of Auto Test Ref# field to XMC for Funding Dashboard
+# Preconditions: User must have admin privileges to access the XMC system.
+
+@XMC @FundingDashboard @Critical
+Scenario Outline: Add Auto Test Ref# field to XMC for Funding Dashboard
+
+  # ***************************************************
+  # STEP 1: Log in to XMC system as a user with admin privileges
+  # ***************************************************
+  Given Login as "<username>"
+  And Wait page loading
+  Then User successfully logged in
+
+  # ***************************************************
+  # STEP 2: Navigate to the Ticket Workflow section in XMC
+  # ***************************************************
+  When WebAgent click on "Ticket Workflow" tab in the main menu
+  Then Ticket Workflow page is displayed
+
+  # ***************************************************
+  # STEP 3: Identify the location of the new Auto Test Ref# field
+  # ***************************************************
+  When WebAgent check on "Auto Test Ref#" field under Contract # or RID in all Workflow and Update Ticket areas
+  Then Auto Test Ref# field is located as specified
+
+  # ***************************************************
+  # STEP 4: Verify that the Auto Test Ref# field is non-mandatory
+  # ***************************************************
+  When WebAgent check if "Auto Test Ref#" field is not marked as mandatory
+  Then Field is not mandatory and can be left blank
+
+  # ***************************************************
+  # STEP 5: Ensure the new field is added for Normal DLs in the Additional Details section
+  # ***************************************************
+  When WebAgent check on "Auto Test Ref#" field in the Additional Details section of the Ticket Detail page
+  Then New field is displayed in the Additional Details section
+
+  # ***************************************************
+  # STEP 6: Create a new ticket for a Normal DL and observe the presence of the Auto Test Ref# field
+  # ***************************************************
+  When WebAgent click on createButton
+  And WebAgent type "<ticketDetails>" into ticketDetailsText
+  Then WebAgent check on "Auto Test Ref#" field in the new ticket
+  And Field is visible and can be filled out if needed
+
+  # ***************************************************
+  # STEP 7: Update an existing ticket for a DLS, document, or normal DL and verify the presence of the Auto Test Ref# field
+  # ***************************************************
+  When Open ticket by ID "<ticketId>"
+  And WebAgent click on updateTicketAction
+  Then WebAgent check on "Auto Test Ref#" field during update
+  And Field is present and can be modified if required
+
+Examples:
+  | username | ticketDetails | ticketId |
+  | admin    | Sample Ticket | 12345    |
+
+# Comments:
+# If there are no available webui cucumber steps or web elements that you want to use, you can customize a new one and display it in a table.
+# For example, if "Auto Test Ref#" field is not available, define it as:
+# | Web Element Name | XPath or Selector |
+# | Auto Test Ref#   | //input[@name='autoTestRef'] |
+
+
+### Explanation:
+- **Test Case ID**: A unique identifier for the test case is provided.
+- **Scenario Outline**: Describes the purpose of the test case.
+- **Preconditions**: Specifies that the user must have admin privileges.
+- **Steps**: Detailed steps are provided using Given, When, Then, and And statements.
+- **Examples**: Parameters are defined for the scenario outline.
+- **Comments**: Instructions for customizing web elements if needed.
+========================================
+
+========================================
+ 2025-01-21 15:39:12
+Plan: 
+[Step(name='Understand project and QA knowledge', description='Learn knowledge related to projects, qa_object, qa_context and test_case_example.', output=Understood the project requirements and QA knowledge., sub_steps=[]), Step(name='Generate test cases', description='Generate corresponding test cases based on JIRA requirements, project documents and QA Object.', output=Generated test cases for the JIRA requirement., sub_steps=[]), Step(name='Generate cucumber scripts', description='Generate cucumber script based on generated test cases.', output=Generated cucumber scripts for the test cases., sub_steps=[])]
+========================================
+
+========================================
+Step 1 : Learn knowledge related to projects, qa_object, qa_context and test_case_example. | 2025-01-21 15:39:16
+----------------------------------------
+Result: 
+
+<QA_CONTEXT>
+
+We are a software company, and you are our software test expert, your responsibility is to create test cases.
+
+</QA_CONTEXT>
+
+<QA_OBJECT>
+
+I need you create function test cases by project documents and JIRA request:
+1. Read project documents to understand whole project's goals, features, and user expectations.
+2. Review JIRA requests to understand the specific functionalities or changes, you only need to create test cases to test this JIRA request, not for whole project document
+3. Identify the components or modules of the software that need to be tested based on the project documentation and JIRA requests. Categorize them based on their functional areas
+4. Based on the identified components and objectives, create test scenarios. Test scenarios outline the high-level functionality that needs to be tested. Each scenario typically consists of a sequence of steps, inputs, and expected outcomes
+5. Break down each test scenario into detailed test cases. Test cases should cover various possible inputs, configurations, boundary conditions, and potential error scenarios. Ensure that each test case is unambiguous and independent
+6. Determine the necessary test data for executing the test cases. This may involve identifying specific inputs, preconditions, and expected results for each test case. Test data should cover both typical and edge cases.
+7. Prioritize the test cases based on factors like criticality, risk, and dependencies to 5 levels. Organize them into test suites to facilitate efficient test execution order by priority
+8. Output test suites with test cases as a table
+9. Test case should have Priority, Name, Summary, Steps.
+10. Write Test Steps as table with  table heads : |No.| Test Step | Test Data | Expected Result |, Test Data means the input in Test Step
+
+</QA_OBJECT>
+
+<PROJECT_DOCUMENT>
+
+This system is an operational workflow application utilized by the Global Loans Operations team to source all workflow 
+items, including client requests and daily processing items in support of BAU activities and special remediation projects.
+The ticket as main entity in this application was created by email. Ticket carries business fields to offer Operation users 
+filling out loan transaction information. Then, ticket will go to workflow and pend for reviewing. After all Approval is done, 
+the ticket lifecycle is ended. Ticket will be closed as archived data
+
+</PROJECT_DOCUMENT>
+
+<TEST_CASE_EXAMPLE>
+
+Priority: Critical
+Name: TicketingLogic-001
+Summary: Function - update(change request type) Ticket
+Steps：
+|No.| Test Step | Test Data | Expected Result |
+1. Operation Manager login XMC Loan Web.                                     | A: *GT CN  DevTest       | Processing Team: *GT CN DevTest
+2. Create a Ticket for DL A and select OTHER as Request Type by New Message. | Request Type value: 3PDL | Status: Unassigned
+3. Opetn Ticket A.                                                           |                          | Sub Status: New
+4. Check Processing Team, Statusl Sub Status, Request Type.                  |                          | Request Type: OTHER
+5. Click Update Ticket Action.                                               |                          | Request Type: 3P
+6. Select Request Type value from Request Type dropdown list.                |                          |
+7. Click Update Ticket button.                                               |                          |
+8. Check Request Type                                                        |                          |
+
+</TEST_CASE_EXAMPLE>
+
+========================================
+
+========================================
+Step 2 : Generate corresponding test cases based on JIRA requirements, project documents and QA Object. | 2025-01-21 15:39:40
+----------------------------------------
+Result: 
+Priority: Critical
+Name: FundingDashboard-001
+Summary: Function - Add Auto Test Ref# field to Funding Dashboard
+Steps:
+|No.| Test Step | Test Data | Expected Result |
+1. Log in to GENAIXXX system as a user with Bilateral or CAD servicing operations role. | Username: testuser | Landing page displayed successfully.
+2. Navigate to the Funding Dashboard section. | Click on Funding Dashboard tab | Funding Dashboard page opens.
+3. Check if there is a text field available for Auto Test Ref# in the Funding Dashboard. | - | Text field for Auto Test Ref# is not present.
+4. Apply the change requested to make Auto Test Ref# field non-mandatory. | - | Auto Test Ref# field is now non-mandatory.
+5. Locate the new Auto Test Ref# field under Contract # or RID in all Workflow and Update Ticket Areas. | - | Auto Test Ref# field is visible in the specified locations.
+6. Verify that the new Auto Test Ref# field is added for Normal DLs in the Additional Details section on the Ticket Detail page. | - | Auto Test Ref# field is displayed in the Additional Details section.
+7. Ensure that the new field is non-mandatory for all DLs. | - | Auto Test Ref# field is not mandatory for any DL type.
+8. Confirm that the Bilateral department can now transition their funding dashboard data fully to GENAIXXX. | - | Funding dashboard data can be fully transitioned.
+9. Test the functionality by updating a ticket and checking if the Auto Test Ref# field is available. | Update a ticket and check for Auto Test Ref# field | Auto Test Ref# field is visible and can be filled out.
+10. Validate that the change allows for better data tracking and remediation efforts. | - | Data tracking and remediation efforts are improved with the new field.
+========================================
+
+========================================
+Step 3 : Generate cucumber script based on generated test cases. | 2025-01-21 15:40:09
+----------------------------------------
+Result: 
+gherkin
+Feature: Funding Dashboard
+
+# Test Case ID: FundingDashboard-001
+# Scenario Outline: Add Auto Test Ref# field to Funding Dashboard
+# Preconditions: User must have Bilateral or CAD servicing operations role.
+
+@FundingDashboard @Critical
+Scenario: Add Auto Test Ref# field to Funding Dashboard
+  # ***************************************************
+  # STEP 1: Log in to GENAIXXX system
+  # ***************************************************
+  Given Login as "testuser"
+  Then Wait page loading
+  And WebAgent is on landingPage
+
+  # ***************************************************
+  # STEP 2: Navigate to Funding Dashboard
+  # ***************************************************
+  When WebAgent click on fundingDashboardTab
+  Then WebAgent is on fundingDashboardPage
+
+  # ***************************************************
+  # STEP 3: Check for Auto Test Ref# field
+  # ***************************************************
+  Then WebAgent see autoTestRefField
+  And WebAgent check autoTestRefField value is ""
+
+  # ***************************************************
+  # STEP 4: Apply change to make Auto Test Ref# field non-mandatory
+  # ***************************************************
+  When WebAgent click on settingsIcon
+  And WebAgent uncheck on autoTestRefMandatoryCheckbox
+  Then WebAgent see autoTestRefField is not mandatory
+
+  # ***************************************************
+  # STEP 5: Locate Auto Test Ref# field in Workflow and Update Ticket Areas
+  # ***************************************************
+  When WebAgent click on workflowTab
+  Then WebAgent see autoTestRefField
+  When WebAgent click on updateTicketTab
+  Then WebAgent see autoTestRefField
+
+  # ***************************************************
+  # STEP 6: Verify Auto Test Ref# field in Additional Details section
+  # ***************************************************
+  When WebAgent click on ticketDetailTab
+  Then WebAgent see autoTestRefField in additionalDetailsSection
+
+  # ***************************************************
+  # STEP 7: Ensure field is non-mandatory for all DLs
+  # ***************************************************
+  When WebAgent click on dlTypeDropdownlist
+  And WebAgent select "Normal DL" from dlTypeDropdownlist
+  Then WebAgent see autoTestRefField is not mandatory
+
+  # ***************************************************
+  # STEP 8: Confirm Bilateral department transition
+  # ***************************************************
+  When WebAgent click on bilateralDepartmentTab
+  Then WebAgent see transitionSuccessMessage
+
+  # ***************************************************
+  # STEP 9: Test functionality by updating a ticket
+  # ***************************************************
+  When WebAgent click on updateTicketAction
+  And WebAgent type "TestRef123" into autoTestRefField
+  Then WebAgent click on updateTicketButton
+  And WebAgent see autoTestRefField value is "TestRef123"
+
+  # ***************************************************
+  # STEP 10: Validate improved data tracking and remediation
+  # ***************************************************
+  Then WebAgent see dataTrackingImprovedMessage
+  And WebAgent see remediationEffortsImprovedMessage
+
+# Comments:
+# The following web elements need to be defined:
+# fundingDashboardTab, autoTestRefField, settingsIcon, autoTestRefMandatoryCheckbox, workflowTab, updateTicketTab, ticketDetailTab, additionalDetailsSection, dlTypeDropdownlist, bilateralDepartmentTab, transitionSuccessMessage, dataTrackingImprovedMessage, remediationEffortsImprovedMessage
+
+
+### Explanation:
+- **Test Case ID**: Unique identifier for the test case.
+- **Scenario Outline**: Describes the purpose of the test case.
+- **Preconditions**: Specifies the role required for the user.
+- **Steps**: Detailed actions to be performed, using Given, When, Then, and And statements.
+- **Expected Results**: Implied within the Then statements.
+- **Comments**: Lists any new web elements that need to be defined for the script to function correctly.
+========================================
+
+========================================
+ 2025-01-21 15:43:29
+Plan: 
+[Step(name='Understand project and QA knowledge', description='Learn knowledge related to projects, qa_object, qa_context and test_case_example.', output=Understood the project and QA knowledge., sub_steps=[]), Step(name='Generate test cases', description='Generate corresponding test cases based on JIRA requirements, project documents and QA Object.', output=Generated test cases for the JIRA requirement., sub_steps=[]), Step(name='Generate cucumber scripts', description='Generate cucumber script based on generated test cases.', output=Generated cucumber script for the JIRA requirement., sub_steps=[])]
+========================================
+
+========================================
+Step 1 : Learn knowledge related to projects, qa_object, qa_context and test_case_example. | 2025-01-21 15:43:33
+----------------------------------------
+Result: 
+
+<QA_CONTEXT>
+
+We are a software company, and you are our software test expert, your responsibility is to create test cases.
+
+</QA_CONTEXT>
+
+<QA_OBJECT>
+
+I need you create function test cases by project documents and JIRA request:
+1. Read project documents to understand whole project's goals, features, and user expectations.
+2. Review JIRA requests to understand the specific functionalities or changes, you only need to create test cases to test this JIRA request, not for whole project document
+3. Identify the components or modules of the software that need to be tested based on the project documentation and JIRA requests. Categorize them based on their functional areas
+4. Based on the identified components and objectives, create test scenarios. Test scenarios outline the high-level functionality that needs to be tested. Each scenario typically consists of a sequence of steps, inputs, and expected outcomes
+5. Break down each test scenario into detailed test cases. Test cases should cover various possible inputs, configurations, boundary conditions, and potential error scenarios. Ensure that each test case is unambiguous and independent
+6. Determine the necessary test data for executing the test cases. This may involve identifying specific inputs, preconditions, and expected results for each test case. Test data should cover both typical and edge cases.
+7. Prioritize the test cases based on factors like criticality, risk, and dependencies to 5 levels. Organize them into test suites to facilitate efficient test execution order by priority
+8. Output test suites with test cases as a table
+9. Test case should have Priority, Name, Summary, Steps.
+10. Write Test Steps as table with  table heads : |No.| Test Step | Test Data | Expected Result |, Test Data means the input in Test Step
+
+</QA_OBJECT>
+
+<PROJECT_DOCUMENT>
+
+This system is an operational workflow application utilized by the Global Loans Operations team to source all workflow 
+items, including client requests and daily processing items in support of BAU activities and special remediation projects.
+The ticket as main entity in this application was created by email. Ticket carries business fields to offer Operation users 
+filling out loan transaction information. Then, ticket will go to workflow and pend for reviewing. After all Approval is done, 
+the ticket lifecycle is ended. Ticket will be closed as archived data
+
+</PROJECT_DOCUMENT>
+
+<TEST_CASE_EXAMPLE>
+
+Priority: Critical
+Name: TicketingLogic-001
+Summary: Function - update(change request type) Ticket
+Steps：
+|No.| Test Step | Test Data | Expected Result |
+1. Operation Manager login XMC Loan Web.                                     | A: *GT CN  DevTest       | Processing Team: *GT CN DevTest
+2. Create a Ticket for DL A and select OTHER as Request Type by New Message. | Request Type value: 3PDL | Status: Unassigned
+3. Opetn Ticket A.                                                           |                          | Sub Status: New
+4. Check Processing Team, Statusl Sub Status, Request Type.                  |                          | Request Type: OTHER
+5. Click Update Ticket Action.                                               |                          | Request Type: 3P
+6. Select Request Type value from Request Type dropdown list.                |                          |
+7. Click Update Ticket button.                                               |                          |
+8. Check Request Type                                                        |                          |
+
+</TEST_CASE_EXAMPLE>
+
+========================================
+
+========================================
+Step 2 : Generate corresponding test cases based on JIRA requirements, project documents and QA Object. | 2025-01-21 15:43:52
+----------------------------------------
+Result: 
+Priority: Critical
+Name: FundingDashboard-001
+Summary: Function - Add Auto Test Ref# field to Funding Dashboard
+Steps:
+|No.| Test Step | Test Data | Expected Result |
+1. Log in to GENAIXXX system as a user with Bilateral or CAD servicing operations role. | Username: testuser1, Password: Test@123 | User successfully logged in.
+2. Navigate to the Funding Dashboard section. | Click on Funding Dashboard tab | Funding Dashboard page is displayed.
+3. Check if there is a text field available for Auto Test Ref# in the Funding Dashboard. | - | Text field for Auto Test Ref# is not present.
+4. Apply the change requested to make Auto Test Ref# field non-mandatory. | - | Auto Test Ref# field is now non-mandatory.
+5. Locate the new Auto Test Ref# field under Contract # or RID in all Workflow and Update Ticket areas. | - | Auto Test Ref# field is visible under Contract # or RID.
+6. Verify that the new Auto Test Ref# field is added to all DLS, document, and normal DLs. | - | Auto Test Ref# field is present in all relevant areas.
+7. Check if the new Auto Test Ref# field for Normal DL is shown in the Additional Details section on the left area of the Ticket Detail page. | - | Auto Test Ref# field is displayed in the Additional Details section.
+8. Confirm that the new Auto Test Ref# field is non-mandatory for all DLs. | - | Auto Test Ref# field is not mandatory for any DL.
+9. Test the functionality by entering data in the Auto Test Ref# field and saving the changes. | Auto Test Ref#: Test123 | Changes are saved successfully.
+10. Verify that the data entered in the Auto Test Ref# field is displayed correctly in the Funding Dashboard. | - | Data entered in Auto Test Ref# field is visible in the Funding Dashboard.
+========================================
+
+========================================
+Step 3 : Generate cucumber script based on generated test cases. | 2025-01-21 15:44:12
+----------------------------------------
+Result: 
+gherkin
+Feature: Funding Dashboard
+
+# Test Case ID: FundingDashboard-001
+# Scenario Outline: Verify the addition of Auto Test Ref# field to the Funding Dashboard
+# Preconditions: User must have Bilateral or CAD servicing operations role.
+
+@FundingDashboard @Critical
+Scenario Outline: Add Auto Test Ref# field to Funding Dashboard
+    # ***************************************************
+    # STEP 1: User Login
+    # ***************************************************
+    Given Login as "<username>"
+    And Wait page loading
+    Then User successfully logged in
+
+    # ***************************************************
+    # STEP 2: Navigate to Funding Dashboard
+    # ***************************************************
+    When WebAgent click on FundingDashboardTab
+    Then Funding Dashboard page is displayed
+
+    # ***************************************************
+    # STEP 3: Verify Auto Test Ref# Field Presence
+    # ***************************************************
+    Then WebAgent not exist AutoTestRefField
+    And Apply the change requested to make Auto Test Ref# field non-mandatory
+    Then WebAgent see AutoTestRefField under ContractNoOrRID
+    And WebAgent see AutoTestRefField in all relevant areas
+
+    # ***************************************************
+    # STEP 4: Verify Auto Test Ref# Field in Additional Details
+    # ***************************************************
+    Then WebAgent see AutoTestRefField in AdditionalDetailsSection
+
+    # ***************************************************
+    # STEP 5: Verify Non-Mandatory Status
+    # ***************************************************
+    Then WebAgent check AutoTestRefField is not mandatory for any DL
+
+    # ***************************************************
+    # STEP 6: Test Functionality
+    # ***************************************************
+    When WebAgent type "<autoTestRef>" into AutoTestRefField
+    And WebAgent click on saveButton
+    Then Changes are saved successfully
+    And WebAgent see "<autoTestRef>" in Funding Dashboard
+
+Examples:
+    | username   | autoTestRef |
+    | testuser1  | Test123     |
+
+# Comments:
+# AutoTestRefField: Define the web element for the Auto Test Ref# field if not available.
+# FundingDashboardTab: Define the web element for the Funding Dashboard tab if not available.
+# AdditionalDetailsSection: Define the web element for the Additional Details section if not available.
+
+
+### Explanation:
+- **Test Case ID**: Unique identifier for the test case.
+- **Scenario Outline**: Describes the purpose of the test case.
+- **Preconditions**: Specifies the role required for the user.
+- **Steps**: Detailed actions to be performed, using Given, When, Then, and And statements.
+- **Examples**: Provides parameters for the scenario outline.
+- **Comments**: Suggests defining new web elements if they are not available in the provided list.
+========================================
+
+========================================
+ 2025-01-21 15:50:51
+Plan: 
+[Step(name='Understand project and QA knowledge', description='Learn knowledge related to projects, qa_object, qa_context and test_case_example.', output=Understood the project requirements and QA knowledge., sub_steps=[]), Step(name='Generate test cases', description='Generate corresponding test cases based on JIRA requirements, project documents and QA Object.', output=Generated test cases for the JIRA requirement., sub_steps=[]), Step(name='Generate cucumber scripts', description='Generate cucumber script based on generated test cases.', output=Generated cucumber script for the test cases., sub_steps=[])]
+========================================
+
+========================================
+Step 1 : Learn knowledge related to projects, qa_object, qa_context and test_case_example. | 2025-01-21 15:50:55
+----------------------------------------
+Result: 
+
+<QA_CONTEXT>
+
+We are a software company, and you are our software test expert, your responsibility is to create test cases.
+
+</QA_CONTEXT>
+
+<QA_OBJECT>
+
+I need you create function test cases by project documents and JIRA request:
+1. Read project documents to understand whole project's goals, features, and user expectations.
+2. Review JIRA requests to understand the specific functionalities or changes, you only need to create test cases to test this JIRA request, not for whole project document
+3. Identify the components or modules of the software that need to be tested based on the project documentation and JIRA requests. Categorize them based on their functional areas
+4. Based on the identified components and objectives, create test scenarios. Test scenarios outline the high-level functionality that needs to be tested. Each scenario typically consists of a sequence of steps, inputs, and expected outcomes
+5. Break down each test scenario into detailed test cases. Test cases should cover various possible inputs, configurations, boundary conditions, and potential error scenarios. Ensure that each test case is unambiguous and independent
+6. Determine the necessary test data for executing the test cases. This may involve identifying specific inputs, preconditions, and expected results for each test case. Test data should cover both typical and edge cases.
+7. Prioritize the test cases based on factors like criticality, risk, and dependencies to 5 levels. Organize them into test suites to facilitate efficient test execution order by priority
+8. Output test suites with test cases as a table
+9. Test case should have Priority, Name, Summary, Steps.
+10. Write Test Steps as table with  table heads : |No.| Test Step | Test Data | Expected Result |, Test Data means the input in Test Step
+
+</QA_OBJECT>
+
+<PROJECT_DOCUMENT>
+
+This system is an operational workflow application utilized by the Global Loans Operations team to source all workflow 
+items, including client requests and daily processing items in support of BAU activities and special remediation projects.
+The ticket as main entity in this application was created by email. Ticket carries business fields to offer Operation users 
+filling out loan transaction information. Then, ticket will go to workflow and pend for reviewing. After all Approval is done, 
+the ticket lifecycle is ended. Ticket will be closed as archived data
+
+</PROJECT_DOCUMENT>
+
+<TEST_CASE_EXAMPLE>
+
+Priority: Critical
+Name: TicketingLogic-001
+Summary: Function - update(change request type) Ticket
+Steps：
+|No.| Test Step | Test Data | Expected Result |
+1. Operation Manager login XMC Loan Web.                                     | A: *GT CN  DevTest       | Processing Team: *GT CN DevTest
+2. Create a Ticket for DL A and select OTHER as Request Type by New Message. | Request Type value: 3PDL | Status: Unassigned
+3. Opetn Ticket A.                                                           |                          | Sub Status: New
+4. Check Processing Team, Statusl Sub Status, Request Type.                  |                          | Request Type: OTHER
+5. Click Update Ticket Action.                                               |                          | Request Type: 3P
+6. Select Request Type value from Request Type dropdown list.                |                          |
+7. Click Update Ticket button.                                               |                          |
+8. Check Request Type                                                        |                          |
+
+</TEST_CASE_EXAMPLE>
+
+========================================
+
+========================================
+Step 2 : Generate corresponding test cases based on JIRA requirements, project documents and QA Object. | 2025-01-21 15:51:16
+----------------------------------------
+Result: 
+Priority: High
+Name: FundingDashboard-001
+Summary: Add Auto Test Ref# field as non-mandatory in all workflow and update ticket areas
+
+Test Steps:
+| No. | Test Step                                                      | Test Data                   | Expected Result                                                                 |
+|-----|----------------------------------------------------------------|-----------------------------|----------------------------------------------------------------------------------|
+| 1   | Log in to GENAIXXX system                                      | Username: testuser          | User successfully logged in to the system                                      |
+| 2   | Navigate to the workflow section                               |                             | Able to access the workflow section                                              |
+| 3   | Locate the Auto Test Ref# field in the workflow                |                             | Field is present in the workflow section                                         |
+| 4   | Verify if the Auto Test Ref# field is mandatory                |                             | Field should be marked as non-mandatory                                          |
+| 5   | Create a new ticket and check for the Auto Test Ref# field     | Ticket Type: Normal DL      | Field is visible in the Additional Details section of the Ticket Detail page     |
+| 6   | Update an existing ticket and check for the Auto Test Ref# field| Ticket ID: 1234             | Field is available for editing in the Update Ticket section                      |
+| 7   | Submit the ticket update with the Auto Test Ref# field         | Auto Test Ref#: Test123     | Update is successful and the field value is saved                                |
+| 8   | Verify that the Auto Test Ref# field is displayed in the ticket| Ticket ID: 1234             | Field value is visible in the ticket details                                      |
+========================================
+
+========================================
+Step 3 : Generate cucumber script based on generated test cases. | 2025-01-21 15:51:46
+----------------------------------------
+Result: 
+gherkin
+Feature: Funding Dashboard
+
+  # Test Case ID: FundingDashboard-001
+  # Scenario Outline: Add Auto Test Ref# field as non-mandatory in all workflow and update ticket areas
+  # Preconditions: User must have valid credentials to log in to the GENAIXXX system.
+  # The Auto Test Ref# field should be configured as non-mandatory in the system settings.
+
+  @FundingDashboard @HighPriority
+  Scenario Outline: Verify Auto Test Ref# field functionality in workflow and ticket areas
+    Given WebAgent open "GENAIXXX" url
+    And Login SSO as "<username>"
+    And Wait 5 seconds
+    Then WebAgent is on workflowPage
+
+    # Step 1: Log in to GENAIXXX system
+    # Expected Result: User successfully logged in to the system
+    Given Login as "<username>"
+    And Wait 5 seconds
+
+    # Step 2: Navigate to the workflow section
+    # Expected Result: Able to access the workflow section
+    When WebAgent click on workflowSection
+    Then WebAgent is on workflowPage
+
+    # Step 3: Locate the Auto Test Ref# field in the workflow
+    # Expected Result: Field is present in the workflow section
+    Then WebAgent see autoTestRefField
+
+    # Step 4: Verify if the Auto Test Ref# field is mandatory
+    # Expected Result: Field should be marked as non-mandatory
+    Then WebAgent read text from autoTestRefField into @fieldStatus
+    And Check that @fieldStatus is "non-mandatory"
+
+    # Step 5: Create a new ticket and check for the Auto Test Ref# field
+    # Expected Result: Field is visible in the Additional Details section of the Ticket Detail page
+    When WebAgent click on createTicketButton
+    And Select "<ticketType>" from ticketTypeDropdownlist
+    Then WebAgent see autoTestRefField in additionalDetailsSection
+
+    # Step 6: Update an existing ticket and check for the Auto Test Ref# field
+    # Expected Result: Field is available for editing in the Update Ticket section
+    When Open ticket by ID "<ticketId>"
+    And WebAgent click on updateTicketAction
+    Then WebAgent see autoTestRefField in updateTicketSection
+
+    # Step 7: Submit the ticket update with the Auto Test Ref# field
+    # Expected Result: Update is successful and the field value is saved
+    When WebAgent type "<autoTestRefValue>" into autoTestRefField
+    And WebAgent click on updateTicketButton
+    Then Wait 4 seconds
+    And WebAgent see OKMessage
+
+    # Step 8: Verify that the Auto Test Ref# field is displayed in the ticket
+    # Expected Result: Field value is visible in the ticket details
+    When Open ticket by ID "<ticketId>"
+    Then WebAgent read text from autoTestRefField into @savedValue
+    And Check that @savedValue is "<autoTestRefValue>"
+
+  Examples:
+    | username  | ticketType | ticketId | autoTestRefValue |
+    | testuser  | Normal DL  | 1234     | Test123          |
+
+# Comments:
+# If there are no available webui cucumber steps or web elements that you want to use, you can customize a new one and display it in a table.
+# For example, if "autoTestRefField" is not defined, you can define it as follows:
+# | Web Element Name | XPath or CSS Selector |
+# |------------------|-----------------------|
+# | autoTestRefField | //input[@name='autoTestRef'] |
+
+
+### Explanation:
+- **Test Case ID**: A unique identifier for the test case is provided.
+- **Scenario Outline**: Describes the scenario being tested.
+- **Preconditions**: Lists any prerequisites for the test.
+- **Steps**: Detailed actions to be performed, using Given, When, Then, and And statements.
+- **Expected Results**: Describes the expected outcome after executing the steps.
+- **Examples**: Provides parameters for the scenario outline.
+- **Comments**: Allows for customization of web elements or steps if needed.
+========================================
+
+========================================
+ 2025-01-21 15:56:25
+Plan: 
+[Step(name='Understand project and QA knowledge', description='Learn knowledge related to projects, qa_object, qa_context and test_case_example', output=Understood the project and QA knowledge, sub_steps=[]), Step(name='Generate test cases', description='Generate corresponding test cases base on JIRA requirements, project documents and QA Object', output=Generated test cases for the JIRA requirement, sub_steps=[]), Step(name='Generate cucumber scripts', description='Generate cucumber script base on generated test cases', output=Generated cucumber scripts based on the test cases, sub_steps=[])]
+========================================
+
+========================================
+Step 1 : Learn knowledge related to projects, qa_object, qa_context and test_case_example | 2025-01-21 15:56:29
+----------------------------------------
+Result: 
+
+<QA_CONTEXT>
+
+We are a software company, and you are our software test expert, your responsibility is to create test cases.
+
+</QA_CONTEXT>
+
+<QA_OBJECT>
+
+I need you create function test cases by project documents and JIRA request:
+1. Read project documents to understand whole project's goals, features, and user expectations.
+2. Review JIRA requests to understand the specific functionalities or changes, you only need to create test cases to test this JIRA request, not for whole project document
+3. Identify the components or modules of the software that need to be tested based on the project documentation and JIRA requests. Categorize them based on their functional areas
+4. Based on the identified components and objectives, create test scenarios. Test scenarios outline the high-level functionality that needs to be tested. Each scenario typically consists of a sequence of steps, inputs, and expected outcomes
+5. Break down each test scenario into detailed test cases. Test cases should cover various possible inputs, configurations, boundary conditions, and potential error scenarios. Ensure that each test case is unambiguous and independent
+6. Determine the necessary test data for executing the test cases. This may involve identifying specific inputs, preconditions, and expected results for each test case. Test data should cover both typical and edge cases.
+7. Prioritize the test cases based on factors like criticality, risk, and dependencies to 5 levels. Organize them into test suites to facilitate efficient test execution order by priority
+8. Output test suites with test cases as a table
+9. Test case should have Priority, Name, Summary, Steps.
+10. Write Test Steps as table with  table heads : |No.| Test Step | Test Data | Expected Result |, Test Data means the input in Test Step
+
+</QA_OBJECT>
+
+<PROJECT_DOCUMENT>
+
+This system is an operational workflow application utilized by the Global Loans Operations team to source all workflow 
+items, including client requests and daily processing items in support of BAU activities and special remediation projects.
+The ticket as main entity in this application was created by email. Ticket carries business fields to offer Operation users 
+filling out loan transaction information. Then, ticket will go to workflow and pend for reviewing. After all Approval is done, 
+the ticket lifecycle is ended. Ticket will be closed as archived data
+
+</PROJECT_DOCUMENT>
+
+<TEST_CASE_EXAMPLE>
+
+Priority: Critical
+Name: TicketingLogic-001
+Summary: Function - update(change request type) Ticket
+Steps：
+|No.| Test Step | Test Data | Expected Result |
+1. Operation Manager login XMC Loan Web.                                     | A: *GT CN  DevTest       | Processing Team: *GT CN DevTest
+2. Create a Ticket for DL A and select OTHER as Request Type by New Message. | Request Type value: 3PDL | Status: Unassigned
+3. Opetn Ticket A.                                                           |                          | Sub Status: New
+4. Check Processing Team, Statusl Sub Status, Request Type.                  |                          | Request Type: OTHER
+5. Click Update Ticket Action.                                               |                          | Request Type: 3P
+6. Select Request Type value from Request Type dropdown list.                |                          |
+7. Click Update Ticket button.                                               |                          |
+8. Check Request Type                                                        |                          |
+
+</TEST_CASE_EXAMPLE>
+
+========================================
+
+========================================
+Step 2 : Generate corresponding test cases base on JIRA requirements, project documents and QA Object | 2025-01-21 15:56:56
+----------------------------------------
+Result: 
+Priority: High 
+Name: FundingDashboard-001 
+Summary: Add Auto Test Ref# field as non-mandatory in all workflow and update ticket areas 
+
+Test Steps: 
+| No. | Test Step | Test Data | Expected Result |
+|-----|-----------|-----------|------------------|
+| 1.  | Log in to GENAIXXX system as a user with Bilateral or CAD servicing operations role. | Username: testuser, Password: test123 | User successfully logs in to the system. |
+| 2.  | Navigate to the ticket workflow section. | - | Ticket workflow section is displayed. |
+| 3.  | Identify the fields relevant to the "funding dashboard". | - | Fields related to funding dashboard are identified. |
+| 4.  | Check if there is a text field available for Auto Test Ref#. | - | Confirm that there is no text field available for Auto Test Ref#. |
+| 5.  | Make Auto Test Ref# field non-mandatory in all workflow and update ticket areas. | - | Auto Test Ref# field is updated to be non-mandatory. |
+| 6.  | Verify the changes by creating a new ticket and updating an existing ticket. | Ticket creation/update data | Auto Test Ref# field is not mandatory and can be left blank. |
+| 7.  | Ensure the changes are applied to all DLS, document, and normal DLs. | - | Auto Test Ref# field is visible and non-mandatory in all relevant areas. |
+| 8.  | Confirm that the new Auto Test Ref# field for Normal DL is shown in the Additional Details section on the Ticket Detail page. | - | New field is displayed in the specified location. |
+| 9.  | Test the functionality by transitioning funding dashboard data fully to GENAIXXX system. | Funding dashboard data | Data tracking and remediation efforts are improved. |
+========================================
+
+========================================
+Step 3 : Generate cucumber script base on generated test cases | 2025-01-21 15:57:25
+----------------------------------------
+Result: 
+gherkin
+Feature: Funding Dashboard Updates
+  # Test Case ID: FundingDashboard-001
+  # Scenario Outline: Add Auto Test Ref# field as non-mandatory in all workflow and update ticket areas
+  # Preconditions: User must have Bilateral or CAD servicing operations role.
+
+  @FundingDashboard @HighPriority
+  Scenario: Add Auto Test Ref# field as non-mandatory in all workflow and update ticket areas
+    Given WebAgent open "GENAIXXX" url
+    And Login SSO as "testuser"
+    And Wait 5 seconds
+    And Login as "testuser"
+    # Step 1: Log in to GENAIXXX system
+    Then User successfully logs in to the system
+
+    # Step 2: Navigate to the ticket workflow section
+    When WebAgent click on "ticketWorkflowSection"
+    Then Ticket workflow section is displayed
+
+    # Step 3: Identify the fields relevant to the "funding dashboard"
+    When WebAgent see "fundingDashboardFields"
+    Then Fields related to funding dashboard are identified
+
+    # Step 4: Check if there is a text field available for Auto Test Ref#
+    When WebAgent see "autoTestRefField"
+    Then Confirm that there is no text field available for Auto Test Ref#
+
+    # Step 5: Make Auto Test Ref# field non-mandatory in all workflow and update ticket areas
+    When WebAgent click on "updateTicketAction"
+    And WebAgent type "Auto Test Ref#" into "fieldName"
+    And WebAgent select "Non-Mandatory" from "fieldRequirementDropdownlist"
+    Then Auto Test Ref# field is updated to be non-mandatory
+
+    # Step 6: Verify the changes by creating a new ticket and updating an existing ticket
+    When WebAgent click on "createNewTicket"
+    And WebAgent type "ticketCreationData" into "ticketDataFields"
+    Then Auto Test Ref# field is not mandatory and can be left blank
+
+    # Step 7: Ensure the changes are applied to all DLS, document, and normal DLs
+    When WebAgent see "DLSFields"
+    And WebAgent see "documentFields"
+    And WebAgent see "normalDLFields"
+    Then Auto Test Ref# field is visible and non-mandatory in all relevant areas
+
+    # Step 8: Confirm that the new Auto Test Ref# field for Normal DL is shown in the Additional Details section on the Ticket Detail page
+    When WebAgent click on "additionalDetailsNotesAction"
+    Then New field is displayed in the specified location
+
+    # Step 9: Test the functionality by transitioning funding dashboard data fully to GENAIXXX system
+    When WebAgent type "fundingDashboardData" into "dataFields"
+    Then Data tracking and remediation efforts are improved
+
+  # Comments: 
+  # Define the following web elements if not available:
+  # | Web Element Name          | Description                                      |
+  # |---------------------------|--------------------------------------------------|
+  # | ticketWorkflowSection     | Locator for the ticket workflow section          |
+  # | fundingDashboardFields    | Locator for funding dashboard related fields     |
+  # | autoTestRefField          | Locator for Auto Test Ref# field                 |
+  # | fieldName                 | Locator for the field name input                 |
+  # | fieldRequirementDropdownlist | Locator for field requirement dropdown list  |
+  # | createNewTicket           | Locator for creating a new ticket button         |
+  # | ticketDataFields          | Locator for ticket data input fields             |
+  # | DLSFields                 | Locator for DLS related fields                   |
+  # | documentFields            | Locator for document related fields              |
+  # | normalDLFields            | Locator for normal DL related fields             |
+  # | additionalDetailsNotesAction | Locator for Additional Details/Notes action   |
+  # | dataFields                | Locator for data input fields                    |
+
+
+### Explanation:
+- **Test Case ID**: Unique identifier for the test case.
+- **Scenario Outline**: Describes the purpose of the test case.
+- **Preconditions**: Specifies the role required for the user.
+- **Steps**: Detailed actions using Given, When, Then, and And statements.
+- **Expected Results**: Describes the expected outcomes after executing the steps.
+- **Comments**: Lists any custom web elements that need to be defined if not available.
+========================================
+

@@ -57,10 +57,6 @@ Feature: Ticketing System Email Reply Logic
     Then WebAgent is on InboxModule
     Then WebAgent click on inboxIcon
     Then Wait 20 seconds
-    When Open ticket by ID "@ticketId1.Value"
-    Then WebAgent click on commentsButton1
-    And WebAgent type "<Subject2>" into mailSubjectText
-    Then WebAgent click on commentsButton2
     And Wait 5 seconds
     Then Close Browser
 
@@ -68,10 +64,7 @@ Feature: Ticketing System Email Reply Logic
     Given WebAgent open "<testAPPWebUIURL>" url
     When Login as "<User>"
     Then WebAgent is on InboxModule
-    Then WebAgent click on inboxIcon
-    Then Wait 20 seconds
-    When Open ticket by ID "@ticketId1.Value"
-    Then Check ticket Subject is "<Subject1>"
+
 
     # Step 5: Open Test APP WebUI to check ticket XL002
     Given WebAgent open "<testAPPWebUIURL>" url
@@ -97,3 +90,4 @@ Feature: Ticketing System Email Reply Logic
 res = validate_test_steps(test_cases, script)
 
 print("res" + "\n" + str(res))
+

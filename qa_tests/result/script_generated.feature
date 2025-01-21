@@ -1,75 +1,77 @@
-Feature: Ticketing System Email Reply Logic
-  This feature verifies that replying to an email with a changed subject creates a new ticket in the system.
+gherkin
+Feature: Funding Dashboard Updates
+  # Test Case ID: FundingDashboard-001
+  # Scenario Outline: Add Auto Test Ref# field as non-mandatory in all workflow and update ticket areas
+  # Preconditions: User must have Bilateral or CAD servicing operations role.
 
-  @ticketing
-  Scenario Outline: TicketingLogic-002 Reply email with changed subject of existing ticket should update ticket
-    Given WebAgent open "<testAPPWebUIURL>" url
-    # Step 1: Send a new email to DL1 with Subject1 and Body1
-    When Login as "<User>"
-    Then WebAgent is on InboxModule
-    Then WebAgent click on createButton
-    And WebAgent click on newMessageItem
+  @FundingDashboard @HighPriority
+  Scenario: Add Auto Test Ref# field as non-mandatory in all workflow and update ticket areas
+    Given WebAgent open "GENAIXXX" url
+    And Login SSO as "testuser"
     And Wait 5 seconds
-    Then WebAgent change to next tab
-    And Select "<DL1>" from mailFromDropdownlist
-    And WebAgent type "<DL1>" into mailToText
-    Then WebAgent click on mailAddressoption
-    And Wait 1 seconds
-    And WebAgent click on mailContentText
-    And WebAgent type "<Body1>" into mailContentText
-    And WebAgent type "<Subject1>" into mailSubjectText
-    Then WebAgent click on mailSendButton
-    And Wait 5 seconds
-    Then Close Browser
+    And Login as "testuser"
+    # Step 1: Log in to GENAIXXX system
+    Then User successfully logs in to the system
 
-    # Step 2: Open Test APP WebUI to check ticket XL001
-    Given WebAgent open "<testAPPWebUIURL>" url
-    When Login as "<User>"
-    Then WebAgent is on InboxModule
-    Then WebAgent click on inboxIcon
-    Then Wait 20 seconds
-    And Get Ticket ID by Subject "<Subject1>" and save into @ticketId1
-    When Open ticket by ID "@ticketId1.Value"
-    Then Check ticket Subject is "<Subject1>"
-    And Check ticket Body is "<Body1>"
+    # Step 2: Navigate to the ticket workflow section
+    When WebAgent click on "ticketWorkflowSection"
+    Then Ticket workflow section is displayed
 
-    # Step 3: Reply to this email to DL1 with Subject2
-    Given WebAgent open "<testAPPWebUIURL>" url
-    When Login as "<User>"
-    Then WebAgent is on InboxModule
-    Then WebAgent click on inboxIcon
-    Then Wait 20 seconds
-    When Open ticket by ID "@ticketId1.Value"
-    Then WebAgent click on commentsButton1
-    And WebAgent type "<Subject2>" into mailSubjectText
-    Then WebAgent click on commentsButton2
-    And Wait 5 seconds
-    Then Close Browser
+    # Step 3: Identify the fields relevant to the "funding dashboard"
+    When WebAgent see "fundingDashboardFields"
+    Then Fields related to funding dashboard are identified
 
-    # Step 4: Open Test APP WebUI to check ticket XL001
-    Given WebAgent open "<testAPPWebUIURL>" url
-    When Login as "<User>"
-    Then WebAgent is on InboxModule
-    Then WebAgent click on inboxIcon
-    Then Wait 20 seconds
-    When Open ticket by ID "@ticketId1.Value"
-    Then Check ticket Subject is "<Subject1>"
+    # Step 4: Check if there is a text field available for Auto Test Ref#
+    When WebAgent see "autoTestRefField"
+    Then Confirm that there is no text field available for Auto Test Ref#
 
-    # Step 5: Open Test APP WebUI to check ticket XL002
-    Given WebAgent open "<testAPPWebUIURL>" url
-    When Login as "<User>"
-    Then WebAgent is on InboxModule
-    Then WebAgent click on inboxIcon
-    Then Wait 20 seconds
-    And Get Ticket ID by Subject "<Subject2>" and save into @ticketId2
-    When Open ticket by ID "@ticketId2.Value"
-    Then Check ticket Subject is "<Subject2>"
+    # Step 5: Make Auto Test Ref# field non-mandatory in all workflow and update ticket areas
+    When WebAgent click on "updateTicketAction"
+    And WebAgent type "Auto Test Ref#" into "fieldName"
+    And WebAgent select "Non-Mandatory" from "fieldRequirementDropdownlist"
+    Then Auto Test Ref# field is updated to be non-mandatory
 
-    Examples:
-      | testAPPWebUIURL | User    | DL1   | Subject1 | Body1   | Subject2 |
-      | http://testapp  | Tester1 | DL1   | Subject1 | Body1   | Subject2 |
+    # Step 6: Verify the changes by creating a new ticket and updating an existing ticket
+    When WebAgent click on "createNewTicket"
+    And WebAgent type "ticketCreationData" into "ticketDataFields"
+    Then Auto Test Ref# field is not mandatory and can be left blank
 
-# Comments:
-# - If there are no available webui cucumber steps or web elements that you want to use, you can customize a new one and display it in a table.
-# - Ensure that the script can run normally and meets each step and expected result in the test cases.
+    # Step 7: Ensure the changes are applied to all DLS, document, and normal DLs
+    When WebAgent see "DLSFields"
+    And WebAgent see "documentFields"
+    And WebAgent see "normalDLFields"
+    Then Auto Test Ref# field is visible and non-mandatory in all relevant areas
 
+    # Step 8: Confirm that the new Auto Test Ref# field for Normal DL is shown in the Additional Details section on the Ticket Detail page
+    When WebAgent click on "additionalDetailsNotesAction"
+    Then New field is displayed in the specified location
+
+    # Step 9: Test the functionality by transitioning funding dashboard data fully to GENAIXXX system
+    When WebAgent type "fundingDashboardData" into "dataFields"
+    Then Data tracking and remediation efforts are improved
+
+  # Comments: 
+  # Define the following web elements if not available:
+  # | Web Element Name          | Description                                      |
+  # |---------------------------|--------------------------------------------------|
+  # | ticketWorkflowSection     | Locator for the ticket workflow section          |
+  # | fundingDashboardFields    | Locator for funding dashboard related fields     |
+  # | autoTestRefField          | Locator for Auto Test Ref# field                 |
+  # | fieldName                 | Locator for the field name input                 |
+  # | fieldRequirementDropdownlist | Locator for field requirement dropdown list  |
+  # | createNewTicket           | Locator for creating a new ticket button         |
+  # | ticketDataFields          | Locator for ticket data input fields             |
+  # | DLSFields                 | Locator for DLS related fields                   |
+  # | documentFields            | Locator for document related fields              |
+  # | normalDLFields            | Locator for normal DL related fields             |
+  # | additionalDetailsNotesAction | Locator for Additional Details/Notes action   |
+  # | dataFields                | Locator for data input fields                    |
+
+
+### Explanation:
+- **Test Case ID**: Unique identifier for the test case.
+- **Scenario Outline**: Describes the purpose of the test case.
+- **Preconditions**: Specifies the role required for the user.
+- **Steps**: Detailed actions using Given, When, Then, and And statements.
+- **Expected Results**: Describes the expected outcomes after executing the steps.
+- **Comments**: Lists any custom web elements that need to be defined if not available.

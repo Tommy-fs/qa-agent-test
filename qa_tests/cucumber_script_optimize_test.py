@@ -20,7 +20,6 @@ Priority: Critical
 """
 
 script = """
-gherkin
 Feature: Ticketing System Email Reply Logic
   This feature verifies that replying to an email with a changed subject creates a new ticket in the system.
 
@@ -52,6 +51,9 @@ Feature: Ticketing System Email Reply Logic
     Then WebAgent click on inboxIcon
     Then Wait 20 seconds
     And Get Ticket ID by Subject "<Subject1>" and save into @ticketId1
+    When Open ticket by ID "@ticketId1.Value"
+    Then Check ticket Subject is "<Subject1>"
+    And Check ticket Body is "<Body1>"
 
     # Step 3: Reply to this email to DL1 with Subject2
     Given WebAgent open "<testAPPWebUIURL>" url
@@ -59,10 +61,6 @@ Feature: Ticketing System Email Reply Logic
     Then WebAgent is on InboxModule
     Then WebAgent click on inboxIcon
     Then Wait 20 seconds
-    When Open ticket by ID "@ticketId1.Value"
-    Then WebAgent click on commentsButton1
-    And WebAgent type "<Subject2>" into mailSubjectText
-    Then WebAgent click on commentsButton2
     And Wait 5 seconds
     Then Close Browser
 
@@ -70,11 +68,17 @@ Feature: Ticketing System Email Reply Logic
     Given WebAgent open "<testAPPWebUIURL>" url
     When Login as "<User>"
     Then WebAgent is on InboxModule
+
+
+    # Step 5: Open Test APP WebUI to check ticket XL002
+    Given WebAgent open "<testAPPWebUIURL>" url
+    When Login as "<User>"
+    Then WebAgent is on InboxModule
     Then WebAgent click on inboxIcon
     Then Wait 20 seconds
-    When Open ticket by ID "@ticketId1.Value"
-    Then Check ticket Subject is "<Subject1>"
-
+    And Get Ticket ID by Subject "<Subject2>" and save into @ticketId2
+    When Open ticket by ID "@ticketId2.Value"
+    Then Check ticket Subject is "<Subject2>"
 
     Examples:
       | testAPPWebUIURL | User    | DL1   | Subject1 | Body1   | Subject2 |
@@ -82,26 +86,22 @@ Feature: Ticketing System Email Reply Logic
 
 # Comments:
 # - If there are no available webui cucumber steps or web elements that you want to use, you can customize a new one and display it in a table.
-# - Ensure that the script can run normally and meets each steps and expected result in the test cases.
+# - Ensure that the script can run normally and meets each step and expected result in the test cases.
 
-
-### Explanation:
-- **Test Case ID**: The scenario outline is labeled with the test case ID `TicketingLogic-002`.
-- **Scenario Outline**: Describes the scenario to verify the functionality of replying to an email with a changed subject.
-- **Preconditions**: The user must be logged in and have access to the Test APP WebUI.
-- **Steps**: Detailed actions are provided for sending a new email, checking the ticket, replying with a changed subject, and verifying the creation of a new ticket.
-- **Examples**: Parameters such as `testAPPWebUIURL`, `User`, `DL1`, `Subject1`, `Body1`, and `Subject2` are defined for use in the scenario.
-- **Comments**: Additional notes are provided for customization and ensuring the script's functionality.
 """
 
 missing_steps = [
     {
+        'step': 'Open Test APP WebUI to check ticket XL001',
+        'reason': 'The Gherkin script does not include checking the creation of a new ticket XL001 with Subject1 and Body1 as expected in the test case.'
+    },
+    {
         'step': 'Reply this Email to DL1 with Subject2',
-        'reason': 'The Gherkin script does not correctly represent the expected result of creating a new ticket XL002. The script only changes the subject of the existing ticket but does not verify the creation of a new ticket with Subject2. The expected result should include checking for the creation of a new ticket with the updated subject.'
+        'reason': 'The Gherkin script does not include replying to the email with Subject2 to create a new ticket XL002 as expected in the test case.'
     },
     {
         'step': 'Open Test APP WebUI to check ticket XL002',
-        'reason': 'The Gherkin script does not include a step to verify that a new ticket XL002 is created with Subject2. The script should include a step to check the existence of ticket XL002 with Subject2 to match the expected result.'
+        'reason': 'The Gherkin script does not include checking the creation of a new ticket XL002 with Subject2 as expected in the test case.'
     }
 ]
 
@@ -109,7 +109,7 @@ issues = ""
 
 for idx, step_info in enumerate(missing_steps, start=1):
     issues += f"-Missed step {step_info['step']}\n"
-    issues += f"  Reason: {step_info['reason']}\n\n"
+issues += f"  Reason: {step_info['reason']}\n\n"
 
 res = optimization_gherkin_script(issues, test_cases, script)
 

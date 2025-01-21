@@ -1,281 +1,158 @@
-Feature:INDIA EM WORKFLOW
-  Workflow Detail:
-  1)Author:Jevons
-  2)Workflow Type:Booking Workflow
-  3)DL:*ICG APAC IND SYSTEM DL
-
-  @indiaemail
-  Scenario Outline:C162742-11276 INDIA_Booking_Workflow With Reject
-
-    Given WebAgent open "$testAPPWebUIURL"url
-#**************************************************************
-#  STEP 1:Operation Manager Create New Message in SYSTEM Web
-#*************************************************************
-    When Login as "$Operation Manager India"
-    Then WebAgent is on InboxModule
-    Then WebAgent click on createButton
-    And WebAgent click on newMessageItem
-    And Wait 5 seconds
-    Then WebAgent change to next tab
-
-    And Select "*ICG APAC IND SYSTEM DL"from mailFromDropdownlist
-    And WebAgent type "Guo,Qihua Jevons [TECH]"into mailToText
-    Then WebAgent click on mailAddressoption
-    And Wait 1 seconds
-    And WebAgent click on mailContentText
-
-    And WebAgent type "Mail Content,send from Web by script ---India Booking Workflow"into mailContentText
-    And WebAgent type "[SYSTEM Test]Auto-India Booking Workflow with Reject $TodayDate $RN3"into mailSubjectText
-    Then WebAgent click on mailSendButton
-    And Wait 5 seconds
-    Then Close Browser
-
-#***************************************************************
-#  STEP 2:Operation Manager Save Ticket ID
-#***************************************************************
-    Given WebAgent open "$testAPPWebUIURL"url
-    When Login as "$Operation_Manager_India"
-    Then WebAgent is on InboxModule
-    Then WebAgent click on inboxIcon
-    Then Wait 20 seconds
-    And Get Ticket ID by Subject "[SYSTEM Test]Auto-India Booking Workflow With Reject"and save into @ticketId
-#**************************************************************
-#  STEP 3:Operation Manager Update Ticket
-#*************************************************************
-    When Open ticket by ID "@ticketId.Value"
-    Then Wait 5 seconds
-    Then WebAgent change to next tab
-    And WebAgent click on updateTicketButton
-    Then Wait 3 seconds
-
-    Then Select "<Request Type>"from requestTypeDropdownlist
-    Then Select "<Currency>"from currencyDropdownList
-    And WebAgent type "<Amount>"into amountText
-    And WebAgent type "<Base No>"into baseNoText
-    And WebAgent type "<Client Name>"into clientNameText
-    And WebAgent type "<Flexcube Ref no>"into flexcubeRefnoText
-    And WebAgent type "<Cosmos Ref no>"into cosmosRefnoText
-    Then Select "<Branch>"from branchDropdownList
-    Then Select "<Client Segment>"from clientSegmentDropdownList
-    Then Select "<Payment Type>"from paymentTypeDropdownList
-
-    Then WebAgent click on submitButton
-    Then Wait 3 seconds
-    Then Check ticket Sub Status is "Assigned to Maker"
-
-
-#***************************************************************
-#  STEP 4:Operation Manager Assign To User
-#**************************************************************
-    Then WebAgent click on assignButton
-    Then Wait 2 seconds
-    Then WebAgent click on assignToMeButton
-    Then Wait 2 seconds
-
-    Then Select "<Request Type>"from requestTypeDropdownlist
-    Then Wait 2 seconds
-    Then WebAgent click on submitButton
-    Then Wait 10 seconds
-
-    Then WebAgent click on confirmNotificationButton if exist
-    Then Wait 2 seconds
-    Then Check ticket Sub Status is "Assigned to Maker"
-#****************************************************
-#  STEP 5:Operation Manager Send For Review
-#********************************************************
-    Then WebAgent click on reviewButton
-    Then WebAgent click on sendForReviewButton
-
-    And WebAgent type "Send For Review to Nola"into mailContentText
-    And WebAgent type "Send For Review to Nola"into markerRemarks
-    Then Select "No exception"from statusRemarkDropdownList
-    Then Select "Chai,Nola [TECH]"from checkerDropdownList
-    Then Wait 2 seconds
-    Then WebAgent click on sendForReviewButton
-
-    Then Wait 3 seconds
-    Then Check ticket Sub Status is "Pending Checker Review"
-    Then Close Browser
-#*******率率**********************************************
-#  STEP 6:Operation Reviewer Reject
-#****率率****************************************************
-    Given WebAgent open "$testAPPWebUIURL"url
-    When Login as "$Operation Reviewer_India"
-    Then WebAgent is on InboxModule
-    Then WebAgent click on inboxIcon
-    Then Wait 10 seconds
-
-    When Open ticket by ID "@ticketId.Value"
-    Then Wait 5 seconds
-    Then WebAgent change to next tab
-    Then WebAgent click on reviewButton
-    Then Wait 1 seconds
-    Then WebAgent click on rejectButton
-    Then Wait 2 seconds
-
-    And WebAgent type "Checker Reject the ticket"into checkerRemarks
-    Then Wait 1 seconds
-    Then WebAgent click on typeEmailCommentsRadio
-    Then Wait 1 seconds
-    And Select "No exception"from statusRemarkDropdownList
-    Then Wait 1 seconds
-
-    Then WebAgent click on rejectButton
-    Then Wait 3 seconds
-    Then Check ticket Sub Status is "Checker Rejected"
-    Then Close Browser
-#***************************************************************
-#  STEP 7:Operation Manager Send For Review
-#**************************************************************济
-    Given WebAgent open "$testAPPWebUIURL"url
-    When Login as "$Operation_Manager_India"
-    Then WebAgent is on InboxModule
-    Then WebAgent click on inboxIcon
-    Then Wait 10 seconds
-
-    When Open ticket by ID "@ticketId.Value"
-    Then Wait 5 seconds
-    Then WebAgent change to next tab
-    Then WebAgent click on reviewButton
-    Then WebAgent click on sendForReviewButton
-
-    And WebAgent type "Send For Review to Nola again"into mailContentText
-    And WebAgent type ",Send For Review to Nola again"into markerRemarks
-    Then SeLect "No exception"from statusRemarkDropdownList
-    Then Select "Chai,Nola [TECH]"from checkerDropdownList
-    Then Wait 2 seconds
-
-    Then WebAgent click on sendForReviewButton
-    Then Wait 3 seconds
-    Then Check ticket Sub Status is "Pending Checker Review"
-    Then Close Browser
-
-#**************************************************************
-#  STEP 8:Operation Reviewer Send For OC Review
-#*************************************************************
-    Given WebAgent open "$testAPPWebUIURL"url
-    When Login as "$Operation Reviewer India"
-    Then WebAgent is on InboxModule
-    Then WebAgent click on inboxIcon
-    Then Wait 10 seconds
-    When Open ticket by ID "@ticketId.Value"
-    Then Wait 5 seconds
-    Then WebAgent change to next tab
-
-    Then WebAgent click on reviewButton
-    Then WebAgent click on sendForQCReviewButton
-
-    And WebAgent type "Send For QC Review to Jimmy"into mailContentText
-    And WebAgent type ",Send For QC Review to Jimmy"into checkerRemarks
-    Then Select "No exception"from statusRemarkDropdownList
-    Then Select "Chen,Jimmy [TECH NE]"from qcpropdownlist
-    Then Wait 2 seconds
-
-    Then WebAgent click on sendForQCReviewButton
-    Then Wait 3 seconds
-    Then Check ticket Sub Status is "Pending QC Review"
-    Then Close Browser
-#***************************************************************
-#  STEP 9:Operation OC Reject To Checker
-#***************************************************************
-    Given WebAgent open "$testAPPWebUIURL"url
-    When Login as "$Operation OC India"
-    Then WebAgent is on InboxModule
-    Then WebAgent click on inboxIcon
-    Then Wait 10 seconds
-
-    When Open ticket by ID "@ticketId.Value"
-    Then Wait 5 seconds
-    Then WebAgent change to next tab
-
-    Then WebAgent click on reviewButton
-    Then WebAgent click on rejectToCheckerButton
-
-    And WebAgent type "Jimmy Reject To Checker"into mailContentText
-    And WebAgent type "Jimmy Reject To Checker"into qcRemarks
-    Then Wait 2 seconds
-
-    Then WebAgent click on rejectToCheckerButton
-    Then Wait 3 seconds
-    Then Check ticket Sub Status is "QC Rejected To Checker"
-    Then Close Browser
-#***************************************************************
-#  STEP 10:Operation Reviewer Send For OC Review again
-#***************************************************************
-    Given WebAgent open "$testAPPWebUIURL"url
-    When Login as "$Operation Reviewer India"
-    Then WebAgent is on InboxModule
-    Then WebAgent click on inboxIcon
-    Then Wait 10 seconds
-    When Open ticket by ID "@ticketId.Value"
-
-    Then Wait 5 seconds
-    Then WebAgent change to next tab
-    Then WebAgent click on reviewButton
-    Then WebAgent click on sendForoCReviewButton
-
-    And WebAgent type "Send For QC Review to Jimmy again"into mailContentText
-    And WebAgent type ",Send For QC Review to Jimmy again"into checkerRemarks
-
-    Then Select "No exception"from statusRemarkDropdownList
-    Then Select "Chen,Jimmy [TECH NE]"from qcDropdownlist
-    Then Wait 2 seconds
-
-    Then WebAgent click on sendForQCReviewButton
-    Then Wait 3 seconds
-    Then Check ticket Sub Status is "Pending QC Review"
-    Then Close Browser
-
-#*************************************************************
-#  STEP 11:Operation OC Perform Review
-#**************************************************************
-    Given WebAgent open "$testAPPWebUIURL"url
-    When Login as "$Operation QC India"
-    Then WebAgent is on InboxModule
-    Then WebAgent click on inboxIcon
-    Then Wait 15 seconds
-
-    When Open ticket by ID "@ticketId.Value"
-    Then Wait 5 seconds
-    Then WebAgent change to next tab
-
-    Then WebAgent click on reviewButton
-    Then WebAgent click on performReviewButton
-
-    And WebAgent type "Jimmy Performed Review"into mailContentText
-    And WebAgent type ",Jimmy Performed Review"into qcRemarks
-
-    Then Wait 2 seconds
-    Then WebAgent click on performReviewButton
-    Then Wait 3 seconds
-    Then Check ticket Sub Status is "QC Confirmed"
-    Then Close Browser
-#**************************************************************
-#  STEP 12:Operation Reviewer Close Ticket
-#***************************************************************
-    Given WebAgent open "$testAPPWebUIURL"url
-    When Login as "$Operation Reviewer India"
-    Then WebAgent is on InboxModule
-    Then WebAgent click on inboxIcon
-    Then Wait 15 seconds
-    When Open ticket by ID "@ticketId.Value"
-    Then Wait 5 seconds
-    Then WebAgent change to next tab
-
-    Then WebAgent click on closeTicketButton1
-    Then Wait 2 seconds
-    Then WebAgent click on typeEmailCommentsRadio
-    Then Wait 1 seconds
-    And WebAgent type "Close ticket"into mailContentText
-    Then Wait 1 seconds
-    Then Wait 1 seconds
-
-    And Select "No exception"from statusRemarkDropdownList
-    Then WebAgent click on closeTicketButton2
-    Then Wait 3 seconds
-    Then Check ticket Sub Status is "Closed"
-    Then Close Browser
-
-    Examples:
-      |Request Type   | Currency| Amount        |Base No    |Client Name      |Flexcube Ref no      |Cosmos Ref no        |Branch client  | Segment |Payment Type             |
-      |Booking Process| USD     | 1,540,000.00  |IN0123456  |Auto client Name |Auto Flexcube REf no | Auto Cosmos Ref no  |Mumbai         |TILC     |Internal -client account |
+Feature:Ticket
+1)Author:Jinyang
+2)Workflow:
+3)Check Point:
+4)Key Value:
+@Ticket @Regression @Group2
+Scenario Outline:C162742-4286 Update ticket
+# ***************************************************
+# STEP 1:Operation Manager - Create Ticket
+# ***************************************************
+Given WebAgent open "$xmcNAMLoginPage"url
+And Login SSo as "SopsManagel"
+And Wait 5 seconds
+And Login as "SopsManage1"
+And WebAgent click on inboxIcon
+And Wait 5 seconds
+Then WebAgent click on createButton
+And WebAgent click on newMessageItem
+And Wait 5 seconds
+Then WebAgent change to next tab
+Then WebAgent is on newMessagePage
+And Select "*GT CN XMC Loan Dev Test"from processingTeamDropdownlist
+And Select "*GT CN XMC Loan Dev Test"from frompropdownlist
+And WebAgent type "Jia,Bing Mango [OT-TECH]"into toText
+And Wait 2 seconds
+And Wait 2 seconds
+And WebAgent click on searchValueItem
+And WebAgent click on messageText
+And WebAgent type "Guo,Qihua Jevons [OT-TECH]"into ccText
+And Wait 2 seconds
+And Wait 2 seconds
+And WebAgent click on searchValueItem
+And WebAgent click on messageText
+And WebAgent type "Guo,Qihua
+Jevons [OT-TECH]"into bccText
+And Wait 2 seconds
+And Wait 2 seconds
+And WebAgent click on searchValueItem
+And WebAgent click on messageText
+Then Prepare Ticket Subject begin with "[XMC Test]UpdateTicket-"and Save into @ticketsubject
+And WebAgent type "@ticketsubject.Value"into subjectText
+And Wait 5 seconds
+And WebAgent type "OTHER"into requestTypeDropdownlist
+And Wait 2 seconds
+And WebAgent click on searchValueItem
+And WebAgent click on messageText
+And WebAgent click on nextActionDate
+And Wait 2 seconds
+Then WebAgent click on nextActionDateToday
+#select currency
+And WebAgent type "HKD"into currencyDropdownlist
+And Wait 2 seconds
+And WebAgent click on searchValueItem
+And WebAgent click on newMeassageText
+#select facility
+And WebAgent type "Facility dev test"into facilityDropdownlist
+And Wait 2 seconds
+And WebAgent click on searchValueItem
+#select Effective Date=today
+And WebAgent click on effectiveDate
+And Wait 2 seconds
+Then WebAgent click on effectiveDateToday
+#input Contract or RID
+And WebAgent type "001C001171880002"into contractNoOrRidText
+#input Action Required
+And WebAgent type "Approval Approved"into actionRequiredText
+And WebAgent type "Mail Content,send from Web by script"into messageText
+Then WebAgent click on sendButton
+And Wait 10 seconds
+Then WebAgent change to tab "XMC Loan"
+Then WebAgent is on LoanPage
+And Wait 60 seconds
+And WebAgent click on allTicketsInbox
+And Wait 20 seconds
+And WebAgent click on clearUserPreferenceButton
+And Wait 10 seconds
+And Get Ticket ID by Subject "@ticketsubject.Value"and save into @ticketId
+When Open ticket by ID "@ticketId.Value"
+Then Wait 5 seconds
+# ***************************************************
+# STEP 2:Operation Manager - Check Ticket Details
+# ***************************************************
+Then WebAgent change to next tab
+Then WebAgent is on workflowPage
+And check "Currency"Ticketvalue is "HKD"
+And check "Facility"Ticketvalue is "Facility dev test"
+And check "Contract# or RID"Ticketvalue is "001C001171880002"
+And check "Action Required"Ticketvalue is "Approval Approved"
+# ***************************************************
+# STEP 3:Operation Manager - update Ticket in ticket detail
+# ***************************************************
+Then WebAgent click on updateTicketAction
+And WebAgent type "Payoff"into requestTypepropdownlist
+And Select "Payoff"from requestTypeDropdownlist
+And Select "1.Regression Tags"from tagspropdownlist
+And select "YES"from todaysFundingDropdownlist
+And select "Awaiting for Documents"from commentspropdownlis
+And Select "Pending with Ao"from currentlyPendingwithDropdownlist
+Then Clear Input Box "contractNoOrRidText"
+And WebAgent type "001C001171880001"into contractNoOrRidText
+And WebAgent type "C162742"into amcIDText
+And WebAgent click on effectiveDate
+And WebAgent click on chooseYearButton
+And WebAgent click on selectoneYearButton
+And WebAgent click on chooseMonthButton
+And WebAgent click on selectoneMonthButton
+And WebAgent click on select15thDayButton
+And WebAgent click on nextActionDate
+And WebAgent click on chooseYearButton
+And WebAgent click on selectoneYearButton
+And WebAgent click on chooseMonthButton
+And WebAgent click on selectoneMonthButton
+And WebAgent click on select15thDayButton
+And Select "DKK"from currencyDropdownlist
+#input Action Required
+Then Clear Input Box "actionRequiredText"
+And WebAgent type "Approval Rejected"into actionRequiredText
+select Facility:CVR REFINING ABIE RC
+And select "CVR REFINING ABTE RC"from facilitypropdowni
+input Principal Amount:$RN6,input Fee Amouont:SRN3
+And WebAgent type "1000000"into principalAmountText
+And WebAgent type "10000"into feeAmountText
+#input Fed Ref#:003C001591880001
+And WebAgent type "003C001591880001"into fedRefText
+Then WebAgent click on updateTicketButton
+And Wait 4 seconds
+# ***************************************************
+# STEP 2:Operation Manager - Check Ticket Details
+# ***************************************************
+And check "Request Type"Ticketvalue is "Payoff"
+And check "Tags"Ticketvalue is "1.Regression Tags"
+And check "Todays Funding"Ticketvalue is "YES"
+And check "Comments"Ticketvalue is "Awaiting for Documents"
+And check "Currently Pending With"Ticketvalue is "Pending with AO"
+And check "Contract or RID"Ticketvalue is "001C001171880001"
+And check "AMC ID"Ticketvalue is "C162742"
+And check "Effective Date"Ticketvalue is "2024-12-15"
+And check "Next Action Date"Ticketvalue is "2024-12-15"
+And check "Currency"TicketValue is "DKK"
+And check "Action Required"Ticketvalue is "Approval Rejected"
+And check "Facility"Ticketvalue is "CVR REFINING ABTF RC"
+And check "Principal Amount"Ticketvalue is "1000000"
+And check "Fee Amount"Ticketvalue is "10000"
+And check "Fed Ref #Ticketvalue is "003C001591880001"
+Then Wait 5 seconds
+# ***************************************************
+# STEP 2:Operation Manager - Close Ticket
+# ***************************************************
+Then WebAgent click on closeParentAction
+Then Wait 1 seconds
+Then WebAgent click
+：onc1ase5 ubAct1am
+Then Wait 5 seconds
+Then check "Status"TicketValue is "Closed"
+Then check "Sub Status"Ticketvalue is "Closed"
+Then WebAgent click on expandAuditTrail
+And Wait 1 seconds
+Then Close Browser

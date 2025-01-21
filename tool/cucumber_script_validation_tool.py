@@ -2,6 +2,9 @@ import re
 
 from core.llm_chat import LLMChat
 from util import test_case_extractor
+import subprocess
+import json
+import os
 
 
 def validate_test_steps(test_cases: str, script: str) -> dict:
@@ -21,6 +24,10 @@ def validate_test_steps(test_cases: str, script: str) -> dict:
     prompt = f"""
     You are an expert in Gherkin scripts. Validate whether each test step, along with its Test Data and Expected Result, is correctly represented in the provided Gherkin script. 
 
+    Please analyze from a global perspective whether each step of the test case is covered by the script. Don't check step by step rigidly, check globally
+    Please verify from a human perspective, not a machine, as long as the script covers the test case
+    The order of the test case steps does not need to correspond to the order of the script steps. For example, the first step of the test case can be covered in the fifth step of the script.
+    
     ### Test Steps with Details:
     {test_cases}
 
@@ -48,7 +55,7 @@ def validate_test_steps(test_cases: str, script: str) -> dict:
     3. **Missing Details**: Is there any missing Test Data or Expected Result for any step?
 
     Please do not leave out any steps and provide a clear reason for why any step did not match, including whether the issue is related to missing data, incorrect test steps, or mismatched expected results. Keep the output strictly formatted with no deviations.
-
+    
     For example:
     - **Step 1**: Matched
     - **Step 2**: Not Matched
@@ -60,7 +67,7 @@ def validate_test_steps(test_cases: str, script: str) -> dict:
     # Use GPT to analyze the steps
     parameters = {"test_cases": test_cases, "script": script}
     gpt_response = (
-        LLMChat(model_type='ADVANCED').prompt_with_parameters(prompt, parameters,
+        LLMChat().prompt_with_parameters(prompt, parameters,
                                                               'Cucumber Script steps validation',
                                                               desc='Cucumber Script steps validation')
         .replace("```json", '').replace("```", ''))
@@ -93,3 +100,67 @@ def validate_test_steps(test_cases: str, script: str) -> dict:
     # Calculate the score
     results["score"] = (results["matched_steps"] / len(test_steps)) * 100 if test_steps else 0
     return results
+
+
+def run_behave_tests(feature_path='features', result_file='result.json'):
+    """
+    执行 behave 测试并生成 JSON 格式的结果文件。
+
+    :param feature_path: 存放 .feature 文件的路径（默认是 'features'）
+    :param result_file: 结果文件保存路径（默认是 'result.json'）
+    """
+    # 确保 .feature 文件路径存在
+    if not os.path.exists(feature_path):
+        print(f"Feature path {feature_path} does not exist.")
+        return
+
+    # 使用 subprocess 执行 behave 命令并将结果输出到 result_file
+    command = [
+        'behave', feature_path,
+        '--format', 'json',  # 输出为 JSON 格式
+        '--out', result_file  # 指定结果文件路径
+    ]
+
+    try:
+        # 执行命令
+        result = subprocess.run(command, check=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
+        print(f"Behave tests executed successfully. Results saved to {result_file}")
+    except subprocess.CalledProcessError as e:
+        print(f"Error occurred while running behave: {e.stderr}")
+    except FileNotFoundError:
+        print("Behave command not found. Please ensure behave is installed.")
+
+
+def validate_behave_result(result_file='result.json'):
+    """
+    解析 behave 生成的 JSON 结果文件，并验证测试是否通过。
+
+    :param result_file: behave 结果的 JSON 文件路径
+    :return: None
+    """
+    try:
+        with open(result_file, 'r') as file:
+            data = json.load(file)
+
+        # 检查每个 scenario 的状态
+        all_passed = True
+        for feature in data:
+            for scenario in feature.get('elements', []):
+                for step in scenario.get('steps', []):
+                    # 检查每个 step 的状态
+                    if step.get('result', {}).get('status') != 'passed':
+                        all_passed = False
+                        print(f"Step failed: {step.get('name')}")
+
+        if all_passed:
+            print("All steps passed.")
+        else:
+            print("Some steps failed. See above for details.")
+
+    except FileNotFoundError:
+        print(f"Result file {result_file} not found!")
+    except json.JSONDecodeError:
+        print(f"Error decoding the JSON file {result_file}.")
+
+
+

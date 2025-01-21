@@ -1,84 +1,199 @@
-#Common
-createButton: # Click "Create" button, will load second level buttons which contains "New Message"
-newMessageltem: # "New Message" button, after click this will create a new browser tab which include new message section
-inboxIcon: # Inbox Icon, click this will switch to Inbox Module.
-statusRemarkValueNotCorrectMessage: # Validation message if Status Remark value not correct
-auditTrailTab: # Audit Trail Tab
-correctAllTheErrorsBeforeSubmitMessage: # Validation message if any error exist when submit message
-removeExternalAddressMessage: # Validation Message remind user to remove the external email address in the TO/CC/BCC field
-
-#New Message
-mailFromDropdownlist: # "Mail From" dropdown list in the new message section
-mailFromText: # "Mail From" text field in the new message section
-mailToText: # "Mail To" text field in the new message section
-mailCcText: # "Mail CC" text field in the new message section
-mailBccText: # "Mail BCC" text field in the new message section
-mailSubjectText: # "Mail Subject" text field in the new message section
-mailContentText: # "Mail Content" text field in the new message section
-mailSendButton: # "Mail Send" button only in the new message section. You can only use it when sending a new email, not when replying an email
-mailAddressoption: # "Mail Address Option" in the new message section
-
-#Workflow Fields
-checkerDropdownList: # "Checker" dropdown list which is checker name
-statusRemarkDropdownList: # "Status Remark" dropdown list which value contains "Pending customer", "Clarification/Request", "Pending approvals", "Pending OT Resolution", "Others" and "No exception".
-makerRemarks: # "Maker Remarks" field which user can input text
-checkerRemarks: # "Checker Remarks" field which Checker can input text
-qcRemarks: # "QC Remarks" field which QC can input text
-
-#Inbox List Item
-firstInboxListItemBySubject: # The 1st ticket which contains the given Subject.
-
-#Workflow Actions Button
-commentsButton1: # Click the "Comment 1" button will load comment section. After clicking this button, you should choose typeAddCommentsRadio or typeEmailCommentsRadio firstly.
-commentsButton2: # Click the "Comment 2" button will perform the Comment action, the SUb Status will change to "Updated". If you need to add a comment or reply this email with comment, you can click this button.
-typeAddCommentsRadio: # This button in comment section. If choose the "Add Comments" raido button, when user perform any action, it will only add comment without email.
-typeEmailCommentsRadio: # This button in comment section. If choose the "Email Comments" raido button, when user perform any action, it will add comment and reply email.
-assignButton: # Click the "Assign" button will load second level assign button which contains "Assign to Me" and "Assign To User"
-assignToMeButton: # Click the "Assign To Me" button will pop up window of "Assign To Me"
-assignToUserButton: # Click the "Assign to User" button will pop up window of "Assign To User"
-processingTeamDropdownList: # "Processing Team" dropdown list which contains related Processing Team Name
-requestTypeDropdownlist: # "Request Type" dropdown list which contains aviliable Request Type
-submitButton: # Click the "Submit" Button will perform the Submit action
-confirmNotificationButton: # When the ticket be updated, it will pop up the Notification. After click the "Confirm" Button of notification, it will be closed, then the page will be freshed.
-reviewButton: # Click the "Review" Button will load second level review button which contains "Send For Review", "Perform Review", "Reject", "Send For QC Review", "Reject To Maker" and "Reject To Checker".
-sendForReviewButton: # Click the "Send For Reivew" button, the ticket Sub Status will change to "Pending Checker Review"
-sendForTMReviewButton: # Click the "Send For TM Reivew" button, the ticket Sub Status will change to "Pending TM Review"
-sendForoCReviewButton: # Click the "Send For QC" button, the ticket Sub Status will change to "Pending QC Review"
-performReviewButton: # Click the "Perform Review" button, the ticket Sub Status will change to "Reviewed Pass"
-sendForKLButton1: # Click the "Send For KL 1" button will load Send For KL section
-sendForKLButton2: # Click the "Send For KL 2" button will perform the Send For KL action, the Sub Status will change to "Send For KL"
-rejectButton1: # Click the "Reject 1" button will load Reject section
-rejectButton2: # Click the “Reject 2" button will perform the Reject action, the Sub Status will change to "Rejected"
-rejectButton: # Click the "Reject" Button will load second level reject button which contains "Reject To Maker" and "Reject to Checker"
-rejectToMakerButton: # Click the "Reject To Maker" button, ticket will return to Maker, and the Sub Status will change to "Rejected To Maker"
-rejectToCheckerButton: # Click the "Reject To Checker" button, ticket will return to Checker, and the Sub Status will change to "Rejected To Checker"
-cancelButton: # Click the "Cancel" button, it will pop up a "Cancel Window" and let user to input Cancel Reason
-cancelReasonText: # The text field which allow user to input reason of cancel ticket
-reopenButton: # Click the "Reopen" button, ticket Sub Status will change to "Reopen"
-unassignButton: # Click the "Unassign" button, ticket Sub Status will change to "Unassign"
-closeTicketButton1: # Click the "Close Ticket 1" button will load Close Ticket section
-closeTicketButton2: # Click the ”Close Ticket 2" button will perform the Close action, the Sub Status will change to "Closed"
-reviewerDropdownlist: # "Reviewer" dropdown list which is reviewer name
-tmReviewerDropdownlist: # "TM Reviewer" dropdown list which is tm reviewer name
-qcDropdownlist: # "QC" dropdown list which is qc name
-clientInternalReplyAllRadio: # If choose the "Reply All" raido button, the "Email To" will load all email addresses
-forwardButton1: # Click the "Forward 1" button will load Forward Ticket section
-forwardButton2: # Click the ”Forward 2" button will perform the Forward action, the Sub Status will change to "Forwarded"
-
-#Link Ticket
-linkButton: # Click the "Link" button will load second level link button which contains "Add Link" and "Delete Link"
-addLinkButton: # Click the "Add Link" button will pop up "Add Link" window
-searchTicketToLinkText: # "Search Ticket To Link" text field allow user input what to search
-searchTicketButton: # Click the "Search Ticket" button will load the ticket list base on text of field "Search Ticket To Link"
-n
-#Update Ticket
-updateTicketButton: # Click the "Update Ticket" button will pop up the "Update Ticket" window
-currencyDropdownList: # "Currency" dropdown list field in "Update Ticket" window
-amountText: # "Amount" text field in "Update Ticket" window
-baseNoText: # "Base No." text field in "Update Ticket" window
-clientNameText: # "Client Name" text field in "Update Ticket" window
-flexcubeRefnoText: # "Flexcube Ref no." text field in "Update Ticket" window
-cosmosRefnoText: # "Cosmos Ref no." text field in "Update Ticket" window
-branchDropdownList: # "Branch" dropdown list field in "Update Ticket" window contains India city name
-clientSegmentDropdownList: # "Client Segment" dropdown list field in "Update Ticket" window contains "CRE", "CFIL", “CCB” and "TTLC"
-paymentTypeDropdownList: # "Payment Type" dropdown list field in "Update Ticket" window contains "NEFT/RTGS/Third Party" and "Internal - Client account"
+#Ticket Tab
+generalTab://xmc-button[@data-type="secondary"]//span[text()="General"]
+latestEmailTab://xmc-button[@data-type="secondary"]//span[text()="Latest Email"]
+notesTab://xmc-button [@data-type="secondary"]//span[text()="Notes"]
+linkageDetailsTab://xmc-button[@data-type="secondary"]//span[text()="Linkage Details"]
+documentTab://xmc-button[@data-type="secondary"]//span[text()="Document"]
+pendingReviewBeforeSendingTab://xmc-button [@data-type="secondary"]//span[text()="Pending Review before Sending"]
+qcCheckListQCPricingAdjustmentTemplateTab://xmc-button[@data-type="secondary"]//span[text()="QC Checklist QC Pri
+#General Tab
+#ACTION
+updateTicketAction://xmc-button [@data-type="secondary"]//span[text()="Update Ticket"]
+additionalDetailsNotesAction://xmc-button [@data-type="secondary"]//span[text()="Additional Details/Notes"]
+unassignAction://xmc-button[@data-type="secondary"]/span[text()="Unassign"]
+assignAction://xmc-button[@data-type="secondary"]//span[text()="Assign"]
+assignToMeAction://xmc-button [@data-type="secondary"]//span[text()="Assign To Me"]
+assignToUserAction://xmc-button[@data-type="secondary"]//span[text()="Assign To User"]
+closeParentAction://xmc-button[@data-type="secondary"]//span[text()="Close"]
+closeSubAction://1i//xmc-button [@data-type="secondary"]//span[text()="Close"]
+cancelAction://xmc-button[@data-type="secondary"]//span[text()="Cancel"]
+reopenParentAction://xmc-button [@data-type="secondary"]//span[text()="Reopen"]
+reopenSubAction://xmc-button[@ng-reflect-name="112"]//span[text()="Reopen"]
+reopenCreateNewAction://xmc-button[@data-type="secondary"]//span[text()="Create New"]
+forwardParentAction://xmc-button[@ng-reflect-name="Forward2"]//span[text()="Forward"]
+forwardSubAction://xmc-button [@ng-reflect-name="115"]//span[text()="Forward"]
+forwardsubAction://xmc-button[@ng-reflect-name="115"]//span[text()="Forward"]
+keepopenAndCreateNewAction://xmc-button[@data-type="secondary"]//span[text()="Keep Opened and Create New"]
+closedAndCreateNewAction://xmc-button [@data-type="secondary"]//span [text()="Closed and Create New"]
+approvalAction://xmc-button[@data-type="secondary"]//span[text()="Approval"]
+sendForApprovalAction://xmc-button[@data-type="secondary"]//span[text()="Send For Approval"]
+approveAction://xmc-button[@data-type="secondary"]//span[text()="Approve"]
+rejectAction://xmc-button[@data-type="secondary"]//span[text()="Reject"]
+reviewAction://xmc-button[@data-type="secondary"]//span[text()="Review"]
+sendForReviewAction://xmc-button[@data-type="secondary"]//span[text()="Send For Review"]
+performReviewAction://xmc-button[@data-type="secondary"]//span[text()="Perform Review"]
+clientFollowUpAction://xmc-button[@data-type="secondary"]//span[text()="Client Follow-up"]
+reAssignAction://xmc-button[@data-type="secondary"]//span[text()="Reassign"]
+qcApprovalAction://xmc-button[@data-type="secondary"]//span[text()="QC Approval"]
+sendForQCApprovalAction://xmc-button[@data-type="secondary"]//span[text()="Send for QC Approval"]
+performQCApprovalAction://xmc-button[@data-type="secondary"]//span[text()="Perform QC Approval"]
+# BUTTON
+updateTicketButton://xmc-button [@data-type="primary"]//span[text()="Update Ticket"]
+saveButton://xmc-button[@data-type="primary"]//span[text()="Save"]
+updateButton://xmc-button [@data-type="secondary"]//span[text()="Update"]
+assignToUserButton://xmc-button[@data-type="primary"]//span[text()="Assign To User"]
+assignToUser&CloseButton://xmc-button[@data-type="primary"]//span[text()="Assign To User Close"]
+closeButton://xmc-button[@data-type="primary"]//span[text()="Close"]
+cancelButton://xmc-button[@data-type="primary"]//span[text()="Cancel"]
+reopenCreateNewButton://xmc-button[@data-type="primary"]//span[text()="Create New"]
+forwardButton://xmc-button[@data-type="primary"]//span[text()="Forward"]
+keepopenAndCreateNewButton://xmc-button[@data-type="primary"]//span[text()="Keep Opened and Create New"]
+closedAndCreateNewButton://xmc-button[@data-type="primary"]//span[text()="Closed and Create New"]
+sendForApprovalButton://xmc-button[@data-type="primary"]//span[text()="Send For Approval"]
+approveButton://xmc-button[@data-type="primary"]//span[text()="Approve"]
+rejectButton://xmc-button[@data-type="primary"]//span[text()="Reject"]
+clientFollowUpButton://xmc-button[@data-type="primary"]//span[text()="Client Follow-up"]
+sendForReviewButton://xmc-button [@data-type="primary"]//span[text()="Send For Review"]
+performReviewButton://xmc-button [@data-type="primary"]//span[text()="Perform Review"]
+reAssignButton://xmc-button[@data-type="primary"]//span[text()="Reassign"]
+recoverInquiryButton://xmc-button[@data-type="primary"]//span[text()="Recover Inquiry"]
+markNonInquiryButton://xmc-button [@data-type="primary"]//span[text()="Mark Non-Inquiry"]
+saveAsDraftButton://xmc-button[@data-type="secondary"]//span[text()="Save As Draft"]
+sendForQCApprovalButton://xmc-button[@data-type="primary"]//span[text()="Send for QC Approval"]
+performQCApprovalButton://xmc-button[@data-type="primary"]//span[text()="Perform QC Approval"]
+# CK Editor
+uploadImageButton://button[@data-cke-tooltip-text="Upload image from computer"]
+insertTableButton://button[@data-cke-tooltip-text="Insert table"]
+tablesize25Button://button[@data-row="2"and data-column="5"]
+# DROPDOWN LIST
+approvalDropdownlist://xmc-multiple-select[@ng-reflect-name="10023"]//input
+reviewDropdownlist://xmc-select[@ng-reflect-name="10022"]//input
+analystpropdownlist://xmc-select[@ng-reflect-name="10005"]//input
+processingTeamDropdownlist://xmc-select[@ng-reflect-name="8"]//input
+processedInFlexCubepropdownlist://xmc-select[@ng-reflect-name="10054"]//input
+requestTypeDropdownlist://xmc-select[@ng-reflect-name="7"]//input
+facilityDropdownlist://xmc-select[@ng-reflect-name="10055"]//input
+tranchepropdownlist://xmc-select[@ng-reflect-name="10056"]//input
+currencyDropdownlist://xmc-select[@ng-reflect-name="10067"]//input
+draftDropdownlist://nz-select-top-control[@class="ant-select-selector ng-tns-c100-2"]
+tagspropdownlist://xmc-select[@ng-reflect-name="10047"]//input
+todaysFundingDropdownlist://xmc-select[@ng-reflect-name="10048"]//input
+commentsDropdownlist://xmc-select[@ng-reflect-name="10050"]//input
+currentlyPendingWithDropdownlist://xmc-select[@ng-reflect-name="10052"]//input
+qcTriggeringConditionDropdownlist://xmc-select[@ng-reflect-name="10084"]//input
+qcProcessingTeamDropdownlist://xmc-select[@ng-reflect-name="10085"]//input
+qcApproverDropdownlist://label[contains(text(),"QC Approver")]/ancestor:nz-form-item//nz-form-control//
+qcRequestTypeDropdownlist://label[contains(text(),"QC Request Type")]/ancestor:nz-form-item//nz-form-co
+qcTemplatepropdownlist://label[contains(text(),"QC Template")]/ancestor::nz-form-item//nz-form-control//
+qcTagspropdownlist://label[contains(text(),"QC Tags")]/ancestor:nz-form-item//nz-form-control//xmc-sele
+# DATA TYPE
+processingDate://label[contains(text(),"Processing Date")]//ancestor::xmc-field-template//nz-form-contro
+processingDateToday://calendar-footer[@ng-reflect-locale="[object Object]"]//a[@role="button"]
+effectiveDate://label[contains(text(),"Effective Date")]//ancestor::xmc-field-template//nz-form-control
+effectiveDateToday://calendar-footer[@ng-reflect-locale="[object Object]"]//a[@role="button"]
+nextActionDate://label[contains(text(),"Next Action Date")]//ancestor:xmc-field-template//nz-form-contr
+nextActionDateToday://calendar-footer[@ng-reflect-locale="[object Object]"]//a[@role="button"]
+nextMonthButton://button [@title="Next month (PageDown)"]
+chooseYearButton://Button[@title="Choose a year"]
+chooseMonthButton://Button[@title="Choose a month"]
+selectoneYearButton://td[@title="2024"]
+selectOneMonthButton://td[@title="Dec"]
+select1thDayButton://td[@title="12/1/2024"]
+select15thDayButton://td[@title="12/15/2024"]
+#TEXT
+tradeIdText://xmc-text[@ng-reflect-name="10059"]/input
+contractNoOrRidText://xmc-text [@ng-reflect-name="10063"]/input
+amcIDText://xmc-text[@ng-reflect-name="10049"]/input
+agentBankText://xmc-text[@ng-reflect-name="10066"]/input
+businessContactText://xmc-text [@ng-reflect-name="10057"]/input
+counterpartyText://xmc-text[@ng-reflect-name="10060"]/input
+cusipText://xmc-text [@ng-reflect-name="10061"]/input
+feeAmountText://xmc-text [@ng-reflect-name="10064"]/input
+gfrnNumberText://xmc-text[@ng-reflect-name="10065"]/input
+principalAmountText://xmc-text[@ng-reflect-name="10068"]/input
+interestAmountText://xmc-text[@ng-reflect-name="10069"]/input
+messageText://div[@class="ck ck-editor_main"]/div
+actionRequiredText://xmc-text[@ng-reflect-name="10100"]/input
+fedRefText://xmc-text [@ng-reflect-name="10101"]/input
+reMessageText://div[@class="ck ck-editor_main"]//div[@class="Wordsection1"]/p[1]
+searchTicketText://xmc-text[@ng-reflect-name="search-ticket-id"]/input
+searchValueItem://div[@class ="ant-select-item-option-content"][1]//div[@class ="ant-select-item
+# RADIO
+typeAddCommentsRadio://xmc-radio-group[@ng-reflect-name="10031"]//span [text()="Add comments and/o
+typeEmailCommentsRadio://xmc-radio-group[@ng-reflect-name="10031"]//span[text()="Email comments a
+errorsFoundRadio://xmc-radio-group[@ng-reflect-name="10017"]//label[@ng-reflect-nz-value="1"]
+noErrorsRadio://xmc-radio-group[@ng-reflect-name="10017"]label[@ng-reflect-nz-value="2"]
+duplicatedRadio://xmc-radio-group[@ng-reflect-name="10018]//label[@ng-reflect-nz-value="3"]
+invalidRadio://xmc-radio-group [@ng-reflect-name="10018"]//label[@ng-reflect-nz-value="4"]
+clientInternalLoansOpsOnlyRadio://xmc-radio-group[@ng-reflect-name="10019"]//span[text()="Loans 0
+clientInternalReplyRadio://xmc-radio-group[@ng-reflect-name="10019"]//span[text()="Reply"]
+clientInternalReplyAllRadio://xmc-radio-group[@ng-reflect-name="10019"]//span[text()="Reply all"]
+allApproversMustApproveYesRadio://xmc-radio-group[@ng-reflect-name="10081"]//label[@ng-reflect-nz
+allApproversMustApproveNoRadio://xmc-radio-group[@ng-reflect-name="10081"]//label[@ng-reflect-nz-
+qcApprovalResultApproveRadio://xmc-radio-group[@ng-reflect-name="10094"]//label[@ng-reflect-nz-va
+qcApprovalResultRejectRadio://xmc-radio-group[@ng-reflect-name="10094"]//label[@ng-reflect-nz-val
+# Email comments
+fromDropdownlist://xmc-select[@ng-reflect-model=10002]
+toText://xmc-email-address-search[@ng-reflect-name="11"]//input
+ccText://xmc-email-address-search[@ng-reflect-name="12"]//input
+bccText://xmc-email-address-search[@ng-reflect-name="45"]//input
+subjectText://xmc-text[@ng-reflect-name="6"]/input
+attachFileButton://span[text()="Attach File"]
+clearButton://nz-select-clear
+# Checkbox
+addAllAttachmentsCheckbox://input[@type="checkbox"]/ancestor:label//span[text()="Add All Attachments"]
+addAllEmailsCheckbox://input[@type="checkbox"]/ancestor:label//span[text()="Add All Emails"]
+# Others
+automationTestContent://span [text()="Automation Test"]
+draftContent://span[text()="Drafts "
+subTicketName://div[@class="ag-center-cols-clipper"]//div[@row-index=""]//div[@aria-colindex="2"]
+OKMessage://span[contains(text(),"OK")]
+UCCSpan://span[contains(text(),"UCC")]
+outsideWarning://p[contains(text(),"recipients are outside")]
+informationokButton://button[@ng-reflect-disabled="false"]//span[text()="OK "
+informationcloseButton://button[@aria-label="Close"]
+mandatoryWarningMessage://span[contains(text(),"Please correct all the errors before submit")]
+# Document Tab
+filename://span[text()="demo.xlsx"]/parent:div
+fileCopyButton://xmc-email-attachment//xmc-button[2]
+fileCopyButton2://xmc-tag[@nztooltiptitle="Click to copy DMC ID"]
+pasteButton://xmc-button[@data-type="primary"]//span[text()="Paste"]
+newFileName://div[@aria-rowindex="2"]//div[@aria-colindex="7"]//xmc-tag[@nztooltiptitle="Click to copy DMC
+newFileActivity://div[@aria-rowindex="2"]//div[@aria-colindex="1"]//span[contains(text(),"Additional Detai
+newFileActivity2://div[@aria-rowindex="3"]//div[@aria-colindex="1"]//span[contains(text(),"Additional Deta
+attachmentName://span [@nztye="link"]/parent:a[contains(text(),"demo.xlsx")]
+# Linkage Tab
+shareLinkButton://xmc-button [@data-type="secondary"]//span[text()="Share Link"]
+addLinkButton://xmc-button [@data-type="secondary"]//span[text()="Add Link"]
+deleteLinkButton://span[contains(text(),"Delete Link")]
+yesButton://span[text()="Yes"]
+searchLinkButton://xmc-button [@name="search"]
+chooseLinkButton://div[@row-index="1"]//div[@ref="eWrapper"]//input[@ref="eInput"]
+addParentButton://xmc-button[@data-type="primary"]//span[contains(text(),"Add Parent")]
+addChildButton://xmc-button[@data-type="primary"]//span[contains(text(),"Add Child")]
+linkButton://xmc-button[@data-type="secondary"]//span[text()="Link"]
+lessItemButton://div[@row-index="0"]//span[@ref="eExpanded"]
+moreItemButton://div[@row-index="0"]//span[@ref="eContracted"]
+# Audit Trail
+expandAuditTrail://div[text()="Audit Trail"]//ancestor::xmc-card//div[@slot="actions"]//xmc-button [@name-
+previewAuditButton://nz-switch [@ng-reflect-title="Preview Notes"]
+audiTrailMail://div[@class="li-file ng-star-inserted"]//div[@class="file-info file-info-0"]//span
+hyperLinkButton://a[@class="ant-btn createNewTicket xmc-button ant-btn-icon-only"]//i[@ng-reflect-nz-typ
+# Checklist
+tradeCloserText://xmc-text[@ng-reflect-name="Trade Closer"]//input
+sellerHasPositiontoCoversalepropdownlist://xmc-select[@ng-reflect-name="Seller Has Position to Cover s"]
+yesEvidenceofsellerPositionIncludedpropdownlist://xmc-select[@ng-reflect-name="if Yes Evidence of Selle
+noSellerupstceamticketisText://xmc-textarea[@ng-reflect-name="if No Seller Upstream ticket"]//textarea
+buyeriscurrentlenderDropdownlist://xmc-select[@ng-reflect-name="Buyer is current lender (Y/N)"]
+yesEvidenceofBuyerPositionIncludedDropdownlist://xmc-select[@ng-reflect-name="if Yes Evidence of Buyer
+noEvidenceofBuyerKYCCompletionIncludedDropdownlist://xmc-select[@ng-reflect-name="if No Evidence of Buy
+noTypeofConsentRequiredAndEvidencedText://xmc-textarea[@ng-reflect-name="if No Type of Consent Reguic"
+creditAgreementPrintoutofThirdPartySummarySheetIncludedDropdownlist://xmc-select[@ng-reflect-name="Credi
+isAssigneelistedonDisqualifiedLenderListDropdownlist://xmc-select[@ng-reflect-name="Is Assignee listed or
+signedAssignmentAndAcceptanceDocbyAssigneeandAssignorDropdownlist://xmc-select[@ng-reflect-name="signed A
+celeasedtoAgentforsigningclearparDropdownlist://xmc-select[@ng-reflect-name="Rele
+globalinFlexLIOmatchesglobalonAssignmentDropdownlist://xmc-select[@ng-reflect-nar
+isDealLXIDMappedtoTrancheinFlexcubeDropdownlist://xmc-select[@ng-reflect-name="Is
+revolvingCreditpropdownlist://xmc-select[@ng-reflect-name="Revolving Credit (Y/N
+yesConfirmedActivitywAgencyDropdownlist://xmc-select[@ng-reflect-name="if Yes -
+yesarewiredetailsexistingforallcurrenciesDropdownlist://xmc-select[@ng-reflect-na

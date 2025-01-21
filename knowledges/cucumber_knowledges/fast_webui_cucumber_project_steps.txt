@@ -1,32 +1,15 @@
-@Given("^Print Log \"([^\"]*)\"$")  // Print Log info
-@Given("^Login as \"([^\"]*)\"$")   // Login system as corresponding user
-@Then("Switch Platform to \"([^\"]*)\"$")  // Switch to different platform
-@Then("^Switch Queue to \"([^\"]*)\"$") // Switch to different Queue
-@Then("^Sign Out$") // Sign out system
-@Then("^Close Browser$") // Close browser
-@And("^(\\w+) Check on (@?[\\W\\.]+) if exist$") // Check on web element if exist
-@Then("^(\\w+) click on (?[\\W\\.]+) if exist$") // Click on web element if exist
-@When("^Select\"([^\"]*)\" from (@?[\\w\\.]+)$") // Select value from dropdown list field
-@When("^Search and Select instruction id \"([^\"]*)\" from list$") // Search the instruction and select it
-@And("^Check Process Status is \"([^\"]*)\"$") // Check the Process Status of instruction
-@And("^(w+)check(@?[\w\.]+) value is \"([^\"]*)\"$") // Check the value of web element
-@And("^(\\w+)check (@?[\\W\\.]+) value contain \"([^\"]*)\"$") // Check the value of web elment contains some value or not
-@And("^Save instruction Id and URL with prefix \"([^\"]*)\" from (?[\W\\.]+) into (\\w+)and (\\w+)$") // Get and save instruction from successful message
-@And("^Save Change Request Id from (?[\w\\.]+) into (\\w+)$") // Save change rquest id from successful message
-@And("^Get Ticket ID by Subject \"([^\"]*)\" and save into (\\w+)$") // Save Ticket ID from Ticket Subject
-@And("^Open ticket by ID \"([^\"]*)\"$") // Open the ticket by given ID
-@And("^Select Account Change Request by Request_ID \"([^\"]*)\"$") // Select Account Change Request by Request ID
-@And("^Select Account by Account_Number \"([^\"]*)\"$") // Select Account by Account Number
-@Given("^Send key CtrlV$") // Perform keyboard action - Ctrl + V
-@Given("^Send key Enter$") // Perform keyboard action - Enter
-@Given("^Copy \"([^\"]*)\ into clipboard$") // Perofrm keyboard action - Ctrl + C
-@Given("^Select Local file with \"([^\"]*)\"$") //Select the local file by given file path
-@And("^Check ticket Sub Status is \"([^\"]*)\"$") // Check the ticket's Sub Status
-@And("^Check ticket Status is \"([^\"]*)\"$") // Check the ticket's Status
-@And("^Check ticket Processing Team is \"([^\"]*)\"$") // Check the ticket's Proessing Team
-@And("^Check Latest Activity in Audit Trail is \"([^\"]*)\"$") // Check the Latest Activity in Audit Trail
-@And("^Print login user \"([^\"]*)\"$") // Pring Login User name
-@And("^Get instruction Id") // Get the instruction ID
-@Then("^Wait page loading$") // Wait page loading successfully
-@When("^([w\\.]+)not exist$") // Check Web Element not exist
-@Given("^read file \"([^\"]*)\" into (\\w+)$") // Read file content
+@When("(\w+) open \"([^\"]*)\" url$")
+@Given("^Login SSO as \"([^\"]*)\"$")
+@When("Wait {int} seconds")
+@Given("^Login as \"([^\"]*)\"$")
+@When("^(\\w+) click on (@?[\w\.]+)")
+@Then("^(\\w+) change to next tab$")
+@Then("^(\\w+) (am|is) on (@?[w\.]+)")
+@When("^Select \"([\"]*)\" from (@[\w\\-]+)$")
+@When("^(\wt) type \"([^\"]*)\" into (@?[\w\.]+)")
+@Then("^Prepare Ticket Subject begin with  \"([\"]*)\" and Save into (@\\w)$")
+@And("^Get Ticket ID by Subject \"([\"]*)\" and save into (@\\w+)$")
+@And("^Open ticket by ID  \"([\"]*)\"$")
+@And("^check  \"([^\"]*)\" Ticketvalue is  \"([^\"]*)\"$")
+@Then("^Clear Input Box  \"([^\"]*)\"$")
+@Then("^Close Browser$")

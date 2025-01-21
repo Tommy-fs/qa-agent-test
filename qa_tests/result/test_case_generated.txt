@@ -1,9 +1,16 @@
-Priority: Critical 
-Name: TicketingLogic-002 
-Summary: Reply email with change Subject to create new ticket 
-Steps: 
-| No. | Test Step | Test Data | Expected Result | 
-| 1 | Send email with Subject1 to create new ticket XL001 | Subject1 | Create new ticket XL001 in Test APP | 
-| 2 | Reply email with change Subject1 to Subject 2 | Subject1, Subject2 | Create new ticket XL002 in Test APP | 
-| 3 | Open Test APP WebUI to check ticket XL001 | XL001 | Ticket XL001 is not updated | 
-| 4 | Open Test APP WebUI to check ticket XL002 | XL002 | Ticket XL002 is created with Subject2 |
+Priority: High 
+Name: FundingDashboard-001 
+Summary: Add Auto Test Ref# field as non-mandatory in all workflow and update ticket areas 
+
+Test Steps: 
+| No. | Test Step | Test Data | Expected Result |
+|-----|-----------|-----------|------------------|
+| 1.  | Log in to GENAIXXX system as a user with Bilateral or CAD servicing operations role. | Username: testuser, Password: test123 | User successfully logs in to the system. |
+| 2.  | Navigate to the ticket workflow section. | - | Ticket workflow section is displayed. |
+| 3.  | Identify the fields relevant to the "funding dashboard". | - | Fields related to funding dashboard are identified. |
+| 4.  | Check if there is a text field available for Auto Test Ref#. | - | Confirm that there is no text field available for Auto Test Ref#. |
+| 5.  | Make Auto Test Ref# field non-mandatory in all workflow and update ticket areas. | - | Auto Test Ref# field is updated to be non-mandatory. |
+| 6.  | Verify the changes by creating a new ticket and updating an existing ticket. | Ticket creation/update data | Auto Test Ref# field is not mandatory and can be left blank. |
+| 7.  | Ensure the changes are applied to all DLS, document, and normal DLs. | - | Auto Test Ref# field is visible and non-mandatory in all relevant areas. |
+| 8.  | Confirm that the new Auto Test Ref# field for Normal DL is shown in the Additional Details section on the Ticket Detail page. | - | New field is displayed in the specified location. |
+| 9.  | Test the functionality by transitioning funding dashboard data fully to GENAIXXX system. | Funding dashboard data | Data tracking and remediation efforts are improved. |
