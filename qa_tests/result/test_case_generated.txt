@@ -1,16 +1,22 @@
 Priority: High 
 Name: FundingDashboard-001 
-Summary: Add Auto Test Ref# field as non-mandatory in all workflow and update ticket areas 
+Summary: Add Auto Test Ref# field as non-mandatory in all workflow and ticket areas 
 
 Test Steps: 
 | No. | Test Step | Test Data | Expected Result |
 |-----|-----------|-----------|------------------|
-| 1.  | Log in to GENAIXXX system as a user with Bilateral or CAD servicing operations role. | Username: testuser, Password: test123 | User successfully logs in to the system. |
-| 2.  | Navigate to the ticket workflow section. | - | Ticket workflow section is displayed. |
-| 3.  | Identify the fields relevant to the "funding dashboard". | - | Fields related to funding dashboard are identified. |
-| 4.  | Check if there is a text field available for Auto Test Ref#. | - | Confirm that there is no text field available for Auto Test Ref#. |
-| 5.  | Make Auto Test Ref# field non-mandatory in all workflow and update ticket areas. | - | Auto Test Ref# field is updated to be non-mandatory. |
-| 6.  | Verify the changes by creating a new ticket and updating an existing ticket. | Ticket creation/update data | Auto Test Ref# field is not mandatory and can be left blank. |
-| 7.  | Ensure the changes are applied to all DLS, document, and normal DLs. | - | Auto Test Ref# field is visible and non-mandatory in all relevant areas. |
-| 8.  | Confirm that the new Auto Test Ref# field for Normal DL is shown in the Additional Details section on the Ticket Detail page. | - | New field is displayed in the specified location. |
-| 9.  | Test the functionality by transitioning funding dashboard data fully to GENAIXXX system. | Funding dashboard data | Data tracking and remediation efforts are improved. |
+| 1   | Login to GENAIXXX system as a user with Bilateral or CAD servicing operations role | Username: testuser, Password: testpassword | User successfully logs in to the system |
+| 2   | Navigate to the ticket workflow section | - | Ticket workflow section is displayed |
+| 3   | Identify the fields relevant to the "funding dashboard" | - | Fields related to funding dashboard are identified |
+| 4   | Check if there is a text field available for Auto Test Ref# | - | Confirm if Auto Test Ref# field is present |
+| 5   | Verify if Auto Test Ref# field is mandatory or non-mandatory | - | Auto Test Ref# field should be non-mandatory |
+| 6   | Make a change request to add Auto Test Ref# field as non-mandatory | Change Request: Add Auto Test Ref# field as non-mandatory in all workflow and ticket areas | Change request is submitted successfully |
+| 7   | Verify the location of the new Auto Test Ref# field | Location: Under Contract # or RID in all Workflow and Update Ticket Areas | New field is displayed in the specified locations |
+| 8   | Check if the change is applied to all DLS, document, and normal DLs | - | Change should be applied to all specified areas |
+| 9   | Verify the display of the new Auto Test Ref# field for Normal DL | - | New field should be shown in the Additional Details section in the left area of Ticket Detail page |
+| 10  | Confirm that the new field is non-mandatory | - | Auto Test Ref# field should be non-mandatory |
+| 11  | Test the functionality by creating a new ticket and updating the Auto Test Ref# field | - | User should be able to create a ticket without filling the Auto Test Ref# field as mandatory |
+| 12  | Validate that the Bilateral department can transition their funding dashboard data fully to GENAIXXX system | - | Funding dashboard data should be successfully transitioned to the system |
+| 13  | Ensure that the change allows for better data tracking and remediation efforts | - | Data tracking and remediation efforts should be improved with the new field |
+
+This test case covers the implementation of the change request to add the Auto Test Ref# field as non-mandatory in all workflow and ticket areas in the GENAIXXX system.

@@ -32767,3 +32767,1427 @@ Feature: Funding Dashboard Updates
 
 [4d38e4c9-d7cd-11ef-862c-3c58c25c58c7-end 2025-01-21 15:57:25]
 [33b19a43-d7cd-11ef-a606-3c58c25c58c7-end 2025-01-21 15:57:25]
+[test-qa-start 2025-01-21 16:17:46]
+[3255f306-d7d0-11ef-8132-3c58c25c58c7-start 2025-01-21 16:17:46] steps ==> Generate test case workflow ==> Generate test case workflow
+[3255f307-d7d0-11ef-bd40-3c58c25c58c7-start 2025-01-21 16:17:46] steps ==> Generate test case ==> Generate test case base on JIRA Description
+[37c63e36-d7d0-11ef-8c84-3c58c25c58c7-start 2025-01-21 16:17:56] steps ==> Understand Poject ==> Feed QA project related knowledge
+[37c63e36-d7d0-11ef-8c84-3c58c25c58c7-end 2025-01-21 16:17:56]
+[411d5813-d7d0-11ef-bd7c-3c58c25c58c7-start 2025-01-21 16:18:11] steps ==> Generate test case ==> Generate test case base on JIRA Description
+[25b43528-2f3e-4f1f-a3fc-42cd84536732-start 2025-01-21 16:18:13] steps ==> Generate test case ==> Generate test case base on JIRA Description
+
+{"input":"Human: 
+# CONTEXT #
+We are a software company, and you are our software test expert, your responsibility is to create test cases.
+
+#############
+
+# OBJECTIVE #
+I need you create function test cases by project documents and JIRA request: 1. Read project documents to understand whole project's goals, features, and user expectations. 2. Review JIRA requests to understand the specific functionalities or changes, you only need to create test cases to test this JIRA request, not for whole project document 3. Identify the components or modules of the software that need to be tested based on the project documentation and JIRA requests. Categorize them based on their functional areas 4. Based on the identified components and objectives, create test scenarios. Test scenarios outline the high-level functionality that needs to be tested. Each scenario typically consists of a sequence of steps, inputs, and expected outcomes 5. Break down each test scenario into detailed test cases. Test cases should cover various possible inputs, configurations, boundary conditions, and potential error scenarios. Ensure that each test case is unambiguous and independent 6. Determine the necessary test data for executing the test cases. This may involve identifying specific inputs, preconditions, and expected results for each test case. Test data should cover both typical and edge cases. 7. Prioritize the test cases based on factors like criticality, risk, and dependencies to 5 levels. Organize them into test suites to facilitate efficient test execution order by priority 8. Output test suites with test cases as a table 9. Test case should have Priority, Name, Summary, Steps. 10. Write Test Steps as table with  table heads : |No.| Test Step | Test Data | Expected Result |, Test Data means the input in Test Step
+
+#############
+
+# PROJECT DOCUMENT #
+This system is an operational workflow application utilized by the Global Loans Operations team to source all workflow items, including client requests and daily processing items in support of BAU activities and special remediation projects. The ticket as main entity in this application was created by email. Ticket carries business fields to offer Operation users filling out loan transaction information. Then, ticket will go to workflow and pend for reviewing. After all Approval is done, the ticket lifecycle is ended. Ticket will be closed as archived data
+
+#############
+
+# JIRA REQUEST #
+Problem Statement: Bilateral and CAD servicing operations want to be able to use our system - GENAIXXX to have a funding dashboard that outlines all relevant information that leadership needs tracked and monitored. Current Process: our system - GENAIXXX ticket workflow has all the fields relevant to what would be on a "funding dashboard" but does not have a text field available for Auto Test Ref# Because of this, we cannot move away from a manual touchpoint in SharePoint but would prefer to use our system - GENAIXXX instead since all updates show in individual columns within a public inbox. Change Requested: Please also make this Auto Test Ref# non mandatory field Location of the New Auto Test Re:Under Contract # or RID in all Workflow and Update Ticket Areas + Change should be applied to all DLS, document and normal DLs. + • New added field for Normal DL will be shown in Additional Details section in left area of Ticket Detail page • New field is non mandatory. This will allow the Bilateral department to transition their funding dashboard data fully to our system - GENAIXXX and to eliminate an additional touchpoint and allow for better data tracking and remediation efforts.
+
+#############
+
+# TEST PURPOSE #
+Regression Functional testing
+
+#############
+
+# TEST DATA #
+Mock test data by your understanding
+
+#############
+
+# LIMITATION #
+For test data, Email Subject must use this format: Subject-001, Subject-002
+
+#############
+
+# STYLE #
+Style refer to the successful software company, such Google, Microsoft.
+You need to refer to existing Test Cases,  take them as Example, learn writing habit and format to write test case:
+
+#############
+
+#Test Case Example#
+Priority: Critical Name: TicketingLogic-001 Summary: Function - update(change request type) Ticket Steps： |No.| Test Step | Test Data | Expected Result | 1. Operation Manager login XMC Loan Web. | A: *GT CN DevTest | Processing Team: *GT CN DevTest 2. Create a Ticket for DL A and select OTHER as Request Type by New Message. | Request Type value: 3PDL | Status: Unassigned 3. Opetn Ticket A. | | Sub Status: New 4. Check Processing Team, Statusl Sub Status, Request Type. | | Request Type: OTHER 5. Click Update Ticket Action. | | Request Type: 3P 6. Select Request Type value from Request Type dropdown list. | | 7. Click Update Ticket button. | | 8. Check Request Type | |
+
+#############
+
+# TONE #
+Professional, technical
+
+#############
+
+# AUDIENCE #
+Test cases should be detailed and easy to understood, junior tester will test system steps by steps, follow your test case.
+
+#############
+
+# RESPONSE #
+Output test cases with name, summary, priority and steps.
+Output test cases steps as table with  table heads : |No.| Test Step | Test Data | Expected Result |, Test Data means the input in Test Step
+
+#############
+
+"}
+
+{"output":"Priority: High 
+Name: FundingDashboard-001 
+Summary: Add Auto Test Ref# field as non-mandatory in all Workflow and Update Ticket Areas 
+
+Test Steps: 
+| No. | Test Step | Test Data | Expected Result |
+|-----|-----------|-----------|------------------|
+| 1.  | Log in to GENAIXXX system as a user with appropriate permissions. | Username: testuser, Password: testpassword | User successfully logs in to the system. |
+| 2.  | Navigate to the Workflow section of the system. | - | Workflow section is displayed. |
+| 3.  | Locate the Auto Test Ref# field in the Workflow section. | - | Auto Test Ref# field is found. |
+| 4.  | Verify if the Auto Test Ref# field is currently a mandatory field. | - | Auto Test Ref# field is currently mandatory. |
+| 5.  | Update the Auto Test Ref# field to be non-mandatory. | - | Auto Test Ref# field is successfully updated to be non-mandatory. |
+| 6.  | Navigate to the Update Ticket Areas section of the system. | - | Update Ticket Areas section is displayed. |
+| 7.  | Locate the Auto Test Ref# field in the Update Ticket Areas section. | - | Auto Test Ref# field is found. |
+| 8.  | Verify if the Auto Test Ref# field is currently a mandatory field. | - | Auto Test Ref# field is currently mandatory. |
+| 9.  | Update the Auto Test Ref# field in the Update Ticket Areas to be non-mandatory. | - | Auto Test Ref# field is successfully updated to be non-mandatory. |
+| 10. | Ensure that the changes apply to all DLS, document, and normal DLs. | - | Changes are successfully applied to all relevant areas. |
+| 11. | Verify that the new Auto Test Ref# field for Normal DL is displayed in the Additional Details section on the left area of the Ticket Detail page. | - | New field is displayed as expected. |
+| 12. | Confirm that the new Auto Test Ref# field is non-mandatory. | - | New field is non-mandatory as intended. |
+| 13. | Test the functionality by creating a new ticket and verifying the behavior of the Auto Test Ref# field. | Ticket creation with Auto Test Ref# field behaving as expected. |"}
+
+[25b43528-2f3e-4f1f-a3fc-42cd84536732-end 2025-01-21 16:18:19]
+
+[411d5813-d7d0-11ef-bd7c-3c58c25c58c7-end 2025-01-21 16:18:19]
+[50e203c1-d7d0-11ef-a0d3-3c58c25c58c7-start 2025-01-21 16:18:38] steps ==> Generate cucumber script ==> Generate cucumber script on TEST CASES
+[8f159bc8-f687-4965-a9eb-ccaade774976-start 2025-01-21 16:18:40] steps ==> Generate Cucumber Script ==> Generate cucumber script base on test cases
+
+{"input":"Human: 
+# CONTEXT #
+We are a software company, and you are our software test expert. You are tasked with generating a Cucumber script based on the generated test cases.
+
+#############
+
+# OBJECTIVE #
+I need you create cucumber scripts for the generated test cases and cucumber knowledge base:
+1. Read cucumber knowledge basic example to understand grammar, format, and standard.
+2. Review test cases to understand the specific functionalities and learn each Test Step Test Data and Expected Result. You only need to create cucumber scripts for generated test cases, not for whole project document
+3. Read available web elements to understand web elements that you can use in the cucumber scripts.
+4. Read available webui cucumber system and project steps to understand the steps scripts that you can use in the cucumber scripts.
+5. Write script files related to test cases based on the provided examples, steps, web elements, and your knowledge.
+6. The generated script must be strongly associated with the test case and an explanation related to the test case must be added above each steps
+7. Do not generate any scripts that do not comply with syntax standards.
+#############
+
+# GUIDELINES #
+Please follow these guidelines:
+1. Convert each test case into a Gherkin format, which includes Given, When, and Then statements.
+2. Ensure that each steps is clear and concise, using plain language.
+3. If applicable, include And statements to combine steps for improved readability.
+4. Use tags for scenarios that require specific conditions or environments.
+
+#############
+
+# GENERATED TEST CASES #
+Priority: High 
+Name: FundingDashboard-001 
+Summary: Add Auto Test Ref# field as non-mandatory in all Workflow and Update Ticket Areas 
+
+Test Steps: 
+| No. | Test Step | Test Data | Expected Result |
+|-----|-----------|-----------|------------------|
+| 1.  | Log in to GENAIXXX system as a user with appropriate permissions. | Username: testuser, Password: testpassword | User successfully logs in to the system. |
+| 2.  | Navigate to the Workflow section of the system. | - | Workflow section is displayed. |
+| 3.  | Locate the Auto Test Ref# field in the Workflow section. | - | Auto Test Ref# field is found. |
+| 4.  | Verify if the Auto Test Ref# field is currently a mandatory field. | - | Auto Test Ref# field is currently mandatory. |
+| 5.  | Update the Auto Test Ref# field to be non-mandatory. | - | Auto Test Ref# field is successfully updated to be non-mandatory. |
+| 6.  | Navigate to the Update Ticket Areas section of the system. | - | Update Ticket Areas section is displayed. |
+| 7.  | Locate the Auto Test Ref# field in the Update Ticket Areas section. | - | Auto Test Ref# field is found. |
+| 8.  | Verify if the Auto Test Ref# field is currently a mandatory field. | - | Auto Test Ref# field is currently mandatory. |
+| 9.  | Update the Auto Test Ref# field in the Update Ticket Areas to be non-mandatory. | - | Auto Test Ref# field is successfully updated to be non-mandatory. |
+| 10. | Ensure that the changes apply to all DLS, document, and normal DLs. | - | Changes are successfully applied to all relevant areas. |
+| 11. | Verify that the new Auto Test Ref# field for Normal DL is displayed in the Additional Details section on the left area of the Ticket Detail page. | - | New field is displayed as expected. |
+| 12. | Confirm that the new Auto Test Ref# field is non-mandatory. | - | New field is non-mandatory as intended. |
+| 13. | Test the functionality by creating a new ticket and verifying the behavior of the Auto Test Ref# field. | Ticket creation with Auto Test Ref# field behaving as expected. |
+
+#############
+
+# CUCUMBER SCRIPT EXAMPLE #
+This is the cucumber script example that has already been written. You can read it to understand the general operating logic of the system.
+You need write a script corresponding to the generated test case requirements, but you are not able to copy this example.
+
+Feature:Ticket
+1)Author:Jinyang
+2)Workflow:
+3)Check Point:
+4)Key Value:
+@Ticket @Regression @Group2
+Scenario Outline:C162742-4286 Update ticket
+# ***************************************************
+# STEP 1:Operation Manager - Create Ticket
+# ***************************************************
+Given WebAgent open "$xmcNAMLoginPage"url
+And Login SSo as "SopsManagel"
+And Wait 5 seconds
+And Login as "SopsManage1"
+And WebAgent click on inboxIcon
+And Wait 5 seconds
+Then WebAgent click on createButton
+And WebAgent click on newMessageItem
+And Wait 5 seconds
+Then WebAgent change to next tab
+Then WebAgent is on newMessagePage
+And Select "*GT CN XMC Loan Dev Test"from processingTeamDropdownlist
+And Select "*GT CN XMC Loan Dev Test"from frompropdownlist
+And WebAgent type "Jia,Bing Mango [OT-TECH]"into toText
+And Wait 2 seconds
+And Wait 2 seconds
+And WebAgent click on searchValueItem
+And WebAgent click on messageText
+And WebAgent type "Guo,Qihua Jevons [OT-TECH]"into ccText
+And Wait 2 seconds
+And Wait 2 seconds
+And WebAgent click on searchValueItem
+And WebAgent click on messageText
+And WebAgent type "Guo,Qihua
+Jevons [OT-TECH]"into bccText
+And Wait 2 seconds
+And Wait 2 seconds
+And WebAgent click on searchValueItem
+And WebAgent click on messageText
+Then Prepare Ticket Subject begin with "[XMC Test]UpdateTicket-"and Save into @ticketsubject
+And WebAgent type "@ticketsubject.Value"into subjectText
+And Wait 5 seconds
+And WebAgent type "OTHER"into requestTypeDropdownlist
+And Wait 2 seconds
+And WebAgent click on searchValueItem
+And WebAgent click on messageText
+And WebAgent click on nextActionDate
+And Wait 2 seconds
+Then WebAgent click on nextActionDateToday
+#select currency
+And WebAgent type "HKD"into currencyDropdownlist
+And Wait 2 seconds
+And WebAgent click on searchValueItem
+And WebAgent click on newMeassageText
+#select facility
+And WebAgent type "Facility dev test"into facilityDropdownlist
+And Wait 2 seconds
+And WebAgent click on searchValueItem
+#select Effective Date=today
+And WebAgent click on effectiveDate
+And Wait 2 seconds
+Then WebAgent click on effectiveDateToday
+#input Contract or RID
+And WebAgent type "001C001171880002"into contractNoOrRidText
+#input Action Required
+And WebAgent type "Approval Approved"into actionRequiredText
+And WebAgent type "Mail Content,send from Web by script"into messageText
+Then WebAgent click on sendButton
+And Wait 10 seconds
+Then WebAgent change to tab "XMC Loan"
+Then WebAgent is on LoanPage
+And Wait 60 seconds
+And WebAgent click on allTicketsInbox
+And Wait 20 seconds
+And WebAgent click on clearUserPreferenceButton
+And Wait 10 seconds
+And Get Ticket ID by Subject "@ticketsubject.Value"and save into @ticketId
+When Open ticket by ID "@ticketId.Value"
+Then Wait 5 seconds
+# ***************************************************
+# STEP 2:Operation Manager - Check Ticket Details
+# ***************************************************
+Then WebAgent change to next tab
+Then WebAgent is on workflowPage
+And check "Currency"Ticketvalue is "HKD"
+And check "Facility"Ticketvalue is "Facility dev test"
+And check "Contract# or RID"Ticketvalue is "001C001171880002"
+And check "Action Required"Ticketvalue is "Approval Approved"
+# ***************************************************
+# STEP 3:Operation Manager - update Ticket in ticket detail
+# ***************************************************
+Then WebAgent click on updateTicketAction
+And WebAgent type "Payoff"into requestTypepropdownlist
+And Select "Payoff"from requestTypeDropdownlist
+And Select "1.Regression Tags"from tagspropdownlist
+And select "YES"from todaysFundingDropdownlist
+And select "Awaiting for Documents"from commentspropdownlis
+And Select "Pending with Ao"from currentlyPendingwithDropdownlist
+Then Clear Input Box "contractNoOrRidText"
+And WebAgent type "001C001171880001"into contractNoOrRidText
+And WebAgent type "C162742"into amcIDText
+And WebAgent click on effectiveDate
+And WebAgent click on chooseYearButton
+And WebAgent click on selectoneYearButton
+And WebAgent click on chooseMonthButton
+And WebAgent click on selectoneMonthButton
+And WebAgent click on select15thDayButton
+And WebAgent click on nextActionDate
+And WebAgent click on chooseYearButton
+And WebAgent click on selectoneYearButton
+And WebAgent click on chooseMonthButton
+And WebAgent click on selectoneMonthButton
+And WebAgent click on select15thDayButton
+And Select "DKK"from currencyDropdownlist
+#input Action Required
+Then Clear Input Box "actionRequiredText"
+And WebAgent type "Approval Rejected"into actionRequiredText
+select Facility:CVR REFINING ABIE RC
+And select "CVR REFINING ABTE RC"from facilitypropdowni
+input Principal Amount:$RN6,input Fee Amouont:SRN3
+And WebAgent type "1000000"into principalAmountText
+And WebAgent type "10000"into feeAmountText
+#input Fed Ref#:003C001591880001
+And WebAgent type "003C001591880001"into fedRefText
+Then WebAgent click on updateTicketButton
+And Wait 4 seconds
+# ***************************************************
+# STEP 2:Operation Manager - Check Ticket Details
+# ***************************************************
+And check "Request Type"Ticketvalue is "Payoff"
+And check "Tags"Ticketvalue is "1.Regression Tags"
+And check "Todays Funding"Ticketvalue is "YES"
+And check "Comments"Ticketvalue is "Awaiting for Documents"
+And check "Currently Pending With"Ticketvalue is "Pending with AO"
+And check "Contract or RID"Ticketvalue is "001C001171880001"
+And check "AMC ID"Ticketvalue is "C162742"
+And check "Effective Date"Ticketvalue is "2024-12-15"
+And check "Next Action Date"Ticketvalue is "2024-12-15"
+And check "Currency"TicketValue is "DKK"
+And check "Action Required"Ticketvalue is "Approval Rejected"
+And check "Facility"Ticketvalue is "CVR REFINING ABTF RC"
+And check "Principal Amount"Ticketvalue is "1000000"
+And check "Fee Amount"Ticketvalue is "10000"
+And check "Fed Ref #Ticketvalue is "003C001591880001"
+Then Wait 5 seconds
+# ***************************************************
+# STEP 2:Operation Manager - Close Ticket
+# ***************************************************
+Then WebAgent click on closeParentAction
+Then Wait 1 seconds
+Then WebAgent click
+：onc1ase5 ubAct1am
+Then Wait 5 seconds
+Then check "Status"TicketValue is "Closed"
+Then check "Sub Status"Ticketvalue is "Closed"
+Then WebAgent click on expandAuditTrail
+And Wait 1 seconds
+Then Close Browser
+
+#############
+
+# AVAILABLE WEB ELEMENTS #
+You must use the provided web elements as part of the script. 
+If there are no web elements you want to use, Please define them in comments at the end, you just need give the name of the web elementes that you want to use.
+
+#Ticket Tab
+generalTab://xmc-button[@data-type="secondary"]//span[text()="General"]
+latestEmailTab://xmc-button[@data-type="secondary"]//span[text()="Latest Email"]
+notesTab://xmc-button [@data-type="secondary"]//span[text()="Notes"]
+linkageDetailsTab://xmc-button[@data-type="secondary"]//span[text()="Linkage Details"]
+documentTab://xmc-button[@data-type="secondary"]//span[text()="Document"]
+pendingReviewBeforeSendingTab://xmc-button [@data-type="secondary"]//span[text()="Pending Review before Sending"]
+qcCheckListQCPricingAdjustmentTemplateTab://xmc-button[@data-type="secondary"]//span[text()="QC Checklist QC Pri
+#General Tab
+#ACTION
+updateTicketAction://xmc-button [@data-type="secondary"]//span[text()="Update Ticket"]
+additionalDetailsNotesAction://xmc-button [@data-type="secondary"]//span[text()="Additional Details/Notes"]
+unassignAction://xmc-button[@data-type="secondary"]/span[text()="Unassign"]
+assignAction://xmc-button[@data-type="secondary"]//span[text()="Assign"]
+assignToMeAction://xmc-button [@data-type="secondary"]//span[text()="Assign To Me"]
+assignToUserAction://xmc-button[@data-type="secondary"]//span[text()="Assign To User"]
+closeParentAction://xmc-button[@data-type="secondary"]//span[text()="Close"]
+closeSubAction://1i//xmc-button [@data-type="secondary"]//span[text()="Close"]
+cancelAction://xmc-button[@data-type="secondary"]//span[text()="Cancel"]
+reopenParentAction://xmc-button [@data-type="secondary"]//span[text()="Reopen"]
+reopenSubAction://xmc-button[@ng-reflect-name="112"]//span[text()="Reopen"]
+reopenCreateNewAction://xmc-button[@data-type="secondary"]//span[text()="Create New"]
+forwardParentAction://xmc-button[@ng-reflect-name="Forward2"]//span[text()="Forward"]
+forwardSubAction://xmc-button [@ng-reflect-name="115"]//span[text()="Forward"]
+forwardsubAction://xmc-button[@ng-reflect-name="115"]//span[text()="Forward"]
+keepopenAndCreateNewAction://xmc-button[@data-type="secondary"]//span[text()="Keep Opened and Create New"]
+closedAndCreateNewAction://xmc-button [@data-type="secondary"]//span [text()="Closed and Create New"]
+approvalAction://xmc-button[@data-type="secondary"]//span[text()="Approval"]
+sendForApprovalAction://xmc-button[@data-type="secondary"]//span[text()="Send For Approval"]
+approveAction://xmc-button[@data-type="secondary"]//span[text()="Approve"]
+rejectAction://xmc-button[@data-type="secondary"]//span[text()="Reject"]
+reviewAction://xmc-button[@data-type="secondary"]//span[text()="Review"]
+sendForReviewAction://xmc-button[@data-type="secondary"]//span[text()="Send For Review"]
+performReviewAction://xmc-button[@data-type="secondary"]//span[text()="Perform Review"]
+clientFollowUpAction://xmc-button[@data-type="secondary"]//span[text()="Client Follow-up"]
+reAssignAction://xmc-button[@data-type="secondary"]//span[text()="Reassign"]
+qcApprovalAction://xmc-button[@data-type="secondary"]//span[text()="QC Approval"]
+sendForQCApprovalAction://xmc-button[@data-type="secondary"]//span[text()="Send for QC Approval"]
+performQCApprovalAction://xmc-button[@data-type="secondary"]//span[text()="Perform QC Approval"]
+# BUTTON
+updateTicketButton://xmc-button [@data-type="primary"]//span[text()="Update Ticket"]
+saveButton://xmc-button[@data-type="primary"]//span[text()="Save"]
+updateButton://xmc-button [@data-type="secondary"]//span[text()="Update"]
+assignToUserButton://xmc-button[@data-type="primary"]//span[text()="Assign To User"]
+assignToUser&CloseButton://xmc-button[@data-type="primary"]//span[text()="Assign To User Close"]
+closeButton://xmc-button[@data-type="primary"]//span[text()="Close"]
+cancelButton://xmc-button[@data-type="primary"]//span[text()="Cancel"]
+reopenCreateNewButton://xmc-button[@data-type="primary"]//span[text()="Create New"]
+forwardButton://xmc-button[@data-type="primary"]//span[text()="Forward"]
+keepopenAndCreateNewButton://xmc-button[@data-type="primary"]//span[text()="Keep Opened and Create New"]
+closedAndCreateNewButton://xmc-button[@data-type="primary"]//span[text()="Closed and Create New"]
+sendForApprovalButton://xmc-button[@data-type="primary"]//span[text()="Send For Approval"]
+approveButton://xmc-button[@data-type="primary"]//span[text()="Approve"]
+rejectButton://xmc-button[@data-type="primary"]//span[text()="Reject"]
+clientFollowUpButton://xmc-button[@data-type="primary"]//span[text()="Client Follow-up"]
+sendForReviewButton://xmc-button [@data-type="primary"]//span[text()="Send For Review"]
+performReviewButton://xmc-button [@data-type="primary"]//span[text()="Perform Review"]
+reAssignButton://xmc-button[@data-type="primary"]//span[text()="Reassign"]
+recoverInquiryButton://xmc-button[@data-type="primary"]//span[text()="Recover Inquiry"]
+markNonInquiryButton://xmc-button [@data-type="primary"]//span[text()="Mark Non-Inquiry"]
+saveAsDraftButton://xmc-button[@data-type="secondary"]//span[text()="Save As Draft"]
+sendForQCApprovalButton://xmc-button[@data-type="primary"]//span[text()="Send for QC Approval"]
+performQCApprovalButton://xmc-button[@data-type="primary"]//span[text()="Perform QC Approval"]
+# CK Editor
+uploadImageButton://button[@data-cke-tooltip-text="Upload image from computer"]
+insertTableButton://button[@data-cke-tooltip-text="Insert table"]
+tablesize25Button://button[@data-row="2"and data-column="5"]
+# DROPDOWN LIST
+approvalDropdownlist://xmc-multiple-select[@ng-reflect-name="10023"]//input
+reviewDropdownlist://xmc-select[@ng-reflect-name="10022"]//input
+analystpropdownlist://xmc-select[@ng-reflect-name="10005"]//input
+processingTeamDropdownlist://xmc-select[@ng-reflect-name="8"]//input
+processedInFlexCubepropdownlist://xmc-select[@ng-reflect-name="10054"]//input
+requestTypeDropdownlist://xmc-select[@ng-reflect-name="7"]//input
+facilityDropdownlist://xmc-select[@ng-reflect-name="10055"]//input
+tranchepropdownlist://xmc-select[@ng-reflect-name="10056"]//input
+currencyDropdownlist://xmc-select[@ng-reflect-name="10067"]//input
+draftDropdownlist://nz-select-top-control[@class="ant-select-selector ng-tns-c100-2"]
+tagspropdownlist://xmc-select[@ng-reflect-name="10047"]//input
+todaysFundingDropdownlist://xmc-select[@ng-reflect-name="10048"]//input
+commentsDropdownlist://xmc-select[@ng-reflect-name="10050"]//input
+currentlyPendingWithDropdownlist://xmc-select[@ng-reflect-name="10052"]//input
+qcTriggeringConditionDropdownlist://xmc-select[@ng-reflect-name="10084"]//input
+qcProcessingTeamDropdownlist://xmc-select[@ng-reflect-name="10085"]//input
+qcApproverDropdownlist://label[contains(text(),"QC Approver")]/ancestor:nz-form-item//nz-form-control//
+qcRequestTypeDropdownlist://label[contains(text(),"QC Request Type")]/ancestor:nz-form-item//nz-form-co
+qcTemplatepropdownlist://label[contains(text(),"QC Template")]/ancestor::nz-form-item//nz-form-control//
+qcTagspropdownlist://label[contains(text(),"QC Tags")]/ancestor:nz-form-item//nz-form-control//xmc-sele
+# DATA TYPE
+processingDate://label[contains(text(),"Processing Date")]//ancestor::xmc-field-template//nz-form-contro
+processingDateToday://calendar-footer[@ng-reflect-locale="[object Object]"]//a[@role="button"]
+effectiveDate://label[contains(text(),"Effective Date")]//ancestor::xmc-field-template//nz-form-control
+effectiveDateToday://calendar-footer[@ng-reflect-locale="[object Object]"]//a[@role="button"]
+nextActionDate://label[contains(text(),"Next Action Date")]//ancestor:xmc-field-template//nz-form-contr
+nextActionDateToday://calendar-footer[@ng-reflect-locale="[object Object]"]//a[@role="button"]
+nextMonthButton://button [@title="Next month (PageDown)"]
+chooseYearButton://Button[@title="Choose a year"]
+chooseMonthButton://Button[@title="Choose a month"]
+selectoneYearButton://td[@title="2024"]
+selectOneMonthButton://td[@title="Dec"]
+select1thDayButton://td[@title="12/1/2024"]
+select15thDayButton://td[@title="12/15/2024"]
+#TEXT
+tradeIdText://xmc-text[@ng-reflect-name="10059"]/input
+contractNoOrRidText://xmc-text [@ng-reflect-name="10063"]/input
+amcIDText://xmc-text[@ng-reflect-name="10049"]/input
+agentBankText://xmc-text[@ng-reflect-name="10066"]/input
+businessContactText://xmc-text [@ng-reflect-name="10057"]/input
+counterpartyText://xmc-text[@ng-reflect-name="10060"]/input
+cusipText://xmc-text [@ng-reflect-name="10061"]/input
+feeAmountText://xmc-text [@ng-reflect-name="10064"]/input
+gfrnNumberText://xmc-text[@ng-reflect-name="10065"]/input
+principalAmountText://xmc-text[@ng-reflect-name="10068"]/input
+interestAmountText://xmc-text[@ng-reflect-name="10069"]/input
+messageText://div[@class="ck ck-editor_main"]/div
+actionRequiredText://xmc-text[@ng-reflect-name="10100"]/input
+fedRefText://xmc-text [@ng-reflect-name="10101"]/input
+reMessageText://div[@class="ck ck-editor_main"]//div[@class="Wordsection1"]/p[1]
+searchTicketText://xmc-text[@ng-reflect-name="search-ticket-id"]/input
+searchValueItem://div[@class ="ant-select-item-option-content"][1]//div[@class ="ant-select-item
+# RADIO
+typeAddCommentsRadio://xmc-radio-group[@ng-reflect-name="10031"]//span [text()="Add comments and/o
+typeEmailCommentsRadio://xmc-radio-group[@ng-reflect-name="10031"]//span[text()="Email comments a
+errorsFoundRadio://xmc-radio-group[@ng-reflect-name="10017"]//label[@ng-reflect-nz-value="1"]
+noErrorsRadio://xmc-radio-group[@ng-reflect-name="10017"]label[@ng-reflect-nz-value="2"]
+duplicatedRadio://xmc-radio-group[@ng-reflect-name="10018]//label[@ng-reflect-nz-value="3"]
+invalidRadio://xmc-radio-group [@ng-reflect-name="10018"]//label[@ng-reflect-nz-value="4"]
+clientInternalLoansOpsOnlyRadio://xmc-radio-group[@ng-reflect-name="10019"]//span[text()="Loans 0
+clientInternalReplyRadio://xmc-radio-group[@ng-reflect-name="10019"]//span[text()="Reply"]
+clientInternalReplyAllRadio://xmc-radio-group[@ng-reflect-name="10019"]//span[text()="Reply all"]
+allApproversMustApproveYesRadio://xmc-radio-group[@ng-reflect-name="10081"]//label[@ng-reflect-nz
+allApproversMustApproveNoRadio://xmc-radio-group[@ng-reflect-name="10081"]//label[@ng-reflect-nz-
+qcApprovalResultApproveRadio://xmc-radio-group[@ng-reflect-name="10094"]//label[@ng-reflect-nz-va
+qcApprovalResultRejectRadio://xmc-radio-group[@ng-reflect-name="10094"]//label[@ng-reflect-nz-val
+# Email comments
+fromDropdownlist://xmc-select[@ng-reflect-model=10002]
+toText://xmc-email-address-search[@ng-reflect-name="11"]//input
+ccText://xmc-email-address-search[@ng-reflect-name="12"]//input
+bccText://xmc-email-address-search[@ng-reflect-name="45"]//input
+subjectText://xmc-text[@ng-reflect-name="6"]/input
+attachFileButton://span[text()="Attach File"]
+clearButton://nz-select-clear
+# Checkbox
+addAllAttachmentsCheckbox://input[@type="checkbox"]/ancestor:label//span[text()="Add All Attachments"]
+addAllEmailsCheckbox://input[@type="checkbox"]/ancestor:label//span[text()="Add All Emails"]
+# Others
+automationTestContent://span [text()="Automation Test"]
+draftContent://span[text()="Drafts "
+subTicketName://div[@class="ag-center-cols-clipper"]//div[@row-index=""]//div[@aria-colindex="2"]
+OKMessage://span[contains(text(),"OK")]
+UCCSpan://span[contains(text(),"UCC")]
+outsideWarning://p[contains(text(),"recipients are outside")]
+informationokButton://button[@ng-reflect-disabled="false"]//span[text()="OK "
+informationcloseButton://button[@aria-label="Close"]
+mandatoryWarningMessage://span[contains(text(),"Please correct all the errors before submit")]
+# Document Tab
+filename://span[text()="demo.xlsx"]/parent:div
+fileCopyButton://xmc-email-attachment//xmc-button[2]
+fileCopyButton2://xmc-tag[@nztooltiptitle="Click to copy DMC ID"]
+pasteButton://xmc-button[@data-type="primary"]//span[text()="Paste"]
+newFileName://div[@aria-rowindex="2"]//div[@aria-colindex="7"]//xmc-tag[@nztooltiptitle="Click to copy DMC
+newFileActivity://div[@aria-rowindex="2"]//div[@aria-colindex="1"]//span[contains(text(),"Additional Detai
+newFileActivity2://div[@aria-rowindex="3"]//div[@aria-colindex="1"]//span[contains(text(),"Additional Deta
+attachmentName://span [@nztye="link"]/parent:a[contains(text(),"demo.xlsx")]
+# Linkage Tab
+shareLinkButton://xmc-button [@data-type="secondary"]//span[text()="Share Link"]
+addLinkButton://xmc-button [@data-type="secondary"]//span[text()="Add Link"]
+deleteLinkButton://span[contains(text(),"Delete Link")]
+yesButton://span[text()="Yes"]
+searchLinkButton://xmc-button [@name="search"]
+chooseLinkButton://div[@row-index="1"]//div[@ref="eWrapper"]//input[@ref="eInput"]
+addParentButton://xmc-button[@data-type="primary"]//span[contains(text(),"Add Parent")]
+addChildButton://xmc-button[@data-type="primary"]//span[contains(text(),"Add Child")]
+linkButton://xmc-button[@data-type="secondary"]//span[text()="Link"]
+lessItemButton://div[@row-index="0"]//span[@ref="eExpanded"]
+moreItemButton://div[@row-index="0"]//span[@ref="eContracted"]
+# Audit Trail
+expandAuditTrail://div[text()="Audit Trail"]//ancestor::xmc-card//div[@slot="actions"]//xmc-button [@name-
+previewAuditButton://nz-switch [@ng-reflect-title="Preview Notes"]
+audiTrailMail://div[@class="li-file ng-star-inserted"]//div[@class="file-info file-info-0"]//span
+hyperLinkButton://a[@class="ant-btn createNewTicket xmc-button ant-btn-icon-only"]//i[@ng-reflect-nz-typ
+# Checklist
+tradeCloserText://xmc-text[@ng-reflect-name="Trade Closer"]//input
+sellerHasPositiontoCoversalepropdownlist://xmc-select[@ng-reflect-name="Seller Has Position to Cover s"]
+yesEvidenceofsellerPositionIncludedpropdownlist://xmc-select[@ng-reflect-name="if Yes Evidence of Selle
+noSellerupstceamticketisText://xmc-textarea[@ng-reflect-name="if No Seller Upstream ticket"]//textarea
+buyeriscurrentlenderDropdownlist://xmc-select[@ng-reflect-name="Buyer is current lender (Y/N)"]
+yesEvidenceofBuyerPositionIncludedDropdownlist://xmc-select[@ng-reflect-name="if Yes Evidence of Buyer
+noEvidenceofBuyerKYCCompletionIncludedDropdownlist://xmc-select[@ng-reflect-name="if No Evidence of Buy
+noTypeofConsentRequiredAndEvidencedText://xmc-textarea[@ng-reflect-name="if No Type of Consent Reguic"
+creditAgreementPrintoutofThirdPartySummarySheetIncludedDropdownlist://xmc-select[@ng-reflect-name="Credi
+isAssigneelistedonDisqualifiedLenderListDropdownlist://xmc-select[@ng-reflect-name="Is Assignee listed or
+signedAssignmentAndAcceptanceDocbyAssigneeandAssignorDropdownlist://xmc-select[@ng-reflect-name="signed A
+celeasedtoAgentforsigningclearparDropdownlist://xmc-select[@ng-reflect-name="Rele
+globalinFlexLIOmatchesglobalonAssignmentDropdownlist://xmc-select[@ng-reflect-nar
+isDealLXIDMappedtoTrancheinFlexcubeDropdownlist://xmc-select[@ng-reflect-name="Is
+revolvingCreditpropdownlist://xmc-select[@ng-reflect-name="Revolving Credit (Y/N
+yesConfirmedActivitywAgencyDropdownlist://xmc-select[@ng-reflect-name="if Yes -
+yesarewiredetailsexistingforallcurrenciesDropdownlist://xmc-select[@ng-reflect-na
+
+#############
+You must use the provided web ui cucumber steps as part of the script. 
+If there are no web ui cucumber steps you want to use, Please define them in comments at the end.you need give the annotation conditions and matching conditions, such as @And("^Check ticket Subject is "([^"]*)"$").
+
+# AVAILABLE WEBUI CUCUMBER SYSTEM STEPS #
+//Browser click on @webElement
+@When("^(\\w+) click on (@?[\\W\\.]+)")
+
+//Browser type text into @inputbox
+@When("^(\\w+) type \"([\"]*)\" into (@?[\\w\\.]+)")
+
+//Browser select item from @dropdownlist
+@When("^(\w+) select \"([\"]*)\" from (@?[\\w\.]+)")
+
+//Browser check on @checkbox
+@When("(\\w+) check on (@?[\\W\\.]*)")
+
+//Browser uncheck on @checkbox
+@When("(\\w+)uncheck on (@?[W\\.]*)")
+
+//Browser get text of webElement and save to @variable
+@Then("^(\\w+) read text from (@?[\w\\.]+) into (@\\w+)$")
+
+//Browser open url
+@When("^(\\w+) open \"([\"]*)\”url$")
+
+//Browser get url of opened page
+@Then("^(\\w+) get current url$")
+
+//Browser check if @page is opened
+@Then("^(\\w+) (am|is) on (@?[\\w\\.]+)")
+
+//Browser check @webElement exist
+@Then("^(\w+) see (@?[\\w\\.]+)")
+
+//Browser refresh page
+@Then("^(\w+)refresh$)")
+
+#############
+
+# AVAILABLE WEBUI CUCUMBER PROJECT STEPS #
+@When("(\w+) open \"([^\"]*)\" url$")
+@Given("^Login SSO as \"([^\"]*)\"$")
+@When("Wait {int} seconds")
+@Given("^Login as \"([^\"]*)\"$")
+@When("^(\\w+) click on (@?[\w\.]+)")
+@Then("^(\\w+) change to next tab$")
+@Then("^(\\w+) (am|is) on (@?[w\.]+)")
+@When("^Select \"([\"]*)\" from (@[\w\\-]+)$")
+@When("^(\wt) type \"([^\"]*)\" into (@?[\w\.]+)")
+@Then("^Prepare Ticket Subject begin with  \"([\"]*)\" and Save into (@\\w)$")
+@And("^Get Ticket ID by Subject \"([\"]*)\" and save into (@\\w+)$")
+@And("^Open ticket by ID  \"([\"]*)\"$")
+@And("^check  \"([^\"]*)\" Ticketvalue is  \"([^\"]*)\"$")
+@Then("^Clear Input Box  \"([^\"]*)\"$")
+@Then("^Close Browser$")
+
+#############
+
+# STYLE #
+Style refer to the successful software company, such Google, Microsoft.
+You need to refer to existing cucumber scripts,  take them as Example, learn writing habit and format to write test case:
+
+#############
+
+# TONE #
+Professional, technical
+
+#############
+
+# AUDIENCE #
+The generated cucumber scripts should be detailed and meet the requirements, meet each steps and expected result in the test cases, and ensure that the script can run normally
+
+#############
+
+# RESPONSE #
+
+Each generated cucumber scripts includes the following components:
+
+Test Case ID(mandatory): A unique identifier for the test case.
+Scenario Outline(mandatory): A brief description of what the test case is intended to verify.
+Preconditions(mandatory): Any prerequisites that must be met before executing the test case.
+Steps(mandatory): A detailed list of actions to be performed in the test case.
+Expected Results(optional): The expected outcome after executing the steps.
+Examples(mandatory): The defined parameters you need to use. These parameters need to be used in <>
+Comments(optional): If there are no available webui cucumber steps or web elements that you want to use. You can customize a new one and display it in a table
+
+#############
+
+"}
+
+{"output":"```gherkin
+Feature: Funding Dashboard - Auto Test Ref# Field Update
+
+# Test Case ID: FundingDashboard-001
+# Scenario Outline: Add Auto Test Ref# field as non-mandatory in all Workflow and Update Ticket Areas
+# Preconditions: User must have appropriate permissions to log in and modify fields in the GENAIXXX system.
+
+@FundingDashboard @HighPriority
+Scenario Outline: Update Auto Test Ref# field to be non-mandatory
+  Given WebAgent open "GENAIXXX" url
+  And Login SSO as "<username>"
+  And Wait 5 seconds
+  And Login as "<username>"
+  # Step 1: Log in to the system
+  Then User successfully logs in to the system
+
+  # Step 2: Navigate to the Workflow section
+  When WebAgent click on workflowSection
+  Then Workflow section is displayed
+
+  # Step 3: Locate the Auto Test Ref# field in the Workflow section
+  Then WebAgent see autoTestRefField
+  # Step 4: Verify if the Auto Test Ref# field is currently a mandatory field
+  And WebAgent read text from autoTestRefField into @fieldStatus
+  Then Check if @fieldStatus is "mandatory"
+
+  # Step 5: Update the Auto Test Ref# field to be non-mandatory
+  When WebAgent click on updateFieldButton
+  And WebAgent uncheck on mandatoryCheckbox
+  Then Auto Test Ref# field is successfully updated to be non-mandatory
+
+  # Step 6: Navigate to the Update Ticket Areas section
+  When WebAgent click on updateTicketAreasSection
+  Then Update Ticket Areas section is displayed
+
+  # Step 7: Locate the Auto Test Ref# field in the Update Ticket Areas section
+  Then WebAgent see autoTestRefField
+  # Step 8: Verify if the Auto Test Ref# field is currently a mandatory field
+  And WebAgent read text from autoTestRefField into @fieldStatus
+  Then Check if @fieldStatus is "mandatory"
+
+  # Step 9: Update the Auto Test Ref# field in the Update Ticket Areas to be non-mandatory
+  When WebAgent click on updateFieldButton
+  And WebAgent uncheck on mandatoryCheckbox
+  Then Auto Test Ref# field is successfully updated to be non-mandatory
+
+  # Step 10: Ensure that the changes apply to all DLS, document, and normal DLs
+  Then Changes are successfully applied to all relevant areas
+
+  # Step 11: Verify that the new Auto Test Ref# field for Normal DL is displayed in the Additional Details section on the left area of the Ticket Detail page
+  When WebAgent click on ticketDetailPage
+  Then WebAgent see additionalDetailsSection
+  And WebAgent see autoTestRefField
+
+  # Step 12: Confirm that the new Auto Test Ref# field is non-mandatory
+  And WebAgent read text from autoTestRefField into @fieldStatus
+  Then Check if @fieldStatus is "non-mandatory"
+
+  # Step 13: Test the functionality by creating a new ticket and verifying the behavior of the Auto Test Ref# field
+  When WebAgent click on createNewTicketButton
+  And WebAgent type "<ticketData>" into ticketDataField
+  Then Ticket creation with Auto Test Ref# field behaving as expected
+
+Examples:
+  | username   | ticketData |
+  | testuser   | Test Data  |
+
+# Comments:
+# Define any additional web elements or steps if necessary
+# | Web Element Name       | XPath or Identifier |
+# |------------------------|---------------------|
+# | workflowSection        | //div[@id='workflow'] |
+# | updateTicketAreasSection | //div[@id='updateTicketAreas'] |
+# | autoTestRefField       | //input[@name='autoTestRef'] |
+# | updateFieldButton      | //button[@name='updateField'] |
+# | mandatoryCheckbox      | //input[@type='checkbox'][@name='mandatory'] |
+# | ticketDetailPage       | //div[@id='ticketDetail'] |
+# | additionalDetailsSection | //div[@id='additionalDetails'] |
+# | createNewTicketButton  | //button[@name='createNewTicket'] |
+# | ticketDataField        | //input[@name='ticketData'] |
+```
+
+### Explanation:
+- **Test Case ID**: A unique identifier for the test case.
+- **Scenario Outline**: Describes the scenario being tested.
+- **Preconditions**: Specifies any prerequisites for the test.
+- **Steps**: Detailed actions to be performed, using Given, When, Then, and And statements.
+- **Expected Results**: Describes the expected outcome of each step.
+- **Examples**: Provides parameter values for the scenario outline.
+- **Comments**: Lists any additional web elements or steps that need to be defined."}
+
+[8f159bc8-f687-4965-a9eb-ccaade774976-end 2025-01-21 16:19:14]
+
+[50e203c1-d7d0-11ef-a0d3-3c58c25c58c7-end 2025-01-21 16:19:14]
+[3255f307-d7d0-11ef-bd40-3c58c25c58c7-end 2025-01-21 16:19:14]
+[test-qa-start 2025-01-21 16:19:31]
+[705eeeca-d7d0-11ef-83f9-3c58c25c58c7-start 2025-01-21 16:19:31] steps ==> Generate test case workflow ==> Generate test case workflow
+[705eeecb-d7d0-11ef-bed4-3c58c25c58c7-start 2025-01-21 16:19:31] steps ==> Generate test case ==> Generate test case base on JIRA Description
+[764476e4-d7d0-11ef-b6f3-3c58c25c58c7-start 2025-01-21 16:19:40] steps ==> Understand Poject ==> Feed QA project related knowledge
+[764476e4-d7d0-11ef-b6f3-3c58c25c58c7-end 2025-01-21 16:19:40]
+[81f552e1-d7d0-11ef-8481-3c58c25c58c7-start 2025-01-21 16:20:00] steps ==> Generate test case ==> Generate test case base on JIRA Description
+[7fabfa69-84ed-400e-8713-ed8e19f4c62c-start 2025-01-21 16:20:02] steps ==> Generate test case ==> Generate test case base on JIRA Description
+
+{"input":"Human: 
+# CONTEXT #
+We are a software company, and you are our software test expert, your responsibility is to create test cases.
+
+#############
+
+# OBJECTIVE #
+I need you create function test cases by project documents and JIRA request: 1. Read project documents to understand whole project's goals, features, and user expectations. 2. Review JIRA requests to understand the specific functionalities or changes, you only need to create test cases to test this JIRA request, not for whole project document 3. Identify the components or modules of the software that need to be tested based on the project documentation and JIRA requests. Categorize them based on their functional areas 4. Based on the identified components and objectives, create test scenarios. Test scenarios outline the high-level functionality that needs to be tested. Each scenario typically consists of a sequence of steps, inputs, and expected outcomes 5. Break down each test scenario into detailed test cases. Test cases should cover various possible inputs, configurations, boundary conditions, and potential error scenarios. Ensure that each test case is unambiguous and independent 6. Determine the necessary test data for executing the test cases. This may involve identifying specific inputs, preconditions, and expected results for each test case. Test data should cover both typical and edge cases. 7. Prioritize the test cases based on factors like criticality, risk, and dependencies to 5 levels. Organize them into test suites to facilitate efficient test execution order by priority 8. Output test suites with test cases as a table 9. Test case should have Priority, Name, Summary, Steps. 10. Write Test Steps as table with  table heads : |No.| Test Step | Test Data | Expected Result |, Test Data means the input in Test Step
+
+#############
+
+# PROJECT DOCUMENT #
+This system is an operational workflow application utilized by the Global Loans Operations team to source all workflow items, including client requests and daily processing items in support of BAU activities and special remediation projects. The ticket as main entity in this application was created by email. Ticket carries business fields to offer Operation users filling out loan transaction information. Then, ticket will go to workflow and pend for reviewing. After all Approval is done, the ticket lifecycle is ended. Ticket will be closed as archived data
+
+#############
+
+# JIRA REQUEST #
+Problem Statement: Bilateral and CAD servicing operations want to be able to use our system - GENAIXXX to have a funding dashboard that outlines all relevant information that leadership needs tracked and monitored. Current Process: our system - GENAIXXX ticket workflow has all the fields relevant to what would be on a "funding dashboard" but does not have a text field available for Auto Test Ref# Because of this, we cannot move away from a manual touchpoint in SharePoint but would prefer to use our system - GENAIXXX instead since all updates show in individual columns within a public inbox. Change Requested: Please also make this Auto Test Ref# non mandatory field Location of the New Auto Test Re:Under Contract # or RID in all Workflow and Update Ticket Areas + Change should be applied to all DLS, document and normal DLs. + • New added field for Normal DL will be shown in Additional Details section in left area of Ticket Detail page • New field is non mandatory. This will allow the Bilateral department to transition their funding dashboard data fully to our system - GENAIXXX and to eliminate an additional touchpoint and allow for better data tracking and remediation efforts.
+
+#############
+
+# TEST PURPOSE #
+Regression Functional testing
+
+#############
+
+# TEST DATA #
+Mock test data by your understanding
+
+#############
+
+# LIMITATION #
+For test data, Email Subject must use this format: Subject-001, Subject-002
+
+#############
+
+# STYLE #
+Style refer to the successful software company, such Google, Microsoft.
+You need to refer to existing Test Cases,  take them as Example, learn writing habit and format to write test case:
+
+#############
+
+#Test Case Example#
+Priority: Critical Name: TicketingLogic-001 Summary: Function - update(change request type) Ticket Steps： |No.| Test Step | Test Data | Expected Result | 1. Operation Manager login XMC Loan Web. | A: *GT CN DevTest | Processing Team: *GT CN DevTest 2. Create a Ticket for DL A and select OTHER as Request Type by New Message. | Request Type value: 3PDL | Status: Unassigned 3. Opetn Ticket A. | | Sub Status: New 4. Check Processing Team, Statusl Sub Status, Request Type. | | Request Type: OTHER 5. Click Update Ticket Action. | | Request Type: 3P 6. Select Request Type value from Request Type dropdown list. | | 7. Click Update Ticket button. | | 8. Check Request Type | |
+
+#############
+
+# TONE #
+Professional, technical
+
+#############
+
+# AUDIENCE #
+Test cases should be detailed and easy to understood, junior tester will test system steps by steps, follow your test case.
+
+#############
+
+# RESPONSE #
+Output test cases with name, summary, priority and steps.
+Output test cases steps as table with  table heads : |No.| Test Step | Test Data | Expected Result |, Test Data means the input in Test Step
+
+#############
+
+"}
+
+{"output":"Priority: High 
+Name: FundingDashboard-001 
+Summary: Add Auto Test Ref# field as non-mandatory in all workflow and ticket areas 
+
+Test Steps: 
+| No. | Test Step | Test Data | Expected Result |
+|-----|-----------|-----------|------------------|
+| 1   | Login to GENAIXXX system as a user with Bilateral or CAD servicing operations role | Username: testuser, Password: testpassword | User successfully logs in to the system |
+| 2   | Navigate to the ticket workflow section | - | Ticket workflow section is displayed |
+| 3   | Identify the fields relevant to the "funding dashboard" | - | Fields related to funding dashboard are identified |
+| 4   | Check if there is a text field available for Auto Test Ref# | - | Confirm if Auto Test Ref# field is present |
+| 5   | Verify if Auto Test Ref# field is mandatory or non-mandatory | - | Auto Test Ref# field should be non-mandatory |
+| 6   | Make a change request to add Auto Test Ref# field as non-mandatory | Change Request: Add Auto Test Ref# field as non-mandatory in all workflow and ticket areas | Change request is submitted successfully |
+| 7   | Verify the location of the new Auto Test Ref# field | Location: Under Contract # or RID in all Workflow and Update Ticket Areas | New field is displayed in the specified locations |
+| 8   | Check if the change is applied to all DLS, document, and normal DLs | - | Change should be applied to all specified areas |
+| 9   | Verify the display of the new Auto Test Ref# field for Normal DL | - | New field should be shown in the Additional Details section in the left area of Ticket Detail page |
+| 10  | Confirm that the new field is non-mandatory | - | Auto Test Ref# field should be non-mandatory |
+| 11  | Test the functionality by creating a new ticket and updating the Auto Test Ref# field | - | User should be able to create a ticket without filling the Auto Test Ref# field as mandatory |
+| 12  | Validate that the Bilateral department can transition their funding dashboard data fully to GENAIXXX system | - | Funding dashboard data should be successfully transitioned to the system |
+| 13  | Ensure that the change allows for better data tracking and remediation efforts | - | Data tracking and remediation efforts should be improved with the new field |
+
+This test case covers the implementation of the change request to add the Auto Test Ref# field as non-mandatory in all workflow and ticket areas in the GENAIXXX system."}
+
+[7fabfa69-84ed-400e-8713-ed8e19f4c62c-end 2025-01-21 16:20:09]
+
+[81f552e1-d7d0-11ef-8481-3c58c25c58c7-end 2025-01-21 16:20:09]
+[960f3168-d7d0-11ef-88f3-3c58c25c58c7-start 2025-01-21 16:20:34] steps ==> Generate cucumber script ==> Generate cucumber script on TEST CASES
+[a889c1b3-bf94-41ee-ad4e-cb0dd304534d-start 2025-01-21 16:20:36] steps ==> Generate Cucumber Script ==> Generate cucumber script base on test cases
+
+{"input":"Human: 
+# CONTEXT #
+We are a software company, and you are our software test expert. You are tasked with generating a Cucumber script based on the generated test cases.
+
+#############
+
+# OBJECTIVE #
+I need you create cucumber scripts for the generated test cases and cucumber knowledge base:
+1. Read cucumber knowledge basic example to understand grammar, format, and standard.
+2. Review test cases to understand the specific functionalities and learn each Test Step Test Data and Expected Result. You only need to create cucumber scripts for generated test cases, not for whole project document
+3. Read available web elements to understand web elements that you can use in the cucumber scripts.
+4. Read available webui cucumber system and project steps to understand the steps scripts that you can use in the cucumber scripts.
+5. Write script files related to test cases based on the provided examples, steps, web elements, and your knowledge.
+6. The generated script must be strongly associated with the test case and an explanation related to the test case must be added above each steps
+7. Do not generate any scripts that do not comply with syntax standards.
+#############
+
+# GUIDELINES #
+Please follow these guidelines:
+1. Convert each test case into a Gherkin format, which includes Given, When, and Then statements.
+2. Ensure that each steps is clear and concise, using plain language.
+3. If applicable, include And statements to combine steps for improved readability.
+4. Use tags for scenarios that require specific conditions or environments.
+
+#############
+
+# GENERATED TEST CASES #
+Priority: High 
+Name: FundingDashboard-001 
+Summary: Add Auto Test Ref# field as non-mandatory in all workflow and ticket areas 
+
+Test Steps: 
+| No. | Test Step | Test Data | Expected Result |
+|-----|-----------|-----------|------------------|
+| 1   | Login to GENAIXXX system as a user with Bilateral or CAD servicing operations role | Username: testuser, Password: testpassword | User successfully logs in to the system |
+| 2   | Navigate to the ticket workflow section | - | Ticket workflow section is displayed |
+| 3   | Identify the fields relevant to the "funding dashboard" | - | Fields related to funding dashboard are identified |
+| 4   | Check if there is a text field available for Auto Test Ref# | - | Confirm if Auto Test Ref# field is present |
+| 5   | Verify if Auto Test Ref# field is mandatory or non-mandatory | - | Auto Test Ref# field should be non-mandatory |
+| 6   | Make a change request to add Auto Test Ref# field as non-mandatory | Change Request: Add Auto Test Ref# field as non-mandatory in all workflow and ticket areas | Change request is submitted successfully |
+| 7   | Verify the location of the new Auto Test Ref# field | Location: Under Contract # or RID in all Workflow and Update Ticket Areas | New field is displayed in the specified locations |
+| 8   | Check if the change is applied to all DLS, document, and normal DLs | - | Change should be applied to all specified areas |
+| 9   | Verify the display of the new Auto Test Ref# field for Normal DL | - | New field should be shown in the Additional Details section in the left area of Ticket Detail page |
+| 10  | Confirm that the new field is non-mandatory | - | Auto Test Ref# field should be non-mandatory |
+| 11  | Test the functionality by creating a new ticket and updating the Auto Test Ref# field | - | User should be able to create a ticket without filling the Auto Test Ref# field as mandatory |
+| 12  | Validate that the Bilateral department can transition their funding dashboard data fully to GENAIXXX system | - | Funding dashboard data should be successfully transitioned to the system |
+| 13  | Ensure that the change allows for better data tracking and remediation efforts | - | Data tracking and remediation efforts should be improved with the new field |
+
+This test case covers the implementation of the change request to add the Auto Test Ref# field as non-mandatory in all workflow and ticket areas in the GENAIXXX system.
+
+#############
+
+# CUCUMBER SCRIPT EXAMPLE #
+This is the cucumber script example that has already been written. You can read it to understand the general operating logic of the system.
+You need write a script corresponding to the generated test case requirements, but you are not able to copy this example.
+
+Feature:Ticket
+1)Author:Jinyang
+2)Workflow:
+3)Check Point:
+4)Key Value:
+@Ticket @Regression @Group2
+Scenario Outline:C162742-4286 Update ticket
+# ***************************************************
+# STEP 1:Operation Manager - Create Ticket
+# ***************************************************
+Given WebAgent open "$xmcNAMLoginPage"url
+And Login SSo as "SopsManagel"
+And Wait 5 seconds
+And Login as "SopsManage1"
+And WebAgent click on inboxIcon
+And Wait 5 seconds
+Then WebAgent click on createButton
+And WebAgent click on newMessageItem
+And Wait 5 seconds
+Then WebAgent change to next tab
+Then WebAgent is on newMessagePage
+And Select "*GT CN XMC Loan Dev Test"from processingTeamDropdownlist
+And Select "*GT CN XMC Loan Dev Test"from frompropdownlist
+And WebAgent type "Jia,Bing Mango [OT-TECH]"into toText
+And Wait 2 seconds
+And Wait 2 seconds
+And WebAgent click on searchValueItem
+And WebAgent click on messageText
+And WebAgent type "Guo,Qihua Jevons [OT-TECH]"into ccText
+And Wait 2 seconds
+And Wait 2 seconds
+And WebAgent click on searchValueItem
+And WebAgent click on messageText
+And WebAgent type "Guo,Qihua
+Jevons [OT-TECH]"into bccText
+And Wait 2 seconds
+And Wait 2 seconds
+And WebAgent click on searchValueItem
+And WebAgent click on messageText
+Then Prepare Ticket Subject begin with "[XMC Test]UpdateTicket-"and Save into @ticketsubject
+And WebAgent type "@ticketsubject.Value"into subjectText
+And Wait 5 seconds
+And WebAgent type "OTHER"into requestTypeDropdownlist
+And Wait 2 seconds
+And WebAgent click on searchValueItem
+And WebAgent click on messageText
+And WebAgent click on nextActionDate
+And Wait 2 seconds
+Then WebAgent click on nextActionDateToday
+#select currency
+And WebAgent type "HKD"into currencyDropdownlist
+And Wait 2 seconds
+And WebAgent click on searchValueItem
+And WebAgent click on newMeassageText
+#select facility
+And WebAgent type "Facility dev test"into facilityDropdownlist
+And Wait 2 seconds
+And WebAgent click on searchValueItem
+#select Effective Date=today
+And WebAgent click on effectiveDate
+And Wait 2 seconds
+Then WebAgent click on effectiveDateToday
+#input Contract or RID
+And WebAgent type "001C001171880002"into contractNoOrRidText
+#input Action Required
+And WebAgent type "Approval Approved"into actionRequiredText
+And WebAgent type "Mail Content,send from Web by script"into messageText
+Then WebAgent click on sendButton
+And Wait 10 seconds
+Then WebAgent change to tab "XMC Loan"
+Then WebAgent is on LoanPage
+And Wait 60 seconds
+And WebAgent click on allTicketsInbox
+And Wait 20 seconds
+And WebAgent click on clearUserPreferenceButton
+And Wait 10 seconds
+And Get Ticket ID by Subject "@ticketsubject.Value"and save into @ticketId
+When Open ticket by ID "@ticketId.Value"
+Then Wait 5 seconds
+# ***************************************************
+# STEP 2:Operation Manager - Check Ticket Details
+# ***************************************************
+Then WebAgent change to next tab
+Then WebAgent is on workflowPage
+And check "Currency"Ticketvalue is "HKD"
+And check "Facility"Ticketvalue is "Facility dev test"
+And check "Contract# or RID"Ticketvalue is "001C001171880002"
+And check "Action Required"Ticketvalue is "Approval Approved"
+# ***************************************************
+# STEP 3:Operation Manager - update Ticket in ticket detail
+# ***************************************************
+Then WebAgent click on updateTicketAction
+And WebAgent type "Payoff"into requestTypepropdownlist
+And Select "Payoff"from requestTypeDropdownlist
+And Select "1.Regression Tags"from tagspropdownlist
+And select "YES"from todaysFundingDropdownlist
+And select "Awaiting for Documents"from commentspropdownlis
+And Select "Pending with Ao"from currentlyPendingwithDropdownlist
+Then Clear Input Box "contractNoOrRidText"
+And WebAgent type "001C001171880001"into contractNoOrRidText
+And WebAgent type "C162742"into amcIDText
+And WebAgent click on effectiveDate
+And WebAgent click on chooseYearButton
+And WebAgent click on selectoneYearButton
+And WebAgent click on chooseMonthButton
+And WebAgent click on selectoneMonthButton
+And WebAgent click on select15thDayButton
+And WebAgent click on nextActionDate
+And WebAgent click on chooseYearButton
+And WebAgent click on selectoneYearButton
+And WebAgent click on chooseMonthButton
+And WebAgent click on selectoneMonthButton
+And WebAgent click on select15thDayButton
+And Select "DKK"from currencyDropdownlist
+#input Action Required
+Then Clear Input Box "actionRequiredText"
+And WebAgent type "Approval Rejected"into actionRequiredText
+select Facility:CVR REFINING ABIE RC
+And select "CVR REFINING ABTE RC"from facilitypropdowni
+input Principal Amount:$RN6,input Fee Amouont:SRN3
+And WebAgent type "1000000"into principalAmountText
+And WebAgent type "10000"into feeAmountText
+#input Fed Ref#:003C001591880001
+And WebAgent type "003C001591880001"into fedRefText
+Then WebAgent click on updateTicketButton
+And Wait 4 seconds
+# ***************************************************
+# STEP 2:Operation Manager - Check Ticket Details
+# ***************************************************
+And check "Request Type"Ticketvalue is "Payoff"
+And check "Tags"Ticketvalue is "1.Regression Tags"
+And check "Todays Funding"Ticketvalue is "YES"
+And check "Comments"Ticketvalue is "Awaiting for Documents"
+And check "Currently Pending With"Ticketvalue is "Pending with AO"
+And check "Contract or RID"Ticketvalue is "001C001171880001"
+And check "AMC ID"Ticketvalue is "C162742"
+And check "Effective Date"Ticketvalue is "2024-12-15"
+And check "Next Action Date"Ticketvalue is "2024-12-15"
+And check "Currency"TicketValue is "DKK"
+And check "Action Required"Ticketvalue is "Approval Rejected"
+And check "Facility"Ticketvalue is "CVR REFINING ABTF RC"
+And check "Principal Amount"Ticketvalue is "1000000"
+And check "Fee Amount"Ticketvalue is "10000"
+And check "Fed Ref #Ticketvalue is "003C001591880001"
+Then Wait 5 seconds
+# ***************************************************
+# STEP 2:Operation Manager - Close Ticket
+# ***************************************************
+Then WebAgent click on closeParentAction
+Then Wait 1 seconds
+Then WebAgent click
+：onc1ase5 ubAct1am
+Then Wait 5 seconds
+Then check "Status"TicketValue is "Closed"
+Then check "Sub Status"Ticketvalue is "Closed"
+Then WebAgent click on expandAuditTrail
+And Wait 1 seconds
+Then Close Browser
+
+#############
+
+# AVAILABLE WEB ELEMENTS #
+You must use the provided web elements as part of the script. 
+If there are no web elements you want to use, Please define them in comments at the end, you just need give the name of the web elementes that you want to use.
+
+#Ticket Tab
+generalTab://xmc-button[@data-type="secondary"]//span[text()="General"]
+latestEmailTab://xmc-button[@data-type="secondary"]//span[text()="Latest Email"]
+notesTab://xmc-button [@data-type="secondary"]//span[text()="Notes"]
+linkageDetailsTab://xmc-button[@data-type="secondary"]//span[text()="Linkage Details"]
+documentTab://xmc-button[@data-type="secondary"]//span[text()="Document"]
+pendingReviewBeforeSendingTab://xmc-button [@data-type="secondary"]//span[text()="Pending Review before Sending"]
+qcCheckListQCPricingAdjustmentTemplateTab://xmc-button[@data-type="secondary"]//span[text()="QC Checklist QC Pri
+#General Tab
+#ACTION
+updateTicketAction://xmc-button [@data-type="secondary"]//span[text()="Update Ticket"]
+additionalDetailsNotesAction://xmc-button [@data-type="secondary"]//span[text()="Additional Details/Notes"]
+unassignAction://xmc-button[@data-type="secondary"]/span[text()="Unassign"]
+assignAction://xmc-button[@data-type="secondary"]//span[text()="Assign"]
+assignToMeAction://xmc-button [@data-type="secondary"]//span[text()="Assign To Me"]
+assignToUserAction://xmc-button[@data-type="secondary"]//span[text()="Assign To User"]
+closeParentAction://xmc-button[@data-type="secondary"]//span[text()="Close"]
+closeSubAction://1i//xmc-button [@data-type="secondary"]//span[text()="Close"]
+cancelAction://xmc-button[@data-type="secondary"]//span[text()="Cancel"]
+reopenParentAction://xmc-button [@data-type="secondary"]//span[text()="Reopen"]
+reopenSubAction://xmc-button[@ng-reflect-name="112"]//span[text()="Reopen"]
+reopenCreateNewAction://xmc-button[@data-type="secondary"]//span[text()="Create New"]
+forwardParentAction://xmc-button[@ng-reflect-name="Forward2"]//span[text()="Forward"]
+forwardSubAction://xmc-button [@ng-reflect-name="115"]//span[text()="Forward"]
+forwardsubAction://xmc-button[@ng-reflect-name="115"]//span[text()="Forward"]
+keepopenAndCreateNewAction://xmc-button[@data-type="secondary"]//span[text()="Keep Opened and Create New"]
+closedAndCreateNewAction://xmc-button [@data-type="secondary"]//span [text()="Closed and Create New"]
+approvalAction://xmc-button[@data-type="secondary"]//span[text()="Approval"]
+sendForApprovalAction://xmc-button[@data-type="secondary"]//span[text()="Send For Approval"]
+approveAction://xmc-button[@data-type="secondary"]//span[text()="Approve"]
+rejectAction://xmc-button[@data-type="secondary"]//span[text()="Reject"]
+reviewAction://xmc-button[@data-type="secondary"]//span[text()="Review"]
+sendForReviewAction://xmc-button[@data-type="secondary"]//span[text()="Send For Review"]
+performReviewAction://xmc-button[@data-type="secondary"]//span[text()="Perform Review"]
+clientFollowUpAction://xmc-button[@data-type="secondary"]//span[text()="Client Follow-up"]
+reAssignAction://xmc-button[@data-type="secondary"]//span[text()="Reassign"]
+qcApprovalAction://xmc-button[@data-type="secondary"]//span[text()="QC Approval"]
+sendForQCApprovalAction://xmc-button[@data-type="secondary"]//span[text()="Send for QC Approval"]
+performQCApprovalAction://xmc-button[@data-type="secondary"]//span[text()="Perform QC Approval"]
+# BUTTON
+updateTicketButton://xmc-button [@data-type="primary"]//span[text()="Update Ticket"]
+saveButton://xmc-button[@data-type="primary"]//span[text()="Save"]
+updateButton://xmc-button [@data-type="secondary"]//span[text()="Update"]
+assignToUserButton://xmc-button[@data-type="primary"]//span[text()="Assign To User"]
+assignToUser&CloseButton://xmc-button[@data-type="primary"]//span[text()="Assign To User Close"]
+closeButton://xmc-button[@data-type="primary"]//span[text()="Close"]
+cancelButton://xmc-button[@data-type="primary"]//span[text()="Cancel"]
+reopenCreateNewButton://xmc-button[@data-type="primary"]//span[text()="Create New"]
+forwardButton://xmc-button[@data-type="primary"]//span[text()="Forward"]
+keepopenAndCreateNewButton://xmc-button[@data-type="primary"]//span[text()="Keep Opened and Create New"]
+closedAndCreateNewButton://xmc-button[@data-type="primary"]//span[text()="Closed and Create New"]
+sendForApprovalButton://xmc-button[@data-type="primary"]//span[text()="Send For Approval"]
+approveButton://xmc-button[@data-type="primary"]//span[text()="Approve"]
+rejectButton://xmc-button[@data-type="primary"]//span[text()="Reject"]
+clientFollowUpButton://xmc-button[@data-type="primary"]//span[text()="Client Follow-up"]
+sendForReviewButton://xmc-button [@data-type="primary"]//span[text()="Send For Review"]
+performReviewButton://xmc-button [@data-type="primary"]//span[text()="Perform Review"]
+reAssignButton://xmc-button[@data-type="primary"]//span[text()="Reassign"]
+recoverInquiryButton://xmc-button[@data-type="primary"]//span[text()="Recover Inquiry"]
+markNonInquiryButton://xmc-button [@data-type="primary"]//span[text()="Mark Non-Inquiry"]
+saveAsDraftButton://xmc-button[@data-type="secondary"]//span[text()="Save As Draft"]
+sendForQCApprovalButton://xmc-button[@data-type="primary"]//span[text()="Send for QC Approval"]
+performQCApprovalButton://xmc-button[@data-type="primary"]//span[text()="Perform QC Approval"]
+# CK Editor
+uploadImageButton://button[@data-cke-tooltip-text="Upload image from computer"]
+insertTableButton://button[@data-cke-tooltip-text="Insert table"]
+tablesize25Button://button[@data-row="2"and data-column="5"]
+# DROPDOWN LIST
+approvalDropdownlist://xmc-multiple-select[@ng-reflect-name="10023"]//input
+reviewDropdownlist://xmc-select[@ng-reflect-name="10022"]//input
+analystpropdownlist://xmc-select[@ng-reflect-name="10005"]//input
+processingTeamDropdownlist://xmc-select[@ng-reflect-name="8"]//input
+processedInFlexCubepropdownlist://xmc-select[@ng-reflect-name="10054"]//input
+requestTypeDropdownlist://xmc-select[@ng-reflect-name="7"]//input
+facilityDropdownlist://xmc-select[@ng-reflect-name="10055"]//input
+tranchepropdownlist://xmc-select[@ng-reflect-name="10056"]//input
+currencyDropdownlist://xmc-select[@ng-reflect-name="10067"]//input
+draftDropdownlist://nz-select-top-control[@class="ant-select-selector ng-tns-c100-2"]
+tagspropdownlist://xmc-select[@ng-reflect-name="10047"]//input
+todaysFundingDropdownlist://xmc-select[@ng-reflect-name="10048"]//input
+commentsDropdownlist://xmc-select[@ng-reflect-name="10050"]//input
+currentlyPendingWithDropdownlist://xmc-select[@ng-reflect-name="10052"]//input
+qcTriggeringConditionDropdownlist://xmc-select[@ng-reflect-name="10084"]//input
+qcProcessingTeamDropdownlist://xmc-select[@ng-reflect-name="10085"]//input
+qcApproverDropdownlist://label[contains(text(),"QC Approver")]/ancestor:nz-form-item//nz-form-control//
+qcRequestTypeDropdownlist://label[contains(text(),"QC Request Type")]/ancestor:nz-form-item//nz-form-co
+qcTemplatepropdownlist://label[contains(text(),"QC Template")]/ancestor::nz-form-item//nz-form-control//
+qcTagspropdownlist://label[contains(text(),"QC Tags")]/ancestor:nz-form-item//nz-form-control//xmc-sele
+# DATA TYPE
+processingDate://label[contains(text(),"Processing Date")]//ancestor::xmc-field-template//nz-form-contro
+processingDateToday://calendar-footer[@ng-reflect-locale="[object Object]"]//a[@role="button"]
+effectiveDate://label[contains(text(),"Effective Date")]//ancestor::xmc-field-template//nz-form-control
+effectiveDateToday://calendar-footer[@ng-reflect-locale="[object Object]"]//a[@role="button"]
+nextActionDate://label[contains(text(),"Next Action Date")]//ancestor:xmc-field-template//nz-form-contr
+nextActionDateToday://calendar-footer[@ng-reflect-locale="[object Object]"]//a[@role="button"]
+nextMonthButton://button [@title="Next month (PageDown)"]
+chooseYearButton://Button[@title="Choose a year"]
+chooseMonthButton://Button[@title="Choose a month"]
+selectoneYearButton://td[@title="2024"]
+selectOneMonthButton://td[@title="Dec"]
+select1thDayButton://td[@title="12/1/2024"]
+select15thDayButton://td[@title="12/15/2024"]
+#TEXT
+tradeIdText://xmc-text[@ng-reflect-name="10059"]/input
+contractNoOrRidText://xmc-text [@ng-reflect-name="10063"]/input
+amcIDText://xmc-text[@ng-reflect-name="10049"]/input
+agentBankText://xmc-text[@ng-reflect-name="10066"]/input
+businessContactText://xmc-text [@ng-reflect-name="10057"]/input
+counterpartyText://xmc-text[@ng-reflect-name="10060"]/input
+cusipText://xmc-text [@ng-reflect-name="10061"]/input
+feeAmountText://xmc-text [@ng-reflect-name="10064"]/input
+gfrnNumberText://xmc-text[@ng-reflect-name="10065"]/input
+principalAmountText://xmc-text[@ng-reflect-name="10068"]/input
+interestAmountText://xmc-text[@ng-reflect-name="10069"]/input
+messageText://div[@class="ck ck-editor_main"]/div
+actionRequiredText://xmc-text[@ng-reflect-name="10100"]/input
+fedRefText://xmc-text [@ng-reflect-name="10101"]/input
+reMessageText://div[@class="ck ck-editor_main"]//div[@class="Wordsection1"]/p[1]
+searchTicketText://xmc-text[@ng-reflect-name="search-ticket-id"]/input
+searchValueItem://div[@class ="ant-select-item-option-content"][1]//div[@class ="ant-select-item
+# RADIO
+typeAddCommentsRadio://xmc-radio-group[@ng-reflect-name="10031"]//span [text()="Add comments and/o
+typeEmailCommentsRadio://xmc-radio-group[@ng-reflect-name="10031"]//span[text()="Email comments a
+errorsFoundRadio://xmc-radio-group[@ng-reflect-name="10017"]//label[@ng-reflect-nz-value="1"]
+noErrorsRadio://xmc-radio-group[@ng-reflect-name="10017"]label[@ng-reflect-nz-value="2"]
+duplicatedRadio://xmc-radio-group[@ng-reflect-name="10018]//label[@ng-reflect-nz-value="3"]
+invalidRadio://xmc-radio-group [@ng-reflect-name="10018"]//label[@ng-reflect-nz-value="4"]
+clientInternalLoansOpsOnlyRadio://xmc-radio-group[@ng-reflect-name="10019"]//span[text()="Loans 0
+clientInternalReplyRadio://xmc-radio-group[@ng-reflect-name="10019"]//span[text()="Reply"]
+clientInternalReplyAllRadio://xmc-radio-group[@ng-reflect-name="10019"]//span[text()="Reply all"]
+allApproversMustApproveYesRadio://xmc-radio-group[@ng-reflect-name="10081"]//label[@ng-reflect-nz
+allApproversMustApproveNoRadio://xmc-radio-group[@ng-reflect-name="10081"]//label[@ng-reflect-nz-
+qcApprovalResultApproveRadio://xmc-radio-group[@ng-reflect-name="10094"]//label[@ng-reflect-nz-va
+qcApprovalResultRejectRadio://xmc-radio-group[@ng-reflect-name="10094"]//label[@ng-reflect-nz-val
+# Email comments
+fromDropdownlist://xmc-select[@ng-reflect-model=10002]
+toText://xmc-email-address-search[@ng-reflect-name="11"]//input
+ccText://xmc-email-address-search[@ng-reflect-name="12"]//input
+bccText://xmc-email-address-search[@ng-reflect-name="45"]//input
+subjectText://xmc-text[@ng-reflect-name="6"]/input
+attachFileButton://span[text()="Attach File"]
+clearButton://nz-select-clear
+# Checkbox
+addAllAttachmentsCheckbox://input[@type="checkbox"]/ancestor:label//span[text()="Add All Attachments"]
+addAllEmailsCheckbox://input[@type="checkbox"]/ancestor:label//span[text()="Add All Emails"]
+# Others
+automationTestContent://span [text()="Automation Test"]
+draftContent://span[text()="Drafts "
+subTicketName://div[@class="ag-center-cols-clipper"]//div[@row-index=""]//div[@aria-colindex="2"]
+OKMessage://span[contains(text(),"OK")]
+UCCSpan://span[contains(text(),"UCC")]
+outsideWarning://p[contains(text(),"recipients are outside")]
+informationokButton://button[@ng-reflect-disabled="false"]//span[text()="OK "
+informationcloseButton://button[@aria-label="Close"]
+mandatoryWarningMessage://span[contains(text(),"Please correct all the errors before submit")]
+# Document Tab
+filename://span[text()="demo.xlsx"]/parent:div
+fileCopyButton://xmc-email-attachment//xmc-button[2]
+fileCopyButton2://xmc-tag[@nztooltiptitle="Click to copy DMC ID"]
+pasteButton://xmc-button[@data-type="primary"]//span[text()="Paste"]
+newFileName://div[@aria-rowindex="2"]//div[@aria-colindex="7"]//xmc-tag[@nztooltiptitle="Click to copy DMC
+newFileActivity://div[@aria-rowindex="2"]//div[@aria-colindex="1"]//span[contains(text(),"Additional Detai
+newFileActivity2://div[@aria-rowindex="3"]//div[@aria-colindex="1"]//span[contains(text(),"Additional Deta
+attachmentName://span [@nztye="link"]/parent:a[contains(text(),"demo.xlsx")]
+# Linkage Tab
+shareLinkButton://xmc-button [@data-type="secondary"]//span[text()="Share Link"]
+addLinkButton://xmc-button [@data-type="secondary"]//span[text()="Add Link"]
+deleteLinkButton://span[contains(text(),"Delete Link")]
+yesButton://span[text()="Yes"]
+searchLinkButton://xmc-button [@name="search"]
+chooseLinkButton://div[@row-index="1"]//div[@ref="eWrapper"]//input[@ref="eInput"]
+addParentButton://xmc-button[@data-type="primary"]//span[contains(text(),"Add Parent")]
+addChildButton://xmc-button[@data-type="primary"]//span[contains(text(),"Add Child")]
+linkButton://xmc-button[@data-type="secondary"]//span[text()="Link"]
+lessItemButton://div[@row-index="0"]//span[@ref="eExpanded"]
+moreItemButton://div[@row-index="0"]//span[@ref="eContracted"]
+# Audit Trail
+expandAuditTrail://div[text()="Audit Trail"]//ancestor::xmc-card//div[@slot="actions"]//xmc-button [@name-
+previewAuditButton://nz-switch [@ng-reflect-title="Preview Notes"]
+audiTrailMail://div[@class="li-file ng-star-inserted"]//div[@class="file-info file-info-0"]//span
+hyperLinkButton://a[@class="ant-btn createNewTicket xmc-button ant-btn-icon-only"]//i[@ng-reflect-nz-typ
+# Checklist
+tradeCloserText://xmc-text[@ng-reflect-name="Trade Closer"]//input
+sellerHasPositiontoCoversalepropdownlist://xmc-select[@ng-reflect-name="Seller Has Position to Cover s"]
+yesEvidenceofsellerPositionIncludedpropdownlist://xmc-select[@ng-reflect-name="if Yes Evidence of Selle
+noSellerupstceamticketisText://xmc-textarea[@ng-reflect-name="if No Seller Upstream ticket"]//textarea
+buyeriscurrentlenderDropdownlist://xmc-select[@ng-reflect-name="Buyer is current lender (Y/N)"]
+yesEvidenceofBuyerPositionIncludedDropdownlist://xmc-select[@ng-reflect-name="if Yes Evidence of Buyer
+noEvidenceofBuyerKYCCompletionIncludedDropdownlist://xmc-select[@ng-reflect-name="if No Evidence of Buy
+noTypeofConsentRequiredAndEvidencedText://xmc-textarea[@ng-reflect-name="if No Type of Consent Reguic"
+creditAgreementPrintoutofThirdPartySummarySheetIncludedDropdownlist://xmc-select[@ng-reflect-name="Credi
+isAssigneelistedonDisqualifiedLenderListDropdownlist://xmc-select[@ng-reflect-name="Is Assignee listed or
+signedAssignmentAndAcceptanceDocbyAssigneeandAssignorDropdownlist://xmc-select[@ng-reflect-name="signed A
+celeasedtoAgentforsigningclearparDropdownlist://xmc-select[@ng-reflect-name="Rele
+globalinFlexLIOmatchesglobalonAssignmentDropdownlist://xmc-select[@ng-reflect-nar
+isDealLXIDMappedtoTrancheinFlexcubeDropdownlist://xmc-select[@ng-reflect-name="Is
+revolvingCreditpropdownlist://xmc-select[@ng-reflect-name="Revolving Credit (Y/N
+yesConfirmedActivitywAgencyDropdownlist://xmc-select[@ng-reflect-name="if Yes -
+yesarewiredetailsexistingforallcurrenciesDropdownlist://xmc-select[@ng-reflect-na
+
+#############
+You must use the provided web ui cucumber steps as part of the script. 
+If there are no web ui cucumber steps you want to use, Please define them in comments at the end.you need give the annotation conditions and matching conditions, such as @And("^Check ticket Subject is "([^"]*)"$").
+
+# AVAILABLE WEBUI CUCUMBER SYSTEM STEPS #
+//Browser click on @webElement
+@When("^(\\w+) click on (@?[\\W\\.]+)")
+
+//Browser type text into @inputbox
+@When("^(\\w+) type \"([\"]*)\" into (@?[\\w\\.]+)")
+
+//Browser select item from @dropdownlist
+@When("^(\w+) select \"([\"]*)\" from (@?[\\w\.]+)")
+
+//Browser check on @checkbox
+@When("(\\w+) check on (@?[\\W\\.]*)")
+
+//Browser uncheck on @checkbox
+@When("(\\w+)uncheck on (@?[W\\.]*)")
+
+//Browser get text of webElement and save to @variable
+@Then("^(\\w+) read text from (@?[\w\\.]+) into (@\\w+)$")
+
+//Browser open url
+@When("^(\\w+) open \"([\"]*)\”url$")
+
+//Browser get url of opened page
+@Then("^(\\w+) get current url$")
+
+//Browser check if @page is opened
+@Then("^(\\w+) (am|is) on (@?[\\w\\.]+)")
+
+//Browser check @webElement exist
+@Then("^(\w+) see (@?[\\w\\.]+)")
+
+//Browser refresh page
+@Then("^(\w+)refresh$)")
+
+#############
+
+# AVAILABLE WEBUI CUCUMBER PROJECT STEPS #
+@When("(\w+) open \"([^\"]*)\" url$")
+@Given("^Login SSO as \"([^\"]*)\"$")
+@When("Wait {int} seconds")
+@Given("^Login as \"([^\"]*)\"$")
+@When("^(\\w+) click on (@?[\w\.]+)")
+@Then("^(\\w+) change to next tab$")
+@Then("^(\\w+) (am|is) on (@?[w\.]+)")
+@When("^Select \"([\"]*)\" from (@[\w\\-]+)$")
+@When("^(\wt) type \"([^\"]*)\" into (@?[\w\.]+)")
+@Then("^Prepare Ticket Subject begin with  \"([\"]*)\" and Save into (@\\w)$")
+@And("^Get Ticket ID by Subject \"([\"]*)\" and save into (@\\w+)$")
+@And("^Open ticket by ID  \"([\"]*)\"$")
+@And("^check  \"([^\"]*)\" Ticketvalue is  \"([^\"]*)\"$")
+@Then("^Clear Input Box  \"([^\"]*)\"$")
+@Then("^Close Browser$")
+
+#############
+
+# STYLE #
+Style refer to the successful software company, such Google, Microsoft.
+You need to refer to existing cucumber scripts,  take them as Example, learn writing habit and format to write test case:
+
+#############
+
+# TONE #
+Professional, technical
+
+#############
+
+# AUDIENCE #
+The generated cucumber scripts should be detailed and meet the requirements, meet each steps and expected result in the test cases, and ensure that the script can run normally
+
+#############
+
+# RESPONSE #
+
+Each generated cucumber scripts includes the following components:
+
+Test Case ID(mandatory): A unique identifier for the test case.
+Scenario Outline(mandatory): A brief description of what the test case is intended to verify.
+Preconditions(mandatory): Any prerequisites that must be met before executing the test case.
+Steps(mandatory): A detailed list of actions to be performed in the test case.
+Expected Results(optional): The expected outcome after executing the steps.
+Examples(mandatory): The defined parameters you need to use. These parameters need to be used in <>
+Comments(optional): If there are no available webui cucumber steps or web elements that you want to use. You can customize a new one and display it in a table
+
+#############
+
+"}
+
+{"output":"```gherkin
+Feature: Funding Dashboard Field Management
+  # Test Case ID: FundingDashboard-001
+  # This scenario verifies the addition of the Auto Test Ref# field as non-mandatory in all workflow and ticket areas.
+
+  @FundingDashboard @HighPriority
+  Scenario Outline: Add Auto Test Ref# field as non-mandatory
+    # ***************************************************
+    # STEP 1: User Login
+    # ***************************************************
+    Given WebAgent open "<url>" url
+    And Login SSO as "<username>"
+    And Wait 5 seconds
+    Then WebAgent is on "<homepage>"
+
+    # ***************************************************
+    # STEP 2: Navigate to Ticket Workflow
+    # ***************************************************
+    When WebAgent click on "<ticketWorkflowSection>"
+    Then WebAgent is on "<ticketWorkflowPage>"
+
+    # ***************************************************
+    # STEP 3: Identify Funding Dashboard Fields
+    # ***************************************************
+    When WebAgent see "<fundingDashboardFields>"
+
+    # ***************************************************
+    # STEP 4: Check Auto Test Ref# Field Presence
+    # ***************************************************
+    Then WebAgent see "<autoTestRefField>"
+
+    # ***************************************************
+    # STEP 5: Verify Auto Test Ref# Field Non-Mandatory
+    # ***************************************************
+    Then WebAgent read text from "<autoTestRefField>" into @fieldStatus
+    And check "Field Status" Ticketvalue is "Non-Mandatory"
+
+    # ***************************************************
+    # STEP 6: Submit Change Request
+    # ***************************************************
+    When WebAgent type "Add Auto Test Ref# field as non-mandatory in all workflow and ticket areas" into "<changeRequestField>"
+    And WebAgent click on "<submitChangeRequestButton>"
+    Then WebAgent see "<changeRequestSuccessMessage>"
+
+    # ***************************************************
+    # STEP 7: Verify New Field Location
+    # ***************************************************
+    When WebAgent see "<newFieldLocation>"
+
+    # ***************************************************
+    # STEP 8: Check Change Application to All Areas
+    # ***************************************************
+    Then WebAgent see "<allAreasApplication>"
+
+    # ***************************************************
+    # STEP 9: Verify Display for Normal DL
+    # ***************************************************
+    When WebAgent see "<normalDLDisplay>"
+
+    # ***************************************************
+    # STEP 10: Confirm Non-Mandatory Status
+    # ***************************************************
+    Then WebAgent read text from "<autoTestRefField>" into @fieldStatus
+    And check "Field Status" Ticketvalue is "Non-Mandatory"
+
+    # ***************************************************
+    # STEP 11: Test Functionality by Creating New Ticket
+    # ***************************************************
+    When WebAgent click on "<createNewTicketButton>"
+    And WebAgent type "<ticketDetails>" into "<ticketDetailsField>"
+    Then WebAgent click on "<submitTicketButton>"
+    And WebAgent see "<ticketCreationSuccessMessage>"
+
+    # ***************************************************
+    # STEP 12: Validate Data Transition to GENAIXXX
+    # ***************************************************
+    Then WebAgent see "<dataTransitionSuccess>"
+
+    # ***************************************************
+    # STEP 13: Ensure Improved Data Tracking and Remediation
+    # ***************************************************
+    Then WebAgent see "<improvedDataTracking>"
+
+  Examples:
+    | url                | username  | homepage       | ticketWorkflowSection | ticketWorkflowPage | fundingDashboardFields | autoTestRefField | changeRequestField | submitChangeRequestButton | changeRequestSuccessMessage | newFieldLocation | allAreasApplication | normalDLDisplay | createNewTicketButton | ticketDetails | ticketDetailsField | submitTicketButton | ticketCreationSuccessMessage | dataTransitionSuccess | improvedDataTracking |
+    | "http://genaixxx" | "testuser" | "HomePage"     | "TicketWorkflow"      | "WorkflowPage"     | "FundingDashboard"     | "AutoTestRef#"   | "ChangeRequest"    | "SubmitChangeRequest"     | "ChangeRequestSubmitted"    | "UnderContract#" | "AllAreasApplied"   | "AdditionalDetails" | "CreateTicket"        | "Details"    | "TicketDetails"    | "SubmitTicket"    | "TicketCreated"              | "DataTransitioned"    | "DataTrackingImproved" |
+
+# Comments:
+# If any web elements or steps are not available, please define them as follows:
+# | Annotation Condition | Matching Condition |
+# |----------------------|--------------------|
+# | @And("^Check ticket Subject is \"([^\"]*)\"$") | Check ticket subject |
+```
+
+### Explanation:
+- **Test Case ID**: A unique identifier for the test case is provided.
+- **Scenario Outline**: Describes the scenario being tested.
+- **Steps**: Each step is clearly defined using Given, When, Then, and And statements.
+- **Examples**: Parameters are defined for use in the scenario outline.
+- **Comments**: Instructions for defining new web elements or steps if needed."}
+
+[a889c1b3-bf94-41ee-ad4e-cb0dd304534d-end 2025-01-21 16:20:56]
+
+[960f3168-d7d0-11ef-88f3-3c58c25c58c7-end 2025-01-21 16:20:56]
+[705eeecb-d7d0-11ef-bed4-3c58c25c58c7-end 2025-01-21 16:20:56]

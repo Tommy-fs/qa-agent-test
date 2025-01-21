@@ -1,77 +1,100 @@
 gherkin
-Feature: Funding Dashboard Updates
+Feature: Funding Dashboard Field Management
   # Test Case ID: FundingDashboard-001
-  # Scenario Outline: Add Auto Test Ref# field as non-mandatory in all workflow and update ticket areas
-  # Preconditions: User must have Bilateral or CAD servicing operations role.
+  # This scenario verifies the addition of the Auto Test Ref# field as non-mandatory in all workflow and ticket areas.
 
   @FundingDashboard @HighPriority
-  Scenario: Add Auto Test Ref# field as non-mandatory in all workflow and update ticket areas
-    Given WebAgent open "GENAIXXX" url
-    And Login SSO as "testuser"
+  Scenario Outline: Add Auto Test Ref# field as non-mandatory
+    # ***************************************************
+    # STEP 1: User Login
+    # ***************************************************
+    Given WebAgent open "<url>" url
+    And Login SSO as "<username>"
     And Wait 5 seconds
-    And Login as "testuser"
-    # Step 1: Log in to GENAIXXX system
-    Then User successfully logs in to the system
+    Then WebAgent is on "<homepage>"
 
-    # Step 2: Navigate to the ticket workflow section
-    When WebAgent click on "ticketWorkflowSection"
-    Then Ticket workflow section is displayed
+    # ***************************************************
+    # STEP 2: Navigate to Ticket Workflow
+    # ***************************************************
+    When WebAgent click on "<ticketWorkflowSection>"
+    Then WebAgent is on "<ticketWorkflowPage>"
 
-    # Step 3: Identify the fields relevant to the "funding dashboard"
-    When WebAgent see "fundingDashboardFields"
-    Then Fields related to funding dashboard are identified
+    # ***************************************************
+    # STEP 3: Identify Funding Dashboard Fields
+    # ***************************************************
+    When WebAgent see "<fundingDashboardFields>"
 
-    # Step 4: Check if there is a text field available for Auto Test Ref#
-    When WebAgent see "autoTestRefField"
-    Then Confirm that there is no text field available for Auto Test Ref#
+    # ***************************************************
+    # STEP 4: Check Auto Test Ref# Field Presence
+    # ***************************************************
+    Then WebAgent see "<autoTestRefField>"
 
-    # Step 5: Make Auto Test Ref# field non-mandatory in all workflow and update ticket areas
-    When WebAgent click on "updateTicketAction"
-    And WebAgent type "Auto Test Ref#" into "fieldName"
-    And WebAgent select "Non-Mandatory" from "fieldRequirementDropdownlist"
-    Then Auto Test Ref# field is updated to be non-mandatory
+    # ***************************************************
+    # STEP 5: Verify Auto Test Ref# Field Non-Mandatory
+    # ***************************************************
+    Then WebAgent read text from "<autoTestRefField>" into @fieldStatus
+    And check "Field Status" Ticketvalue is "Non-Mandatory"
 
-    # Step 6: Verify the changes by creating a new ticket and updating an existing ticket
-    When WebAgent click on "createNewTicket"
-    And WebAgent type "ticketCreationData" into "ticketDataFields"
-    Then Auto Test Ref# field is not mandatory and can be left blank
+    # ***************************************************
+    # STEP 6: Submit Change Request
+    # ***************************************************
+    When WebAgent type "Add Auto Test Ref# field as non-mandatory in all workflow and ticket areas" into "<changeRequestField>"
+    And WebAgent click on "<submitChangeRequestButton>"
+    Then WebAgent see "<changeRequestSuccessMessage>"
 
-    # Step 7: Ensure the changes are applied to all DLS, document, and normal DLs
-    When WebAgent see "DLSFields"
-    And WebAgent see "documentFields"
-    And WebAgent see "normalDLFields"
-    Then Auto Test Ref# field is visible and non-mandatory in all relevant areas
+    # ***************************************************
+    # STEP 7: Verify New Field Location
+    # ***************************************************
+    When WebAgent see "<newFieldLocation>"
 
-    # Step 8: Confirm that the new Auto Test Ref# field for Normal DL is shown in the Additional Details section on the Ticket Detail page
-    When WebAgent click on "additionalDetailsNotesAction"
-    Then New field is displayed in the specified location
+    # ***************************************************
+    # STEP 8: Check Change Application to All Areas
+    # ***************************************************
+    Then WebAgent see "<allAreasApplication>"
 
-    # Step 9: Test the functionality by transitioning funding dashboard data fully to GENAIXXX system
-    When WebAgent type "fundingDashboardData" into "dataFields"
-    Then Data tracking and remediation efforts are improved
+    # ***************************************************
+    # STEP 9: Verify Display for Normal DL
+    # ***************************************************
+    When WebAgent see "<normalDLDisplay>"
 
-  # Comments: 
-  # Define the following web elements if not available:
-  # | Web Element Name          | Description                                      |
-  # |---------------------------|--------------------------------------------------|
-  # | ticketWorkflowSection     | Locator for the ticket workflow section          |
-  # | fundingDashboardFields    | Locator for funding dashboard related fields     |
-  # | autoTestRefField          | Locator for Auto Test Ref# field                 |
-  # | fieldName                 | Locator for the field name input                 |
-  # | fieldRequirementDropdownlist | Locator for field requirement dropdown list  |
-  # | createNewTicket           | Locator for creating a new ticket button         |
-  # | ticketDataFields          | Locator for ticket data input fields             |
-  # | DLSFields                 | Locator for DLS related fields                   |
-  # | documentFields            | Locator for document related fields              |
-  # | normalDLFields            | Locator for normal DL related fields             |
-  # | additionalDetailsNotesAction | Locator for Additional Details/Notes action   |
-  # | dataFields                | Locator for data input fields                    |
+    # ***************************************************
+    # STEP 10: Confirm Non-Mandatory Status
+    # ***************************************************
+    Then WebAgent read text from "<autoTestRefField>" into @fieldStatus
+    And check "Field Status" Ticketvalue is "Non-Mandatory"
+
+    # ***************************************************
+    # STEP 11: Test Functionality by Creating New Ticket
+    # ***************************************************
+    When WebAgent click on "<createNewTicketButton>"
+    And WebAgent type "<ticketDetails>" into "<ticketDetailsField>"
+    Then WebAgent click on "<submitTicketButton>"
+    And WebAgent see "<ticketCreationSuccessMessage>"
+
+    # ***************************************************
+    # STEP 12: Validate Data Transition to GENAIXXX
+    # ***************************************************
+    Then WebAgent see "<dataTransitionSuccess>"
+
+    # ***************************************************
+    # STEP 13: Ensure Improved Data Tracking and Remediation
+    # ***************************************************
+    Then WebAgent see "<improvedDataTracking>"
+
+  Examples:
+    | url                | username  | homepage       | ticketWorkflowSection | ticketWorkflowPage | fundingDashboardFields | autoTestRefField | changeRequestField | submitChangeRequestButton | changeRequestSuccessMessage | newFieldLocation | allAreasApplication | normalDLDisplay | createNewTicketButton | ticketDetails | ticketDetailsField | submitTicketButton | ticketCreationSuccessMessage | dataTransitionSuccess | improvedDataTracking |
+    | "http://genaixxx" | "testuser" | "HomePage"     | "TicketWorkflow"      | "WorkflowPage"     | "FundingDashboard"     | "AutoTestRef#"   | "ChangeRequest"    | "SubmitChangeRequest"     | "ChangeRequestSubmitted"    | "UnderContract#" | "AllAreasApplied"   | "AdditionalDetails" | "CreateTicket"        | "Details"    | "TicketDetails"    | "SubmitTicket"    | "TicketCreated"              | "DataTransitioned"    | "DataTrackingImproved" |
+
+# Comments:
+# If any web elements or steps are not available, please define them as follows:
+# | Annotation Condition | Matching Condition |
+# |----------------------|--------------------|
+# | @And("^Check ticket Subject is \"([^\"]*)\"$") | Check ticket subject |
 
 
 ### Explanation:
-- **Test Case ID**: Unique identifier for the test case.
-- **Scenario Outline**: Describes the purpose of the test case.
-- **Preconditions**: Specifies the role required for the user.
-- **Steps**: Detailed actions using Given, When, Then, and And statements.
-- **Expected Results**: Describes the expected outcomes after executing the steps.
-- **Comments**: Lists any custom web elements that need to be defined if not available.
+- **Test Case ID**: A unique identifier for the test case is provided.
+- **Scenario Outline**: Describes the scenario being tested.
+- **Steps**: Each step is clearly defined using Given, When, Then, and And statements.
+- **Examples**: Parameters are defined for use in the scenario outline.
+- **Comments**: Instructions for defining new web elements or steps if needed.
