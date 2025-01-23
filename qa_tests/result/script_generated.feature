@@ -1,100 +1,172 @@
+Below are the Cucumber scripts generated for the provided test cases. Each script is structured to include the necessary components and follows the guidelines provided.
+
+---
+
+### Test Case ID: TC_HK_GCM_001
+#### Scenario Outline: HK GCM Workflow Enhancement - Submit to Payment Action
+**Preconditions:** User must have valid credentials for KL LOANS OPS-PROCESSING-CHECKER.
+
 gherkin
-Feature: Funding Dashboard Field Management
-  # Test Case ID: FundingDashboard-001
-  # This scenario verifies the addition of the Auto Test Ref# field as non-mandatory in all workflow and ticket areas.
+@apacinstruction @high
+Feature: HK GCM Workflow Enhancement
 
-  @FundingDashboard @HighPriority
-  Scenario Outline: Add Auto Test Ref# field as non-mandatory
-    # ***************************************************
-    # STEP 1: User Login
-    # ***************************************************
-    Given WebAgent open "<url>" url
-    And Login SSO as "<username>"
-    And Wait 5 seconds
-    Then WebAgent is on "<homepage>"
+  Scenario Outline: Submit to Payment Action
+    # ***************************************************************
+    # STEP 1: Log in as KL LOANS OPS-PROCESSING-CHECKER
+    # ***************************************************************
+    Given Login as "<user_role>"
+    Then WebAgent is on "<platform>"
 
-    # ***************************************************
-    # STEP 2: Navigate to Ticket Workflow
-    # ***************************************************
-    When WebAgent click on "<ticketWorkflowSection>"
-    Then WebAgent is on "<ticketWorkflowPage>"
+    # ***************************************************************
+    # STEP 2: Create a new instruction with THIRD PARTY PAYMENT = Yes and COMPLETED DATE = blank
+    # ***************************************************************
+    When WebAgent click on createButton
+    And WebAgent click on newInstructionItem
+    And WebAgent select "Yes" from thirdPartyPaymentDropdownlist
+    And WebAgent type "" into completedDateTextbox
+    Then WebAgent see submitToPaymentActionEnabled
+    And WebAgent see completeActionDisabled
 
-    # ***************************************************
-    # STEP 3: Identify Funding Dashboard Fields
-    # ***************************************************
-    When WebAgent see "<fundingDashboardFields>"
+    # ***************************************************************
+    # STEP 3: Submit the instruction
+    # ***************************************************************
+    When WebAgent click on submitButton
+    Then Check Process Status is "PAYMENT - MAKER"
 
-    # ***************************************************
-    # STEP 4: Check Auto Test Ref# Field Presence
-    # ***************************************************
-    Then WebAgent see "<autoTestRefField>"
+    # ***************************************************************
+    # STEP 4: Create a new instruction with THIRD PARTY PAYMENT = Yes and COMPLETED DATE is not blank
+    # ***************************************************************
+    When WebAgent click on createButton
+    And WebAgent click on newInstructionItem
+    And WebAgent select "Yes" from thirdPartyPaymentDropdownlist
+    And WebAgent type "<completed_date>" into completedDateTextbox
+    Then WebAgent see completeActionEnabled
+    And WebAgent see submitToPaymentActionEnabled
 
-    # ***************************************************
-    # STEP 5: Verify Auto Test Ref# Field Non-Mandatory
-    # ***************************************************
-    Then WebAgent read text from "<autoTestRefField>" into @fieldStatus
-    And check "Field Status" Ticketvalue is "Non-Mandatory"
+    # ***************************************************************
+    # STEP 5: Submit the instruction
+    # ***************************************************************
+    When WebAgent click on submitButton
+    Then Check Process Status is "PAYMENT - MAKER"
 
-    # ***************************************************
-    # STEP 6: Submit Change Request
-    # ***************************************************
-    When WebAgent type "Add Auto Test Ref# field as non-mandatory in all workflow and ticket areas" into "<changeRequestField>"
-    And WebAgent click on "<submitChangeRequestButton>"
-    Then WebAgent see "<changeRequestSuccessMessage>"
+    # ***************************************************************
+    # STEP 6: Create a new instruction with THIRD PARTY PAYMENT = No
+    # ***************************************************************
+    When WebAgent click on createButton
+    And WebAgent click on newInstructionItem
+    And WebAgent select "No" from thirdPartyPaymentDropdownlist
+    Then WebAgent see completeActionEnabled
+    And WebAgent see submitToPaymentActionDisabled
 
-    # ***************************************************
-    # STEP 7: Verify New Field Location
-    # ***************************************************
-    When WebAgent see "<newFieldLocation>"
+    # ***************************************************************
+    # STEP 7: Submit the instruction
+    # ***************************************************************
+    When WebAgent click on submitButton
+    Then Check Process Status is "PROCESSING - MAKER-MANUAL"
 
-    # ***************************************************
-    # STEP 8: Check Change Application to All Areas
-    # ***************************************************
-    Then WebAgent see "<allAreasApplication>"
-
-    # ***************************************************
-    # STEP 9: Verify Display for Normal DL
-    # ***************************************************
-    When WebAgent see "<normalDLDisplay>"
-
-    # ***************************************************
-    # STEP 10: Confirm Non-Mandatory Status
-    # ***************************************************
-    Then WebAgent read text from "<autoTestRefField>" into @fieldStatus
-    And check "Field Status" Ticketvalue is "Non-Mandatory"
-
-    # ***************************************************
-    # STEP 11: Test Functionality by Creating New Ticket
-    # ***************************************************
-    When WebAgent click on "<createNewTicketButton>"
-    And WebAgent type "<ticketDetails>" into "<ticketDetailsField>"
-    Then WebAgent click on "<submitTicketButton>"
-    And WebAgent see "<ticketCreationSuccessMessage>"
-
-    # ***************************************************
-    # STEP 12: Validate Data Transition to GENAIXXX
-    # ***************************************************
-    Then WebAgent see "<dataTransitionSuccess>"
-
-    # ***************************************************
-    # STEP 13: Ensure Improved Data Tracking and Remediation
-    # ***************************************************
-    Then WebAgent see "<improvedDataTracking>"
-
-  Examples:
-    | url                | username  | homepage       | ticketWorkflowSection | ticketWorkflowPage | fundingDashboardFields | autoTestRefField | changeRequestField | submitChangeRequestButton | changeRequestSuccessMessage | newFieldLocation | allAreasApplication | normalDLDisplay | createNewTicketButton | ticketDetails | ticketDetailsField | submitTicketButton | ticketCreationSuccessMessage | dataTransitionSuccess | improvedDataTracking |
-    | "http://genaixxx" | "testuser" | "HomePage"     | "TicketWorkflow"      | "WorkflowPage"     | "FundingDashboard"     | "AutoTestRef#"   | "ChangeRequest"    | "SubmitChangeRequest"     | "ChangeRequestSubmitted"    | "UnderContract#" | "AllAreasApplied"   | "AdditionalDetails" | "CreateTicket"        | "Details"    | "TicketDetails"    | "SubmitTicket"    | "TicketCreated"              | "DataTransitioned"    | "DataTrackingImproved" |
-
-# Comments:
-# If any web elements or steps are not available, please define them as follows:
-# | Annotation Condition | Matching Condition |
-# |----------------------|--------------------|
-# | @And("^Check ticket Subject is \"([^\"]*)\"$") | Check ticket subject |
+    Examples:
+      | user_role                          | platform  | completed_date |
+      | KL LOANS OPS-PROCESSING-CHECKER    | HK Loans  | 2023-10-01     |
 
 
-### Explanation:
-- **Test Case ID**: A unique identifier for the test case is provided.
-- **Scenario Outline**: Describes the scenario being tested.
-- **Steps**: Each step is clearly defined using Given, When, Then, and And statements.
-- **Examples**: Parameters are defined for use in the scenario outline.
-- **Comments**: Instructions for defining new web elements or steps if needed.
+---
+
+### Test Case ID: TC_HK_GCM_002
+#### Scenario Outline: HK GCM Workflow Enhancement - Payment Checker Actions
+**Preconditions:** User must have valid credentials for KL LOANS OPS-PROCESSING-PAYMENT CHECKER.
+
+gherkin
+@apacinstruction @medium
+Feature: HK GCM Workflow Enhancement
+
+  Scenario Outline: Payment Checker Actions
+    # ***************************************************************
+    # STEP 1: Log in as KL LOANS OPS-PROCESSING-PAYMENT CHECKER
+    # ***************************************************************
+    Given Login as "<user_role>"
+    Then WebAgent is on "<platform>"
+
+    # ***************************************************************
+    # STEP 2: Perform "Complete" action on an instruction
+    # ***************************************************************
+    When WebAgent click on completeButton
+    Then Check ticket Status is "COMPLETED"
+    And Check Process Status is "COMPLETED"
+
+    # ***************************************************************
+    # STEP 3: Perform "Return to KL LOANS OPS-PROCESSING-MAKER" action
+    # ***************************************************************
+    When WebAgent click on returnToMakerButton
+    Then Check Process Status is "PROCESSING-MAKER-MANUAL"
+
+    # ***************************************************************
+    # STEP 4: Perform "Submit to Payment Checker" action
+    # ***************************************************************
+    When WebAgent click on submitToPaymentCheckerButton
+    Then Check Process Status is "PAYMENT - MAKER"
+
+    # ***************************************************************
+    # STEP 5: Perform "Return to KL LOANS OPS-PROCESSING-MAKER" action
+    # ***************************************************************
+    When WebAgent click on returnToMakerButton
+    Then Check Process Status is "PROCESSING - MAKER-MANUAL"
+
+    # ***************************************************************
+    # STEP 6: Perform "Complete" action after "Submit to Payment Checker"
+    # ***************************************************************
+    When WebAgent click on completeButton
+    Then Check ticket Status is "COMPLETED"
+    And Check Process Status is "COMPLETED"
+
+    Examples:
+      | user_role                              | platform  |
+      | KL LOANS OPS-PROCESSING-PAYMENT CHECKER| HK Loans  |
+
+
+---
+
+### Test Case ID: TC_HK_GCM_003
+#### Scenario Outline: HK GCM Workflow Enhancement - Payment Maker Actions
+**Preconditions:** User must have valid credentials for KL LOANS OPS-PROCESSING-PAYMENT MAKER.
+
+gherkin
+@apacinstruction @low
+Feature: HK GCM Workflow Enhancement
+
+  Scenario Outline: Payment Maker Actions
+    # ***************************************************************
+    # STEP 1: Log in as KL LOANS OPS-PROCESSING-PAYMENT MAKER
+    # ***************************************************************
+    Given Login as "<user_role>"
+    Then WebAgent is on "<platform>"
+
+    # ***************************************************************
+    # STEP 2: Perform "Return to KL LOANS OPS-PROCESSING-MAKER" action
+    # ***************************************************************
+    When WebAgent click on returnToMakerButton
+    Then Check Process Status is "PROCESSING-MAKER-MANUAL"
+
+    # ***************************************************************
+    # STEP 3: Perform "Submit to Payment Checker" action
+    # ***************************************************************
+    When WebAgent click on submitToPaymentCheckerButton
+    Then Check Process Status is "PAYMENT - MAKER"
+
+    # ***************************************************************
+    # STEP 4: Perform "Return to KL LOANS OPS-PROCESSING-PAYMENT MAKER" action
+    # ***************************************************************
+    When WebAgent click on returnToPaymentMakerButton
+    Then Check Process Status is "PAYMENT - MAKER"
+
+    Examples:
+      | user_role                            | platform  |
+      | KL LOANS OPS-PROCESSING-PAYMENT MAKER| HK Loans  |
+
+
+---
+
+**Comments:**
+- The web elements `submitToPaymentActionEnabled`, `completeActionDisabled`, `completeActionEnabled`, `submitToPaymentActionDisabled`, `completeButton`, `returnToMakerButton`, `submitToPaymentCheckerButton`, and `returnToPaymentMakerButton` are assumed to be defined in the system. If not, they should be defined as per the system's requirements.
+- The `completedDateTextbox` is assumed to be a text input field for entering the completed date.
+
+These scripts are designed to be clear, concise, and executable within the Cucumber framework, adhering to the syntax standards and guidelines provided.

@@ -15,12 +15,12 @@ Priority: Critical
 | 5 | Open Test APP WebUI to check ticket XL002 | XL002 | Ticket XL002 is created with Subject2 |
 """
 
-cucumber_script_base = readFile("../knowledges/cucumber_knowledges/cucumber_script_base.feature")
-available_web_elements = readFile("../knowledges/cucumber_knowledges/WebElement.yml")
+cucumber_script_base = readFile("../knowledges/apac-email-case/cucumber_knowledges/cucumber_script_base.feature")
+available_web_elements = readFile("../knowledges/apac-email-case/cucumber_knowledges/WebElement.yml")
 available_webui_cucumber_system_steps = readFile(
-    "../knowledges/cucumber_knowledges/fast_webui_cucumber_system_steps.txt")
+    "../knowledges/apac-email-case/cucumber_knowledges/fast_webui_cucumber_system_steps.txt")
 available_webui_cucumber_project_steps = readFile(
-    "../knowledges/cucumber_knowledges/fast_webui_cucumber_project_steps.txt")
+    "../knowledges/apac-email-case/cucumber_knowledges/fast_webui_cucumber_project_steps.txt")
 
 res = cucumber_script_generate(test_cases)
 

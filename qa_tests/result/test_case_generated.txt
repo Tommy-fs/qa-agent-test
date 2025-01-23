@@ -1,22 +1,38 @@
-Priority: High 
-Name: FundingDashboard-001 
-Summary: Add Auto Test Ref# field as non-mandatory in all workflow and ticket areas 
+# Test Cases #
 
-Test Steps: 
+## JIRA Request: Application: XMC Loan APAC Instruction
+
+### Component: HK GCM Workflow
+
+#### Test Scenario 1: Enable Payment Maker and Payment Checker to perform workflow actions
+
+Priority: High
+
+Summary: Ensure that Payment Maker and Payment Checker can perform the specified workflow actions as per the JIRA request.
+
+Steps:
 | No. | Test Step | Test Data | Expected Result |
 |-----|-----------|-----------|------------------|
-| 1   | Login to GENAIXXX system as a user with Bilateral or CAD servicing operations role | Username: testuser, Password: testpassword | User successfully logs in to the system |
-| 2   | Navigate to the ticket workflow section | - | Ticket workflow section is displayed |
-| 3   | Identify the fields relevant to the "funding dashboard" | - | Fields related to funding dashboard are identified |
-| 4   | Check if there is a text field available for Auto Test Ref# | - | Confirm if Auto Test Ref# field is present |
-| 5   | Verify if Auto Test Ref# field is mandatory or non-mandatory | - | Auto Test Ref# field should be non-mandatory |
-| 6   | Make a change request to add Auto Test Ref# field as non-mandatory | Change Request: Add Auto Test Ref# field as non-mandatory in all workflow and ticket areas | Change request is submitted successfully |
-| 7   | Verify the location of the new Auto Test Ref# field | Location: Under Contract # or RID in all Workflow and Update Ticket Areas | New field is displayed in the specified locations |
-| 8   | Check if the change is applied to all DLS, document, and normal DLs | - | Change should be applied to all specified areas |
-| 9   | Verify the display of the new Auto Test Ref# field for Normal DL | - | New field should be shown in the Additional Details section in the left area of Ticket Detail page |
-| 10  | Confirm that the new field is non-mandatory | - | Auto Test Ref# field should be non-mandatory |
-| 11  | Test the functionality by creating a new ticket and updating the Auto Test Ref# field | - | User should be able to create a ticket without filling the Auto Test Ref# field as mandatory |
-| 12  | Validate that the Bilateral department can transition their funding dashboard data fully to GENAIXXX system | - | Funding dashboard data should be successfully transitioned to the system |
-| 13  | Ensure that the change allows for better data tracking and remediation efforts | - | Data tracking and remediation efforts should be improved with the new field |
+| 1   | Verify if THIRD PARTY PAYMENT is 'yes' and COMPLETED DATE is blank | THIRD PARTY PAYMENT: yes, COMPLETED DATE: blank | Workflow action "submit to Payment" is enabled, "complete" action is disabled |
+| 2   | Verify if THIRD PARTY PAYMENT is 'yes' and COMPLETED DATE is not blank | THIRD PARTY PAYMENT: yes, COMPLETED DATE: not blank | Workflow action "complete" is enabled, "submit to Payment" action is enabled |
+| 3   | Verify if THIRD PARTY PAYMENT is 'no' | THIRD PARTY PAYMENT: no | Workflow action "complete" is enabled, "submit to Payment" action is disabled |
+| 4   | Perform "submit to Payment" action by KL LOANS OPS - PROCESSING - CHECKER | - | PROCESS STATUS is set to "PAYMENT - MAKER" |
+| 5   | Perform "submit to Payment Checker" action by KL LOANS OPS - PROCESSING - PAYMENT MAKER | - | PROCESS STATUS is set to "PAYMENT - CHECKER" |
+| 6   | Perform "Complete" action by KL LOANS OPS - PROCESSING - PAYMENT CHECKER | - | CURRENT STATUS is set to "COMPLETED", PROCESS STATUS is set to "COMPLETED" |
+| 7   | Perform "Return Instruction to KL LOANS OPS - PROCESSING - MAKER" action by KL LOANS OPS - PROCESSING - PAYMENT MAKER | - | PROCESS STATUS is set to "PROCESSING - MAKER - MANUAL" |
 
-This test case covers the implementation of the change request to add the Auto Test Ref# field as non-mandatory in all workflow and ticket areas in the GENAIXXX system.
+#### Test Scenario 2: Standardize workflow for Loans operation process
+
+Priority: Medium
+
+Summary: Ensure that the standardized workflow for the whole Loans operation process is introduced as per the JIRA request.
+
+Steps:
+| No. | Test Step | Test Data | Expected Result |
+|-----|-----------|-----------|------------------|
+| 1   | Verify the new workflow points added under the specified status | - | KL LOANS OPS - PROCESSING - PAYMENT CHECKER can perform the specified actions |
+| 2   | Perform "Complete" action by KL LOANS OPS - PROCESSING - PAYMENT CHECKER | - | CURRENT STATUS is set to "COMPLETED", PROCESS STATUS is set to "COMPLETED" |
+| 3   | Perform "Return Instruction to KL LOANS OPS - PROCESSING - MAKER" action by KL LOANS OPS - PROCESSING - PAYMENT CHECKER | - | PROCESS STATUS is set to "PROCESSING - MAKER - MANUAL" |
+| 4   | Perform "Return Instruction to KL LOANS OPS - PROCESSING - PAYMENT MAKER" action by KL LOANS OPS - PROCESSING - PAYMENT CHECKER | - | PROCESS STATUS is set to "PAYMENT - MAKER" |
+
+## End of Test Cases ##

@@ -1,10 +1,10 @@
+import argparse
 import uuid
 
 from langchain.pydantic_v1 import BaseModel, Field
 
 from core.llm_chat import LLMChat
 from core.log_handler import LoggingHandler
-from knowledges import project_document
 from knowledges.generate_cucumber_script import GENERATE_CUCUMBER_SCRIPT_KNOWLEDGE
 
 script_result_path = "./result/script_generated.feature"
@@ -27,13 +27,18 @@ def cucumber_script_generate(generated_test_cases):
     generate_id = uuid.uuid1()
     log = LoggingHandler()
     log.on_log_start(generate_id, 'Generate cucumber script', desc='Generate cucumber script on TEST CASES')
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--case", required=True)
+    args = parser.parse_args()
+    case = args.case
 
-    cucumber_script_basic_example = readFile("../knowledges/cucumber_knowledges/cucumber_script_base.feature")
-    available_web_elements = readFile("../knowledges/cucumber_knowledges/WebElement.yml")
+    cucumber_script_basic_example = readFile(
+        "../knowledges/" + case + "/cucumber_knowledges/cucumber_script_base.feature")
+    available_web_elements = readFile("../knowledges/" + case + "/cucumber_knowledges/WebElement.yml")
     available_webui_cucumber_system_steps = readFile(
-        "../knowledges/cucumber_knowledges/fast_webui_cucumber_system_steps.txt")
+        "../knowledges/" + case + "/cucumber_knowledges/fast_webui_cucumber_system_steps.txt")
     available_webui_cucumber_project_steps = readFile(
-        "../knowledges/cucumber_knowledges/fast_webui_cucumber_project_steps.txt")
+        "../knowledges/" + case + "/cucumber_knowledges/fast_webui_cucumber_project_steps.txt")
 
     parameters = {
         "generated_test_cases": generated_test_cases,
