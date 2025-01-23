@@ -12,7 +12,7 @@ Feature:HongKong
         # ***************************************************************
         # STEP 1:Processing Maker Create and Maker Submit
         # ***************************************************************
-        Given WebAgent open "$xmcApacLoginPage"url
+        Given WebAgent open "$xxx systemApacLoginPage"url
         When Login as "SopsM_HK"
         Then WebAgent is on InstructionTab
         Then Switch Platform to "HK Loans"

@@ -9,5 +9,5 @@ Scope:
 all Normal DL
 
 Business Benefit.
-The ticket will complete Loan transaction information field on ticket in XMc, in order to help Ops daily works.
+The ticket will complete Loan transaction information field on ticket in xxx system, in order to help Ops daily works.
 """
