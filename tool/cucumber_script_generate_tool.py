@@ -7,8 +7,6 @@ from core.llm_chat import LLMChat
 from core.log_handler import LoggingHandler
 from knowledges.generate_cucumber_script import GENERATE_CUCUMBER_SCRIPT_KNOWLEDGE
 
-script_result_path = "./result/script_generated.feature"
-
 
 class CucumberScriptGenerator(BaseModel):
     generated_test_cases: str = Field(
@@ -56,7 +54,13 @@ def cucumber_script_generate(generated_test_cases):
         .replace("```json", '').replace("```", ''))
 
     log.on_log_end(generate_id)
-    writeFile(script_result_path, cucumber_script)
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--case", required=True)
+    args = parser.parse_args()
+    case = args.case
+
+    file_path = "../knowledges/" + case + "/result/script_generated.feature"
+    writeFile(file_path, cucumber_script)
     return cucumber_script
 
 

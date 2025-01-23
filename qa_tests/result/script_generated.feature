@@ -1,172 +1,133 @@
-Below are the Cucumber scripts generated for the provided test cases. Each script is structured to include the necessary components and follows the guidelines provided.
+Below are the Cucumber scripts generated for the provided test cases, following the guidelines and using the available web elements and steps.
 
----
-
-### Test Case ID: TC_HK_GCM_001
-#### Scenario Outline: HK GCM Workflow Enhancement - Submit to Payment Action
-**Preconditions:** User must have valid credentials for KL LOANS OPS-PROCESSING-CHECKER.
+### Test Case: HKGCM-001
 
 gherkin
-@apacinstruction @high
-Feature: HK GCM Workflow Enhancement
+Feature: HongKong - New Instruction Creation
 
-  Scenario Outline: Submit to Payment Action
+  @critical
+  Scenario Outline: HKGCM-001 - Test the creation of a new instruction via "NewInstruction" button by KL LOANS OPS-PROCESSING -MAKER
+
     # ***************************************************************
-    # STEP 1: Log in as KL LOANS OPS-PROCESSING-CHECKER
+    # STEP 1: Log in to the system as KL LOANS OPS-PROCESSING -MAKER
     # ***************************************************************
     Given Login as "<user_role>"
     Then WebAgent is on "<platform>"
 
     # ***************************************************************
-    # STEP 2: Create a new instruction with THIRD PARTY PAYMENT = Yes and COMPLETED DATE = blank
+    # STEP 2: Click on the "NewInstruction" button
     # ***************************************************************
-    When WebAgent click on createButton
-    And WebAgent click on newInstructionItem
-    And WebAgent select "Yes" from thirdPartyPaymentDropdownlist
-    And WebAgent type "" into completedDateTextbox
-    Then WebAgent see submitToPaymentActionEnabled
-    And WebAgent see completeActionDisabled
+    When WebAgent click on newInstructionButton
+    Then WebAgent is on newInstructionPage
 
     # ***************************************************************
-    # STEP 3: Submit the instruction
+    # STEP 3: Fill in all required information for the instruction
     # ***************************************************************
-    When WebAgent click on submitButton
-    Then Check Process Status is "PAYMENT - MAKER"
+    When WebAgent type "<instruction_details>" into instructionDetailsTextbox
+    And WebAgent click on submitButton
 
     # ***************************************************************
-    # STEP 4: Create a new instruction with THIRD PARTY PAYMENT = Yes and COMPLETED DATE is not blank
+    # STEP 4: Submit the instruction by clicking on "Maker Submit"
     # ***************************************************************
-    When WebAgent click on createButton
-    And WebAgent click on newInstructionItem
-    And WebAgent select "Yes" from thirdPartyPaymentDropdownlist
-    And WebAgent type "<completed_date>" into completedDateTextbox
-    Then WebAgent see completeActionEnabled
-    And WebAgent see submitToPaymentActionEnabled
-
-    # ***************************************************************
-    # STEP 5: Submit the instruction
-    # ***************************************************************
-    When WebAgent click on submitButton
-    Then Check Process Status is "PAYMENT - MAKER"
-
-    # ***************************************************************
-    # STEP 6: Create a new instruction with THIRD PARTY PAYMENT = No
-    # ***************************************************************
-    When WebAgent click on createButton
-    And WebAgent click on newInstructionItem
-    And WebAgent select "No" from thirdPartyPaymentDropdownlist
-    Then WebAgent see completeActionEnabled
-    And WebAgent see submitToPaymentActionDisabled
-
-    # ***************************************************************
-    # STEP 7: Submit the instruction
-    # ***************************************************************
-    When WebAgent click on submitButton
-    Then Check Process Status is "PROCESSING - MAKER-MANUAL"
+    Then WebAgent click on makerSubmitButton
+    And Check Process Status is "KL LOANS - PROCESSING-CHECKER"
+    And Check ticket Status is "KL LOANS OPS"
 
     Examples:
-      | user_role                          | platform  | completed_date |
-      | KL LOANS OPS-PROCESSING-CHECKER    | HK Loans  | 2023-10-01     |
+      | user_role                       | platform   | instruction_details |
+      | KL LOANS OPS-PROCESSING -MAKER  | HK Loans   | Instruction Details |
 
 
----
-
-### Test Case ID: TC_HK_GCM_002
-#### Scenario Outline: HK GCM Workflow Enhancement - Payment Checker Actions
-**Preconditions:** User must have valid credentials for KL LOANS OPS-PROCESSING-PAYMENT CHECKER.
+### Test Case: HKGCM-002
 
 gherkin
-@apacinstruction @medium
-Feature: HK GCM Workflow Enhancement
+Feature: HongKong - Report Item Instruction Creation
 
-  Scenario Outline: Payment Checker Actions
+  @high
+  Scenario Outline: HKGCM-002 - Test the creation of a new instruction via opening "Report item" by KL LOANS OPS-PROCESSING -MAKER
+
     # ***************************************************************
-    # STEP 1: Log in as KL LOANS OPS-PROCESSING-PAYMENT CHECKER
+    # STEP 1: Log in to the system as KL LOANS OPS-PROCESSING -MAKER
     # ***************************************************************
     Given Login as "<user_role>"
     Then WebAgent is on "<platform>"
 
     # ***************************************************************
-    # STEP 2: Perform "Complete" action on an instruction
+    # STEP 2: Open the "Report item" section
     # ***************************************************************
-    When WebAgent click on completeButton
+    When WebAgent click on reportItemSection
+    Then WebAgent see reportItemsDisplayed
+
+    # ***************************************************************
+    # STEP 3: Upload Maturity Report and generate items
+    # ***************************************************************
+    When WebAgent type "<maturity_report>" into uploadMaturityReportTextbox
+    And WebAgent click on generateItemsButton
+    Then WebAgent see itemsAutoGenerated
+
+    # ***************************************************************
+    # STEP 4: Follow KL Loans Workflow actions and submit to KL LOANS OPS-PROCESSING -CHECKER
+    # ***************************************************************
+    When WebAgent click on workflowActionsButton
+    And WebAgent click on submitToCheckerButton
+    Then Check Process Status is "KL LOANS - PROCESSING-CHECKER"
+    And Check ticket Status is "KL LOANS OPS"
+
+    Examples:
+      | user_role                       | platform   | maturity_report |
+      | KL LOANS OPS-PROCESSING -MAKER  | HK Loans   | Maturity Report |
+
+
+### Test Case: HKGCM-003
+
+gherkin
+Feature: HongKong - Workflow Actions
+
+  @medium
+  Scenario Outline: HKGCM-003 - Test the workflow actions of KL LOANS OPS-PROCESSING -MAKER in HKGCM
+
+    # ***************************************************************
+    # STEP 1: Log in to the system as KL LOANS OPS-PROCESSING -MAKER
+    # ***************************************************************
+    Given Login as "<user_role>"
+    Then WebAgent is on "<platform>"
+
+    # ***************************************************************
+    # STEP 2: Create an instruction with full information via "New Instruction"
+    # ***************************************************************
+    When WebAgent click on newInstructionButton
+    And WebAgent type "<instruction_details>" into instructionDetailsTextbox
+    Then Check Process Status is "KL LOANS - PROCESSING-CHECKER"
+    And Check ticket Status is "KL LOANS OPS"
+
+    # ***************************************************************
+    # STEP 3: Perform "Maker Submit" action
+    # ***************************************************************
+    When WebAgent click on makerSubmitButton
+    Then Check Process Status is "DRAWDOWN-QC"
+
+    # ***************************************************************
+    # STEP 4: Perform "Submit to QC" action if QC REQUIRE is true
+    # ***************************************************************
+    When WebAgent check on qcRequireCheckbox if exist
+    And WebAgent click on submitToQCButton
+    Then Check Process Status is "DRAWDOWN-QC"
+
+    # ***************************************************************
+    # STEP 5: Perform "Complete" action if QC REQUIRE is false
+    # ***************************************************************
+    When WebAgent uncheck on qcRequireCheckbox if exist
+    And WebAgent click on completeButton
     Then Check ticket Status is "COMPLETED"
     And Check Process Status is "COMPLETED"
 
-    # ***************************************************************
-    # STEP 3: Perform "Return to KL LOANS OPS-PROCESSING-MAKER" action
-    # ***************************************************************
-    When WebAgent click on returnToMakerButton
-    Then Check Process Status is "PROCESSING-MAKER-MANUAL"
-
-    # ***************************************************************
-    # STEP 4: Perform "Submit to Payment Checker" action
-    # ***************************************************************
-    When WebAgent click on submitToPaymentCheckerButton
-    Then Check Process Status is "PAYMENT - MAKER"
-
-    # ***************************************************************
-    # STEP 5: Perform "Return to KL LOANS OPS-PROCESSING-MAKER" action
-    # ***************************************************************
-    When WebAgent click on returnToMakerButton
-    Then Check Process Status is "PROCESSING - MAKER-MANUAL"
-
-    # ***************************************************************
-    # STEP 6: Perform "Complete" action after "Submit to Payment Checker"
-    # ***************************************************************
-    When WebAgent click on completeButton
-    Then Check ticket Status is "COMPLETED"
-    And Check Process Status is "COMPLETED"
-
     Examples:
-      | user_role                              | platform  |
-      | KL LOANS OPS-PROCESSING-PAYMENT CHECKER| HK Loans  |
+      | user_role                       | platform   | instruction_details |
+      | KL LOANS OPS-PROCESSING -MAKER  | HK Loans   | Instruction Details |
 
 
----
+### Comments
+- The web elements `newInstructionButton`, `instructionDetailsTextbox`, `submitButton`, `makerSubmitButton`, `reportItemSection`, `uploadMaturityReportTextbox`, `generateItemsButton`, `workflowActionsButton`, `submitToCheckerButton`, `qcRequireCheckbox`, and `completeButton` need to be defined in the system.
+- The steps `WebAgent is on newInstructionPage`, `WebAgent see reportItemsDisplayed`, `WebAgent see itemsAutoGenerated`, and `Check Process Status is "DRAWDOWN-QC"` need to be implemented in the system.
 
-### Test Case ID: TC_HK_GCM_003
-#### Scenario Outline: HK GCM Workflow Enhancement - Payment Maker Actions
-**Preconditions:** User must have valid credentials for KL LOANS OPS-PROCESSING-PAYMENT MAKER.
-
-gherkin
-@apacinstruction @low
-Feature: HK GCM Workflow Enhancement
-
-  Scenario Outline: Payment Maker Actions
-    # ***************************************************************
-    # STEP 1: Log in as KL LOANS OPS-PROCESSING-PAYMENT MAKER
-    # ***************************************************************
-    Given Login as "<user_role>"
-    Then WebAgent is on "<platform>"
-
-    # ***************************************************************
-    # STEP 2: Perform "Return to KL LOANS OPS-PROCESSING-MAKER" action
-    # ***************************************************************
-    When WebAgent click on returnToMakerButton
-    Then Check Process Status is "PROCESSING-MAKER-MANUAL"
-
-    # ***************************************************************
-    # STEP 3: Perform "Submit to Payment Checker" action
-    # ***************************************************************
-    When WebAgent click on submitToPaymentCheckerButton
-    Then Check Process Status is "PAYMENT - MAKER"
-
-    # ***************************************************************
-    # STEP 4: Perform "Return to KL LOANS OPS-PROCESSING-PAYMENT MAKER" action
-    # ***************************************************************
-    When WebAgent click on returnToPaymentMakerButton
-    Then Check Process Status is "PAYMENT - MAKER"
-
-    Examples:
-      | user_role                            | platform  |
-      | KL LOANS OPS-PROCESSING-PAYMENT MAKER| HK Loans  |
-
-
----
-
-**Comments:**
-- The web elements `submitToPaymentActionEnabled`, `completeActionDisabled`, `completeActionEnabled`, `submitToPaymentActionDisabled`, `completeButton`, `returnToMakerButton`, `submitToPaymentCheckerButton`, and `returnToPaymentMakerButton` are assumed to be defined in the system. If not, they should be defined as per the system's requirements.
-- The `completedDateTextbox` is assumed to be a text input field for entering the completed date.
-
-These scripts are designed to be clear, concise, and executable within the Cucumber framework, adhering to the syntax standards and guidelines provided.
+These scripts are designed to be clear, concise, and aligned with the provided test cases, ensuring they can be executed effectively within the testing framework.

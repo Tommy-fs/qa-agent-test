@@ -1,0 +1,34 @@
+# Test Cases #
+
+## Priority: Critical
+Name: TicketingLogic-002
+Summary: Reply email with change Subject to create new Ticket
+Steps:
+|No.| Test Step | Test Data | Expected Result |
+| 1 | Send email with Subject1 to create new ticket XL001 | Subject1 | Create new ticket XL001 in Test APP |
+| 2 | Reply email with change Subject1 to Subject 2 | Subject1, Subject2 | Ticket XL001 is not updated, Ticket XL002 is created with Subject2 |
+
+## Priority: High
+Name: TicketingLogic-003
+Summary: Forward email with DL in email to be captured in same ticket
+Steps:
+|No.| Test Step | Test Data | Expected Result |
+| 1 | Send email with Subject1 to create new ticket XL001 | Subject1 | Create new ticket XL001 in Test APP |
+| 2 | Forward email with DL1 in email to DL1 | Subject1, DL1 | Email with DL1 is captured in same ticket XL001 |
+
+## Priority: Medium
+Name: TicketingLogic-004
+Summary: Send email with different body and subject to create new ticket
+Steps:
+|No.| Test Step | Test Data | Expected Result |
+| 1 | Send email with Subject1 and Body1 to create new ticket XL001 | Subject1, Body1 | Create new ticket XL001 in Test APP |
+| 2 | Send email with Subject2 and Body2 to create new ticket XL002 | Subject2, Body2 | Create new ticket XL002 in Test APP |
+
+## Priority: Low
+Name: TicketingLogic-005
+Summary: Close ticket and test reply and forward email functionality
+Steps:
+|No.| Test Step | Test Data | Expected Result |
+| 1 | Send email with Subject1 to create new ticket XL001 | Subject1 | Create new ticket XL001 in Test APP |
+| 2 | Close ticket XL001 in Test APP | XL001 | Ticket XL001 is closed |
+| 3 | Reply email with change Subject1 to Subject 2 | Subject1, Subject2 | Ticket XL001 is closed, Ticket XL002 is created with Subject2 |

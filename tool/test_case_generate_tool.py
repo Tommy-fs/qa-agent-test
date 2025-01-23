@@ -1,3 +1,4 @@
+import argparse
 import uuid
 
 from langchain.pydantic_v1 import BaseModel, Field
@@ -33,7 +34,12 @@ def test_cases_generate(jira_request, project_document, qa_context, qa_object, t
                                          desc='Generate test case base on JIRA Description')
         .replace("```json", '').replace("```", ''))
 
-    file_path="./result/test_case_generated.txt"
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--case", required=True)
+    args = parser.parse_args()
+    case = args.case
+
+    file_path = "../knowledges/" + case + "/result/test_case_generated.txt"
     with open(file_path, 'w', encoding='utf-8') as file:
         file.write(test_case)
 

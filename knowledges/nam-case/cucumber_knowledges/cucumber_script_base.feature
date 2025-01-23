@@ -8,7 +8,7 @@ Scenario Outline:C162742-4286 Update ticket
 # ***************************************************
 # STEP 1:Operation Manager - Create Ticket
 # ***************************************************
-Given WebAgent open "$xmcNAMLoginPage"url
+Given WebAgent open "$xxx systemNAMLoginPage"url
 And Login SSo as "SopsManagel"
 And Wait 5 seconds
 And Login as "SopsManage1"
@@ -19,8 +19,8 @@ And WebAgent click on newMessageItem
 And Wait 5 seconds
 Then WebAgent change to next tab
 Then WebAgent is on newMessagePage
-And Select "*GT CN XMC Loan Dev Test"from processingTeamDropdownlist
-And Select "*GT CN XMC Loan Dev Test"from frompropdownlist
+And Select "*GT CN xxx system Loan Dev Test"from processingTeamDropdownlist
+And Select "*GT CN xxx system Loan Dev Test"from frompropdownlist
 And WebAgent type "Jia,Bing Mango [OT-TECH]"into toText
 And Wait 2 seconds
 And Wait 2 seconds
@@ -37,7 +37,7 @@ And Wait 2 seconds
 And Wait 2 seconds
 And WebAgent click on searchValueItem
 And WebAgent click on messageText
-Then Prepare Ticket Subject begin with "[XMC Test]UpdateTicket-"and Save into @ticketsubject
+Then Prepare Ticket Subject begin with "[xxx system Test]UpdateTicket-"and Save into @ticketsubject
 And WebAgent type "@ticketsubject.Value"into subjectText
 And Wait 5 seconds
 And WebAgent type "OTHER"into requestTypeDropdownlist
@@ -67,7 +67,7 @@ And WebAgent type "Approval Approved"into actionRequiredText
 And WebAgent type "Mail Content,send from Web by script"into messageText
 Then WebAgent click on sendButton
 And Wait 10 seconds
-Then WebAgent change to tab "XMC Loan"
+Then WebAgent change to tab "xxx system Loan"
 Then WebAgent is on LoanPage
 And Wait 60 seconds
 And WebAgent click on allTicketsInbox

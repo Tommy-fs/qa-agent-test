@@ -1,12 +1,14 @@
 TEST_CASE_EXAMPLE = """
 Priority: Critical
-Name: TicketingLogic-001
-Summary: Send new email with same body and subject as existing ticket should create new ticket
+Name: InstructionLogic-001
+Summary: Validate Cancel Instruction function in PH platform
 Steps：
 |No.| Test Step | Test Data | Expected Result |
-| 1 | Send New Email to DL1 with Subject1 and Body1 | DL1, Subject1, Body1| Create new ticket XL001 in Test APP |
-| 2 | Open Test APP WebUI to check ticket XL001 | XL001 | Ticket XL001 is created with Subject1 and Body1 |
-| 3 | Send New Email to DL1 with Subject1 and Body1 | DL1, Subject1, Body1| Create new ticket XL002 in Test APP |
-| 4 | Open Test APP WebUI to check ticket XL001 | XL001 | Ticket XL001 is not updated |
-| 5 | Open Test APP WebUI to check ticket XL002 | XL002 | Ticket XL002 is created with Subject1 and Body1 |
+| 1 | Login XXX system as Business (TT123456) | Business account: TT123456| Login successfully |
+| 2 | Switch to Platform -PH |  |  |
+| 3 | Create a new instruction and Perform Action-Create and Submit to KL | | Create new instruction in Test APP and current status is "submit to KL"|
+| 4 | Login XXX system as Processing Maker(QQ22273) | Processing maker account: QQ22273 | Login successfully |
+| 5 | Open the instruction created and Perform Action-Return to Business | instruction created | instruction return successfully and current status is "Return to Business" |
+| 6 | Login XXX system as Business(BJ38271)again | Business account: TT123456 | Login successfully |
+| 7 | Open the instruction created and Perform Action-CancelInstruction | instruction created | the Cancel Action success and current status is "Cancel Instruction"|
 """

@@ -1,38 +1,41 @@
-# Test Cases #
+# Test Cases
 
-## JIRA Request: Application: XMC Loan APAC Instruction
+## JIRA Request: Application: xxx system Loan APAC Instruction Scope: HK Platform
 
-### Component: HK GCM Workflow
-
-#### Test Scenario 1: Enable Payment Maker and Payment Checker to perform workflow actions
-
-Priority: High
-
-Summary: Ensure that Payment Maker and Payment Checker can perform the specified workflow actions as per the JIRA request.
+### Priority: High
+Name: HK GCM Workflow Actions - Third Party Payment
+Summary: Validate workflow actions based on Third Party Payment status in KL LOANS OPS - PROCESSING-CHECKER stage
 
 Steps:
 | No. | Test Step | Test Data | Expected Result |
 |-----|-----------|-----------|------------------|
-| 1   | Verify if THIRD PARTY PAYMENT is 'yes' and COMPLETED DATE is blank | THIRD PARTY PAYMENT: yes, COMPLETED DATE: blank | Workflow action "submit to Payment" is enabled, "complete" action is disabled |
-| 2   | Verify if THIRD PARTY PAYMENT is 'yes' and COMPLETED DATE is not blank | THIRD PARTY PAYMENT: yes, COMPLETED DATE: not blank | Workflow action "complete" is enabled, "submit to Payment" action is enabled |
-| 3   | Verify if THIRD PARTY PAYMENT is 'no' | THIRD PARTY PAYMENT: no | Workflow action "complete" is enabled, "submit to Payment" action is disabled |
-| 4   | Perform "submit to Payment" action by KL LOANS OPS - PROCESSING - CHECKER | - | PROCESS STATUS is set to "PAYMENT - MAKER" |
-| 5   | Perform "submit to Payment Checker" action by KL LOANS OPS - PROCESSING - PAYMENT MAKER | - | PROCESS STATUS is set to "PAYMENT - CHECKER" |
-| 6   | Perform "Complete" action by KL LOANS OPS - PROCESSING - PAYMENT CHECKER | - | CURRENT STATUS is set to "COMPLETED", PROCESS STATUS is set to "COMPLETED" |
-| 7   | Perform "Return Instruction to KL LOANS OPS - PROCESSING - MAKER" action by KL LOANS OPS - PROCESSING - PAYMENT MAKER | - | PROCESS STATUS is set to "PROCESSING - MAKER - MANUAL" |
+| 1   | Login to xxx system Loan APAC Instruction Application | User credentials | Login successful |
+| 2   | Navigate to HK GCM Workflow under HK Loans |  |  |
+| 3   | Set instruction to KL LOANS OPS - PROCESSING-CHECKER stage | Instruction details | Instruction status set to PROCESSING-CHECKER |
+| 4   | Check THIRD PARTY PAYMENT status as 'yes' and COMPLETED DATE as blank |  | Workflow action "submit to Payment" enabled, "complete" action disabled |
+| 5   | Check THIRD PARTY PAYMENT status as 'yes' and COMPLETED DATE not blank |  | Workflow action "complete" enabled, "submit to Payment" enabled |
+| 6   | Check THIRD PARTY PAYMENT status as 'No' |  | Workflow action "complete" enabled, "submit to Payment" disabled |
 
-#### Test Scenario 2: Standardize workflow for Loans operation process
-
-Priority: Medium
-
-Summary: Ensure that the standardized workflow for the whole Loans operation process is introduced as per the JIRA request.
+### Priority: Medium
+Name: HK GCM Workflow Actions - Payment Maker
+Summary: Validate workflow actions for Payment Maker in HK GCM Workflow
 
 Steps:
 | No. | Test Step | Test Data | Expected Result |
 |-----|-----------|-----------|------------------|
-| 1   | Verify the new workflow points added under the specified status | - | KL LOANS OPS - PROCESSING - PAYMENT CHECKER can perform the specified actions |
-| 2   | Perform "Complete" action by KL LOANS OPS - PROCESSING - PAYMENT CHECKER | - | CURRENT STATUS is set to "COMPLETED", PROCESS STATUS is set to "COMPLETED" |
-| 3   | Perform "Return Instruction to KL LOANS OPS - PROCESSING - MAKER" action by KL LOANS OPS - PROCESSING - PAYMENT CHECKER | - | PROCESS STATUS is set to "PROCESSING - MAKER - MANUAL" |
-| 4   | Perform "Return Instruction to KL LOANS OPS - PROCESSING - PAYMENT MAKER" action by KL LOANS OPS - PROCESSING - PAYMENT CHECKER | - | PROCESS STATUS is set to "PAYMENT - MAKER" |
+| 1   | Set instruction to PROCESS STATUS "PAYMENT - MAKER" | Instruction details | Process status set to PAYMENT - MAKER |
+| 2   | Perform action "submit Payment Checker" as PAYMENT MAKER |  | Process status set to PAYMENT-CHECKER |
+| 3   | Return instruction to KL LOANS OPS - PROCESSING - MAKER |  | Process status set to PROCESSING-MAKER-MANUAL |
 
-## End of Test Cases ##
+### Priority: Low
+Name: HK GCM Workflow Actions - Payment Checker
+Summary: Validate workflow actions for Payment Checker in HK GCM Workflow
+
+Steps:
+| No. | Test Step | Test Data | Expected Result |
+|-----|-----------|-----------|------------------|
+| 1   | Set instruction to PROCESS STATUS "PAYMENT - CHECKER" | Instruction details | Process status set to PAYMENT - CHECKER |
+| 2   | Perform action "Complete" as PAYMENT CHECKER |  | Current status set to COMPLETED, Process status set to COMPLETED |
+| 3   | Return instruction to KL LOANS OPS - PROCESSING - MAKER |  | Process status set to PROCESSING-MAKER-MANUAL |
+
+## End of Test Cases

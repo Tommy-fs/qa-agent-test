@@ -4,7 +4,7 @@ Name: TicketingLogic-001
 Summary: Function - update(change request type) Ticket
 Steps：
 |No.| Test Step | Test Data | Expected Result |
-1. Operation Manager login XMC Loan Web.                                     | A: *GT CN  DevTest       | Processing Team: *GT CN DevTest
+1. Operation Manager login xxx system Loan Web.                                     | A: *GT CN  DevTest       | Processing Team: *GT CN DevTest
 2. Create a Ticket for DL A and select OTHER as Request Type by New Message. | Request Type value: 3PDL | Status: Unassigned
 3. Open Ticket A.                                                            |                          | Sub Status: New
 4. Check Processing Team, Statusl Sub Status, Request Type.                  |                          | Request Type: OTHER

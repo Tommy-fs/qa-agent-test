@@ -1,0 +1,14 @@
+Priority: Critical
+Name: AutoTestRef-001
+Summary: Verify new field 'Auto Test Ref#' is added and configured correctly for Normal DL tickets
+Steps:
+|No.| Test Step | Test Data | Expected Result |
+1. Log in to the xxx system Loan Web application as an Operations Manager. | Username: testuser, Password: Test@123 | Homepage is displayed.
+2. Create a new ticket for Normal DL. | Ticket Type: Normal DL | Ticket is created successfully.
+3. Check if the 'Auto Test Ref#' field is visible in the Update Ticket action form. | Ticket Details: Auto Test Ref# field | Field is displayed in the Update Ticket action form.
+4. Fill out the 'Auto Test Ref#' field with a test value. | Test Value: Test123 | Field is populated with the test value.
+5. Save or submit the action form. | Click on Save or Submit button | Form is saved successfully.
+6. Open the ticket and navigate to the Additional Details section in the left area of the Ticket Detail page. | Ticket Details: Additional Details section | Additional Details section is displayed.
+7. Verify that the 'Auto Test Ref#' field value is shown in the Additional Details section. | Field Value: Test123 | Field value is displayed correctly.
+8. Check if the 'Auto Test Ref#' field is marked as non-mandatory. | Field Configuration: Mandatory flag | Field is marked as non-mandatory.
+9. Close the ticket and verify that the 'Auto Test Ref#' field data is archived. | Archived Data: Auto Test Ref# field value | Field data is archived successfully.
