@@ -1,34 +1,47 @@
 # Test Cases #
 
-## Priority: Critical
+## Test Case 1 ##
+Priority: Critical
 Name: TicketingLogic-002
 Summary: Reply email with change Subject to create new Ticket
 Steps:
 |No.| Test Step | Test Data | Expected Result |
-| 1 | Send email with Subject1 to create new ticket XL001 | Subject1 | Create new ticket XL001 in Test APP |
-| 2 | Reply email with change Subject1 to Subject 2 | Subject1, Subject2 | Ticket XL001 is not updated, Ticket XL002 is created with Subject2 |
+| 1 | Send email with Subject-001 to create new ticket XL001 | Subject-001 | Create new ticket XL001 in Test APP |
+| 2 | Reply email with change Subject-001 to Subject-002 | Subject-002 | Create new ticket XL002 in Test APP |
+| 3 | Open Test APP WebUI to check ticket XL001 | XL001 | Ticket XL001 is not updated |
+| 4 | Open Test APP WebUI to check ticket XL002 | XL002 | Ticket XL002 is created with Subject-002 |
 
-## Priority: High
+## Test Case 2 ##
+Priority: High
 Name: TicketingLogic-003
-Summary: Forward email with DL in email to be captured in same ticket
+Summary: Forward email with DL in email to capture in same ticket
 Steps:
 |No.| Test Step | Test Data | Expected Result |
-| 1 | Send email with Subject1 to create new ticket XL001 | Subject1 | Create new ticket XL001 in Test APP |
-| 2 | Forward email with DL1 in email to DL1 | Subject1, DL1 | Email with DL1 is captured in same ticket XL001 |
+| 1 | Send email with Subject-001 and DL1 in email to create new ticket XL001 | Subject-001, DL1 | Create new ticket XL001 in Test APP |
+| 2 | Forward email with DL1 in email to capture in same ticket XL001 | DL1 | Email with DL1 is captured in ticket XL001 in Test APP |
 
-## Priority: Medium
+## Test Case 3 ##
+Priority: Medium
 Name: TicketingLogic-004
-Summary: Send email with different body and subject to create new ticket
+Summary: Test BCC Logic for future version
 Steps:
 |No.| Test Step | Test Data | Expected Result |
-| 1 | Send email with Subject1 and Body1 to create new ticket XL001 | Subject1, Body1 | Create new ticket XL001 in Test APP |
-| 2 | Send email with Subject2 and Body2 to create new ticket XL002 | Subject2, Body2 | Create new ticket XL002 in Test APP |
+| 1 | Study BCC Logic for future version | - | BCC Logic is covered in future version |
 
-## Priority: Low
+## Test Case 4 ##
+Priority: Low
 Name: TicketingLogic-005
-Summary: Close ticket and test reply and forward email functionality
+Summary: Test ticket creation after ticket closure
 Steps:
 |No.| Test Step | Test Data | Expected Result |
-| 1 | Send email with Subject1 to create new ticket XL001 | Subject1 | Create new ticket XL001 in Test APP |
-| 2 | Close ticket XL001 in Test APP | XL001 | Ticket XL001 is closed |
-| 3 | Reply email with change Subject1 to Subject 2 | Subject1, Subject2 | Ticket XL001 is closed, Ticket XL002 is created with Subject2 |
+| 1 | Close ticket XL001 in Test APP | XL001 | Ticket XL001 is closed |
+| 2 | Reply to closed ticket XL001 | - | Create new ticket in Test APP |
+
+## Test Case 5 ##
+Priority: Low
+Name: TicketingLogic-006
+Summary: Test ticket creation by sending email with different subject to same DL
+Steps:
+|No.| Test Step | Test Data | Expected Result |
+| 1 | Send email with Subject-001 to create new ticket XL001 | Subject-001 | Create new ticket XL001 in Test APP |
+| 2 | Send email with Subject-002 to same DL | Subject-002 | Create new ticket XL002 in Test APP |

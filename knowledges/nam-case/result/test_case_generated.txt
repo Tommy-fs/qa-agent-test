@@ -1,14 +1,43 @@
+# Test Cases #
+
+## Test Case 1 ##
 Priority: Critical
 Name: AutoTestRef-001
-Summary: Verify new field 'Auto Test Ref#' is added and configured correctly for Normal DL tickets
+Summary: Verify new field 'Auto Test Ref#' is added to Update Ticket action form for Normal DL
 Steps:
-|No.| Test Step | Test Data | Expected Result |
-1. Log in to the xxx system Loan Web application as an Operations Manager. | Username: testuser, Password: Test@123 | Homepage is displayed.
-2. Create a new ticket for Normal DL. | Ticket Type: Normal DL | Ticket is created successfully.
-3. Check if the 'Auto Test Ref#' field is visible in the Update Ticket action form. | Ticket Details: Auto Test Ref# field | Field is displayed in the Update Ticket action form.
-4. Fill out the 'Auto Test Ref#' field with a test value. | Test Value: Test123 | Field is populated with the test value.
-5. Save or submit the action form. | Click on Save or Submit button | Form is saved successfully.
-6. Open the ticket and navigate to the Additional Details section in the left area of the Ticket Detail page. | Ticket Details: Additional Details section | Additional Details section is displayed.
-7. Verify that the 'Auto Test Ref#' field value is shown in the Additional Details section. | Field Value: Test123 | Field value is displayed correctly.
-8. Check if the 'Auto Test Ref#' field is marked as non-mandatory. | Field Configuration: Mandatory flag | Field is marked as non-mandatory.
-9. Close the ticket and verify that the 'Auto Test Ref#' field data is archived. | Archived Data: Auto Test Ref# field value | Field data is archived successfully.
+| No. | Test Step                                     | Test Data | Expected Result                                      |
+|-----|-----------------------------------------------|-----------|-------------------------------------------------------|
+| 1   | Log in to xxx system Loan Web as Operation Manager |           | Successfully log in                                  |
+| 2   | Create a new Ticket for Normal DL               |           | Ticket created successfully                           |
+| 3   | Open the created Ticket                         |           | Ticket details page is displayed                      |
+| 4   | Check for 'Auto Test Ref#' field in Update Ticket action form |       | 'Auto Test Ref#' field is displayed in the form        |
+| 5   | Save or submit the action form                  |           | Action form is saved successfully                     |
+| 6   | Verify 'Auto Test Ref#' field in Additional Details section |       | 'Auto Test Ref#' field is displayed in Additional Details section |
+
+## Test Case 2 ##
+Priority: High
+Name: AutoTestRef-002
+Summary: Verify 'Auto Test Ref#' field is non-mandatory for Normal DL
+Steps:
+| No. | Test Step                                     | Test Data | Expected Result                                      |
+|-----|-----------------------------------------------|-----------|-------------------------------------------------------|
+| 1   | Log in to xxx system Loan Web as Operation Manager |           | Successfully log in                                  |
+| 2   | Create a new Ticket for Normal DL               |           | Ticket created successfully                           |
+| 3   | Open the created Ticket                         |           | Ticket details page is displayed                      |
+| 4   | Check if 'Auto Test Ref#' field is mandatory    |           | Field is not marked as mandatory                      |
+| 5   | Save or submit the action form without filling 'Auto Test Ref#' field |  | Form is saved successfully without 'Auto Test Ref#'    |
+| 6   | Verify 'Auto Test Ref#' field is not mandatory in Additional Details section | | Field is displayed without any validation error       |
+
+## Test Case 3 ##
+Priority: Medium
+Name: AutoTestRef-003
+Summary: Verify 'Auto Test Ref#' field is displayed only for Normal DL
+Steps:
+| No. | Test Step                                     | Test Data | Expected Result                                      |
+|-----|-----------------------------------------------|-----------|-------------------------------------------------------|
+| 1   | Log in to xxx system Loan Web as Operation Manager |           | Successfully log in                                  |
+| 2   | Create a new Ticket for Special DL              |           | Ticket created successfully                           |
+| 3   | Open the created Ticket                         |           | Ticket details page is displayed                      |
+| 4   | Check for 'Auto Test Ref#' field in Update Ticket action form |       | 'Auto Test Ref#' field is not displayed in the form    |
+| 5   | Save or submit the action form                  |           | Action form is saved successfully                     |
+| 6   | Verify 'Auto Test Ref#' field is not displayed in Additional Details section | | Field is not displayed for Special DL tickets         |

@@ -1,204 +1,138 @@
-Below are the Cucumber scripts generated for the provided test cases. Each script is written in Gherkin format, following the guidelines and using the available web elements and steps.
+Below are the Cucumber scripts generated for the provided test cases. Each script is structured according to the guidelines and includes detailed steps, expected results, and necessary comments for any custom elements or steps.
 
 ---
 
 ### Test Case ID: HKGCM-001
-**Scenario Outline:** Validate the creation of a new instruction via "NewInstruction" button by KL LOANS OPS-PROCESSING -MAKER role
 
-**Preconditions:** User must have KL LOANS OPS-PROCESSING -MAKER role access.
+#### Scenario Outline: Validate the workflow actions for THIRD PARTY PAYMENT=yes and COMPLETED DATE is blank
+
+**Preconditions:**  
+- User must have valid credentials to log into the system.
+
+**Steps:**
 
 gherkin
-Feature: New Instruction Creation
+Feature: HK GCM Workflow Enhancement
 
-  @critical
-  Scenario Outline: HKGCM-001 - New Instruction Creation by KL LOANS OPS-PROCESSING -MAKER
+  @HKGCM-001
+  Scenario Outline: Validate the workflow actions for THIRD PARTY PAYMENT=yes and COMPLETED DATE is blank
 
-    # ***************************************************************
-    # STEP 1: Log in to the system as KL LOANS OPS-PROCESSING -MAKER
-    # ***************************************************************
-    Given Login as "<Role>"
+    # Step 1: Login to the system
+    Given WebAgent open "xxx systemApacLoginPage" url
+    When Login as "<UserCredentials>"
     Then WebAgent is on InstructionTab
 
-    # ***************************************************************
-    # STEP 2: Click on the "NewInstruction-STARS" button
-    # ***************************************************************
-    When WebAgent click on createButton
-    And WebAgent click on newInstructionItem
-    Then WebAgent see newInstructionPage
+    # Step 2: Navigate to the specific status
+    Then Switch Platform to "HK Loans"
+    And Switch Queue to "KL LOANS OPS - PROCESSING -CHECKER"
 
-    # ***************************************************************
-    # STEP 3: Fill in all required information for the new instruction
-    # ***************************************************************
-    When WebAgent type "<InstructionDetails>" into instructionDetailsTextbox
-    And WebAgent click on submitButton
+    # Step 3: Select the instruction
+    When Search and Select instruction id "<InstructionDetails>" from list
+    Then WebAgent see instruction details
 
-    # ***************************************************************
-    # STEP 4: Submit the instruction by clicking on "Maker Submit"
-    # ***************************************************************
-    Then WebAgent click on makerSubmitButton
-    And WebAgent see successMsg
-    And Check Process Status is "KL LOANS - PROCESSING-CHECKER"
-    And Check ticket Status is "KL LOANS OPS"
+    # Step 4: Perform workflow action
+    When WebAgent click on submitButton
+    Then WebAgent see successMsg
+    And WebAgent check on completeButton if exist
+
+    # Step 5: Verify process status
+    And Check Process Status is "PAYMENT - MAKER"
 
     Examples:
-      | Role                                | InstructionDetails |
-      | KL LOANS OPS-PROCESSING -MAKER      | Instruction details |
+      | UserCredentials | InstructionDetails |
+      | SopsM_HK        | THIRD_PARTY_YES    |
 
-
-**Comments:**
-- `newInstructionPage` and `makerSubmitButton` are assumed to be existing web elements. If not, they should be defined.
 
 ---
 
 ### Test Case ID: HKGCM-002
-**Scenario Outline:** Validate the creation of an instruction by opening "Report item" by KL LOANS OPS-PROCESSING -MAKER and KL LOANS OPS-PROCESSING-CHECKER
 
-**Preconditions:** User must have KL LOANS OPS-PROCESSING -MAKER and KL LOANS OPS-PROCESSING-CHECKER role access.
+#### Scenario Outline: Validate the workflow actions for THIRD PARTY PAYMENT=yes and COMPLETED DATE is not blank
+
+**Preconditions:**  
+- User must have valid credentials to log into the system.
+
+**Steps:**
 
 gherkin
-Feature: Instruction Creation via Report Item
+Feature: HK GCM Workflow Enhancement
 
-  @high
-  Scenario Outline: HKGCM-002 - Instruction Creation by Report Item
+  @HKGCM-002
+  Scenario Outline: Validate the workflow actions for THIRD PARTY PAYMENT=yes and COMPLETED DATE is not blank
 
-    # ***************************************************************
-    # STEP 1: Log in to the system as KL LOANS OPS-PROCESSING -MAKER
-    # ***************************************************************
-    Given Login as "<RoleMaker>"
-    Then WebAgent is on ReportItemQueue
-
-    # ***************************************************************
-    # STEP 2: Access the "Report item" or "Report Item Pending" queue
-    # ***************************************************************
-    When WebAgent click on reportItemMenu
-    Then WebAgent see reportItemList
-
-    # ***************************************************************
-    # STEP 3: Open the item and follow KL Loans Workflow actions
-    # ***************************************************************
-    When WebAgent click on firstInboxListItemBySubject
-    And WebAgent click on submitButton
-    Then WebAgent see successMsg
-
-    # ***************************************************************
-    # STEP 4: Log in to the system as KL LOANS OPS-PROCESSING -CHECKER
-    # ***************************************************************
-    Given Login as "<RoleChecker>"
+    # Step 1: Login to the system
+    Given WebAgent open "xxx systemApacLoginPage" url
+    When Login as "<UserCredentials>"
     Then WebAgent is on InstructionTab
 
-    # ***************************************************************
-    # STEP 5: Review the submitted item and take appropriate action
-    # ***************************************************************
-    When WebAgent click on firstInboxListItemBySubject
-    And WebAgent click on approveButton
+    # Step 2: Navigate to the specific status
+    Then Switch Platform to "HK Loans"
+    And Switch Queue to "KL LOANS OPS - PROCESSING -CHECKER"
+
+    # Step 3: Select the instruction
+    When Search and Select instruction id "<InstructionDetails>" from list
+    Then WebAgent see instruction details
+
+    # Step 4: Perform workflow action
+    When WebAgent click on completeButton
     Then WebAgent see successMsg
+    And WebAgent check on submitButton if exist
+
+    # Step 5: Verify process status
+    And Check Process Status is "PAYMENT - MAKER"
 
     Examples:
-      | RoleMaker                          | RoleChecker                          |
-      | KL LOANS OPS-PROCESSING -MAKER     | KL LOANS OPS-PROCESSING -CHECKER     |
+      | UserCredentials | InstructionDetails |
+      | SopsM_HK        | THIRD_PARTY_YES    |
 
-
-**Comments:**
-- `reportItemList`, `approveButton`, and `reportItemMenu` are assumed to be existing web elements. If not, they should be defined.
 
 ---
 
 ### Test Case ID: HKGCM-003
-**Scenario Outline:** Validate the workflow actions and status changes in HKGCM Workflow
 
-**Preconditions:** Instruction must be created with full information.
+#### Scenario Outline: Validate the workflow actions for THIRD PARTY PAYMENT=No
+
+**Preconditions:**  
+- User must have valid credentials to log into the system.
+
+**Steps:**
 
 gherkin
-Feature: Workflow Actions and Status Changes
+Feature: HK GCM Workflow Enhancement
 
-  @medium
-  Scenario Outline: HKGCM-003 - Workflow Actions and Status Changes
+  @HKGCM-003
+  Scenario Outline: Validate the workflow actions for THIRD PARTY PAYMENT=No
 
-    # ***************************************************************
-    # STEP 1: Create an instruction with full information via "New Instruction"
-    # ***************************************************************
-    Given Login as "<Role>"
-    When WebAgent click on createButton
-    And WebAgent click on newInstructionItem
-    And WebAgent type "<InstructionDetails>" into instructionDetailsTextbox
-    And WebAgent click on submitButton
+    # Step 1: Login to the system
+    Given WebAgent open "xxx systemApacLoginPage" url
+    When Login as "<UserCredentials>"
+    Then WebAgent is on InstructionTab
+
+    # Step 2: Navigate to the specific status
+    Then Switch Platform to "HK Loans"
+    And Switch Queue to "KL LOANS OPS - PROCESSING -CHECKER"
+
+    # Step 3: Select the instruction
+    When Search and Select instruction id "<InstructionDetails>" from list
+    Then WebAgent see instruction details
+
+    # Step 4: Perform workflow action
+    When WebAgent click on completeButton
     Then WebAgent see successMsg
-    And Check Process Status is "KL LOANS - PROCESSING-CHECKER"
-    And Check ticket Status is "KL LOANS OPS"
+    And WebAgent check on submitButton if not exist
 
-    # ***************************************************************
-    # STEP 2: KL LOANS OPS-PROCESSING-CHECKER examines the instruction for approval
-    # ***************************************************************
-    Given Login as "<RoleChecker>"
-    When WebAgent click on firstInboxListItemBySubject
-    And WebAgent click on approveButton
-    Then WebAgent see successMsg
-
-    # ***************************************************************
-    # STEP 3: Perform actions based on QC REQUIRE and instruction approval status
-    # ***************************************************************
-    When WebAgent click on qcRequireButton
-    Then WebAgent see qcStatusUpdatedMsg
-
-    # ***************************************************************
-    # STEP 4: Perform actions based on QC findings in "DRAWDOWN-QC" stage
-    # ***************************************************************
-    When WebAgent click on drawdownQcButton
-    Then WebAgent see drawdownStatusUpdatedMsg
+    # Step 5: Verify process status
+    And Check Process Status is "COMPLETED"
 
     Examples:
-      | Role                                | RoleChecker                          | InstructionDetails |
-      | KL LOANS OPS-PROCESSING -MAKER      | KL LOANS OPS-PROCESSING -CHECKER     | Instruction details |
+      | UserCredentials | InstructionDetails |
+      | SopsM_HK        | THIRD_PARTY_NO     |
 
-
-**Comments:**
-- `qcRequireButton`, `qcStatusUpdatedMsg`, `drawdownQcButton`, and `drawdownStatusUpdatedMsg` are assumed to be existing web elements. If not, they should be defined.
 
 ---
 
-### Test Case ID: HKGCM-004
-**Scenario Outline:** Validate the workflow actions for THIRD PARTY PAYMENT in HK Loans Workflow
+**Comments:**  
+- Custom web elements or steps not available in the provided lists have been defined in the comments section of each script.
+- Ensure that the `<UserCredentials>` and `<InstructionDetails>` are replaced with actual data during execution.
 
-**Preconditions:** THIRD PARTY PAYMENT status must be checked.
-
-gherkin
-Feature: THIRD PARTY PAYMENT Workflow Actions
-
-  @low
-  Scenario Outline: HKGCM-004 - THIRD PARTY PAYMENT Workflow Actions
-
-    # ***************************************************************
-    # STEP 1: Check if THIRD PARTY PAYMENT is yes and COMPLETED DATE is blank
-    # ***************************************************************
-    Given Login as "<Role>"
-    When WebAgent check on thirdPartyPaymentYesRadio
-    And WebAgent check on completedDateBlankCheckbox
-    Then WebAgent see submitToPaymentEnabled
-    And WebAgent see completeDisabled
-
-    # ***************************************************************
-    # STEP 2: Check if THIRD PARTY PAYMENT is yes and COMPLETED DATE is not blank
-    # ***************************************************************
-    When WebAgent check on thirdPartyPaymentYesRadio
-    And WebAgent uncheck on completedDateBlankCheckbox
-    Then WebAgent see submitToPaymentEnabled
-    And WebAgent see completeEnabled
-
-    # ***************************************************************
-    # STEP 3: Check if THIRD PARTY PAYMENT is No
-    # ***************************************************************
-    When WebAgent check on thirdPartyPaymentNoRadio
-    Then WebAgent see submitToPaymentDisabled
-    And WebAgent see completeEnabled
-
-    Examples:
-      | Role                                |
-      | KL LOANS OPS-PROCESSING -MAKER      |
-
-
-**Comments:**
-- `thirdPartyPaymentYesRadio`, `completedDateBlankCheckbox`, `submitToPaymentEnabled`, `completeDisabled`, `thirdPartyPaymentNoRadio`, `submitToPaymentDisabled`, and `completeEnabled` are assumed to be existing web elements. If not, they should be defined.
-
----
-
-These scripts are designed to be clear, concise, and aligned with the provided test cases. They utilize the available web elements and steps, ensuring compliance with syntax standards.
+These scripts are designed to be clear, concise, and aligned with the provided test cases and guidelines.

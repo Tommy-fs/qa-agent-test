@@ -1,39 +1,36 @@
-Priority: Critical
+Based on the project documents and JIRA request provided, here are the test cases for the HK GCM Workflow enhancement:
+
+Priority: High
 Name: HKGCM-001
-Summary: Validate the creation of a new instruction via "NewInstruction" button by KL LOANS OPS-PROCESSING -MAKER role
+Summary: Validate the workflow actions for THIRD PARTY PAYMENT=yes and COMPLETED DATE is blank
 Steps:
 |No.| Test Step | Test Data | Expected Result |
-| 1 | Log in to the system as KL LOANS OPS-PROCESSING -MAKER | Role: KL LOANS OPS-PROCESSING -MAKER | Login successful |
-| 2 | Click on the "NewInstruction-STARS" button |  | New instruction creation page opens |
-| 3 | Fill in all required information for the new instruction | Instruction details | Instruction is successfully created |
-| 4 | Submit the instruction by clicking on "Maker Submit" |  | Current status is set to "KL LOANS OPS" and process status is set to "KL LOANS - PROCESSING-CHECKER" |
+| 1 | Login to xxx system | User credentials | Successfully logged in |
+| 2 | Navigate to KL LOANS OPS - PROCESSING -CHECKER status | - | Able to view instructions under this status |
+| 3 | Select an instruction with THIRD PARTY PAYMENT=yes and COMPLETED DATE blank | Instruction details | Able to view the instruction |
+| 4 | Perform workflow action "submit to Payment" | - | Action is successful, "complete" action is disabled |
+| 5 | Verify PROCESS STATUS is set to "PAYMENT - MAKER" | - | Process status is updated correctly |
 
 Priority: High
 Name: HKGCM-002
-Summary: Validate the creation of an instruction by opening "Report item" by KL LOANS OPS-PROCESSING -MAKER and KL LOANS OPS-PROCESSING-CHECKER
+Summary: Validate the workflow actions for THIRD PARTY PAYMENT=yes and COMPLETED DATE is not blank
 Steps:
 |No.| Test Step | Test Data | Expected Result |
-| 1 | Log in to the system as KL LOANS OPS-PROCESSING -MAKER | Role: KL LOANS OPS-PROCESSING -MAKER | Login successful |
-| 2 | Access the "Report item" or "Report Item Pending" queue |  | View the generated items |
-| 3 | Open the item and follow KL Loans Workflow actions | Item details | Able to submit the item to KL LOANS OPS-PROCESSING -CHECKER |
-| 4 | Log in to the system as KL LOANS OPS-PROCESSING -CHECKER | Role: KL LOANS OPS-PROCESSING -CHECKER | Login successful |
-| 5 | Review the submitted item and take appropriate action | Item details | Able to approve or return the instruction as needed |
+| 1 | Login to xxx system | User credentials | Successfully logged in |
+| 2 | Navigate to KL LOANS OPS - PROCESSING -CHECKER status | - | Able to view instructions under this status |
+| 3 | Select an instruction with THIRD PARTY PAYMENT=yes and COMPLETED DATE not blank | Instruction details | Able to view the instruction |
+| 4 | Perform workflow action "complete" | - | Action is successful, "submit to Payment" action is enabled |
+| 5 | Verify PROCESS STATUS is set to "PAYMENT - MAKER" | - | Process status is updated correctly |
 
 Priority: Medium
 Name: HKGCM-003
-Summary: Validate the workflow actions and status changes in HKGCM Workflow
+Summary: Validate the workflow actions for THIRD PARTY PAYMENT=No
 Steps:
 |No.| Test Step | Test Data | Expected Result |
-| 1 | Create an instruction with full information via "New Instruction" | Instruction details | Current status set to "KL LOANS OPS" and process status set to "KL LOANS - PROCESSING-CHECKER" |
-| 2 | KL LOANS OPS-PROCESSING-CHECKER examines the instruction for approval | Instruction details | Able to approve or return the instruction |
-| 3 | Perform actions based on QC REQUIRE and instruction approval status | QC REQUIRE status | Process status updated accordingly |
-| 4 | Perform actions based on QC findings in "DRAWDOWN-QC" stage | QC findings | Instruction status updated as per actions taken |
+| 1 | Login to xxx system | User credentials | Successfully logged in |
+| 2 | Navigate to KL LOANS OPS - PROCESSING -CHECKER status | - | Able to view instructions under this status |
+| 3 | Select an instruction with THIRD PARTY PAYMENT=No | Instruction details | Able to view the instruction |
+| 4 | Perform workflow action "complete" | - | Action is successful, "submit to Payment" action is disabled |
+| 5 | Verify PROCESS STATUS is set to "COMPLETED" | - | Process status is updated correctly |
 
-Priority: Low
-Name: HKGCM-004
-Summary: Validate the workflow actions for THIRD PARTY PAYMENT in HK Loans Workflow
-Steps:
-|No.| Test Step | Test Data | Expected Result |
-| 1 | Check if THIRD PARTY PAYMENT is yes and COMPLETED DATE is blank | THIRD PARTY PAYMENT status | Workflow action "submit to Payment" is enabled and "complete" is disabled |
-| 2 | Check if THIRD PARTY PAYMENT is yes and COMPLETED DATE is not blank | THIRD PARTY PAYMENT status | Workflow action "complete" is enabled and "submit to Payment" is enabled |
-| 3 | Check if THIRD PARTY PAYMENT is No | THIRD PARTY PAYMENT status | Workflow action "complete" is enabled and "submit to Payment" is disabled |
+These test cases cover the specific functionalities and changes requested in the JIRA request for the HK GCM Workflow enhancement.
