@@ -40,8 +40,15 @@ You need to refer to existing Test Cases,  take them as Example, learn writing h
 
 #############
 
-#Test Case Example#
+#Test Case Template#
+You need to understand and imitate this case to write a new test case
 {test_case_example}
+
+#############
+
+#Test Case Guide#
+You need to strictly follow the following rules and guidelines to generate test cases(If exists)
+{test_case_guide}
 
 #############
 

@@ -1,36 +1,95 @@
-Based on the project documents and JIRA request provided, here are the test cases for the HK GCM Workflow enhancement:
+Based on the provided project documents and JIRA request, I have created the following test cases for the HK GCM Workflow enhancements. These test cases focus on the new functionalities introduced in the JIRA request.
 
-Priority: High
-Name: HKGCM-001
-Summary: Validate the workflow actions for THIRD PARTY PAYMENT=yes and COMPLETED DATE is blank
-Steps:
-|No.| Test Step | Test Data | Expected Result |
-| 1 | Login to xxx system | User credentials | Successfully logged in |
-| 2 | Navigate to KL LOANS OPS - PROCESSING -CHECKER status | - | Able to view instructions under this status |
-| 3 | Select an instruction with THIRD PARTY PAYMENT=yes and COMPLETED DATE blank | Instruction details | Able to view the instruction |
-| 4 | Perform workflow action "submit to Payment" | - | Action is successful, "complete" action is disabled |
-| 5 | Verify PROCESS STATUS is set to "PAYMENT - MAKER" | - | Process status is updated correctly |
+### Test Suite: HK GCM Workflow Enhancements
 
-Priority: High
-Name: HKGCM-002
-Summary: Validate the workflow actions for THIRD PARTY PAYMENT=yes and COMPLETED DATE is not blank
-Steps:
-|No.| Test Step | Test Data | Expected Result |
-| 1 | Login to xxx system | User credentials | Successfully logged in |
-| 2 | Navigate to KL LOANS OPS - PROCESSING -CHECKER status | - | Able to view instructions under this status |
-| 3 | Select an instruction with THIRD PARTY PAYMENT=yes and COMPLETED DATE not blank | Instruction details | Able to view the instruction |
-| 4 | Perform workflow action "complete" | - | Action is successful, "submit to Payment" action is enabled |
-| 5 | Verify PROCESS STATUS is set to "PAYMENT - MAKER" | - | Process status is updated correctly |
+---
 
-Priority: Medium
-Name: HKGCM-003
-Summary: Validate the workflow actions for THIRD PARTY PAYMENT=No
-Steps:
-|No.| Test Step | Test Data | Expected Result |
-| 1 | Login to xxx system | User credentials | Successfully logged in |
-| 2 | Navigate to KL LOANS OPS - PROCESSING -CHECKER status | - | Able to view instructions under this status |
-| 3 | Select an instruction with THIRD PARTY PAYMENT=No | Instruction details | Able to view the instruction |
-| 4 | Perform workflow action "complete" | - | Action is successful, "submit to Payment" action is disabled |
-| 5 | Verify PROCESS STATUS is set to "COMPLETED" | - | Process status is updated correctly |
+#### Test Case 1
 
-These test cases cover the specific functionalities and changes requested in the JIRA request for the HK GCM Workflow enhancement.
+**Priority:** High  
+**Name:** GCMWorkflow-001  
+**Summary:** Validate the "Submit to Payment" action when THIRD PARTY PAYMENT is "Yes" and COMPLETED DATE is blank.
+
+**Steps:**
+
+| No. | Test Step | Test Data | Expected Result |
+|-----|-----------|-----------|-----------------|
+| 1   | Login to XXX system as KL LOANS OPS - PROCESSING - MAKER | Maker account: MK123456 | Login successfully |
+| 2   | Create a new instruction with THIRD PARTY PAYMENT set to "Yes" and COMPLETED DATE left blank | Instruction data: THIRD PARTY PAYMENT = Yes, COMPLETED DATE = blank | Instruction created successfully |
+| 3   | Perform "Maker Submit" action | | Instruction status is "KL LOANS OPS", PROCESS STATUS is "PROCESSING-CHECKER" |
+| 4   | Login to XXX system as KL LOANS OPS - PROCESSING - CHECKER | Checker account: CK123456 | Login successfully |
+| 5   | Open the instruction created and verify available actions | Instruction created | "Submit to Payment" action is enabled, "Complete" action is disabled |
+
+---
+
+#### Test Case 2
+
+**Priority:** High  
+**Name:** GCMWorkflow-002  
+**Summary:** Validate the "Complete" action when THIRD PARTY PAYMENT is "Yes" and COMPLETED DATE is not blank.
+
+**Steps:**
+
+| No. | Test Step | Test Data | Expected Result |
+|-----|-----------|-----------|-----------------|
+| 1   | Login to XXX system as KL LOANS OPS - PROCESSING - MAKER | Maker account: MK123456 | Login successfully |
+| 2   | Create a new instruction with THIRD PARTY PAYMENT set to "Yes" and COMPLETED DATE set | Instruction data: THIRD PARTY PAYMENT = Yes, COMPLETED DATE = today | Instruction created successfully |
+| 3   | Perform "Maker Submit" action | | Instruction status is "KL LOANS OPS", PROCESS STATUS is "PROCESSING-CHECKER" |
+| 4   | Login to XXX system as KL LOANS OPS - PROCESSING - CHECKER | Checker account: CK123456 | Login successfully |
+| 5   | Open the instruction created and verify available actions | Instruction created | Both "Submit to Payment" and "Complete" actions are enabled |
+
+---
+
+#### Test Case 3
+
+**Priority:** Medium  
+**Name:** GCMWorkflow-003  
+**Summary:** Validate the "Complete" action when THIRD PARTY PAYMENT is "No".
+
+**Steps:**
+
+| No. | Test Step | Test Data | Expected Result |
+|-----|-----------|-----------|-----------------|
+| 1   | Login to XXX system as KL LOANS OPS - PROCESSING - MAKER | Maker account: MK123456 | Login successfully |
+| 2   | Create a new instruction with THIRD PARTY PAYMENT set to "No" | Instruction data: THIRD PARTY PAYMENT = No | Instruction created successfully |
+| 3   | Perform "Maker Submit" action | | Instruction status is "KL LOANS OPS", PROCESS STATUS is "PROCESSING-CHECKER" |
+| 4   | Login to XXX system as KL LOANS OPS - PROCESSING - CHECKER | Checker account: CK123456 | Login successfully |
+| 5   | Open the instruction created and verify available actions | Instruction created | "Complete" action is enabled, "Submit to Payment" action is disabled |
+
+---
+
+#### Test Case 4
+
+**Priority:** Medium  
+**Name:** GCMWorkflow-004  
+**Summary:** Validate the transition to "PAYMENT - MAKER" status after "Submit to Payment".
+
+**Steps:**
+
+| No. | Test Step | Test Data | Expected Result |
+|-----|-----------|-----------|-----------------|
+| 1   | Login to XXX system as KL LOANS OPS - PROCESSING - MAKER | Maker account: MK123456 | Login successfully |
+| 2   | Create a new instruction with THIRD PARTY PAYMENT set to "Yes" and COMPLETED DATE left blank | Instruction data: THIRD PARTY PAYMENT = Yes, COMPLETED DATE = blank | Instruction created successfully |
+| 3   | Perform "Maker Submit" action | | Instruction status is "KL LOANS OPS", PROCESS STATUS is "PROCESSING-CHECKER" |
+| 4   | Login to XXX system as KL LOANS OPS - PROCESSING - CHECKER | Checker account: CK123456 | Login successfully |
+| 5   | Open the instruction created and perform "Submit to Payment" action | Instruction created | PROCESS STATUS is set to "PAYMENT - MAKER" |
+
+---
+
+#### Test Case 5
+
+**Priority:** Low  
+**Name:** GCMWorkflow-005  
+**Summary:** Validate the actions available for KL LOANS OPS - PROCESSING - PAYMENT MAKER.
+
+**Steps:**
+
+| No. | Test Step | Test Data | Expected Result |
+|-----|-----------|-----------|-----------------|
+| 1   | Login to XXX system as KL LOANS OPS - PROCESSING - PAYMENT MAKER | Payment Maker account: PM123456 | Login successfully |
+| 2   | Open an instruction with PROCESS STATUS "PAYMENT - MAKER" | Instruction with PROCESS STATUS = "PAYMENT - MAKER" | Instruction opened successfully |
+| 3   | Verify available actions | | "Submit Payment Checker" and "Return to Processing Maker" actions are enabled |
+
+---
+
+These test cases are designed to cover the new functionalities introduced in the JIRA request, ensuring that the workflow actions behave as expected under various conditions.

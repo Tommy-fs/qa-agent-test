@@ -43,7 +43,6 @@ Feature:HongKong
         And WebAgent type "10" into tenorTextbox
         And WebAgent type "$RN6" into facilityNumberTextbox
         And WebAgent type "LINK-$RN6" into linkLcuTextbox
-        Loans Details
         And Select "HKD" from loanCurrencyDropdownlist
         And WebAgent type "200,000,000.00" into bookingAmountTextbox
         And select "CHATS" from creditAccTypeDropdownlist

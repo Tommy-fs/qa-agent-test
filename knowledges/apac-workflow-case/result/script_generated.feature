@@ -1,138 +1,222 @@
-Below are the Cucumber scripts generated for the provided test cases. Each script is structured according to the guidelines and includes detailed steps, expected results, and necessary comments for any custom elements or steps.
+Below are the Cucumber scripts for the generated test cases based on the provided guidelines and available elements. Each script is associated with a specific test case and includes detailed steps and expected results.
 
 ---
 
-### Test Case ID: HKGCM-001
+### Test Case ID: GCMWorkflow-001
 
-#### Scenario Outline: Validate the workflow actions for THIRD PARTY PAYMENT=yes and COMPLETED DATE is blank
+**Scenario Outline:** Validate the workflow actions for instructions with THIRD PARTY PAYMENT set to "Yes" and COMPLETED DATE is blank.
 
-**Preconditions:**  
-- User must have valid credentials to log into the system.
-
-**Steps:**
+**Preconditions:** User must have access to the XXX system with Maker and Checker roles.
 
 gherkin
 Feature: HK GCM Workflow Enhancement
 
-  @HKGCM-001
-  Scenario Outline: Validate the workflow actions for THIRD PARTY PAYMENT=yes and COMPLETED DATE is blank
+  @GCMWorkflow-001
+  Scenario Outline: Validate workflow actions for THIRD PARTY PAYMENT "Yes" and COMPLETED DATE blank
 
-    # Step 1: Login to the system
-    Given WebAgent open "xxx systemApacLoginPage" url
-    When Login as "<UserCredentials>"
+    # ***************************************************************
+    # STEP 1: Maker creates an instruction and submits it
+    # ***************************************************************
+    Given Login as "KL LOANS OPS - PROCESSING - MAKER"
+    When WebAgent open "XXX system" url
     Then WebAgent is on InstructionTab
+    And WebAgent click on createButton
+    And WebAgent click on newInstructionItem
+    And Select "Yes" from thirdPartyPaymentDropdownlist
+    And WebAgent type "" into completedDateTextbox
+    Then WebAgent click on submitButton
+    And WebAgent see successMsg
+    And Save instruction Id and URL with prefix "GCM" from successMsg into @instructionId and @instructionUrl
+    Then Sign Out
 
-    # Step 2: Navigate to the specific status
-    Then Switch Platform to "HK Loans"
-    And Switch Queue to "KL LOANS OPS - PROCESSING -CHECKER"
-
-    # Step 3: Select the instruction
-    When Search and Select instruction id "<InstructionDetails>" from list
-    Then WebAgent see instruction details
-
-    # Step 4: Perform workflow action
-    When WebAgent click on submitButton
-    Then WebAgent see successMsg
-    And WebAgent check on completeButton if exist
-
-    # Step 5: Verify process status
-    And Check Process Status is "PAYMENT - MAKER"
+    # ***************************************************************
+    # STEP 2: Checker verifies the instruction
+    # ***************************************************************
+    Given Login as "KL LOANS OPS - PROCESSING - CHECKER"
+    When WebAgent open "@instructionUrl.Value" url
+    Then WebAgent is on InstructionTab
+    And WebAgent see "Submit to Payment" button enabled
+    And WebAgent see "Complete" button disabled
+    Then Sign Out
 
     Examples:
-      | UserCredentials | InstructionDetails |
-      | SopsM_HK        | THIRD_PARTY_YES    |
+      | thirdPartyPayment | completedDate |
+      | Yes               |               |
 
 
 ---
 
-### Test Case ID: HKGCM-002
+### Test Case ID: GCMWorkflow-002
 
-#### Scenario Outline: Validate the workflow actions for THIRD PARTY PAYMENT=yes and COMPLETED DATE is not blank
+**Scenario Outline:** Validate the workflow actions for instructions with THIRD PARTY PAYMENT set to "Yes" and COMPLETED DATE is not blank.
 
-**Preconditions:**  
-- User must have valid credentials to log into the system.
-
-**Steps:**
+**Preconditions:** User must have access to the XXX system with Maker and Checker roles.
 
 gherkin
 Feature: HK GCM Workflow Enhancement
 
-  @HKGCM-002
-  Scenario Outline: Validate the workflow actions for THIRD PARTY PAYMENT=yes and COMPLETED DATE is not blank
+  @GCMWorkflow-002
+  Scenario Outline: Validate workflow actions for THIRD PARTY PAYMENT "Yes" and COMPLETED DATE set
 
-    # Step 1: Login to the system
-    Given WebAgent open "xxx systemApacLoginPage" url
-    When Login as "<UserCredentials>"
+    # ***************************************************************
+    # STEP 1: Maker creates an instruction and completes it
+    # ***************************************************************
+    Given Login as "KL LOANS OPS - PROCESSING - MAKER"
+    When WebAgent open "XXX system" url
     Then WebAgent is on InstructionTab
+    And WebAgent click on createButton
+    And WebAgent click on newInstructionItem
+    And Select "Yes" from thirdPartyPaymentDropdownlist
+    And WebAgent type "<completedDate>" into completedDateTextbox
+    Then WebAgent click on submitButton
+    And WebAgent see successMsg
+    And Save instruction Id and URL with prefix "GCM" from successMsg into @instructionId and @instructionUrl
+    Then Sign Out
 
-    # Step 2: Navigate to the specific status
-    Then Switch Platform to "HK Loans"
-    And Switch Queue to "KL LOANS OPS - PROCESSING -CHECKER"
-
-    # Step 3: Select the instruction
-    When Search and Select instruction id "<InstructionDetails>" from list
-    Then WebAgent see instruction details
-
-    # Step 4: Perform workflow action
-    When WebAgent click on completeButton
-    Then WebAgent see successMsg
-    And WebAgent check on submitButton if exist
-
-    # Step 5: Verify process status
-    And Check Process Status is "PAYMENT - MAKER"
+    # ***************************************************************
+    # STEP 2: Checker verifies the instruction
+    # ***************************************************************
+    Given Login as "KL LOANS OPS - PROCESSING - CHECKER"
+    When WebAgent open "@instructionUrl.Value" url
+    Then WebAgent is on InstructionTab
+    And WebAgent see "Submit to Payment" button enabled
+    And WebAgent see "Complete" button enabled
+    Then Sign Out
 
     Examples:
-      | UserCredentials | InstructionDetails |
-      | SopsM_HK        | THIRD_PARTY_YES    |
+      | thirdPartyPayment | completedDate |
+      | Yes               | 2023-10-01    |
 
 
 ---
 
-### Test Case ID: HKGCM-003
+### Test Case ID: GCMWorkflow-003
 
-#### Scenario Outline: Validate the workflow actions for THIRD PARTY PAYMENT=No
+**Scenario Outline:** Validate the workflow actions for instructions with THIRD PARTY PAYMENT set to "No".
 
-**Preconditions:**  
-- User must have valid credentials to log into the system.
-
-**Steps:**
+**Preconditions:** User must have access to the XXX system with Maker and Checker roles.
 
 gherkin
 Feature: HK GCM Workflow Enhancement
 
-  @HKGCM-003
-  Scenario Outline: Validate the workflow actions for THIRD PARTY PAYMENT=No
+  @GCMWorkflow-003
+  Scenario Outline: Validate workflow actions for THIRD PARTY PAYMENT "No"
 
-    # Step 1: Login to the system
-    Given WebAgent open "xxx systemApacLoginPage" url
-    When Login as "<UserCredentials>"
+    # ***************************************************************
+    # STEP 1: Maker creates an instruction and submits it
+    # ***************************************************************
+    Given Login as "KL LOANS OPS - PROCESSING - MAKER"
+    When WebAgent open "XXX system" url
     Then WebAgent is on InstructionTab
+    And WebAgent click on createButton
+    And WebAgent click on newInstructionItem
+    And Select "No" from thirdPartyPaymentDropdownlist
+    Then WebAgent click on submitButton
+    And WebAgent see successMsg
+    And Save instruction Id and URL with prefix "GCM" from successMsg into @instructionId and @instructionUrl
+    Then Sign Out
 
-    # Step 2: Navigate to the specific status
-    Then Switch Platform to "HK Loans"
-    And Switch Queue to "KL LOANS OPS - PROCESSING -CHECKER"
-
-    # Step 3: Select the instruction
-    When Search and Select instruction id "<InstructionDetails>" from list
-    Then WebAgent see instruction details
-
-    # Step 4: Perform workflow action
-    When WebAgent click on completeButton
-    Then WebAgent see successMsg
-    And WebAgent check on submitButton if not exist
-
-    # Step 5: Verify process status
-    And Check Process Status is "COMPLETED"
+    # ***************************************************************
+    # STEP 2: Checker verifies the instruction
+    # ***************************************************************
+    Given Login as "KL LOANS OPS - PROCESSING - CHECKER"
+    When WebAgent open "@instructionUrl.Value" url
+    Then WebAgent is on InstructionTab
+    And WebAgent see "Complete" button enabled
+    And WebAgent see "Submit to Payment" button disabled
+    Then Sign Out
 
     Examples:
-      | UserCredentials | InstructionDetails |
-      | SopsM_HK        | THIRD_PARTY_NO     |
+      | thirdPartyPayment |
+      | No                |
 
 
 ---
 
-**Comments:**  
-- Custom web elements or steps not available in the provided lists have been defined in the comments section of each script.
-- Ensure that the `<UserCredentials>` and `<InstructionDetails>` are replaced with actual data during execution.
+### Test Case ID: GCMWorkflow-004
 
-These scripts are designed to be clear, concise, and aligned with the provided test cases and guidelines.
+**Scenario Outline:** Validate the workflow transition after "Submit to Payment" action.
+
+**Preconditions:** User must have access to the XXX system with Checker and Payment Maker roles.
+
+gherkin
+Feature: HK GCM Workflow Enhancement
+
+  @GCMWorkflow-004
+  Scenario Outline: Validate workflow transition after "Submit to Payment" action
+
+    # ***************************************************************
+    # STEP 1: Checker submits instruction to payment
+    # ***************************************************************
+    Given Login as "KL LOANS OPS - PROCESSING - CHECKER"
+    When WebAgent open "XXX system" url
+    Then WebAgent is on InstructionTab
+    And WebAgent open "<instructionUrl>"
+    Then WebAgent click on submitToPaymentButton
+    And WebAgent see successMsg
+    Then Sign Out
+
+    # ***************************************************************
+    # STEP 2: Payment Maker verifies available actions
+    # ***************************************************************
+    Given Login as "KL LOANS OPS - PROCESSING - PAYMENT MAKER"
+    When WebAgent open "XXX system" url
+    Then WebAgent is on PaymentTab
+    And WebAgent open "<instructionUrl>"
+    And WebAgent see "Submit Payment Checker" button enabled
+    And WebAgent see "Return to Maker" button enabled
+    Then Sign Out
+
+    Examples:
+      | instructionUrl |
+      | @instructionUrl |
+
+
+---
+
+### Test Case ID: GCMWorkflow-005
+
+**Scenario Outline:** Validate the workflow transition after "Submit Payment Checker" action.
+
+**Preconditions:** User must have access to the XXX system with Payment Maker and Payment Checker roles.
+
+gherkin
+Feature: HK GCM Workflow Enhancement
+
+  @GCMWorkflow-005
+  Scenario Outline: Validate workflow transition after "Submit Payment Checker" action
+
+    # ***************************************************************
+    # STEP 1: Payment Maker submits to Payment Checker
+    # ***************************************************************
+    Given Login as "KL LOANS OPS - PROCESSING - PAYMENT MAKER"
+    When WebAgent open "XXX system" url
+    Then WebAgent is on PaymentTab
+    And WebAgent open "<instructionUrl>"
+    Then WebAgent click on submitToPaymentCheckerButton
+    And WebAgent see successMsg
+    Then Sign Out
+
+    # ***************************************************************
+    # STEP 2: Payment Checker verifies available actions
+    # ***************************************************************
+    Given Login as "KL LOANS OPS - PROCESSING - PAYMENT CHECKER"
+    When WebAgent open "XXX system" url
+    Then WebAgent is on PaymentTab
+    And WebAgent open "<instructionUrl>"
+    And WebAgent see "Complete" button enabled
+    And WebAgent see "Return to Payment Maker" button enabled
+    Then Sign Out
+
+    Examples:
+      | instructionUrl |
+      | @instructionUrl |
+
+
+---
+
+**Comments:**
+
+- For any missing web elements or steps, please define them as needed in the comments section of each script.
+- Ensure all scripts are executed in the correct environment and with the correct user roles.
+- The scripts are designed to be clear and concise, following the Gherkin syntax standards.

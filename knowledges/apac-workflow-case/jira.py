@@ -11,7 +11,7 @@ GCM Workflow
 Requirement:
 Enhance and expand current HK Loans Workflow -HK GCM.
 
-1. INSTRUCTION UNDER KL LOANS  - PROCESSING-CHECKER STATUS, PROCESS STATUS UNDER "PROCESSING- CHECKER -QC CHECKED" OR "PROCESSING-CHEKER", KL LOANS OPS - PROCESING CHECKER actions change:
+1. INSTRUCTION UNDER KL LOANS  - PROCESSING-CHECKER STATUS, PROCESS STATUS UNDER "PROCESSING- CHECKER -QC CHECKED" OR "PROCESSING-CHEKER", KL LOANS OPS - PROCESSING CHECKER actions change:
     1. If THIRD PARTY PAYMENT=yes and COMPLETED DATE is blank, please add workFLOW action "submit to Payment",this moment disable action "complete".
     2. If THIRD PARTY PAYMENT=yes and COMPLETED DATE isn't blank, please add workFLOW action "complete", also enable action "submit to Payment.
     3. If THIRD PARTY PAYMENT=No, please add enable action "complete", disable action "submit to Payment".

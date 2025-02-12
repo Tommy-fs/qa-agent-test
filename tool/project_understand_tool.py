@@ -31,8 +31,12 @@ def understand_project():
     module_c = importlib.import_module(module_path_c)
     test_case_example = getattr(module_c, class_name_c)
 
+    class_name_g = "TEST_CASE_GUIDE"
+    test_case_guide = getattr(module_c, class_name_g)
+
     contextStr += f"\n<PROJECT_DOCUMENT>\n{project_document}\n</PROJECT_DOCUMENT>\n"
     contextStr += f"\n<TEST_CASE_EXAMPLE>\n{test_case_example}\n</TEST_CASE_EXAMPLE>\n"
+    contextStr += f"\n<TEST_CASE_GUIDE>\n{test_case_guide}\n</TEST_CASE_GUIDE>\n"
 
     log.on_log_end(generate_id)
     return contextStr
