@@ -1,0 +1,32 @@
+//Browser click on @webElement
+@When("^(\\w+) click on (@?[\\W\\.]+)")
+
+//Browser type text into @inputbox
+@When("^(\\w+) type \"([\"]*)\" into (@?[\\w\\.]+)")
+
+//Browser select item from @dropdownlist
+@When("^(\w+) select \"([\"]*)\" from (@?[\\w\.]+)")
+
+//Browser check on @checkbox
+@When("(\\w+) check on (@?[\\W\\.]*)")
+
+//Browser uncheck on @checkbox
+@When("(\\w+)uncheck on (@?[W\\.]*)")
+
+//Browser get text of webElement and save to @variable
+@Then("^(\\w+) read text from (@?[\w\\.]+) into (@\\w+)$")
+
+//Browser open url
+@When("^(\\w+) open \"([\"]*)\”url$")
+
+//Browser get url of opened page
+@Then("^(\\w+) get current url$")
+
+//Browser check if @page is opened
+@Then("^(\\w+) (am|is) on (@?[\\w\\.]+)")
+
+//Browser check @webElement exist
+@Then("^(\w+) see (@?[\\w\\.]+)")
+
+//Browser refresh page
+@Then("^(\w+)refresh$)")
