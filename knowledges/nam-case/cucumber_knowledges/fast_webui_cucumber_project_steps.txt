@@ -1,15 +1,15 @@
-@When("(\w+) open \"([^\"]*)\" url$")
-@Given("^Login SSO as \"([^\"]*)\"$")
-@When("Wait {int} seconds")
-@Given("^Login as \"([^\"]*)\"$")
-@When("^(\\w+) click on (@?[\w\.]+)")
-@Then("^(\\w+) change to next tab$")
-@Then("^(\\w+) (am|is) on (@?[w\.]+)")
-@When("^Select \"([\"]*)\" from (@[\w\\-]+)$")
-@When("^(\wt) type \"([^\"]*)\" into (@?[\w\.]+)")
-@Then("^Prepare Ticket Subject begin with  \"([\"]*)\" and Save into (@\\w)$")
-@And("^Get Ticket ID by Subject \"([\"]*)\" and save into (@\\w+)$")
-@And("^Open ticket by ID  \"([\"]*)\"$")
-@And("^check  \"([^\"]*)\" Ticketvalue is  \"([^\"]*)\"$")
-@Then("^Clear Input Box  \"([^\"]*)\"$")
-@Then("^Close Browser$")
+@When("(\w+) open \"([^\"]*)\" url$") //Open broswer before login
+@Given("^Login SSO as \"([^\"]*)\"$") //Login SSO use special role before login system
+@When("Wait {int} seconds") //Wait some seconds after trigger controller
+@Given("^Login as \"([^\"]*)\"$")//login system use the role
+@When("^(\\w+) click on (@?[\w\.]+)")//click some controller
+@Then("^(\\w+) change to next tab$")//change tab when the next step should operate in other page
+@Then("^(\\w+) (am|is) on (@?[w\.]+)")//get the controller
+@When("^Select \"([\"]*)\" from (@[\w\\-]+)$")//select some value from dropdownlist
+@When("^(\wt) type \"([^\"]*)\" into (@?[\w\.]+)")//input some value into text box
+@Then("^Prepare Ticket Subject begin with  \"([\"]*)\" and Save into (@\\w)$")//prepare ticket subject and save it
+@And("^Get Ticket ID by Subject \"([\"]*)\" and save into (@\\w+)$")//get ticket id by saved subject and save the ticket id
+@And("^Open ticket by ID  \"([\"]*)\"$")//open ticket by ticket id
+@And("^check  \"([^\"]*)\" Ticketvalue is  \"([^\"]*)\"$")//check field value in ticket details
+@Then("^Clear Input Box  \"([^\"]*)\"$")//clear text box
+@Then("^Close Browser$")//close broswer

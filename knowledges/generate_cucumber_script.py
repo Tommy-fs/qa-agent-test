@@ -6,22 +6,22 @@ We are a software company, and you are our software test expert. You are tasked 
 
 # OBJECTIVE #
 I need you create cucumber scripts for the generated test cases and cucumber knowledge base:
+
 1. Read cucumber knowledge basic example to understand grammar, format, and standard.
 2. Review test cases to understand the specific functionalities and learn each Test Step Test Data and Expected Result. You only need to create cucumber scripts for generated test cases, not for whole project document
 3. Read available web elements to understand web elements that you can use in the cucumber scripts.
 4. Read available webui cucumber system and project steps to understand the steps scripts that you can use in the cucumber scripts.
-5. Write script files related to test cases based on the provided examples, steps, web elements, and your knowledge.
-6. The generated script must be strongly associated with the test case and an explanation related to the test case must be added above each steps
-7. Do not generate any scripts that do not comply with syntax standards.
-#############
-
-# GUIDELINES #
-Please follow these guidelines:
-1. Convert each test case into a Gherkin format, which includes Given, When, and Then statements.
-2. Ensure that each steps is clear and concise, using plain language.
-3. If applicable, include And statements to combine steps for improved readability.
-4. Use tags for scenarios that require specific conditions or environments.
-
+5. Read CUCUMBER SCRIPT TEMPLATE to understand the general operating logic of the system.
+6. use the method in the template and then modify it to generate test case corresponding.
+7. Write script files related to test cases based on the provided examples, steps, web elements, and your knowledge.
+8. The generated script must be strongly associated with the test case and an explanation related to the test case must be added above each steps
+9. Do not generate any scripts that do not comply with syntax standards.
+10. Each test case corresponds to a Feature script, generate several scripts if there are several test cases. You need to output all of them.
+11. Convert each test case into a Gherkin format, which includes Given, When, and Then statements, scripts cannot be written in natural language
+12. Ensure that each steps is clear and concise, using plain language.
+13. Some action script codes are provided in the template. There are corresponding comments to explain the code block
+14. When some operations of the test case exist in the template, you need to use the corresponding action code provided by the script template as the basis, modify the parameters, steps and other contents in the corresponding template according to specific needs to generate new related script files
+15. You need to add comments before each step to explain the corresponding test step. You can refer to the template for details
 #############
 
 # GENERATED TEST CASES #
@@ -29,28 +29,28 @@ Please follow these guidelines:
 
 #############
 
-# CUCUMBER SCRIPT EXAMPLE #
-This is the cucumber script example that has already been written. You can read it to understand the general operating logic of the system.
-You need write a script corresponding to the generated test case requirements, but you are not able to copy this example.
+# CUCUMBER SCRIPT TEMPLATE #
 
-{cucumber_script_basic_example}
+{cucumber_script_basic_template}
+
+#############
+# GUIDELINE #
+Use CUCUMBER SCRIPT TEMPLATE and GUIDELINE together to complete the creation of the script(if have).
+
+{script_generate_guide}
 
 #############
 
 # AVAILABLE WEB ELEMENTS #
 You must use the provided web elements as part of the script. 
-If there are no web elements you want to use, Please define them in comments at the end, you just need give the name of the web elementes that you want to use.
 
 {available_web_elements}
 
 #############
 You must use the provided web ui cucumber steps as part of the script. 
-If there are no web ui cucumber steps you want to use, Please define them in comments at the end.you need give the annotation conditions and matching conditions, such as @And("^Check ticket Subject is \"([^\"]*)\"$").
 
 # AVAILABLE WEBUI CUCUMBER SYSTEM STEPS #
 {available_webui_cucumber_system_steps}
-
-#############
 
 # AVAILABLE WEBUI CUCUMBER PROJECT STEPS #
 {available_webui_cucumber_project_steps}

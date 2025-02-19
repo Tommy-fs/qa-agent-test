@@ -1,40 +1,36 @@
-gherkin
-Feature: Verify 'Auto Test Ref#' field is displayed only for Normal DL
+Feature: XMC Loan - Auto Test Ref# Field Addition
 
-@AutoTestRef @Medium
-Scenario Outline: Verify 'Auto Test Ref#' field visibility for Special DL
-    # ***************************************************
-    # STEP 1: Operation Manager - Log in and Create Ticket
-    # ***************************************************
-    Given WebAgent open "<system_url>" url
-    And Login SSO as "<operation_manager>"
-    And Wait 5 seconds
-    And Login as "<operation_manager>"
-    Then WebAgent click on createButton
-    And WebAgent select "Special DL" from requestTypeDropdownlist
-    And WebAgent click on saveButton
-    And Wait 5 seconds
-    # ***************************************************
-    # STEP 2: Operation Manager - Open Ticket and Verify Field Absence
-    # ***************************************************
-    When Open ticket by ID "<ticket_id>"
-    Then WebAgent is on ticketDetailsPage
-    And WebAgent click on updateTicketAction
-    Then WebAgent does not see "Auto Test Ref#" field
-    # ***************************************************
-    # STEP 3: Operation Manager - Save Form and Verify in Additional Details
-    # ***************************************************
-    When WebAgent click on saveButton
-    Then WebAgent does not see "Auto Test Ref#" field in additionalDetailsSection
+Scenario Outline: Verify the addition of 'Auto Test Ref#' field in Update Ticket action form for Normal DL and its display in Additional Details section
 
-Examples:
-    | system_url | operation_manager | ticket_id |
-    | "http://xxx-system.com" | "SopsManager" | "12345" |
+  Given User with Operations Manager role logs into XMC Loan Web
+  And Create a new ticket for Normal DL using the New Message option with Processing Team: <Processing Team>, From email address: <From Email>, To email address: <To Email>, Subject: <Subject>, Request Type: Normal DL
+  And Open the created ticket
+  And Click on 'Update Ticket' action button
+  And Verify the presence of 'Auto Test Ref#' field in the Update Ticket form
+  When Enter a value <Auto Test Ref#> in the 'Auto Test Ref#' field and save the form
+  And Verify that the 'Auto Test Ref#' field value is displayed in Additional Details section
+  And Close the ticket to complete the test case
+
+  Examples:
+    | Processing Team       | From Email      | To Email     | Subject      | Auto Test Ref# |
+    | *GT CN DevTest        | TEST123@Q.COM   | YY544@.COM   | Subject-001  | AT12345       
 
 
-### Comments ###
-- If any web elements or steps are not available, they should be defined as follows:
-  - **Web Elements**: Define new elements in the comments section at the end of the script.
-  - **Web UI Cucumber Steps**: Define new steps with appropriate annotations and matching conditions.
+Scenario Outline: Verify that the 'Auto Test Ref#' field is non-mandatory in the Update Ticket action form for Normal DL
 
-These scripts are designed to be clear, concise, and executable, ensuring they meet the test case requirements and expected results.
+  Given User with Operations Manager role logs into XMC Loan Web
+  And Create a new ticket for Normal DL using the New Message option with Processing Team: <Processing Team>, From email address: <From Email>, To email address: <To Email>, Subject: <Subject>, Request Type: Normal DL
+  And Open the created ticket
+  And Click on 'Update Ticket' action button
+  And Leave the 'Auto Test Ref#' field empty and save the form
+  And Verify that the 'Auto Test Ref#' field is not displayed in Additional Details section when left empty
+  And Close the ticket to complete the test case
+
+  Examples:
+    | Processing Team       | From Email      | To Email     | Subject      |
+    | *GT CN DevTest        | TEST123@Q.COM   | YY544@.COM   | Subject-002  | 
+
+#############
+
+# COMMENTS #
+If there are no available webui cucumber steps or web elements that you want to use, please provide the details, and I can help customize them for you.

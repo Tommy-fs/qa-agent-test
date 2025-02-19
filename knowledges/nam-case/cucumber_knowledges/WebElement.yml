@@ -1,199 +1,43 @@
+workflowPage: trait:/html/body/app-root
 #Ticket Tab
-generalTab://xxx system-button[@data-type="secondary"]//span[text()="General"]
-latestEmailTab://xxx system-button[@data-type="secondary"]//span[text()="Latest Email"]
-notesTab://xxx system-button [@data-type="secondary"]//span[text()="Notes"]
-linkageDetailsTab://xxx system-button[@data-type="secondary"]//span[text()="Linkage Details"]
-documentTab://xxx system-button[@data-type="secondary"]//span[text()="Document"]
-pendingReviewBeforeSendingTab://xxx system-button [@data-type="secondary"]//span[text()="Pending Review before Sending"]
-qcCheckListQCPricingAdjustmentTemplateTab://xxx system-button[@data-type="secondary"]//span[text()="QC Checklist QC Pri
+generalTab: #a tab named general in ticket
+
 #General Tab
 #ACTION
-updateTicketAction://xxx system-button [@data-type="secondary"]//span[text()="Update Ticket"]
-additionalDetailsNotesAction://xxx system-button [@data-type="secondary"]//span[text()="Additional Details/Notes"]
-unassignAction://xxx system-button[@data-type="secondary"]/span[text()="Unassign"]
-assignAction://xxx system-button[@data-type="secondary"]//span[text()="Assign"]
-assignToMeAction://xxx system-button [@data-type="secondary"]//span[text()="Assign To Me"]
-assignToUserAction://xxx system-button[@data-type="secondary"]//span[text()="Assign To User"]
-closeParentAction://xxx system-button[@data-type="secondary"]//span[text()="Close"]
-closeSubAction://1i//xxx system-button [@data-type="secondary"]//span[text()="Close"]
-cancelAction://xxx system-button[@data-type="secondary"]//span[text()="Cancel"]
-reopenParentAction://xxx system-button [@data-type="secondary"]//span[text()="Reopen"]
-reopenSubAction://xxx system-button[@ng-reflect-name="112"]//span[text()="Reopen"]
-reopenCreateNewAction://xxx system-button[@data-type="secondary"]//span[text()="Create New"]
-forwardParentAction://xxx system-button[@ng-reflect-name="Forward2"]//span[text()="Forward"]
-forwardSubAction://xxx system-button [@ng-reflect-name="115"]//span[text()="Forward"]
-forwardsubAction://xxx system-button[@ng-reflect-name="115"]//span[text()="Forward"]
-keepopenAndCreateNewAction://xxx system-button[@data-type="secondary"]//span[text()="Keep Opened and Create New"]
-closedAndCreateNewAction://xxx system-button [@data-type="secondary"]//span [text()="Closed and Create New"]
-approvalAction://xxx system-button[@data-type="secondary"]//span[text()="Approval"]
-sendForApprovalAction://xxx system-button[@data-type="secondary"]//span[text()="Send For Approval"]
-approveAction://xxx system-button[@data-type="secondary"]//span[text()="Approve"]
-rejectAction://xxx system-button[@data-type="secondary"]//span[text()="Reject"]
-reviewAction://xxx system-button[@data-type="secondary"]//span[text()="Review"]
-sendForReviewAction://xxx system-button[@data-type="secondary"]//span[text()="Send For Review"]
-performReviewAction://xxx system-button[@data-type="secondary"]//span[text()="Perform Review"]
-clientFollowUpAction://xxx system-button[@data-type="secondary"]//span[text()="Client Follow-up"]
-reAssignAction://xxx system-button[@data-type="secondary"]//span[text()="Reassign"]
-qcApprovalAction://xxx system-button[@data-type="secondary"]//span[text()="QC Approval"]
-sendForQCApprovalAction://xxx system-button[@data-type="secondary"]//span[text()="Send for QC Approval"]
-performQCApprovalAction://xxx system-button[@data-type="secondary"]//span[text()="Perform QC Approval"]
+updateTicketAction: # open update ticket action form by click Update Ticket action
 # BUTTON
-updateTicketButton://xxx system-button [@data-type="primary"]//span[text()="Update Ticket"]
-saveButton://xxx system-button[@data-type="primary"]//span[text()="Save"]
-updateButton://xxx system-button [@data-type="secondary"]//span[text()="Update"]
-assignToUserButton://xxx system-button[@data-type="primary"]//span[text()="Assign To User"]
-assignToUser&CloseButton://xxx system-button[@data-type="primary"]//span[text()="Assign To User Close"]
-closeButton://xxx system-button[@data-type="primary"]//span[text()="Close"]
-cancelButton://xxx system-button[@data-type="primary"]//span[text()="Cancel"]
-reopenCreateNewButton://xxx system-button[@data-type="primary"]//span[text()="Create New"]
-forwardButton://xxx system-button[@data-type="primary"]//span[text()="Forward"]
-keepopenAndCreateNewButton://xxx system-button[@data-type="primary"]//span[text()="Keep Opened and Create New"]
-closedAndCreateNewButton://xxx system-button[@data-type="primary"]//span[text()="Closed and Create New"]
-sendForApprovalButton://xxx system-button[@data-type="primary"]//span[text()="Send For Approval"]
-approveButton://xxx system-button[@data-type="primary"]//span[text()="Approve"]
-rejectButton://xxx system-button[@data-type="primary"]//span[text()="Reject"]
-clientFollowUpButton://xxx system-button[@data-type="primary"]//span[text()="Client Follow-up"]
-sendForReviewButton://xxx system-button [@data-type="primary"]//span[text()="Send For Review"]
-performReviewButton://xxx system-button [@data-type="primary"]//span[text()="Perform Review"]
-reAssignButton://xxx system-button[@data-type="primary"]//span[text()="Reassign"]
-recoverInquiryButton://xxx system-button[@data-type="primary"]//span[text()="Recover Inquiry"]
-markNonInquiryButton://xxx system-button [@data-type="primary"]//span[text()="Mark Non-Inquiry"]
-saveAsDraftButton://xxx system-button[@data-type="secondary"]//span[text()="Save As Draft"]
-sendForQCApprovalButton://xxx system-button[@data-type="primary"]//span[text()="Send for QC Approval"]
-performQCApprovalButton://xxx system-button[@data-type="primary"]//span[text()="Perform QC Approval"]
-# CK Editor
-uploadImageButton://button[@data-cke-tooltip-text="Upload image from computer"]
-insertTableButton://button[@data-cke-tooltip-text="Insert table"]
-tablesize25Button://button[@data-row="2"and data-column="5"]
-# DROPDOWN LIST
-approvalDropdownlist://xxx system-multiple-select[@ng-reflect-name="10023"]//input
-reviewDropdownlist://xxx system-select[@ng-reflect-name="10022"]//input
-analystpropdownlist://xxx system-select[@ng-reflect-name="10005"]//input
-processingTeamDropdownlist://xxx system-select[@ng-reflect-name="8"]//input
-processedInFlexCubepropdownlist://xxx system-select[@ng-reflect-name="10054"]//input
-requestTypeDropdownlist://xxx system-select[@ng-reflect-name="7"]//input
-facilityDropdownlist://xxx system-select[@ng-reflect-name="10055"]//input
-tranchepropdownlist://xxx system-select[@ng-reflect-name="10056"]//input
-currencyDropdownlist://xxx system-select[@ng-reflect-name="10067"]//input
-draftDropdownlist://nz-select-top-control[@class="ant-select-selector ng-tns-c100-2"]
-tagspropdownlist://xxx system-select[@ng-reflect-name="10047"]//input
-todaysFundingDropdownlist://xxx system-select[@ng-reflect-name="10048"]//input
-commentsDropdownlist://xxx system-select[@ng-reflect-name="10050"]//input
-currentlyPendingWithDropdownlist://xxx system-select[@ng-reflect-name="10052"]//input
-qcTriggeringConditionDropdownlist://xxx system-select[@ng-reflect-name="10084"]//input
-qcProcessingTeamDropdownlist://xxx system-select[@ng-reflect-name="10085"]//input
-qcApproverDropdownlist://label[contains(text(),"QC Approver")]/ancestor:nz-form-item//nz-form-control//
-qcRequestTypeDropdownlist://label[contains(text(),"QC Request Type")]/ancestor:nz-form-item//nz-form-co
-qcTemplatepropdownlist://label[contains(text(),"QC Template")]/ancestor::nz-form-item//nz-form-control//
-qcTagspropdownlist://label[contains(text(),"QC Tags")]/ancestor:nz-form-item//nz-form-control//xxx system-sele
-# DATA TYPE
-processingDate://label[contains(text(),"Processing Date")]//ancestor::xxx system-field-template//nz-form-contro
-processingDateToday://calendar-footer[@ng-reflect-locale="[object Object]"]//a[@role="button"]
-effectiveDate://label[contains(text(),"Effective Date")]//ancestor::xxx system-field-template//nz-form-control
-effectiveDateToday://calendar-footer[@ng-reflect-locale="[object Object]"]//a[@role="button"]
-nextActionDate://label[contains(text(),"Next Action Date")]//ancestor:xxx system-field-template//nz-form-contr
-nextActionDateToday://calendar-footer[@ng-reflect-locale="[object Object]"]//a[@role="button"]
-nextMonthButton://button [@title="Next month (PageDown)"]
-chooseYearButton://Button[@title="Choose a year"]
-chooseMonthButton://Button[@title="Choose a month"]
-selectoneYearButton://td[@title="2024"]
-selectOneMonthButton://td[@title="Dec"]
-select1thDayButton://td[@title="12/1/2024"]
-select15thDayButton://td[@title="12/15/2024"]
+updateTicketButton: # submit update ticket action form by click Update Ticket button
 #TEXT
-tradeIdText://xxx system-text[@ng-reflect-name="10059"]/input
-contractNoOrRidText://xxx system-text [@ng-reflect-name="10063"]/input
-amcIDText://xxx system-text[@ng-reflect-name="10049"]/input
-agentBankText://xxx system-text[@ng-reflect-name="10066"]/input
-businessContactText://xxx system-text [@ng-reflect-name="10057"]/input
-counterpartyText://xxx system-text[@ng-reflect-name="10060"]/input
-cusipText://xxx system-text [@ng-reflect-name="10061"]/input
-feeAmountText://xxx system-text [@ng-reflect-name="10064"]/input
-gfrnNumberText://xxx system-text[@ng-reflect-name="10065"]/input
-principalAmountText://xxx system-text[@ng-reflect-name="10068"]/input
-interestAmountText://xxx system-text[@ng-reflect-name="10069"]/input
-messageText://div[@class="ck ck-editor_main"]/div
-actionRequiredText://xxx system-text[@ng-reflect-name="10100"]/input
-fedRefText://xxx system-text [@ng-reflect-name="10101"]/input
-reMessageText://div[@class="ck ck-editor_main"]//div[@class="Wordsection1"]/p[1]
-searchTicketText://xxx system-text[@ng-reflect-name="search-ticket-id"]/input
-searchValueItem://div[@class ="ant-select-item-option-content"][1]//div[@class ="ant-select-item
-# RADIO
-typeAddCommentsRadio://xxx system-radio-group[@ng-reflect-name="10031"]//span [text()="Add comments and/o
-typeEmailCommentsRadio://xxx system-radio-group[@ng-reflect-name="10031"]//span[text()="Email comments a
-errorsFoundRadio://xxx system-radio-group[@ng-reflect-name="10017"]//label[@ng-reflect-nz-value="1"]
-noErrorsRadio://xxx system-radio-group[@ng-reflect-name="10017"]label[@ng-reflect-nz-value="2"]
-duplicatedRadio://xxx system-radio-group[@ng-reflect-name="10018]//label[@ng-reflect-nz-value="3"]
-invalidRadio://xxx system-radio-group [@ng-reflect-name="10018"]//label[@ng-reflect-nz-value="4"]
-clientInternalLoansOpsOnlyRadio://xxx system-radio-group[@ng-reflect-name="10019"]//span[text()="Loans 0
-clientInternalReplyRadio://xxx system-radio-group[@ng-reflect-name="10019"]//span[text()="Reply"]
-clientInternalReplyAllRadio://xxx system-radio-group[@ng-reflect-name="10019"]//span[text()="Reply all"]
-allApproversMustApproveYesRadio://xxx system-radio-group[@ng-reflect-name="10081"]//label[@ng-reflect-nz
-allApproversMustApproveNoRadio://xxx system-radio-group[@ng-reflect-name="10081"]//label[@ng-reflect-nz-
-qcApprovalResultApproveRadio://xxx system-radio-group[@ng-reflect-name="10094"]//label[@ng-reflect-nz-va
-qcApprovalResultRejectRadio://xxx system-radio-group[@ng-reflect-name="10094"]//label[@ng-reflect-nz-val
-# Email comments
-fromDropdownlist://xxx system-select[@ng-reflect-model=10002]
-toText://xxx system-email-address-search[@ng-reflect-name="11"]//input
-ccText://xxx system-email-address-search[@ng-reflect-name="12"]//input
-bccText://xxx system-email-address-search[@ng-reflect-name="45"]//input
-subjectText://xxx system-text[@ng-reflect-name="6"]/input
-attachFileButton://span[text()="Attach File"]
-clearButton://nz-select-clear
-# Checkbox
-addAllAttachmentsCheckbox://input[@type="checkbox"]/ancestor:label//span[text()="Add All Attachments"]
-addAllEmailsCheckbox://input[@type="checkbox"]/ancestor:label//span[text()="Add All Emails"]
-# Others
-automationTestContent://span [text()="Automation Test"]
-draftContent://span[text()="Drafts "
-subTicketName://div[@class="ag-center-cols-clipper"]//div[@row-index=""]//div[@aria-colindex="2"]
-OKMessage://span[contains(text(),"OK")]
-UCCSpan://span[contains(text(),"UCC")]
-outsideWarning://p[contains(text(),"recipients are outside")]
-informationokButton://button[@ng-reflect-disabled="false"]//span[text()="OK "
-informationcloseButton://button[@aria-label="Close"]
-mandatoryWarningMessage://span[contains(text(),"Please correct all the errors before submit")]
-# Document Tab
-filename://span[text()="demo.xlsx"]/parent:div
-fileCopyButton://xxx system-email-attachment//xxx system-button[2]
-fileCopyButton2://xxx system-tag[@nztooltiptitle="Click to copy DMC ID"]
-pasteButton://xxx system-button[@data-type="primary"]//span[text()="Paste"]
-newFileName://div[@aria-rowindex="2"]//div[@aria-colindex="7"]//xxx system-tag[@nztooltiptitle="Click to copy DMC
-newFileActivity://div[@aria-rowindex="2"]//div[@aria-colindex="1"]//span[contains(text(),"Additional Detai
-newFileActivity2://div[@aria-rowindex="3"]//div[@aria-colindex="1"]//span[contains(text(),"Additional Deta
-attachmentName://span [@nztye="link"]/parent:a[contains(text(),"demo.xlsx")]
-# Linkage Tab
-shareLinkButton://xxx system-button [@data-type="secondary"]//span[text()="Share Link"]
-addLinkButton://xxx system-button [@data-type="secondary"]//span[text()="Add Link"]
-deleteLinkButton://span[contains(text(),"Delete Link")]
-yesButton://span[text()="Yes"]
-searchLinkButton://xxx system-button [@name="search"]
-chooseLinkButton://div[@row-index="1"]//div[@ref="eWrapper"]//input[@ref="eInput"]
-addParentButton://xxx system-button[@data-type="primary"]//span[contains(text(),"Add Parent")]
-addChildButton://xxx system-button[@data-type="primary"]//span[contains(text(),"Add Child")]
-linkButton://xxx system-button[@data-type="secondary"]//span[text()="Link"]
-lessItemButton://div[@row-index="0"]//span[@ref="eExpanded"]
-moreItemButton://div[@row-index="0"]//span[@ref="eContracted"]
-# Audit Trail
-expandAuditTrail://div[text()="Audit Trail"]//ancestor::xxx system-card//div[@slot="actions"]//xxx system-button [@name-
-previewAuditButton://nz-switch [@ng-reflect-title="Preview Notes"]
-audiTrailMail://div[@class="li-file ng-star-inserted"]//div[@class="file-info file-info-0"]//span
-hyperLinkButton://a[@class="ant-btn createNewTicket xxx system-button ant-btn-icon-only"]//i[@ng-reflect-nz-typ
-# Checklist
-tradeCloserText://xxx system-text[@ng-reflect-name="Trade Closer"]//input
-sellerHasPositiontoCoversalepropdownlist://xxx system-select[@ng-reflect-name="Seller Has Position to Cover s"]
-yesEvidenceofsellerPositionIncludedpropdownlist://xxx system-select[@ng-reflect-name="if Yes Evidence of Selle
-noSellerupstceamticketisText://xxx system-textarea[@ng-reflect-name="if No Seller Upstream ticket"]//textarea
-buyeriscurrentlenderDropdownlist://xxx system-select[@ng-reflect-name="Buyer is current lender (Y/N)"]
-yesEvidenceofBuyerPositionIncludedDropdownlist://xxx system-select[@ng-reflect-name="if Yes Evidence of Buyer
-noEvidenceofBuyerKYCCompletionIncludedDropdownlist://xxx system-select[@ng-reflect-name="if No Evidence of Buy
-noTypeofConsentRequiredAndEvidencedText://xxx system-textarea[@ng-reflect-name="if No Type of Consent Reguic"
-creditAgreementPrintoutofThirdPartySummarySheetIncludedDropdownlist://xxx system-select[@ng-reflect-name="Credi
-isAssigneelistedonDisqualifiedLenderListDropdownlist://xxx system-select[@ng-reflect-name="Is Assignee listed or
-signedAssignmentAndAcceptanceDocbyAssigneeandAssignorDropdownlist://xxx system-select[@ng-reflect-name="signed A
-celeasedtoAgentforsigningclearparDropdownlist://xxx system-select[@ng-reflect-name="Rele
-globalinFlexLIOmatchesglobalonAssignmentDropdownlist://xxx system-select[@ng-reflect-nar
-isDealLXIDMappedtoTrancheinFlexcubeDropdownlist://xxx system-select[@ng-reflect-name="Is
-revolvingCreditpropdownlist://xxx system-select[@ng-reflect-name="Revolving Credit (Y/N
-yesConfirmedActivitywAgencyDropdownlist://xxx system-select[@ng-reflect-name="if Yes -
-yesarewiredetailsexistingforallcurrenciesDropdownlist://xxx system-select[@ng-reflect-na
+autoTestRefText: # a text field in update ticket action form
+
+newMessagePage: # a can create new ticket in this page
+#Button
+sendButton: #Send button,user must click this button to send email from new message to create ticket
+processingTeamDropdownlist: # Processing Team field, user can select DL in this field
+fromDropdownlist: # From field, user can select from address in this field
+toText: #To field, user can input to address into this field
+subjectText: #Subject field, user can input the ticket subject into this field
+requestTypeDropdownlist: #Request Type field, user can select request type from this field
+
+
+SSOLoginPage: trait://h2[text()="Please Login"]
+userNameTextbox: #SSO User name box, can input user soeid 
+ssoPasswordTextbox: #SSO Password box, can input password
+signOnButton: #SSO login button
+
+LoginPage: trait://input[@placeholder='SOEID']
+soeidTextbox: #System User name box, can input user soeid
+passwordTextbox: #System Password box, can input password
+loginButton: #System login button
+LogoutPage: trait:/html/body/app-root
+userIcon: //xmc-menu-icon[@name="user"]
+signOutMenu: //div[@class="list-item-title"and contains(text(),"Sign Out")]
+LoanPage: trait:/html/body/app-root
+inboxIcon: #this is an inbo icon, user can click this icon to to in system queue page
+dashboardIcon: //xmc-paper-listbox/xmc-menu-icon[@ng-reflect-name="dashboard"]
+settingIcon: //xmc-paper-listbox/xmc-menu-icon[@ng-reflect-name="setting"]
+maintenanceIcon: //xmc-paper-listbox/xmc-menu-icon[@ng-reflect-menu-name="Maintenance"]
+gldcIcon: //xmc-paper-listbox/xmc-menu-icon[@ng-reflect-menu-name="Global Loan Archived Data"]
+createButton: #Create button, user can click this button to get new message button.
+newMessageItem: # New Message button, user can clic this button to go in New Message page
+allTicketsInbox: # All ticket inbox, can click this inbox to go in All ticket Inbox.

@@ -30,25 +30,30 @@ def cucumber_script_generate(generated_test_cases):
     args = parser.parse_args()
     case = args.case
 
-    cucumber_script_basic_example = readFile(
+    cucumber_script_basic_template = readFile(
         "../knowledges/" + case + "/cucumber_knowledges/cucumber_script_base.feature")
     available_web_elements = readFile("../knowledges/" + case + "/cucumber_knowledges/WebElement.yml")
     available_webui_cucumber_system_steps = readFile(
         "../knowledges/" + case + "/cucumber_knowledges/fast_webui_cucumber_system_steps.txt")
     available_webui_cucumber_project_steps = readFile(
         "../knowledges/" + case + "/cucumber_knowledges/fast_webui_cucumber_project_steps.txt")
+    script_generate_guide = readFile(
+        "../knowledges/" + case + "/cucumber_knowledges/script_generate_guide.txt")
+    project_document = readFile(
+        "../knowledges/" + case + "/project_knowledges/project_document.py")
 
     parameters = {
         "generated_test_cases": generated_test_cases,
-        "cucumber_script_basic_example": cucumber_script_basic_example,
+        "cucumber_script_basic_template": cucumber_script_basic_template,
         "available_web_elements": available_web_elements,
         "available_webui_cucumber_system_steps": available_webui_cucumber_system_steps,
-        "available_webui_cucumber_project_steps": available_webui_cucumber_project_steps
-        # "project_document": project_document
+        "available_webui_cucumber_project_steps": available_webui_cucumber_project_steps,
+        "script_generate_guide": script_generate_guide,
+        "project_document": project_document
     }
 
     cucumber_script = (
-        LLMChat(model_type='ADVANCED').prompt_with_parameters(GENERATE_CUCUMBER_SCRIPT_KNOWLEDGE, parameters,
+        LLMChat().prompt_with_parameters(GENERATE_CUCUMBER_SCRIPT_KNOWLEDGE, parameters,
                                                               'Generate Cucumber Script',
                                                               desc='Generate cucumber script base on test cases')
         .replace("```json", '').replace("```", ''))
