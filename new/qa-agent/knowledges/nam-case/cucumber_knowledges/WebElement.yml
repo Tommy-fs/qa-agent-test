@@ -1,0 +1,43 @@
+workflowPage: trait:/html/body/app-root
+#Ticket Tab
+generalTab: #a tab named general in ticket
+
+#General Tab
+#ACTION
+updateTicketAction: # open update ticket action form by click Update Ticket action
+# BUTTON
+updateTicketButton: # submit update ticket action form by click Update Ticket button
+#TEXT
+autoTestRefText: # a text field in update ticket action form
+
+newMessagePage: # a can create new ticket in this page
+#Button
+sendButton: #Send button,user must click this button to send email from new message to create ticket
+processingTeamDropdownlist: # Processing Team field, user can select DL in this field
+fromDropdownlist: # From field, user can select from address in this field
+toText: #To field, user can input to address into this field
+subjectText: #Subject field, user can input the ticket subject into this field
+requestTypeDropdownlist: #Request Type field, user can select request type from this field
+
+
+SSOLoginPage: trait://h2[text()="Please Login"]
+userNameTextbox: #SSO User name box, can input user soeid 
+ssoPasswordTextbox: #SSO Password box, can input password
+signOnButton: #SSO login button
+
+LoginPage: trait://input[@placeholder='SOEID']
+soeidTextbox: #System User name box, can input user soeid
+passwordTextbox: #System Password box, can input password
+loginButton: #System login button
+LogoutPage: trait:/html/body/app-root
+userIcon: //xmc-menu-icon[@name="user"]
+signOutMenu: //div[@class="list-item-title"and contains(text(),"Sign Out")]
+LoanPage: trait:/html/body/app-root
+inboxIcon: #this is an inbo icon, user can click this icon to to in system queue page
+dashboardIcon: //xmc-paper-listbox/xmc-menu-icon[@ng-reflect-name="dashboard"]
+settingIcon: //xmc-paper-listbox/xmc-menu-icon[@ng-reflect-name="setting"]
+maintenanceIcon: //xmc-paper-listbox/xmc-menu-icon[@ng-reflect-menu-name="Maintenance"]
+gldcIcon: //xmc-paper-listbox/xmc-menu-icon[@ng-reflect-menu-name="Global Loan Archived Data"]
+createButton: #Create button, user can click this button to get new message button.
+newMessageItem: # New Message button, user can clic this button to go in New Message page
+allTicketsInbox: # All ticket inbox, can click this inbox to go in All ticket Inbox.
