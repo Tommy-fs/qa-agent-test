@@ -1,0 +1,69 @@
+1. **Standardization of Feature Modules**
+   - [ ] The **Feature module** should include basic information about the script, such as:
+     - The name of the functional module being tested.
+     - Author information (e.g., name or team name).
+     - Creation date and last modification date.
+     - Other key information (e.g., version number, dependency environment, etc.).
+   - [ ] The Feature description should be concise and accurately summarize the goals and scope of the test scenario.
+
+2. **Clarity of Scenario Outline**
+   - [ ] The **Scenario Outline** should clearly describe the main test points of the script, including:
+     - The goal of the test scenario.
+     - The input data and expected results involved.
+     - If parameterized testing is used, list all possible parameter combinations.
+   - [ ] Use the `Examples` table to clearly define test data, ensuring readability and maintainability.
+
+3. **Step Comments and Readability**
+   - [ ] Add comments before each test step, including:
+     - Step number (e.g., "Step 1").
+     - The user role performing the action.
+     - A description of the specific action for the step.
+   - [ ] Comments should be concise and avoid redundant information to facilitate future maintenance and team collaboration.
+
+4. **Initialization and Cleanup of Test Steps**
+   - [ ] At the beginning of each test scenario, clearly define initialization steps, such as:
+     - Opening the browser and navigating to the target website.
+     - Logging into the system with the specified user role.
+   - [ ] At the end of each test scenario, perform cleanup operations, such as:
+     - Closing the browser.
+
+5. **Standardization of Data Input and Page Operations**
+   - [ ] When entering data on a page, follow these rules:
+     - Refer to templates to select the correct page type, method, and value.
+     - Use default values from the template for fields not specifically specified.
+     - For fields that are specifically specified, use the given values.
+
+   - [ ] Before users operate on data, ensure the following:
+     - Open the correct data page.
+     - Click the edit button to enter edit mode.
+     - After entering the required values, perform the corresponding action (e.g., save, submit, etc.).
+
+6. **Completeness of Checkpoints**
+   - [ ] The test script should include necessary checkpoints to verify whether the system behavior meets expectations, such as:
+     - Display status of page elements (e.g., buttons, text, prompt messages, etc.).
+     - Correctness of field values (e.g., input validation, calculation results, etc.).
+   - [ ] Each checkpoint should clearly describe the expected result and compare it with the actual result.
+
+7. **Code Structure and Maintainability**
+   - [ ] The test script should follow Cucumber framework best practices, such as:
+     - Using clear Gherkin syntax (Given-When-Then structure).
+     - Avoiding code duplication by extracting common steps into reusable methods.
+     - Using tags to categorize and manage test scenarios.
+   - [ ] The script should have good readability and maintainability, such as:
+     - Using meaningful variable and method names.
+     - Adding necessary comments to explain complex logic.
+     - Following the project's code style guidelines.
+
+8. **Performance and Stability**
+   - [ ] The test script should consider performance and stability, such as:
+     - Avoiding unnecessary wait times by using explicit waits instead of hard-coded waits.
+     - Ensuring consistent results across multiple executions to avoid failures due to environment or data issues.
+
+9. **Dependency Management and Environment Adaptation**
+    - [ ] The test script should clearly annotate its dependencies on external conditions (e.g., database state, network environment, third-party services, etc.).
+    - [ ] For scripts requiring specific environments or configurations, provide detailed setup instructions to ensure test executability.
+
+10. **Reference document relevance**
+    - [ ] Some action script codes are provided in the template.The comment specifies which action
+    - [ ] When there is an action in the test case, you need to use the corresponding action code provided by the template as the basis
+    - [ ] Modify the parameters, steps and other contents in the corresponding template according to specific needs to generate new related script files
