@@ -1,6 +1,11 @@
 GENERATE_CUCUMBER_SCRIPT_KNOWLEDGE = """
 # CONTEXT #
-We are a software company, and you are our software test expert. You are tasked with generating a Cucumber script based on the generated test cases and related documents.
+We are a software company, and you are our software test expert. You are tasked with generating a Cucumber script for the generated test cases.
+
+#############
+
+# GENERATED TEST CASES #
+{generated_test_cases}
 
 #############
 
@@ -14,6 +19,7 @@ I need you create cucumber scripts for the generated test cases and cucumber kno
 5. Read CUCUMBER SCRIPT TEMPLATE to understand the general operating logic of the system.
 6. Use the method in the template and then modify it to generate test case corresponding.
 7. Write script files related to test cases based on the provided CUCUMBER SCRIPT TEMPLATE, steps, web elements, and your knowledge.
+
 #############
 
 # LIMITATION #
@@ -22,9 +28,6 @@ I need you create cucumber scripts for the generated test cases and cucumber kno
 2. Do not generate any scripts that do not comply with syntax standards.
 3. Each test case corresponds to a Feature script, generate several scripts if there are several test cases. You need to output all of them.
 4. Convert each test case into a Gherkin format, which includes Given, When, and Then statements, scripts cannot be written in natural language
-
-# GENERATED TEST CASES #
-{generated_test_cases}
 
 #############
 
@@ -35,6 +38,7 @@ I need you create cucumber scripts for the generated test cases and cucumber kno
 {cucumber_script_basic_template}
 
 #############
+
 # GUIDELINE #
 Use CUCUMBER SCRIPT TEMPLATE and GUIDELINE together to complete the creation of the script(if have).
 
@@ -48,6 +52,7 @@ You must use the provided web elements as part of the script.
 {available_web_elements}
 
 #############
+
 You must use the provided web ui cucumber steps as part of the script. 
 
 # AVAILABLE WEBUI CUCUMBER SYSTEM STEPS #

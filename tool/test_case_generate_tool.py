@@ -64,4 +64,4 @@ class TestCaseGenerator:
         # with open(file_path, 'w', encoding='utf-8') as file:
         #     file.write(test_case)
 
-        return test_case
+        return test_case.replace("```json", "").replace("```", "").strip()

@@ -10,7 +10,7 @@ from knowledges.generate_cucumber_script import GENERATE_CUCUMBER_SCRIPT_KNOWLED
 
 @tool("cucumber_script_generate")
 def cucumber_script_generate(
-        generated_test_cases: Annotated[str, 'local repository file path']):
+        generated_test_cases: Annotated[str, 'Newly generated test cases in the previous step']):
     """Generate test case base on JIRA Description"""
     test_case_script_generator = CucumberScriptGenerator()
     test_case_script_generator.cucumber_script_generate(generated_test_cases)
@@ -58,7 +58,7 @@ class CucumberScriptGenerator:
             project_document=parameters["project_document"],
         )
 
-        agent = Agent()
+        agent = Agent(model_name="gemini-1.5-pro-002")
 
         cucumber_script = agent.execute(prompt)
 
