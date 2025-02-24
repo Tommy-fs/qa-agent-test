@@ -1,45 +1,31 @@
-### Test Suite for JIRA Request: New Field 'Auto Test Ref#'
-
-| Priority | Name                          | Summary                                             |
-|----------|-------------------------------|-----------------------------------------------------|
-| Critical | TicketingLogic-002            | Function - Add 'Auto Test Ref#' field in Update Ticket action form for Normal DL |
-| High     | TicketingLogic-003            | Function - Verify 'Auto Test Ref#' field visibility in Additional Details section |
-
----
-
-#### Test Case 1: TicketingLogic-002
-**Priority:** Critical  
-**Name:** TicketingLogic-002  
-**Summary:** Function - Add 'Auto Test Ref#' field in Update Ticket action form for Normal DL  
-
-|No.| Test Step | Test Data | Expected Result |
-|---|-----------|-----------|------------------|
-| 1 | Operation Manager login to XMC Loan Web. | User: Operations Manager | Successful login to the system. |
-| 2 | Create a Ticket for Normal DL using New Message. | Processing Team: TEST@QCOM, From email address: TEST123@Q.COM, To email address: YY544@COM, SUBJECT: Subject-001, Request Type: Normal DL | Ticket is created successfully. |
-| 3 | Open the created Ticket. | | Ticket details are displayed. |
-| 4 | Click on Update Ticket Action. | | Update Ticket form is displayed. |
-| 5 | Check for the presence of 'Auto Test Ref#' field in the Update Ticket form. | | 'Auto Test Ref#' field is visible in the form. |
-| 6 | Leave 'Auto Test Ref#' field empty and fill other mandatory fields. | Auto Test Ref#: (empty), Other fields filled | System allows submission without error. |
-| 7 | Click Update Ticket button. | | Ticket is updated successfully without 'Auto Test Ref#' value. |
-| 8 | Close the Ticket. | | Ticket status is updated to Closed. |
+Priority: Critical  
+Name: TicketingLogic-002  
+Summary: Function - Add 'Auto Test Ref#' field in Update Ticket action form for Normal DL  
+Steps：  
+| No. | Test Step                                                                 | Test Data                                                                                          | Expected Result                                      |
+|-----|---------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------|-----------------------------------------------------|
+| 1   | Operation Manager login to XMC Loan web.                                 | Username: OperationsManager, Password: Password123                                               | User is logged in successfully.                      |
+| 2   | Create a Ticket for Normal DL by New Message.                            | Processing Team: TEST@QCOM, From email address: TEST123@Q.COM, To email address: YY544@.COM, SUBJECT: TEST 44, Request Type: Normal DL | Ticket is created with status: Unassigned.          |
+| 3   | Open Ticket created in step 2.                                          |                                                                                                    | Ticket details are displayed.                        |
+| 4   | Check if 'Auto Test Ref#' field is present in Update Ticket action form. |                                                                                                    | 'Auto Test Ref#' field is displayed.                |
+| 5   | Fill in the 'Auto Test Ref#' field with a value.                        | Auto Test Ref#: AT123456                                                                           | Field is filled successfully.                        |
+| 6   | Click Update Ticket Action.                                              |                                                                                                    | Update Ticket action form is displayed.              |
+| 7   | Click Update Ticket button.                                              |                                                                                                    | Ticket is updated successfully.                      |
+| 8   | Check 'Auto Test Ref#' value in Additional Details section.             |                                                                                                    | 'Auto Test Ref#' value is displayed correctly.      |
+| 9   | Close the Ticket.                                                        |                                                                                                    | Ticket status is changed to Closed.                  |
 
 ---
 
-#### Test Case 2: TicketingLogic-003
-**Priority:** High  
-**Name:** TicketingLogic-003  
-**Summary:** Function - Verify 'Auto Test Ref#' field visibility in Additional Details section  
-
-|No.| Test Step | Test Data | Expected Result |
-|---|-----------|-----------|------------------|
-| 1 | Operation Manager login to XMC Loan Web. | User: Operations Manager | Successful login to the system. |
-| 2 | Create a Ticket for Normal DL using New Message. | Processing Team: TEST@QCOM, From email address: TEST123@Q.COM, To email address: YY544@COM, SUBJECT: Subject-002, Request Type: Normal DL | Ticket is created successfully. |
-| 3 | Open the created Ticket. | | Ticket details are displayed. |
-| 4 | Check the Additional Details section on the Ticket Detail page. | | 'Auto Test Ref#' field is visible in the Additional Details section. |
-| 5 | Verify that 'Auto Test Ref#' field is non-mandatory. | | System allows saving without entering a value in 'Auto Test Ref#'. |
-| 6 | Close the Ticket. | | Ticket status is updated to Closed. |
-
----
-
-### Summary
-The above test cases cover the addition of the new field 'Auto Test Ref#' in the Update Ticket action form for Normal DL and its visibility in the Additional Details section. Each test case is designed to ensure that the new functionality works as intended while adhering to the specified requirements.
+Priority: High  
+Name: TicketingLogic-003  
+Summary: Function - Validate non-mandatory 'Auto Test Ref#' field behavior  
+Steps：  
+| No. | Test Step                                                                 | Test Data                                                                                          | Expected Result                                      |
+|-----|---------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------|-----------------------------------------------------|
+| 1   | Operation Manager login to XMC Loan web.                                 | Username: OperationsManager, Password: Password123                                               | User is logged in successfully.                      |
+| 2   | Create a Ticket for Normal DL by New Message.                            | Processing Team: TEST@QCOM, From email address: TEST123@Q.COM, To email address: YY544@.COM, SUBJECT: TEST 44, Request Type: Normal DL | Ticket is created with status: Unassigned.          |
+| 3   | Open Ticket created in step 2.                                          |                                                                                                    | Ticket details are displayed.                        |
+| 4   | Leave 'Auto Test Ref#' field empty and click Update Ticket Action.      |                                                                                                    | System prompts that 'Auto Test Ref#' is not mandatory. |
+| 5   | Click Update Ticket button without filling 'Auto Test Ref#'.             |                                                                                                    | Ticket is updated successfully without 'Auto Test Ref#'. |
+| 6   | Check 'Auto Test Ref#' value in Additional Details section.             |                                                                                                    | 'Auto Test Ref#' field is empty in Additional Details. |
+| 7   | Close the Ticket.                                                        |                                                                                                    | Ticket status is changed to Closed.                  |

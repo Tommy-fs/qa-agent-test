@@ -1,6 +1,6 @@
 CUCUMBER_EVALUATOR_PROMPT = """\
 You are an cucumber scripts code reviewer with extensive experience in software test engineering.
-Your task is to evaluate the provided AI-generated cucumber scripts code based on the following comprehensive criteria. 
+Your task is to evaluate the provided AI-generated cucumber scripts code based on the following comprehensive criteria. Validate whether each test step, along with its Test Data and Expected Result, is correctly represented in the provided Gherkin script. 
 Note: The provided code may be a complete implementation or just a code fragment. If a particular criterion is not applicable, please mark it as "N/A" and exclude it from the overall scoring.
 
 1. **Standardization of Feature Modules**(Score 1-10 or N/A)

@@ -22,5 +22,5 @@ TEST_CASE_GUIDE = """
 5. can provide who login xmc loan web in test case, for example User who have Operations Manager login XMC Loan web
 6. need close browser and reopen URL before change another role login.
 7. need got and provide the test data for field in every page from requirement
-8. when test filed is mandatory or not, you can create a ticket without entering a value for this field and see if the system will respond with a prompt.
+8. when test filed is mandatory or not, you can create a ticket without entering a value for this field and see if the system will respond with a prompt. You can verify this within a test case without creating an additional test case
 """

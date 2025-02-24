@@ -23,8 +23,10 @@ class QAAgent:
 
         self.jira_request = jira_request
         self.add_context()
-        self.agent.enable_evaluators()
-        self.agent.add_evaluator("cucumber script evaluator", CucumberEvaluator(self.agent.model_name))
+
+        # self.agent.enable_evaluators()
+        # self.agent.add_evaluator("cucumber script evaluator", CucumberEvaluator(self.agent.model_name))
+
         self.agent.planner = GraphPlanner()
         request = f"Generate test cases for the JIRA requirement\n"
         self.agent.execute(request)
