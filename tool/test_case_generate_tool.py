@@ -1,51 +1,67 @@
 import argparse
-import uuid
+import logging
+from typing import Annotated
 
-from langchain.pydantic_v1 import BaseModel, Field
+from agent_core.agents import Agent
+from langchain_core.tools import tool
 
-from core.llm_chat import LLMChat
-from core.log_handler import LoggingHandler
 from knowledges.generate_test_case import GENERATE_TEST_CASE_KNOWLEDGE
+from knowledges.qa_context import QA_BACKGROUND, QA_OBJECT
 
 
-class TestCaseGenerator(BaseModel):
-    jira_request: str = Field(
-        description='A paragraph about the specific Jira requirement, including summary and description, The format is str.')
-    project_document: str = Field(description='A paragraph about Detailed project documentation, The format is str.')
-    qa_context: str = Field(description='A paragraph about QA CONTEXT, The format is str.')
-    qa_object: str = Field(description='A paragraph about QA OBJECT, The format is str.')
-    test_case_example: str = Field(description='A paragraph about TEST CASE EXAMPLE, The format is str.')
-    test_case_guide: str = Field(description='A paragraph about TEST CASE GUIDE, The format is str.')
+@tool("test_case_generate")
+def test_case_generate(
+        jira_request: Annotated[str, 'the jira request'],
+        project_document: Annotated[str, 'the project document'],
+        test_case_example: Annotated[str, 'the test case example'],
+        test_case_guide: Annotated[str, 'the test case guide']):
+    """Generate test case base on JIRA Description"""
+    test_case_generator = TestCaseGenerator()
+    test_case_generator.test_cases_generate(jira_request, project_document, test_case_example, test_case_guide)
 
 
-def test_cases_generate(jira_request, project_document, qa_context, qa_object, test_case_example, test_case_guide=""):
-    generate_id = uuid.uuid1()
-    log = LoggingHandler()
-    log.on_log_start(generate_id, 'Generate test case', desc='Generate test case base on JIRA Description')
+class TestCaseGenerator:
+    def test_cases_generate(self, jira_request, project_document, test_case_example, test_case_guide=""):
+        logging.basicConfig(level=logging.INFO)
+        logging.info('Generate test case start')
 
-    parameters = {
-        "qa_context": qa_context,
-        "qa_object": qa_object,
-        "jira_content": jira_request,
-        "project_document": project_document,
-        "test_case_example": test_case_example,
-        "test_case_guide": test_case_guide
-    }
+        parameters = {
+            "qa_context": QA_BACKGROUND,
+            "qa_object": QA_OBJECT,
+            "jira_content": jira_request,
+            "project_document": project_document,
+            "test_case_example": test_case_example,
+            "test_case_guide": test_case_guide
+        }
 
-    test_case = (
-        LLMChat(model_type='ADVANCED').prompt_with_parameters(GENERATE_TEST_CASE_KNOWLEDGE, parameters,
-                                                              'Generate test case',
-                                                              desc='Generate test case base on JIRA Description')
-        .replace("```json", '').replace("```", ''))
+        prompt = GENERATE_TEST_CASE_KNOWLEDGE.format(
+            qa_context=parameters["qa_context"],
+            qa_object=parameters["qa_object"],
+            jira_content=parameters["jira_content"],
+            project_document=parameters["project_document"],
+            test_case_example=parameters["test_case_example"],
+            test_case_guide=parameters["test_case_guide"]
+        )
 
-    parser = argparse.ArgumentParser()
-    parser.add_argument("--case", required=True)
-    args = parser.parse_args()
-    case = args.case
+        agent = Agent()
+        # agent.context.add_context("system", CODE_GENERATOR_SYSTEM_MESSAGE)
+        # agent.background = f"here is source code: {files_dict_before.to_chat().replace('{', '{{').replace('}', '}}')}"
 
-    file_path = "../knowledges/" + case + "/result/test_case_generated.txt"
-    with open(file_path, 'w', encoding='utf-8') as file:
-        file.write(test_case)
+        test_case = agent.execute(prompt)
+        logging.info("AI response:")
+        logging.info(test_case)
 
-    log.on_log_end(generate_id)
-    return test_case
+        parser = argparse.ArgumentParser()
+        parser.add_argument("--case", required=True)
+        args = parser.parse_args()
+        case = args.case
+
+        file_path = "../knowledges/" + case + "/result/test_case_generated.txt"
+        with open(file_path, 'w', encoding='utf-8') as file:
+            file.write(test_case)
+
+        # file_path = "../result/test_case_generated" + datetime.now().strftime("%Y-%m-%d") + ".txt"
+        # with open(file_path, 'w', encoding='utf-8') as file:
+        #     file.write(test_case)
+
+        return test_case

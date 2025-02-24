@@ -1,78 +1,52 @@
-Based on the provided project documents and JIRA request, I've created a set of test cases focusing on the enhancements and changes specified in the JIRA request for the HK GCM Workflow. The test cases are organized into test suites with priorities assigned based on criticality and dependencies.
+### Test Suite for HK GCM Workflow Enhancements
 
-### Test Suite: HK GCM Workflow Enhancements
+#### Test Case 1
+**Priority:** Critical  
+**Name:** HKGCM-Workflow-001  
+**Summary:** Validate the HK Loans Workflow actions for KL LOANS OPS - PROCESS CHECK based on THIRD PARTY PAYMENT and COMPLETED DATE conditions.  
 
-#### Test Case 1: InstructionLogic-002
-- **Priority**: Critical
-- **Name**: InstructionLogic-002
-- **Summary**: Validate the "Submit to Payment" action when THIRD PARTY PAYMENT is "Yes" and COMPLETED DATE is blank.
-- **Steps**:
+|No.| Test Step | Test Data | Expected Result |
+|---|-----------|-----------|-----------------|
+| 1 | Login to HK GCM system as Payment Maker (PM12345) | Payment Maker account: PM12345 | Login successfully |
+| 2 | Navigate to the HK Loans Workflow section | | Workflow section displayed |
+| 3 | Create a new loan request with THIRD PARTY PAYMENT condition | Loan Request: Subject-001, Payment Type: Third Party | Loan request created with status "Pending" |
+| 4 | Set COMPLETED DATE for the loan request | Completed Date: 2023-10-01 | Completed date set successfully |
+| 5 | Perform Action - Process Check on the loan request | Loan Request: Subject-001 | Action processed successfully and status updated to "Under Review" |
+| 6 | Login to HK GCM system as Payment Checker (PC67890) | Payment Checker account: PC67890 | Login successfully |
+| 7 | Open the loan request with status "Under Review" | Loan Request: Subject-001 | Loan request details displayed |
+| 8 | Perform Action - Approve the loan request | Loan Request: Subject-001 | Loan request approved successfully and status updated to "Approved" |
 
-| No. | Test Step | Test Data | Expected Result |
-|-----|-----------|-----------|-----------------|
-| 1   | Login to XXX system as KL LOANS OPS - PROCESSING - MAKER | Maker account: MK123456 | Login successfully |
-| 2   | Create a new instruction with THIRD PARTY PAYMENT set to "Yes" and QC REQUIRE set to "False" | THIRD PARTY PAYMENT: Yes, QC REQUIRE: False | Instruction created with CURRENT STATUS "KL LOANS OPS" and PROCESS STATUS "KL LOANS - PROCESSING-CHECKER" |
-| 3   | Login to XXX system as KL LOANS OPS - PROCESSING - CHECKER | Checker account: CK123456 | Login successfully |
-| 4   | Open the instruction created and verify available actions | Instruction created | "Submit to Payment" action is available, "Complete" action is disabled |
-| 5   | Perform "Submit to Payment" action | Instruction created | PROCESS STATUS is set to "PAYMENT - MAKER" |
+#### Test Case 2
+**Priority:** High  
+**Name:** HKGCM-Workflow-002  
+**Summary:** Validate the HK Loans Workflow actions for KL LOANS OPS - PROCESS CHECK when conditions are not met.  
 
-#### Test Case 2: InstructionLogic-003
-- **Priority**: High
-- **Name**: InstructionLogic-003
-- **Summary**: Validate the "Complete" action when THIRD PARTY PAYMENT is "Yes" and COMPLETED DATE is not blank.
-- **Steps**:
+|No.| Test Step | Test Data | Expected Result |
+|---|-----------|-----------|-----------------|
+| 1 | Login to HK GCM system as Payment Maker (PM12345) | Payment Maker account: PM12345 | Login successfully |
+| 2 | Navigate to the HK Loans Workflow section | | Workflow section displayed |
+| 3 | Create a new loan request without THIRD PARTY PAYMENT condition | Loan Request: Subject-002, Payment Type: Internal | Loan request created with status "Pending" |
+| 4 | Attempt to set COMPLETED DATE for the loan request | Completed Date: 2023-10-01 | Error message displayed: "Conditions not met for processing" |
+| 5 | Login to HK GCM system as Payment Checker (PC67890) | Payment Checker account: PC67890 | Login successfully |
+| 6 | Open the loan request with status "Pending" | Loan Request: Subject-002 | Loan request details displayed |
+| 7 | Attempt to perform Action - Approve the loan request | Loan Request: Subject-002 | Error message displayed: "Cannot approve, conditions not met" |
 
-| No. | Test Step | Test Data | Expected Result |
-|-----|-----------|-----------|-----------------|
-| 1   | Login to XXX system as KL LOANS OPS - PROCESSING - MAKER | Maker account: MK123456 | Login successfully |
-| 2   | Create a new instruction with THIRD PARTY PAYMENT set to "Yes" and QC REQUIRE set to "False" | THIRD PARTY PAYMENT: Yes, QC REQUIRE: False | Instruction created with CURRENT STATUS "KL LOANS OPS" and PROCESS STATUS "KL LOANS - PROCESSING-CHECKER" |
-| 3   | Login to XXX system as KL LOANS OPS - PROCESSING - CHECKER | Checker account: CK123456 | Login successfully |
-| 4   | Open the instruction created and perform "Complete" action | Instruction created | Instruction completed, CURRENT STATUS and PROCESS STATUS set to "COMPLETED" |
+#### Test Case 3
+**Priority:** Medium  
+**Name:** HKGCM-Workflow-003  
+**Summary:** Validate the system's response to invalid inputs in the HK Loans Workflow.  
 
-#### Test Case 3: InstructionLogic-004
-- **Priority**: Medium
-- **Name**: InstructionLogic-004
-- **Summary**: Validate the "Complete" action when THIRD PARTY PAYMENT is "No".
-- **Steps**:
+|No.| Test Step | Test Data | Expected Result |
+|---|-----------|-----------|-----------------|
+| 1 | Login to HK GCM system as Payment Maker (PM12345) | Payment Maker account: PM12345 | Login successfully |
+| 2 | Navigate to the HK Loans Workflow section | | Workflow section displayed |
+| 3 | Create a new loan request with invalid THIRD PARTY PAYMENT condition | Loan Request: Subject-003, Payment Type: InvalidType | Error message displayed: "Invalid payment type" |
+| 4 | Set COMPLETED DATE to an invalid date | Completed Date: 2023-02-30 | Error message displayed: "Invalid date" |
+| 5 | Attempt to perform Action - Process Check on the loan request | Loan Request: Subject-003 | Error message displayed: "Cannot process, invalid inputs" |
 
-| No. | Test Step | Test Data | Expected Result |
-|-----|-----------|-----------|-----------------|
-| 1   | Login to XXX system as KL LOANS OPS - PROCESSING - MAKER | Maker account: MK123456 | Login successfully |
-| 2   | Create a new instruction with THIRD PARTY PAYMENT set to "No" and QC REQUIRE set to "False" | THIRD PARTY PAYMENT: No, QC REQUIRE: False | Instruction created with CURRENT STATUS "KL LOANS OPS" and PROCESS STATUS "KL LOANS - PROCESSING-CHECKER" |
-| 3   | Login to XXX system as KL LOANS OPS - PROCESSING - CHECKER | Checker account: CK123456 | Login successfully |
-| 4   | Open the instruction created and verify available actions | Instruction created | "Complete" action is available, "Submit to Payment" action is disabled |
-| 5   | Perform "Complete" action | Instruction created | Instruction completed, CURRENT STATUS and PROCESS STATUS set to "COMPLETED" |
+### Summary of Test Cases
+- **Test Case 1:** Validates the successful processing of loan requests under valid conditions.
+- **Test Case 2:** Validates the system's handling of loan requests when conditions are not met.
+- **Test Case 3:** Validates the system's response to invalid inputs in the workflow.
 
-#### Test Case 4: InstructionLogic-005
-- **Priority**: Medium
-- **Name**: InstructionLogic-005
-- **Summary**: Validate the "Submit Payment Checker" action by PAYMENT MAKER.
-- **Steps**:
-
-| No. | Test Step | Test Data | Expected Result |
-|-----|-----------|-----------|-----------------|
-| 1   | Login to XXX system as KL LOANS OPS - PROCESSING - MAKER | Maker account: MK123456 | Login successfully |
-| 2   | Create a new instruction with THIRD PARTY PAYMENT set to "Yes" and QC REQUIRE set to "False" | THIRD PARTY PAYMENT: Yes, QC REQUIRE: False | Instruction created with CURRENT STATUS "KL LOANS OPS" and PROCESS STATUS "KL LOANS - PROCESSING-CHECKER" |
-| 3   | Login to XXX system as KL LOANS OPS - PROCESSING - CHECKER | Checker account: CK123456 | Login successfully |
-| 4   | Perform "Submit to Payment" action | Instruction created | PROCESS STATUS is set to "PAYMENT - MAKER" |
-| 5   | Login to XXX system as KL LOANS OPS - PROCESSING - PAYMENT MAKER | Payment Maker account: PM123456 | Login successfully |
-| 6   | Open the instruction and perform "Submit Payment Checker" action | Instruction created | PROCESS STATUS is set to "PAYMENT-CHECKER" |
-
-#### Test Case 5: InstructionLogic-006
-- **Priority**: Low
-- **Name**: InstructionLogic-006
-- **Summary**: Validate the "Complete" action by PAYMENT CHECKER.
-- **Steps**:
-
-| No. | Test Step | Test Data | Expected Result |
-|-----|-----------|-----------|-----------------|
-| 1   | Login to XXX system as KL LOANS OPS - PROCESSING - MAKER | Maker account: MK123456 | Login successfully |
-| 2   | Create a new instruction with THIRD PARTY PAYMENT set to "Yes" and QC REQUIRE set to "False" | THIRD PARTY PAYMENT: Yes, QC REQUIRE: False | Instruction created with CURRENT STATUS "KL LOANS OPS" and PROCESS STATUS "KL LOANS - PROCESSING-CHECKER" |
-| 3   | Login to XXX system as KL LOANS OPS - PROCESSING - CHECKER | Checker account: CK123456 | Login successfully |
-| 4   | Perform "Submit to Payment" action | Instruction created | PROCESS STATUS is set to "PAYMENT - MAKER" |
-| 5   | Login to XXX system as KL LOANS OPS - PROCESSING - PAYMENT MAKER | Payment Maker account: PM123456 | Login successfully |
-| 6   | Perform "Submit Payment Checker" action | Instruction created | PROCESS STATUS is set to "PAYMENT-CHECKER" |
-| 7   | Login to XXX system as KL LOANS OPS - PROCESSING - PAYMENT CHECKER | Payment Checker account: PC123456 | Login successfully |
-| 8   | Open the instruction and perform "Complete" action | Instruction created | CURRENT STATUS and PROCESS STATUS set to "COMPLETED" |
-
-These test cases cover the key scenarios outlined in the JIRA request, ensuring that the new workflow actions and conditions are thoroughly tested.
+These test cases cover the essential functionalities and edge cases for the enhancements requested in the HK Loans Workflow, ensuring a comprehensive regression functional testing approach.

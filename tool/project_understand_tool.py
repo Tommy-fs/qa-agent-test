@@ -3,15 +3,16 @@ import importlib
 import argparse
 
 from core.log_handler import LoggingHandler
-from knowledges.qa_context import QA_CONTEXT, QA_OBJECT
+from knowledges.qa_context import QA_BACKGROUND, QA_OBJECT
 
 
 def understand_project():
+    QAAG
     generate_id = uuid.uuid1()
     log = LoggingHandler()
     log.on_log_start(generate_id, 'Understand Poject', desc='Feed QA project related knowledge')
 
-    contextStr = f"\n<QA_CONTEXT>\n{QA_CONTEXT}\n</QA_CONTEXT>\n"
+    contextStr = f"\n<QA_CONTEXT>\n{QA_BACKGROUND}\n</QA_CONTEXT>\n"
     contextStr += f"\n<QA_OBJECT>\n{QA_OBJECT}\n</QA_OBJECT>\n"
 
     parser = argparse.ArgumentParser()

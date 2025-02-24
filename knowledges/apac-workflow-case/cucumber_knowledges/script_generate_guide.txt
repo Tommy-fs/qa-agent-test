@@ -63,7 +63,7 @@
     - [ ] The test script should clearly annotate its dependencies on external conditions (e.g., database state, network environment, third-party services, etc.).
     - [ ] For scripts requiring specific environments or configurations, provide detailed setup instructions to ensure test executability.
 
-10.
+10. **Reference document relevance**
     - [ ] Some action script codes are provided in the template.The comment specifies which action
     - [ ] When there is an action in the test case, you need to use the corresponding action code provided by the template as the basis
     - [ ] Modify the parameters, steps and other contents in the corresponding template according to specific needs to generate new related script files

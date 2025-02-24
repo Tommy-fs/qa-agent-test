@@ -1,6 +1,6 @@
 GENERATE_CUCUMBER_SCRIPT_KNOWLEDGE = """
 # CONTEXT #
-We are a software company, and you are our software test expert. You are tasked with generating a Cucumber script based on the generated test cases.
+We are a software company, and you are our software test expert. You are tasked with generating a Cucumber script based on the generated test cases and related documents.
 
 #############
 
@@ -59,7 +59,7 @@ You must use the provided web ui cucumber steps as part of the script.
 
 # STYLE #
 Style refer to the successful software company, such Google, Microsoft.
-You need to refer to existing cucumber scripts,  take them as Example, learn writing habit and format to write test case:
+You need to refer to existing cucumber scripts, take them as Example, learn writing habit and format to write test case.
 
 #############
 
