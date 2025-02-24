@@ -6,7 +6,7 @@ from agent_core.agents import Agent
 from langchain_core.tools import tool
 
 from knowledges.generate_test_case import GENERATE_TEST_CASE_KNOWLEDGE
-from knowledges.qa_context import QA_CONTEXT, QA_OBJECT
+from knowledges.qa_context import QA_BACKGROUND, QA_OBJECT
 
 
 @tool("test_case_generate")
@@ -26,7 +26,7 @@ class TestCaseGenerator:
         logging.info('Generate test case start')
 
         parameters = {
-            "qa_context": QA_CONTEXT,
+            "qa_context": QA_BACKGROUND,
             "qa_object": QA_OBJECT,
             "jira_content": jira_request,
             "project_document": project_document,
