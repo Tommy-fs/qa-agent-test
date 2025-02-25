@@ -24,12 +24,17 @@ class QAAgent:
         self.jira_request = jira_request
         self.add_context()
 
-        # self.agent.enable_evaluators()
-        # self.agent.add_evaluator("cucumber script evaluator", CucumberEvaluator(self.agent.model_name))
+        self.agent.enable_evaluators()
+        self.agent.add_evaluator("cucumber script evaluator", CucumberEvaluator(self.agent.model_name))
 
         self.agent.planner = GraphPlanner()
         request = f"Generate test cases for the JIRA requirement\n"
-        self.agent.execute(request)
+        response = self.agent.execute(request)
+
+        execution_history = self.agent.execution_history
+        print(f"Execution History: {execution_history}")
+        execution_result = self.agent.get_execution_result_summary()
+        print(f"Execution Result: {execution_result}")
 
     def add_context(self):
         self.agent.context.add_context('JIRA requirements', self.jira_request)

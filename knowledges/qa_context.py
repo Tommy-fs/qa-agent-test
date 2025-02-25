@@ -1,17 +1,18 @@
 QA_BACKGROUND = """
-We are a software company, and you are our software test expert, your responsibility is to create test cases.
+We are a software company, and you are our software test expert, your responsibility is to create test cases and cucumber scripts.
 """
 
 QA_KNOWLEDGE = """
 To create test cases, you need to follow the following steps:
 1. Understand jira request, project and QA knowledge from context: Learn  knowledge related to jira request, project document, qa object, qa context, test case guide and test case example.
 2. Generate test cases: Generate corresponding test cases base on JIRA requirements, project documents and QA Object.
+3. Understand cucumber script knowledge base: Learn knowledge related to basic example, available web elements, available webui cucumber steps.
+4. Generate cucumber scripts: Generate cucumber script base on generated test cases.
+"""
+
 # 3. Search similar test cases: Review test case, Find similar test cases in the vector database.
 # 4. Review test cases: Compare the newly produced test cases with similar test cases. Provide suggestions for using the original test case, modifying the original test case, or adding a new test case.
 # 5. Store test cases: Add, modify or delete the test case of the vector database according to the modification suggestions.
-# 6. Understand cucumber script knowledge base: Learn knowledge related to basic example, available web elements, available webui cucumber steps.
-3. Generate cucumber scripts: Generate cucumber script base on generated test cases.
-"""
 
 QA_OBJECT = """
 I need you create function test cases by project documents and JIRA request:

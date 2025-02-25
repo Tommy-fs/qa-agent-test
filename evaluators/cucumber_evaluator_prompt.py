@@ -80,7 +80,7 @@ Note: The provided code may be a complete implementation or just a code fragment
 
 For each criterion, provide:
 
-- **Score (1-10) or N/A**
+- **Score or N/A**
 - **Justification:** A brief explanation for your score or reason for marking it N/A.
 
 At the end:
@@ -88,8 +88,8 @@ At the end:
 - Calculate the **Total Score**.
 - Provide a final recommendation:
 
-- **Accept Output** if the total score is above 85 and no criterion scored below 5.
-- **Rerun Subtask** if the total score is 85 or below, or if any criterion scored below 5.
+- **Accept Output** if the total score is above 80 and no criterion scored below 5.
+- **Rerun Subtask** if the total score is 80 or below, or if any criterion scored below 5.
 
 - If recommending a rerun, provide suggestions on how to improve the output.
 - If output is an incorrect and unexpected structure in response, provide the structure evaluation output still (Score 0 for each criteria)

@@ -7,7 +7,6 @@ from knowledges.qa_context import QA_BACKGROUND, QA_OBJECT
 
 
 def understand_project():
-    QAAG
     generate_id = uuid.uuid1()
     log = LoggingHandler()
     log.on_log_start(generate_id, 'Understand Poject', desc='Feed QA project related knowledge')

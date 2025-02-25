@@ -47,7 +47,7 @@ class TestCaseGenerator:
         # agent.context.add_context("system", CODE_GENERATOR_SYSTEM_MESSAGE)
         # agent.background = f"here is source code: {files_dict_before.to_chat().replace('{', '{{').replace('}', '}}')}"
 
-        test_case = agent.execute(prompt)
+        test_case = agent.execute_prompt(prompt)
         logging.info("AI response:")
         logging.info(test_case)
 
@@ -64,4 +64,4 @@ class TestCaseGenerator:
         # with open(file_path, 'w', encoding='utf-8') as file:
         #     file.write(test_case)
 
-        return test_case.replace("```json", "").replace("```", "").strip()
+        return test_case
