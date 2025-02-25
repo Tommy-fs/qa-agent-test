@@ -77,26 +77,3 @@ Feature: TicketingLogic-002 - Add Auto Test Ref# field in Update Ticket action f
         | loan_web_url | sso_username | system_username | auto_test_ref |
         |  YOUR_LOAN_WEB_URL  | YOUR_SSO_USERNAME | YOUR_SYSTEM_USERNAME | TEST123 |
 
-
-# NEW STEP DEFINITIONS (Need Implementation)
-| Step Definition                               | Implementation (Example - Adapt to your framework) |
-|-----------------------------------------------|---------------------------------------------------|
-| And "Auto Test Ref#" field is displayed in "Additional Details" section |  // Code to locate and verify the presence of the field in the Additional Details section |
-
-
-```
-
-**Explanation and Key Improvements:**
-
-* **Clear Feature Description:** The feature file now clearly states the purpose and scope of the test.
-* **Structured Steps:** The steps are organized according to the test case flow, making it easier to follow.
-* **Data-Driven Testing:** The `Scenario Outline` and `Examples` table allow you to run the same test with different data (e.g., different users, Auto Test Ref# values).  This is crucial for thorough testing.
-* **Placeholders:** Placeholders like `<loan_web_url>`, `<sso_username>`, etc., are used for variables that will be provided in the `Examples` table.  This makes the script more reusable and maintainable.
-* **Specific Email and Subject:** The provided email addresses and subject from the test case are now used directly in the script.
-* **Assumptions and TODOs:**  Where information is missing (e.g., how to locate the newly created ticket, the correct element for closing the sub-action), clear comments and placeholders are used.  You'll need to fill in these gaps based on your application's specifics.
-* **New Step Definitions Table:** A table is included to list the new step definitions that need to be implemented.  The examples provided give you a starting point, but you'll need to adapt them to your testing framework.
-* **Verification of Field Presence:**  The script now explicitly verifies the presence of the `autoTestRefText` field using `WebAgent see autoTestRefText`.
-* **Reopening Ticket Logic:** The comment indicates where the logic to reopen the ticket needs to be added. This is essential for verifying that the Auto Test Ref# value is retained.
-
-
-This improved Cucumber script provides a much stronger foundation for your testing and addresses many of the limitations and requirements outlined in the prompt. Remember to replace the placeholders and implement the missing step definitions to make the script fully functional.
