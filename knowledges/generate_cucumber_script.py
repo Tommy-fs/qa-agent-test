@@ -28,7 +28,7 @@ I need you create cucumber scripts for the generated test cases and cucumber kno
 2. Do not generate any scripts that do not comply with syntax standards.
 3. Each test case corresponds to a Feature script, generate several scripts if there are several test cases. You need to output all of them.
 4. Convert each test case into a Gherkin format, which includes Given, When, and Then statements, scripts cannot be written in natural language
-
+5. Output cannot have any extra content, only Feature module(mandatory), Test Case ID(mandatory), Scenario Outline(mandatory), Preconditions(mandatory), Steps(mandatory), Expected Results(optional), Examples(mandatory), Comments(optional).
 #############
 
 # CUCUMBER SCRIPT TEMPLATE #
@@ -79,7 +79,7 @@ The generated cucumber scripts should be detailed and meet the requirements, mee
 
 #############
 
-# RESPONSE #
+# OUTPUT #
 
 Each generated cucumber scripts includes the following components:
 
@@ -91,6 +91,7 @@ Steps(mandatory): A detailed list of actions to be performed in the test case.
 Expected Results(optional): The expected outcome after executing the steps.
 Examples(mandatory): The defined parameters you need to use. These parameters need to be used in <>
 Comments(optional): If there are no available webui cucumber steps or web elements that you want to use. You can customize a new one and display it in a table
+
 
 #############
 
