@@ -9,10 +9,14 @@ Feature:Ticket
         # ***************************************************
         # STEP 1:Operation Manager - Create Ticket
         # ***************************************************
+
+        # User who have Operation Manager login XMC Loan Web.
         Given WebAgent open "$xxx systemNAMLoginPage"url
         And Login SSo as "SopsManagel"
         And Wait 5 seconds
         And Login as "SopsManage1"
+
+        #  Go to New Message and create Ticket A according below step.
         And WebAgent click on inboxIcon
         And Wait 5 seconds
         Then WebAgent click on createButton
@@ -20,10 +24,13 @@ Feature:Ticket
         And Wait 5 seconds
         Then WebAgent change to next tab
         Then WebAgent is on newMessagePage
+
+        # Select DL A in Processing Team Dropdown list.
         And Select "*GT CN xxx system Loan Dev Test"from processingTeamDropdownlist
         And Select "*GT CN xxx system Loan Dev Test"from frompropdownlist
+
+         # input To address
         And WebAgent type "Jia,Bing Mango [OT-TECH]"into toText
-        And Wait 2 seconds
         And Wait 2 seconds
         And WebAgent click on searchValueItem
         And WebAgent click on messageText
@@ -37,6 +44,8 @@ Feature:Ticket
         And Wait 2 seconds
         And WebAgent click on searchValueItem
         And WebAgent click on messageText
+
+        # input Subject
         Then Prepare Ticket Subject begin with "[xxx system Test]UpdateTicket-"and Save into @ticketsubject
         And WebAgent type "@ticketsubject.Value"into subjectText
         And Wait 5 seconds
@@ -47,26 +56,30 @@ Feature:Ticket
         And WebAgent click on nextActionDate
         And Wait 2 seconds
         Then WebAgent click on nextActionDateToday
-        #select currency
+        # select currency
         And WebAgent type "HKD"into currencyDropdownlist
         And Wait 2 seconds
         And WebAgent click on searchValueItem
         And WebAgent click on newMeassageText
-        #select facility
+        # select facility
         And WebAgent type "Facility dev test"into facilityDropdownlist
         And Wait 2 seconds
         And WebAgent click on searchValueItem
-        #select Effective Date=today
+        # select Effective Date=today
         And WebAgent click on effectiveDate
         And Wait 2 seconds
         Then WebAgent click on effectiveDateToday
-        #input Contract or RID
+        # input Contract or RID
         And WebAgent type "001C001171880002"into contractNoOrRidText
-        #input Action Required
+        # input Action Required
         And WebAgent type "Approval Approved"into actionRequiredText
         And WebAgent type "Mail Content,send from Web by script"into messageText
+
+        # Click Send button.
         Then WebAgent click on sendButton
         And Wait 10 seconds
+
+        # Go to All Ticket Inbox and Open ticket
         Then WebAgent change to tab "xxx system Loan"
         Then WebAgent is on LoanPage
         And Wait 60 seconds
@@ -80,6 +93,8 @@ Feature:Ticket
         # ***************************************************
         # STEP 2:Operation Manager - Check Ticket Details
         # ***************************************************
+
+        # Check Processing Team, Statusl Sub Status, Request Type, Currency, Facility, Contract # or RlD and Action Required
         Then WebAgent change to next tab
         Then WebAgent is on workflowPage
         And check "Currency"Ticketvalue is "HKD"
@@ -89,7 +104,11 @@ Feature:Ticket
         # ***************************************************
         # STEP 3:Operation Manager - update Ticket in ticket detail
         # ***************************************************
+
+        # Click Update Ticket Action
         Then WebAgent click on updateTicketAction
+
+        # Select Request Type, Tags, Todays Funding, Comments, Currently Pending With,Currency, facility.
         And WebAgent type "Payoff"into requestTypepropdownlist
         And Select "Payoff"from requestTypeDropdownlist
         And Select "1.Regression Tags"from tagspropdownlist
@@ -112,14 +131,17 @@ Feature:Ticket
         And WebAgent click on selectoneMonthButton
         And WebAgent click on select15thDayButton
         And Select "DKK"from currencyDropdownlist
-        #input Action Required
+
+        # input Action Required
         Then Clear Input Box "actionRequiredText"
         And WebAgent type "Approval Rejected"into actionRequiredText select Facility:CVR REFINING ABIE RC
         And select "CVR REFINING ABTE RC"from facilitypropdowni input Principal Amount:$RN6,input Fee Amouont:SRN3
         And WebAgent type "1000000"into principalAmountText
         And WebAgent type "10000"into feeAmountText
-        #input Fed Ref#:003C001591880001
+        # input Fed Ref#:003C001591880001
         And WebAgent type "003C001591880001"into fedRefText
+
+        # Click Update Ticket button.
         Then WebAgent click on updateTicketButton
         And Wait 4 seconds
         # ***************************************************

@@ -6,12 +6,14 @@ QA_KNOWLEDGE = """
 To create test cases, you need to follow the following steps:
 1. Understand project and QA knowledge: Learn knowledge related to projects, qa_object, qa_context and test_case_example.
 2. Generate test cases: Generate corresponding test cases base on JIRA requirements, project documents and QA Object.
+4. Understand cucumber script knowledge base: Learn knowledge related to basic example, available web elements, available webui cucumber steps.
+3. Generate cucumber scripts: Generate cucumber script base on generated test cases.
+"""
+
 # 3. Search similar test cases: Review test case, Find similar test cases in the vector database.
 # 4. Review test cases: Compare the newly produced test cases with similar test cases. Provide suggestions for using the original test case, modifying the original test case, or adding a new test case.
 # 5. Store test cases: Add, modify or delete the test case of the vector database according to the modification suggestions.
 # 6. Understand cucumber script knowledge base: Learn knowledge related to basic example, available web elements, available webui cucumber steps.
-3. Generate cucumber scripts: Generate cucumber script base on generated test cases.
-"""
 
 QA_OBJECT = """
 I need you create function test cases by project documents and JIRA request:
