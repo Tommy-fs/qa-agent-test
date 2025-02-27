@@ -17,7 +17,7 @@ def test_case_generate(
         test_case_guide: Annotated[str, 'the related test case guide']):
     """Generate test case base on JIRA Description and related Document"""
     test_case_generator = TestCaseGenerator()
-    test_case_generator.test_cases_generate(jira_request, project_document, test_case_example, test_case_guide)
+    return test_case_generator.test_cases_generate(jira_request, project_document, test_case_example, test_case_guide)
 
 
 class TestCaseGenerator:
@@ -43,7 +43,7 @@ class TestCaseGenerator:
             test_case_guide=parameters["test_case_guide"]
         )
 
-        agent = Agent()
+        agent = Agent(model_name="gemini-1.5-pro-002")
 
         test_case = agent.execute(prompt)
 
@@ -61,5 +61,4 @@ class TestCaseGenerator:
         # file_path = "../result/test_case_generated" + datetime.now().strftime("%Y-%m-%d") + ".txt"
         # with open(file_path, 'w', encoding='utf-8') as file:
         #     file.write(test_case)
-
         return test_case

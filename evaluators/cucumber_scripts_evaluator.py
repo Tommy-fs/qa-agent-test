@@ -1,45 +1,11 @@
-# 11/cucumber_scripts_evaluator.py
 
-import json
-from typing import Optional, List, re
+from typing import Optional
+import re
 
 from agent_core.evaluators import BaseEvaluator
 from agent_core.evaluators.entities.evaluator_result import EvaluatorResult
 
 from evaluators.cucumber_evaluator_prompt import CUCUMBER_EVALUATOR_PROMPT
-
-
-def generate_improvement_suggestions(scores: List[tuple]) -> str:
-    """
-    Generate improvement suggestions based on the scores. For each applicable criterion with a score below 3,
-    provide a specific suggestion.
-    """
-    suggestion_dict = {
-        "Requirements Coverage": "Ensure the code fully addresses and implements the requirements.",
-        "Correctness": "Review the logic and test the code to verify its correctness.",
-        "Code Style and Conventions": "Follow standard coding practices and style guidelines.",
-        "Readability and Documentation": "Improve code organization and add meaningful comments and documentation.",
-        "Efficiency and Performance": "Optimize algorithms and resource usage for better performance.",
-        "Maintainability and Scalability": "Refactor the code to enhance maintainability and facilitate future extensions.",
-        "Security and Robustness": "Implement proper error handling and security measures to cover edge cases.",
-        "Testability": "Design the code structure to facilitate unit testing and overall verification.",
-    }
-
-    suggestions = []
-    for criterion, score_value in scores:
-        if score_value < 3:
-            suggestion = suggestion_dict.get(
-                criterion, f"Consider improving {criterion}."
-            )
-            suggestions.append(f"- {criterion}: {suggestion}")
-
-    if not suggestions:
-        suggestions.append(
-            "Review the overall implementation to better meet the requirements and quality standards."
-        )
-
-    return "\n".join(suggestions)
-
 
 class CucumberEvaluator(BaseEvaluator):
 
@@ -97,46 +63,6 @@ class CucumberEvaluator(BaseEvaluator):
     def default_prompt(self):
         return CUCUMBER_EVALUATOR_PROMPT
 
-    # def parse_scored_evaluation_response(self, evaluation_response: str):
-    #     """
-    #     Parse the evaluation text to extract scores for each criterion, and calculate the total and average scores.
-    #     For criteria marked as N/A, they are excluded from the score calculation.
-    #     """
-    #     try:
-    #         cleaned_evaluation_response = (
-    #             evaluation_response.replace("```json", "").replace("```", "").strip()
-    #         )
-    #         evaluation_data = json.loads(cleaned_evaluation_response)
-    #     except json.JSONDecodeError:
-    #         self.logger.error("Unable to parse the model's evaluation response.")
-    #         return "Reject Code", 0, []
-    #
-    #     scores = []
-    #     total_score = 0
-    #     applicable_criteria_count = 0
-    #
-    #     for item in evaluation_data["scores"]:
-    #         score_value = item["score"]
-    #         if score_value != "N/A":
-    #             scores.append((item["criterion"], score_value))
-    #             total_score += score_value
-    #             applicable_criteria_count += 1
-    #
-    #     if applicable_criteria_count == 0:
-    #         self.logger.warning("No valid criteria were parsed for evaluation.")
-    #         return "Reject Code", 0, scores
-    #
-    #     # Check if any criterion scored below 3
-    #     any_low_scores = any(score < 3 for _, score in scores)
-    #     average_score = total_score / applicable_criteria_count
-    #
-    #     decision = (
-    #         "Accept Code"
-    #         if average_score >= (5 * self.evaluation_threshold) and not any_low_scores
-    #         else "Reject Code"
-    #     )
-    #
-    #     return decision, total_score, scores
 
     def parse_scored_evaluation_response(self, evaluation_response):
         """

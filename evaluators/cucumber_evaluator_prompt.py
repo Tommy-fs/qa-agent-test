@@ -27,7 +27,7 @@ Note: The provided code may be a complete implementation or just a code fragment
       - For status messages or page elements, verify that their displayed content is accurate.
 
 4. **Ensure that the script can be executed smoothly**(Score 1-10 or N/A)
-    - [ ] Comments should be concise and standardized. Avoid using too many non-standard or overly personalized comments. Ensure that the script can be shared and executed smoothly among other members of the team.
+    - [ ] Comments should be concise and standardized. Avoid using too many non-standard or overly personalized comments. Ensure that the script can be executed smoothly among other members of the team.
       - Do not include redundant information in comments and avoid detailed explanations of known steps.
       - Follow the team or project's comment and naming conventions to ensure consistency.
       

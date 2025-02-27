@@ -13,7 +13,7 @@ def cucumber_script_generate(
         generated_test_cases: Annotated[str, 'Newly generated test cases in the previous step']):
     """Generate cucumber script based on test case generated and related document"""
     test_case_script_generator = CucumberScriptGenerator()
-    test_case_script_generator.cucumber_script_generate(generated_test_cases)
+    return test_case_script_generator.cucumber_script_generate(generated_test_cases)
 
 
 class CucumberScriptGenerator:

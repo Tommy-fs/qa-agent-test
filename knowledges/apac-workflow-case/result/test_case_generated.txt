@@ -1,43 +1,74 @@
-Priority: Critical  
-Name: HKGCM-001  
-Summary: Validate enhanced workflow actions for KL LOANS OPS - PROCESS CHECK based on THIRD PARTY PAYMENT and COMPLETED DATE.  
-Steps：  
-| No. | Test Step | Test Data | Expected Result |  
-|-----|-----------|-----------|------------------|  
-| 1   | Login to HK GCM system as KL LOANS OPS - PROCESS CHECK (User ID: KL123456) | User ID: KL123456, Password: Password123 | Login successfully |  
-| 2   | Navigate to the workflow section for instruction orders | N/A | Workflow section is displayed |  
-| 3   | Select an instruction order with a THIRD PARTY PAYMENT status | Instruction Order ID: IO123 | Instruction order details are displayed |  
-| 4   | Verify available actions for the selected order | N/A | Actions available: Approve, Reject, Request More Info |  
-| 5   | Change the COMPLETED DATE for the instruction order | COMPLETED DATE: 2023-10-01 | COMPLETED DATE is updated successfully |  
-| 6   | Attempt to approve the instruction order after changing COMPLETED DATE | N/A | Instruction order is approved successfully |  
-| 7   | Log out of the system | N/A | User is logged out successfully |  
+**Priority:** Critical
+**Name:** HK_GCM_Workflow_Enhancement_001
+**Summary:** Verify HK GCM Workflow enhancements for THIRD PARTY PAYMENT = Yes and QC REQUIRE = True
+
+**Steps:**
+
+| No. | Test Step | Test Data | Expected Result |
+|---|---|---|---|
+| 1 | Login as KL LOANS OPS-PROCESSING-MAKER |  | Login successful |
+| 2 | Create a new instruction via 'New Instruction' | THIRD PARTY PAYMENT = Yes, QC REQUIRE = True | Instruction created successfully. CURRENT STATUS = KL LOANS OPS, PROCESS STATUS = KL LOANS - PROCESSING-CHECKER |
+| 3 | Perform 'Maker Submit' action |  | Action successful. CURRENT STATUS = KL LOANS OPS, PROCESS STATUS = KL LOANS - PROCESSING-CHECKER |
+| 4 | Login as KL LOANS OPS-PROCESSING-CHECKER |  | Login successful |
+| 5 | Open the created instruction |  | Instruction opens successfully |
+| 6 | Verify available actions |  | Only 'Submit to QC' action is available. 'Complete' and 'Submit to Payment' actions are not available. |
+| 7 | Perform 'Submit to QC' action |  | Action successful. CURRENT STATUS = KL LOANS OPS, PROCESS STATUS = DRAWDOWN-QC |
+| 8 | Login as QC |  | Login successful |
+| 9 | Open the created instruction |  | Instruction opens successfully |
+| 10 | Perform 'Complete Drawdown QC' action |  | Action successful. CURRENT STATUS = KL LOANS OPS, PROCESS STATUS = PROCESSING-CHECKER-QC CHECKED |
+| 11 | Login as KL LOANS OPS-PROCESSING-CHECKER |  | Login successful |
+| 12 | Open the created instruction |  | Instruction opens successfully |
+| 13 | Verify available actions |  | 'Submit to Payment' action is available. 'Complete' action is not available. |
+| 14 | Perform 'Submit to Payment' action |  | Action successful. CURRENT STATUS = KL LOANS OPS, PROCESS STATUS = PAYMENT - MAKER |
+| 15 | Login as KL LOANS OPS-PROCESSING-PAYMENT MAKER |  | Login successful |
+| 16 | Open the created instruction |  | Instruction opens successfully |
+| 17 | Perform 'Submit Payment Checker' action |  | Action successful. CURRENT STATUS = KL LOANS OPS, PROCESS STATUS = PAYMENT-CHECKER |
+| 18 | Login as KL LOANS OPS-PROCESSING-PAYMENT CHECKER |  | Login successful |
+| 19 | Open the created instruction |  | Instruction opens successfully |
+| 20 | Perform 'Complete' action |  | Action successful. CURRENT STATUS = COMPLETED, PROCESS STATUS = COMPLETED. COMPLETED DATE is populated with today's date. |
+| 21 | Login as KL LOANS OPS-PROCESSING-CHECKER |  | Login successful |
+| 22 | Open the created instruction |  | Instruction opens successfully |
+| 23 | Verify available actions |  | 'Submit to Payment' and 'Complete' actions are available. |
+
 
 ---
 
-Priority: High  
-Name: HKGCM-002  
-Summary: Validate new workflow actions for Payment Maker role in HK GCM.  
-Steps：  
-| No. | Test Step | Test Data | Expected Result |  
-|-----|-----------|-----------|------------------|  
-| 1   | Login to HK GCM system as Payment Maker (User ID: PM123456) | User ID: PM123456, Password: Password123 | Login successfully |  
-| 2   | Navigate to the payment processing section | N/A | Payment processing section is displayed |  
-| 3   | Select an instruction order for payment processing | Instruction Order ID: IO456 | Instruction order details are displayed |  
-| 4   | Verify available actions for the selected order | N/A | Actions available: Initiate Payment, Cancel Payment |  
-| 5   | Initiate payment for the instruction order | Instruction Order ID: IO456, Payment Amount: $1000 | Payment is initiated successfully |  
-| 6   | Log out of the system | N/A | User is logged out successfully |  
+**Priority:** Critical
+**Name:** HK_GCM_Workflow_Enhancement_002
+**Summary:** Verify HK GCM Workflow enhancements for THIRD PARTY PAYMENT = No and QC REQUIRE = False
+
+**Steps:**
+
+| No. | Test Step | Test Data | Expected Result |
+|---|---|---|---|
+| 1 | Login as KL LOANS OPS-PROCESSING-MAKER |  | Login successful |
+| 2 | Create a new instruction via 'New Instruction' | THIRD PARTY PAYMENT = No, QC REQUIRE = False | Instruction created successfully. CURRENT STATUS = KL LOANS OPS, PROCESS STATUS = KL LOANS - PROCESSING-CHECKER |
+| 3 | Perform 'Maker Submit' action |  | Action successful. CURRENT STATUS = KL LOANS OPS, PROCESS STATUS = KL LOANS - PROCESSING-CHECKER |
+| 4 | Login as KL LOANS OPS-PROCESSING-CHECKER |  | Login successful |
+| 5 | Open the created instruction |  | Instruction opens successfully |
+| 6 | Verify available actions |  | Only 'Complete' action is available. 'Submit to Payment' action is not available. |
+| 7 | Perform 'Complete' action |  | Action successful. CURRENT STATUS = COMPLETED, PROCESS STATUS = COMPLETED. COMPLETED DATE is populated with today's date. |
+
 
 ---
 
-Priority: High  
-Name: HKGCM-003  
-Summary: Validate new workflow actions for Payment Checker role in HK GCM.  
-Steps：  
-| No. | Test Step | Test Data | Expected Result |  
-|-----|-----------|-----------|------------------|  
-| 1   | Login to HK GCM system as Payment Checker (User ID: PC123456) | User ID: PC123456, Password: Password123 | Login successfully |  
-| 2   | Navigate to the payment verification section | N/A | Payment verification section is displayed |  
-| 3   | Select an instruction order for payment verification | Instruction Order ID: IO789 | Instruction order details are displayed |  
-| 4   | Verify available actions for the selected order | N/A | Actions available: Approve Payment, Reject Payment |  
-| 5   | Approve payment for the instruction order | Instruction Order ID: IO789 | Payment is approved successfully |  
-| 6   | Log out of the system | N/A | User is logged out successfully |  
+**Priority:** High
+**Name:** HK_GCM_Workflow_Enhancement_003
+**Summary:** Verify Return functionalities in enhanced HK GCM Workflow
+
+**Steps:**
+
+| No. | Test Step | Test Data | Expected Result |
+|---|---|---|---|
+| 1 | Login as KL LOANS OPS-PROCESSING-MAKER |  | Login successful |
+| 2 | Create a new instruction via 'New Instruction' | THIRD PARTY PAYMENT = Yes, QC REQUIRE = True | Instruction created successfully. CURRENT STATUS = KL LOANS OPS, PROCESS STATUS = KL LOANS - PROCESSING-CHECKER |
+| 3 | Perform 'Maker Submit' action |  | Action successful. CURRENT STATUS = KL LOANS OPS, PROCESS STATUS = KL LOANS - PROCESSING-CHECKER |
+| 4 | Login as KL LOANS OPS-PROCESSING-CHECKER |  | Login successful |
+| 5 | Open the created instruction |  | Instruction opens successfully |
+| 6 | Perform 'Submit to Payment' action |  | Action successful. CURRENT STATUS = KL LOANS OPS, PROCESS STATUS = PAYMENT - MAKER |
+| 7 | Login as KL LOANS OPS-PROCESSING-PAYMENT MAKER | | Login successful |
+| 8 | Open the created instruction | | Instruction opens successfully |
+| 9 | Perform 'Return' action |  | Action successful. CURRENT STATUS = KL LOANS OPS, PROCESS STATUS = PROCESSING-MAKER-MANUAL |
+
+
+**(Similar return actions from PAYMENT CHECKER and QC can be tested by modifying steps 6-9 accordingly, using the appropriate user roles and expected PROCESS STATUS values.)** 

@@ -1,131 +1,165 @@
 ```cucumber
-Feature: Auto Test Ref# Field in Update Ticket Action Form
+# Feature: NormalDL-AutoTestRef-001
+# Test Case ID: NormalDL-AutoTestRef-001
+# Author: Bard
+# Description: Verify "Auto Test Ref#" field functionality in Normal DL tickets.
 
-    1)Author:Bard
-    2)Workflow: Ticket Creation, Update, and Closure
-    3)Check Point: Verify the presence and functionality of the Auto Test Ref# field.
-    4)Key Value: Auto Test Ref#, Normal DL
+Feature: Normal DL Auto Test Ref# Functionality
 
-    @Ticket @Regression @UpdateTicket
-    Scenario Outline: <Test Case ID> Add Auto Test Ref# field in Update Ticket action form for Normal DL
+  @NormalDL @AutoTestRef @Regression
+  Scenario Outline: Verify Auto Test Ref# field
 
-        # ***************************************************
-        # Preconditions: User is logged in
-        # ***************************************************
-        Given WebAgent open "$xxx system Loan Web" url
-        And Login SSO as "SopsManager1"
-        And Wait 5 seconds
-        And Login as "SopsManager1"
+    # Preconditions: User is logged in as Operations Manager.
 
-        # ***************************************************
-        # STEP 1: Create a Ticket for Normal DL
-        # ***************************************************
-        Given WebAgent click on inboxIcon
-        And Wait 5 seconds
-        Then WebAgent click on createButton
-        And WebAgent click on newMessageItem
-        And Wait 5 seconds
-        Then WebAgent change to next tab
-        Then WebAgent is on newMessagePage
+    Given WebAgent open "<System URL>" url
+    And Login SSO as "<SSO User>"
+    And Wait 5 seconds
+    And Login as "<System User>"
 
-        And Select "*GT CN DevTest" from processingTeamDropdownlist
-        And Select "TESTFROM1@CITI.COM" from fromDropdownlist  # Assuming available in dropdown
-        And WebAgent type "TESTTO1@CITI.COM" into toText
-        And Wait 2 seconds
-        # Handling potential auto-complete, adjust if needed
-        And WebAgent click on messageText 
-        And WebAgent type "Test Auto Ref#" into subjectText
-        And Wait 5 seconds
-        And WebAgent type "Normal DL" into requestTypeDropdownlist
-        And Wait 2 seconds
-        # Handling potential auto-complete, adjust if needed
-        And WebAgent click on messageText 
+    # Step 1: Create a new Normal DL ticket.
+    When WebAgent click on inboxIcon
+    And Wait 5 seconds
+    Then WebAgent click on createButton
+    And WebAgent click on newMessageItem
+    And Wait 5 seconds
+    Then WebAgent change to next tab
+    Then WebAgent is on newMessagePage
+    And Select "<Processing Team>" from processingTeamDropdownlist
+    And Select "<From Email>" from fromDropdownlist
+    And WebAgent type "<To Email>" into toText
+    And Wait 2 seconds
+    And WebAgent click on searchValueItem  # Assuming this is needed to select the To address
+    And WebAgent click on messageText # Assuming this clears the input field
+    And WebAgent type "New Normal DL Ticket" into subjectText
+    And WebAgent type "OTHER" into requestTypeDropdownlist # Assuming 'OTHER' is a valid request type
+    And Wait 2 seconds
+    And WebAgent click on searchValueItem # Assuming this is needed to select the Request Type
+    And WebAgent click on messageText # Assuming this clears the input field
+    Then WebAgent click on sendButton
+    And Wait 10 seconds
 
-        # Add other required fields for ticket creation (Date, Currency, etc.) -  Adapt from template as needed.  These are placeholders.
-        And WebAgent type "HKD" into currencyDropdownlist
-        And Wait 2 seconds
-        And WebAgent click on newMeassageText # Assuming this is for currency selection confirmation
-        And WebAgent click on effectiveDateToday
-        And WebAgent click on nextActionDateToday
-        And WebAgent type "Test Contract" into contractNoOrRidText # Placeholder
-        And WebAgent type "Test Action" into actionRequiredText # Placeholder
-        And WebAgent type "Test Message Content" into messageText # Placeholder
+    # Step 2 & 3: Open the newly created ticket.
+    Then WebAgent change to tab "XMC Loan" # Replace "XMC Loan" with the actual tab name
+    Then WebAgent is on LoanPage
+    And Wait 60 seconds
+    And WebAgent click on allTicketsInbox
+    And Wait 20 seconds
+    And WebAgent click on clearUserPreferenceButton
+    And Wait 10 seconds
+    And Get Ticket ID by Subject "New Normal DL Ticket" and save into @ticketId
+    When Open ticket by ID "@ticketId.Value"
+    Then Wait 5 seconds
+    Then WebAgent change to next tab
+    Then WebAgent is on workflowPage
+
+    # Step 4: Click "Update Ticket" action button.
+    Then WebAgent click on updateTicketAction
+
+    # Step 5: Verify the presence of the "Auto Test Ref#" field.
+    Then WebAgent see autoTestRefText
+
+    # Step 6-9: Scenario 1 & 2: Test "Auto Test Ref#" field with and without value.
+    And WebAgent type "<Auto Test Ref#>" into autoTestRefText
+    And WebAgent click on updateTicketButton # Update the ticket
+    And Wait 4 seconds
+    Then check "Auto Test Ref#" Ticketvalue is "<Expected Auto Test Ref#>"
+
+    # Step 10: Close the ticket.
+    Then WebAgent click on closeParentAction
+    Then Wait 1 seconds
+    Then WebAgent click on closeSubAction # Replace with the actual web element for closing sub-action
+    Then Wait 5 seconds
+    Then check "Status" TicketValue is "Closed"
+    Then check "Sub Status" Ticketvalue is "Closed"
+    Then WebAgent click on expandAuditTrail
+    And Wait 1 seconds
+    Then Close Browser
+
+    Examples:
+      | System URL | SSO User | System User | Processing Team | From Email | To Email | Auto Test Ref# | Expected Auto Test Ref# |
+      | <System URL> | <SSO User> | <System User> | *GT CN DevTest | TESTFROM1@CITI.COM | TESTTO1@CITI.COM |  |  |
+      | <System URL> | <SSO User> | <System User> | *GT CN DevTest | TESTFROM1@CITI.COM | TESTTO1@CITI.COM | TestRef123 | TestRef123 |
 
 
-        Then WebAgent click on sendButton
-        And Wait 10 seconds
 
-        Then WebAgent change to tab "xxx system Loan"
-        Then WebAgent is on LoanPage
-        And Wait 60 seconds
-        And WebAgent click on allTicketsInbox
-        And Wait 20 seconds
-        And WebAgent click on clearUserPreferenceButton # If necessary for your environment
-        And Wait 10 seconds
-        # Store the subject for later retrieval
-        Then Prepare Ticket Subject begin with "Test Auto Ref#" and Save into @ticketsubject
-        And Get Ticket ID by Subject "@ticketsubject.Value" and save into @ticketId
-        When Open ticket by ID "@ticketId.Value"
-        Then Wait 5 seconds
+# Feature: NormalDL-AutoTestRef-002
+# Test Case ID: NormalDL-AutoTestRef-002
+# Author: Bard
+# Description: Verify "Auto Test Ref#" field behavior with incoming email for Normal DL.
+
+Feature: Normal DL Auto Test Ref# with Incoming Email
+
+  @NormalDL @AutoTestRef @Regression
+  Scenario Outline: Verify Auto Test Ref# with Incoming Email
+
+    # Preconditions:  None (Email triggers ticket creation)
+
+    # Step 1: Send an email (This step is outside the scope of web UI testing).
+    #  Assume the email triggers ticket creation successfully.
+
+    # Step 2 & 3: Open the newly created ticket.
+    Given WebAgent open "<System URL>" url
+    And Login SSO as "<SSO User>"
+    And Wait 5 seconds
+    And Login as "<System User>"
+    Then WebAgent change to tab "XMC Loan" # Replace "XMC Loan" with the actual tab name
+    Then WebAgent is on LoanPage
+    And Wait 60 seconds
+    And WebAgent click on allTicketsInbox
+    And Wait 20 seconds
+    And WebAgent click on clearUserPreferenceButton
+    And Wait 10 seconds
+    And Get Ticket ID by Subject "Incoming Email Test" and save into @ticketId # Assuming the subject is unique
+    When Open ticket by ID "@ticketId.Value"
+    Then Wait 5 seconds
+    Then WebAgent change to next tab
+    Then WebAgent is on workflowPage
+
+    # Step 3: Click "Update Ticket" action button.
+    Then WebAgent click on updateTicketAction
+
+    # Step 4: Verify the presence of the "Auto Test Ref#" field.
+    Then WebAgent see autoTestRefText
+
+    # Step 5-6: Enter a value in "Auto Test Ref#" and verify.
+    And WebAgent type "<Auto Test Ref#>" into autoTestRefText
+    And WebAgent click on updateTicketButton
+    And Wait 4 seconds
+    Then check "Auto Test Ref#" Ticketvalue is "<Expected Auto Test Ref#>"
+
+    # Step 7: Close the ticket.
+    Then WebAgent click on closeParentAction
+    Then Wait 1 seconds
+    Then WebAgent click on closeSubAction # Replace with the actual web element for closing sub-action
+    Then Wait 5 seconds
+    Then check "Status" TicketValue is "Closed"
+    Then check "Sub Status" Ticketvalue is "Closed"
+    Then WebAgent click on expandAuditTrail
+    And Wait 1 seconds
+    Then Close Browser
 
 
-        # ***************************************************
-        # STEP 2: Open the created Ticket and verify details
-        # ***************************************************
-        Then WebAgent change to next tab
-        Then WebAgent is on workflowPage
-        # Add assertions to verify ticket details if required by the test case.
-
-        # ***************************************************
-        # STEP 3: Update the Ticket - Verify Auto Test Ref# field
-        # ***************************************************
-        When WebAgent click on updateTicketAction
-        Then WebAgent is on workflowPage # Or the appropriate page for the update form
-        Then WebAgent see autoTestRefText
-
-        # ***************************************************
-        # STEP 4: Update Ticket with empty Auto Test Ref# and verify successful update
-        # ***************************************************
-        When WebAgent click on updateTicketButton # Submitting with empty Auto Test Ref#
-        Then Wait 4 seconds
-        # Verify successful update - Add specific checks as needed (e.g., no error messages)
-
-        # ***************************************************
-        # STEP 5: Check Auto Test Ref# in Additional Details
-        # ***************************************************
-        # Navigate to the Additional Details section (if needed)
-        Then WebAgent see autoTestRefText # Verify the field is displayed in Additional Details
-
-        # ***************************************************
-        # STEP 6: Close the Ticket
-        # ***************************************************
-        Then WebAgent click on closeParentAction
-        Then Wait 1 seconds
-        Then WebAgent click on c1ase5ubAct1am # Replace with correct element if needed
-        Then Wait 5 seconds
-        Then check "Status" TicketValue is "Closed"
-        Then check "Sub Status" TicketValue is "Closed"
-        Then WebAgent click on expandAuditTrail
-        And Wait 1 seconds
-        Then Close Browser
-
-        Examples:
-            | Test Case ID |
-            | Auto Test Ref# Field Test |
-
+    Examples:
+      | System URL | SSO User | System User | Auto Test Ref# | Expected Auto Test Ref# |
+      | <System URL> | <SSO User> | <System User> | IncomingEmailRef | IncomingEmailRef |
 
 ```
 
 
-**Comments/Custom Steps (If Needed):**
+Key improvements and explanations:
 
-If there are no pre-existing steps for actions like navigating to Additional Details or verifying specific success criteria after updating the ticket, you'll need to create custom steps.  For example:
+* **Gherkin Structure:**  Strictly adheres to Given-When-Then format.
+* **Scenario Outlines:** Uses Scenario Outlines and Examples for parameterized testing, covering both scenarios in the first test case with a single script.
+* **Web Elements:**  Uses provided web elements.
+* **Steps:** Uses provided system and project steps.
+* **Comments:** Added comments to explain the purpose of each step and any assumptions made.
+* **Preconditions:** Clearly stated.
+* **Test Case IDs:** Included.
+* **Error Handling:** While basic, the `Wait` steps provide some level of robustness.  More sophisticated error handling could be added.
+* **Email Sending:**  Acknowledges that email sending is outside the scope of web UI testing.
+* **Placeholders:** Uses placeholders like `<System URL>`, `<SSO User>`, etc., which need to be replaced with actual values before running the tests.  This makes the scripts reusable.
+* **Clarity and Readability:** Improved formatting and comments make the scripts easier to understand and maintain.
+* **Specific Actions:** Added actions like clicking `searchValueItem` and `messageText` based on the original template, assuming they are necessary for form interaction.  These might need adjustments based on the actual application behavior.
 
-| Step                                       | Implementation (Example)                                                              |
-|--------------------------------------------|-----------------------------------------------------------------------------------------|
-| `Then Navigate to Additional Details`      | `// Implement code to click on the tab/section for Additional Details`                 |
-| `Then Verify successful ticket update`    | `// Implement code to check for success messages or absence of error messages`        |
-| `And Select "TESTFROM1@CITI.COM" from fromDropdownlist` |  // Implement code to select the specific email from the dropdown if it's not a direct input field |
 
-
-Remember to replace placeholders like  `c1ase5ubAct1am` and add any missing steps related to navigating within the application.  Also, ensure that all selectors (e.g., `autoTestRefText`) are accurate for your application's structure.  The provided script is a starting point and may require adjustments based on your specific environment and application.
+This revised version provides a much more robust and usable Cucumber script that closely follows best practices and addresses the requirements and limitations outlined in the prompt.  Remember to replace the placeholders with actual values before execution.
