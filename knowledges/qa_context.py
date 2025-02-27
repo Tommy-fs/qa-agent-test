@@ -4,10 +4,8 @@ We are a software company, and you are our software test expert, your responsibi
 
 QA_KNOWLEDGE = """
 To create test cases, you need to follow the following steps:
-1. Understand jira request, project and QA knowledge from context: Learn  knowledge related to jira request, project document, qa object, qa context, test case guide and test case example.
-2. Generate test cases: Generate corresponding test cases base on JIRA requirements, project documents and QA Object.
-3. Understand cucumber script knowledge base: Learn knowledge related to basic example, available web elements, available webui cucumber steps.
-4. Generate cucumber scripts: Generate cucumber script base on generated test cases.
+1. Generate test cases: Generate corresponding test cases base on JIRA requirements, project documents and QA Object.
+2. Generate cucumber scripts: Generate cucumber script base on generated test cases.
 """
 
 # 3. Search similar test cases: Review test case, Find similar test cases in the vector database.

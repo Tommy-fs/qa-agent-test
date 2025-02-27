@@ -12,10 +12,10 @@ from knowledges.qa_context import QA_BACKGROUND, QA_OBJECT
 @tool("test_case_generate")
 def test_case_generate(
         jira_request: Annotated[str, 'the jira request'],
-        project_document: Annotated[str, 'the project document'],
-        test_case_example: Annotated[str, 'the test case example'],
-        test_case_guide: Annotated[str, 'the test case guide']):
-    """Generate test case base on JIRA Description"""
+        project_document: Annotated[str, 'the related project document'],
+        test_case_example: Annotated[str, 'the related test case example'],
+        test_case_guide: Annotated[str, 'the related test case guide']):
+    """Generate test case base on JIRA Description and related Document"""
     test_case_generator = TestCaseGenerator()
     test_case_generator.test_cases_generate(jira_request, project_document, test_case_example, test_case_guide)
 
@@ -44,12 +44,8 @@ class TestCaseGenerator:
         )
 
         agent = Agent()
-        # agent.context.add_context("system", CODE_GENERATOR_SYSTEM_MESSAGE)
-        # agent.background = f"here is source code: {files_dict_before.to_chat().replace('{', '{{').replace('}', '}}')}"
 
-        test_case = agent.execute_prompt(prompt)
-        logging.info("AI response:")
-        logging.info(test_case)
+        test_case = agent.execute(prompt)
 
         parser = argparse.ArgumentParser()
         parser.add_argument("--case", required=True)
@@ -59,6 +55,8 @@ class TestCaseGenerator:
         file_path = "../knowledges/" + case + "/result/test_case_generated.txt"
         with open(file_path, 'w', encoding='utf-8') as file:
             file.write(test_case)
+
+        logging.info("Test case result has been wrote in " + file_path)
 
         # file_path = "../result/test_case_generated" + datetime.now().strftime("%Y-%m-%d") + ".txt"
         # with open(file_path, 'w', encoding='utf-8') as file:

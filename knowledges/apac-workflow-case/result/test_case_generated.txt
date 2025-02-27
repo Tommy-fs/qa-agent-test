@@ -1,52 +1,43 @@
-### Test Suite for HK GCM Workflow Enhancements
+Priority: Critical  
+Name: HKGCM-001  
+Summary: Validate enhanced workflow actions for KL LOANS OPS - PROCESS CHECK based on THIRD PARTY PAYMENT and COMPLETED DATE.  
+Steps：  
+| No. | Test Step | Test Data | Expected Result |  
+|-----|-----------|-----------|------------------|  
+| 1   | Login to HK GCM system as KL LOANS OPS - PROCESS CHECK (User ID: KL123456) | User ID: KL123456, Password: Password123 | Login successfully |  
+| 2   | Navigate to the workflow section for instruction orders | N/A | Workflow section is displayed |  
+| 3   | Select an instruction order with a THIRD PARTY PAYMENT status | Instruction Order ID: IO123 | Instruction order details are displayed |  
+| 4   | Verify available actions for the selected order | N/A | Actions available: Approve, Reject, Request More Info |  
+| 5   | Change the COMPLETED DATE for the instruction order | COMPLETED DATE: 2023-10-01 | COMPLETED DATE is updated successfully |  
+| 6   | Attempt to approve the instruction order after changing COMPLETED DATE | N/A | Instruction order is approved successfully |  
+| 7   | Log out of the system | N/A | User is logged out successfully |  
 
-#### Test Case 1
-**Priority:** Critical  
-**Name:** HKGCM-Workflow-001  
-**Summary:** Validate the HK Loans Workflow actions for KL LOANS OPS - PROCESS CHECK based on THIRD PARTY PAYMENT and COMPLETED DATE conditions.  
+---
 
-|No.| Test Step | Test Data | Expected Result |
-|---|-----------|-----------|-----------------|
-| 1 | Login to HK GCM system as Payment Maker (PM12345) | Payment Maker account: PM12345 | Login successfully |
-| 2 | Navigate to the HK Loans Workflow section | | Workflow section displayed |
-| 3 | Create a new loan request with THIRD PARTY PAYMENT condition | Loan Request: Subject-001, Payment Type: Third Party | Loan request created with status "Pending" |
-| 4 | Set COMPLETED DATE for the loan request | Completed Date: 2023-10-01 | Completed date set successfully |
-| 5 | Perform Action - Process Check on the loan request | Loan Request: Subject-001 | Action processed successfully and status updated to "Under Review" |
-| 6 | Login to HK GCM system as Payment Checker (PC67890) | Payment Checker account: PC67890 | Login successfully |
-| 7 | Open the loan request with status "Under Review" | Loan Request: Subject-001 | Loan request details displayed |
-| 8 | Perform Action - Approve the loan request | Loan Request: Subject-001 | Loan request approved successfully and status updated to "Approved" |
+Priority: High  
+Name: HKGCM-002  
+Summary: Validate new workflow actions for Payment Maker role in HK GCM.  
+Steps：  
+| No. | Test Step | Test Data | Expected Result |  
+|-----|-----------|-----------|------------------|  
+| 1   | Login to HK GCM system as Payment Maker (User ID: PM123456) | User ID: PM123456, Password: Password123 | Login successfully |  
+| 2   | Navigate to the payment processing section | N/A | Payment processing section is displayed |  
+| 3   | Select an instruction order for payment processing | Instruction Order ID: IO456 | Instruction order details are displayed |  
+| 4   | Verify available actions for the selected order | N/A | Actions available: Initiate Payment, Cancel Payment |  
+| 5   | Initiate payment for the instruction order | Instruction Order ID: IO456, Payment Amount: $1000 | Payment is initiated successfully |  
+| 6   | Log out of the system | N/A | User is logged out successfully |  
 
-#### Test Case 2
-**Priority:** High  
-**Name:** HKGCM-Workflow-002  
-**Summary:** Validate the HK Loans Workflow actions for KL LOANS OPS - PROCESS CHECK when conditions are not met.  
+---
 
-|No.| Test Step | Test Data | Expected Result |
-|---|-----------|-----------|-----------------|
-| 1 | Login to HK GCM system as Payment Maker (PM12345) | Payment Maker account: PM12345 | Login successfully |
-| 2 | Navigate to the HK Loans Workflow section | | Workflow section displayed |
-| 3 | Create a new loan request without THIRD PARTY PAYMENT condition | Loan Request: Subject-002, Payment Type: Internal | Loan request created with status "Pending" |
-| 4 | Attempt to set COMPLETED DATE for the loan request | Completed Date: 2023-10-01 | Error message displayed: "Conditions not met for processing" |
-| 5 | Login to HK GCM system as Payment Checker (PC67890) | Payment Checker account: PC67890 | Login successfully |
-| 6 | Open the loan request with status "Pending" | Loan Request: Subject-002 | Loan request details displayed |
-| 7 | Attempt to perform Action - Approve the loan request | Loan Request: Subject-002 | Error message displayed: "Cannot approve, conditions not met" |
-
-#### Test Case 3
-**Priority:** Medium  
-**Name:** HKGCM-Workflow-003  
-**Summary:** Validate the system's response to invalid inputs in the HK Loans Workflow.  
-
-|No.| Test Step | Test Data | Expected Result |
-|---|-----------|-----------|-----------------|
-| 1 | Login to HK GCM system as Payment Maker (PM12345) | Payment Maker account: PM12345 | Login successfully |
-| 2 | Navigate to the HK Loans Workflow section | | Workflow section displayed |
-| 3 | Create a new loan request with invalid THIRD PARTY PAYMENT condition | Loan Request: Subject-003, Payment Type: InvalidType | Error message displayed: "Invalid payment type" |
-| 4 | Set COMPLETED DATE to an invalid date | Completed Date: 2023-02-30 | Error message displayed: "Invalid date" |
-| 5 | Attempt to perform Action - Process Check on the loan request | Loan Request: Subject-003 | Error message displayed: "Cannot process, invalid inputs" |
-
-### Summary of Test Cases
-- **Test Case 1:** Validates the successful processing of loan requests under valid conditions.
-- **Test Case 2:** Validates the system's handling of loan requests when conditions are not met.
-- **Test Case 3:** Validates the system's response to invalid inputs in the workflow.
-
-These test cases cover the essential functionalities and edge cases for the enhancements requested in the HK Loans Workflow, ensuring a comprehensive regression functional testing approach.
+Priority: High  
+Name: HKGCM-003  
+Summary: Validate new workflow actions for Payment Checker role in HK GCM.  
+Steps：  
+| No. | Test Step | Test Data | Expected Result |  
+|-----|-----------|-----------|------------------|  
+| 1   | Login to HK GCM system as Payment Checker (User ID: PC123456) | User ID: PC123456, Password: Password123 | Login successfully |  
+| 2   | Navigate to the payment verification section | N/A | Payment verification section is displayed |  
+| 3   | Select an instruction order for payment verification | Instruction Order ID: IO789 | Instruction order details are displayed |  
+| 4   | Verify available actions for the selected order | N/A | Actions available: Approve Payment, Reject Payment |  
+| 5   | Approve payment for the instruction order | Instruction Order ID: IO789 | Payment is approved successfully |  
+| 6   | Log out of the system | N/A | User is logged out successfully |  

@@ -11,7 +11,7 @@ from knowledges.generate_cucumber_script import GENERATE_CUCUMBER_SCRIPT_KNOWLED
 @tool("cucumber_script_generate")
 def cucumber_script_generate(
         generated_test_cases: Annotated[str, 'Newly generated test cases in the previous step']):
-    """Generate test case base on JIRA Description"""
+    """Generate cucumber script based on test case generated and related document"""
     test_case_script_generator = CucumberScriptGenerator()
     test_case_script_generator.cucumber_script_generate(generated_test_cases)
 
@@ -69,6 +69,8 @@ class CucumberScriptGenerator:
 
         file_path = "../knowledges/" + case + "/result/script_generated.feature"
         self.writeFile(file_path, cucumber_script)
+
+        logging.info("Test case script has been wrote in " + file_path)
         return cucumber_script
 
     def readFile(self, file_path):
