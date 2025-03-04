@@ -1,4 +1,3 @@
-
 from typing import Optional
 import re
 
@@ -6,6 +5,7 @@ from agent_core.evaluators import BaseEvaluator
 from agent_core.evaluators.entities.evaluator_result import EvaluatorResult
 
 from evaluators.cucumber_evaluator_prompt import CUCUMBER_EVALUATOR_PROMPT
+
 
 class CucumberEvaluator(BaseEvaluator):
 
@@ -19,7 +19,7 @@ class CucumberEvaluator(BaseEvaluator):
 
     def evaluate(self, root_task, request, response, background, context_manager) -> EvaluatorResult:
         """
-        Evaluate the provided request and generated code response.
+        Evaluate the provided request and generated script response.
         """
         prompt_text = self.prompt.format(root_task=root_task,
                                          request=request, response=response, background=background,
@@ -62,7 +62,6 @@ class CucumberEvaluator(BaseEvaluator):
 
     def default_prompt(self):
         return CUCUMBER_EVALUATOR_PROMPT
-
 
     def parse_scored_evaluation_response(self, evaluation_response):
         """

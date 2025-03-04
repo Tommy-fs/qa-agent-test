@@ -1,74 +1,64 @@
 **Priority:** Critical
-**Name:** HK_GCM_Workflow_Enhancement_001
+**Name:** HK_GCM_Workflow_Enhancement-001
 **Summary:** Verify HK GCM Workflow enhancements for THIRD PARTY PAYMENT = Yes and QC REQUIRE = True
 
 **Steps:**
 
 | No. | Test Step | Test Data | Expected Result |
 |---|---|---|---|
-| 1 | Login as KL LOANS OPS-PROCESSING-MAKER |  | Login successful |
-| 2 | Create a new instruction via 'New Instruction' | THIRD PARTY PAYMENT = Yes, QC REQUIRE = True | Instruction created successfully. CURRENT STATUS = KL LOANS OPS, PROCESS STATUS = KL LOANS - PROCESSING-CHECKER |
-| 3 | Perform 'Maker Submit' action |  | Action successful. CURRENT STATUS = KL LOANS OPS, PROCESS STATUS = KL LOANS - PROCESSING-CHECKER |
-| 4 | Login as KL LOANS OPS-PROCESSING-CHECKER |  | Login successful |
-| 5 | Open the created instruction |  | Instruction opens successfully |
-| 6 | Verify available actions |  | Only 'Submit to QC' action is available. 'Complete' and 'Submit to Payment' actions are not available. |
-| 7 | Perform 'Submit to QC' action |  | Action successful. CURRENT STATUS = KL LOANS OPS, PROCESS STATUS = DRAWDOWN-QC |
-| 8 | Login as QC |  | Login successful |
-| 9 | Open the created instruction |  | Instruction opens successfully |
-| 10 | Perform 'Complete Drawdown QC' action |  | Action successful. CURRENT STATUS = KL LOANS OPS, PROCESS STATUS = PROCESSING-CHECKER-QC CHECKED |
-| 11 | Login as KL LOANS OPS-PROCESSING-CHECKER |  | Login successful |
+| 1 | Login XXX system as KL LOANS OPS-PROCESSING-MAKER |  | Login successfully |
+| 2 | Create a new HK GCM Instruction | THIRD PARTY PAYMENT = Yes, QC REQUIRE = True, other fields filled as required | Instruction created successfully, CURRENT STATUS = "KL LOANS OPS", PROCESS STATUS = "KL LOANS - PROCESSING-CHECKER" |
+| 3 | Login XXX system as KL LOANS OPS-PROCESSING-CHECKER |  | Login successfully |
+| 4 | Open the created instruction |  | Instruction opens successfully |
+| 5 | Perform "Submit to QC" action |  | Action successful, CURRENT STATUS = "KL LOANS OPS", PROCESS STATUS = "DRAWDOWN-QC" |
+| 6 | Login XXX system as QC |  | Login successfully |
+| 7 | Open the created instruction |  | Instruction opens successfully |
+| 8 | Perform "Complete Drawdown QC" action |  | Action successful, CURRENT STATUS = "KL LOANS OPS", PROCESS STATUS = "PROCESSING-CHECKER-QC CHECKED" |
+| 9 | Verify available actions |  | Only "Submit to Payment" action is available, "Complete" action is disabled |
+| 10 | Perform "Submit to Payment" action |  | Action successful, CURRENT STATUS = "KL LOANS OPS", PROCESS STATUS = "PAYMENT - MAKER" |
+| 11 | Login XXX system as KL LOANS OPS-PROCESSING-PAYMENT MAKER |  | Login successfully |
 | 12 | Open the created instruction |  | Instruction opens successfully |
-| 13 | Verify available actions |  | 'Submit to Payment' action is available. 'Complete' action is not available. |
-| 14 | Perform 'Submit to Payment' action |  | Action successful. CURRENT STATUS = KL LOANS OPS, PROCESS STATUS = PAYMENT - MAKER |
-| 15 | Login as KL LOANS OPS-PROCESSING-PAYMENT MAKER |  | Login successful |
-| 16 | Open the created instruction |  | Instruction opens successfully |
-| 17 | Perform 'Submit Payment Checker' action |  | Action successful. CURRENT STATUS = KL LOANS OPS, PROCESS STATUS = PAYMENT-CHECKER |
-| 18 | Login as KL LOANS OPS-PROCESSING-PAYMENT CHECKER |  | Login successful |
-| 19 | Open the created instruction |  | Instruction opens successfully |
-| 20 | Perform 'Complete' action |  | Action successful. CURRENT STATUS = COMPLETED, PROCESS STATUS = COMPLETED. COMPLETED DATE is populated with today's date. |
-| 21 | Login as KL LOANS OPS-PROCESSING-CHECKER |  | Login successful |
-| 22 | Open the created instruction |  | Instruction opens successfully |
-| 23 | Verify available actions |  | 'Submit to Payment' and 'Complete' actions are available. |
+| 13 | Perform "Submit Payment Checker" action |  | Action successful, CURRENT STATUS = "KL LOANS OPS", PROCESS STATUS = "PAYMENT-CHECKER" |
+| 14 | Login XXX system as KL LOANS OPS-PROCESSING-PAYMENT CHECKER |  | Login successfully |
+| 15 | Open the created instruction |  | Instruction opens successfully |
+| 16 | Perform "Complete" action |  | Action successful, CURRENT STATUS = "COMPLETED", PROCESS STATUS = "COMPLETED", COMPLETED DATE is populated with today's date |
+| 17 | Login XXX system as KL LOANS OPS-PROCESSING-CHECKER |  | Login successfully |
+| 18 | Create a new HK GCM Instruction | THIRD PARTY PAYMENT = Yes, QC REQUIRE = True, other fields filled as required | Instruction created successfully, CURRENT STATUS = "KL LOANS OPS", PROCESS STATUS = "KL LOANS - PROCESSING-CHECKER" |
+| 19 | Repeat steps 4-16 | Same data as previous iteration | Same results as previous iteration, except after step 16, verify both "Submit to Payment" and "Complete" actions are available |
 
 
----
+***
 
-**Priority:** Critical
-**Name:** HK_GCM_Workflow_Enhancement_002
+**Priority:** High
+**Name:** HK_GCM_Workflow_Enhancement-002
 **Summary:** Verify HK GCM Workflow enhancements for THIRD PARTY PAYMENT = No and QC REQUIRE = False
 
 **Steps:**
 
 | No. | Test Step | Test Data | Expected Result |
 |---|---|---|---|
-| 1 | Login as KL LOANS OPS-PROCESSING-MAKER |  | Login successful |
-| 2 | Create a new instruction via 'New Instruction' | THIRD PARTY PAYMENT = No, QC REQUIRE = False | Instruction created successfully. CURRENT STATUS = KL LOANS OPS, PROCESS STATUS = KL LOANS - PROCESSING-CHECKER |
-| 3 | Perform 'Maker Submit' action |  | Action successful. CURRENT STATUS = KL LOANS OPS, PROCESS STATUS = KL LOANS - PROCESSING-CHECKER |
-| 4 | Login as KL LOANS OPS-PROCESSING-CHECKER |  | Login successful |
-| 5 | Open the created instruction |  | Instruction opens successfully |
-| 6 | Verify available actions |  | Only 'Complete' action is available. 'Submit to Payment' action is not available. |
-| 7 | Perform 'Complete' action |  | Action successful. CURRENT STATUS = COMPLETED, PROCESS STATUS = COMPLETED. COMPLETED DATE is populated with today's date. |
+| 1 | Login XXX system as KL LOANS OPS-PROCESSING-MAKER |  | Login successfully |
+| 2 | Create a new HK GCM Instruction | THIRD PARTY PAYMENT = No, QC REQUIRE = False, other fields filled as required | Instruction created successfully, CURRENT STATUS = "KL LOANS OPS", PROCESS STATUS = "KL LOANS - PROCESSING-CHECKER" |
+| 3 | Login XXX system as KL LOANS OPS-PROCESSING-CHECKER |  | Login successfully |
+| 4 | Open the created instruction |  | Instruction opens successfully |
+| 5 | Verify available actions |  | Only "Complete" action is available, "Submit to Payment" action is disabled |
+| 6 | Perform "Complete" action |  | Action successful, CURRENT STATUS = "COMPLETED", PROCESS STATUS = "COMPLETED", COMPLETED DATE is populated with today's date |
 
 
----
+***
 
 **Priority:** High
-**Name:** HK_GCM_Workflow_Enhancement_003
-**Summary:** Verify Return functionalities in enhanced HK GCM Workflow
+**Name:** HK_GCM_Workflow_Enhancement-003
+**Summary:** Verify Return functionalities for Payment Maker and Payment Checker roles
 
 **Steps:**
 
 | No. | Test Step | Test Data | Expected Result |
 |---|---|---|---|
-| 1 | Login as KL LOANS OPS-PROCESSING-MAKER |  | Login successful |
-| 2 | Create a new instruction via 'New Instruction' | THIRD PARTY PAYMENT = Yes, QC REQUIRE = True | Instruction created successfully. CURRENT STATUS = KL LOANS OPS, PROCESS STATUS = KL LOANS - PROCESSING-CHECKER |
-| 3 | Perform 'Maker Submit' action |  | Action successful. CURRENT STATUS = KL LOANS OPS, PROCESS STATUS = KL LOANS - PROCESSING-CHECKER |
-| 4 | Login as KL LOANS OPS-PROCESSING-CHECKER |  | Login successful |
-| 5 | Open the created instruction |  | Instruction opens successfully |
-| 6 | Perform 'Submit to Payment' action |  | Action successful. CURRENT STATUS = KL LOANS OPS, PROCESS STATUS = PAYMENT - MAKER |
-| 7 | Login as KL LOANS OPS-PROCESSING-PAYMENT MAKER | | Login successful |
-| 8 | Open the created instruction | | Instruction opens successfully |
-| 9 | Perform 'Return' action |  | Action successful. CURRENT STATUS = KL LOANS OPS, PROCESS STATUS = PROCESSING-MAKER-MANUAL |
+| 1 | Follow steps 1-10 of HK_GCM_Workflow_Enhancement-001 | Same data | Same results |
+| 2 | Perform "Return" action as KL LOANS OPS-PROCESSING-PAYMENT MAKER |  | Action successful, CURRENT STATUS = "KL LOANS OPS", PROCESS STATUS = "PROCESSING-MAKER-MANUAL" |
+| 3 | Follow steps 1-13 of HK_GCM_Workflow_Enhancement-001 | Same data | Same results |
+| 4 | Perform "Return" action as KL LOANS OPS-PROCESSING-PAYMENT CHECKER to KL LOANS OPS-PROCESSING-MAKER |  | Action successful, CURRENT STATUS = "KL LOANS OPS", PROCESS STATUS = "PROCESSING-MAKER-MANUAL" |
+| 5 | Perform "Return" action as KL LOANS OPS-PROCESSING-PAYMENT CHECKER to KL LOANS OPS-PROCESSING-PAYMENT MAKER |  | Action successful, CURRENT STATUS = "KL LOANS OPS", PROCESS STATUS = "PAYMENT - MAKER" |
 
 
-**(Similar return actions from PAYMENT CHECKER and QC can be tested by modifying steps 6-9 accordingly, using the appropriate user roles and expected PROCESS STATUS values.)** 

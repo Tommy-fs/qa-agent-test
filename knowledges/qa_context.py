@@ -4,11 +4,13 @@ We are a software company, and you are our software test expert, your responsibi
 
 QA_KNOWLEDGE = """
 To create test cases, you need to follow the following steps:
-1. Collect the JIRA requirement and any related project documents necessary for generating test cases.
+1. Gather the JIRA requirement and  related documents to understand： document including project_document, test_case_example, test_case_guide.
 2. Generate test cases: Generate corresponding test cases base on JIRA requirements, project documents and QA Object.
 3. Generate cucumber scripts: Generate cucumber script base on generated test cases.
 """
 
+#     Understand these requirements, documentation, and guidance to prepare for generating test cases in the future.
+#     This step does not need provide any detailed test scenarios or test cases.
 # 3. Search similar test cases: Review test case, Find similar test cases in the vector database.
 # 4. Review test cases: Compare the newly produced test cases with similar test cases. Provide suggestions for using the original test case, modifying the original test case, or adding a new test case.
 # 5. Store test cases: Add, modify or delete the test case of the vector database according to the modification suggestions.

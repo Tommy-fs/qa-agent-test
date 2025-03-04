@@ -1,103 +1,157 @@
 ```cucumber
-Feature: HK GCM Workflow Enhancement
+# Test Case 1: Successful Login
+Feature: User Login - Successful Login
 
-    Instruction Detail:
-    1) Author:Bard
-    2) Workflow:HK GCM
-    3) Check Point:E2E
+    Test Case ID: TC_LOGIN_001
+    Scenario Outline: Verify Successful Login with Valid Credentials
+        Preconditions:  Application is running and accessible.
 
-# Test Case ID: HK_GCM_Workflow_Enhancement_001
-@HK_GCM_Workflow_Enhancement_001
-Scenario Outline: Verify HK GCM Workflow enhancements for THIRD PARTY PAYMENT = Yes and QC REQUIRE = True
+        Given WebAgent open "<login_page_url>" url
+        Then WebAgent is on LoginPage
 
-    # Preconditions: None
+        When WebAgent type "<username>" into usernameTextbox
+        And WebAgent type "<password>" into passwordTextbox
+        And WebAgent click on loginButton
 
-    # Step 1: Login as KL LOANS OPS-PROCESSING-MAKER
-    Given Login as "KL LOANS OPS-PROCESSING-MAKER"
+        Then WebAgent is on HomePage
+        And WebAgent see welcomeMessage
 
-    # Step 2: Create a new instruction via 'New Instruction'
-    When WebAgent click on createButton
-    And WebAgent click on newInstructionItem
-    And Wait 5 seconds
-    Then Select "New Drawdown" from transactionTypeDropdownlist
-    And Select "Short Term Fixed Rate" from loanTypepropdownlist
-    And Select "Yes" from thirdPartyPaymentDropdownlist
-    And Select "True" from qcRequireDropdownlist # Assuming a qcRequireDropdownlist exists
-    # ... other fields as needed based on the template ...
-    Then WebAgent click on createAndMakerSubmitButton
-    And WebAgent see successMsg
-    And Save instruction Id and URL with prefix "LHK" from successMsg into @instructionId and @instructionUrl
-    Then sign Out
-
-    # Step 3: Perform 'Maker Submit' action (Already done as part of creation)
-
-    # Step 4: Login as KL LOANS OPS-PROCESSING-CHECKER
-    Given Login as "KL LOANS OPS-PROCESSING-CHECKER"
-
-    # Step 5: Open the created instruction
-    When WebAgent open "@instructionUrl.Value" url
-
-    # Step 6: Verify available actions
-    Then WebAgent see submitToQCButton
-    And WebAgent not see completeButton # Assuming completeButton is the ID for 'Complete' action
-    And WebAgent not see submitToPaymentButton
-
-    # Step 7: Perform 'Submit to QC' action
-    When WebAgent click on submitButton
-    And WebAgent click on submitToQCButton
-    Then WebAgent see successMsg
-    Then Sign Out
-
-    # ... remaining steps following the same pattern ...
+        Examples:
+            | login_page_url | username | password |
+            | https://example.com/login | testuser | password123 |
 
 
-    Examples:
-        | |
+# Test Case 2: Invalid Login Attempts
+Feature: User Login - Invalid Login Attempts
+
+    Test Case ID: TC_LOGIN_002
+    Scenario Outline: Verify Login with Invalid Credentials
+        Preconditions: Application is running and accessible.
+
+        Given WebAgent open "<login_page_url>" url
+        Then WebAgent is on LoginPage
+
+        When WebAgent type "<username>" into usernameTextbox
+        And WebAgent type "<password>" into passwordTextbox
+        And WebAgent click on loginButton
+
+        Then WebAgent see "<error_message>"
+
+        Examples:
+            | login_page_url | username      | password      | error_message                       |
+            | https://example.com/login | invaliduser   | password123   | Invalid username or password.      |
+            | https://example.com/login | testuser      | wrongpassword | Invalid username or password.      |
+            | https://example.com/login |                |               | Username and password are required. |
+            | https://example.com/login | test user!    | password123   | Invalid username.                  | # Example assuming specific error message
+            | https://example.com/login | testuser      | password!@#   | Invalid password.                  | # Example assuming specific error message
 
 
-# Test Case ID: HK_GCM_Workflow_Enhancement_002
-@HK_GCM_Workflow_Enhancement_002
-Scenario Outline: Verify HK GCM Workflow enhancements for THIRD PARTY PAYMENT = No and QC REQUIRE = False
+# Test Case 3: Password Recovery
+Feature: User Login - Password Recovery
 
-    # Preconditions: None
-    # ... steps following the same pattern as above ...
+    Test Case ID: TC_LOGIN_003
+    Scenario Outline: Verify Password Recovery Functionality
+        Preconditions: Application is running and accessible. Email server is configured for testing.
 
-    Examples:
-        | |
+        Given WebAgent open "<login_page_url>" url
+        Then WebAgent is on LoginPage
+
+        When WebAgent click on forgotPasswordLink
+        Then WebAgent is on PasswordRecoveryPage
+
+        When WebAgent type "<email>" into emailTextbox
+        And WebAgent click on resetPasswordButton
+
+        Then WebAgent see passwordResetInstructionsSentMessage
+        # Email verification steps are outside the scope of UI automation and should be tested separately.
+        # Assume email is received and link is clicked.
+
+        # Following steps simulate user clicking the link and landing on the reset page
+        Given WebAgent open "<password_reset_page>" url # This URL would be from the email
+        Then WebAgent is on PasswordResetPage
+
+        When WebAgent type "<new_password>" into newPasswordTextbox
+        And WebAgent type "<confirm_password>" into confirmPasswordTextbox
+        And WebAgent click on updatePasswordButton
+
+        Then WebAgent see passwordUpdatedSuccessfullyMessage
+
+        Examples:
+            | login_page_url | email                   | password_reset_page | new_password | confirm_password |
+            | https://example.com/login | testuser@example.com | https://example.com/reset | newpassword123 | newpassword123 |
+            | https://example.com/login | unregistered@example.com |                     |              |                 | # Negative test case
 
 
-# Test Case ID: HK_GCM_Workflow_Enhancement_003
-@HK_GCM_Workflow_Enhancement_003
-Scenario Outline: Verify Return functionalities in enhanced HK GCM Workflow
+# Test Case 4: Account Lockout
+Feature: User Login - Account Lockout
 
-    # Preconditions: None
-    # ... steps following the same pattern as above ...
+    Test Case ID: TC_LOGIN_004
+    Scenario Outline: Verify Account Lockout after Multiple Failed Login Attempts
+        Preconditions: Application is running and accessible. Account lockout policy is configured.
 
-    Examples:
-        | |
+        Given WebAgent open "<login_page_url>" url
+        Then WebAgent is on LoginPage
+
+        When WebAgent type "<username>" into usernameTextbox
+        And WebAgent type "<password>" into passwordTextbox
+        And WebAgent click on loginButton # First attempt
+        And WebAgent click on loginButton # Second attempt
+        And WebAgent click on loginButton # Third attempt
+        And WebAgent click on loginButton # Fourth attempt
+        And WebAgent click on loginButton # Fifth attempt
+
+        Then WebAgent see accountLockedMessage
+
+        Examples:
+            | login_page_url | username | password      |
+            | https://example.com/login | testuser | wrongpassword |
 
 
-# CUSTOM STEPS (If any)
-| Step                                     | Implementation (Code) |
-|------------------------------------------|-----------------------|
-| WebAgent not see @webElement             |  // Code to check if element is NOT present |
-| Select "True" from qcRequireDropdownlist | // Code to select "True" from the dropdown |
+# Test Case 5: Remember Me Functionality
+Feature: User Login - Remember Me Functionality
 
+    Test Case ID: TC_LOGIN_005
+    Scenario Outline: Verify "Remember Me" Functionality
+        Preconditions: Application is running and accessible. "Remember Me" functionality is implemented.
+
+        Given WebAgent open "<login_page_url>" url
+        Then WebAgent is on LoginPage
+
+        When WebAgent type "<username>" into usernameTextbox
+        And WebAgent type "<password>" into passwordTextbox
+        And WebAgent <remember_me_action> rememberMeCheckbox
+        And WebAgent click on loginButton
+
+        Then WebAgent is on HomePage
+
+        # Browser restart simulation requires specific driver capabilities and is outside basic Cucumber scope.
+        # The following steps would need to be adapted based on the testing framework and browser drivers used.
+        Then Close Browser  # Close the browser
+        Given WebAgent open "<login_page_url>" url # Reopen the browser at the login page
+        Then WebAgent <expected_login_status> on HomePage # Check if logged in or at login page
+
+
+        Examples:
+            | login_page_url | username | password | remember_me_action | expected_login_status |
+            | https://example.com/login | testuser | password123 | check on           | is                    |
+            | https://example.com/login | testuser | password123 | uncheck on         | is not                 |
 
 ```
 
-**Explanation and Key Improvements:**
 
-* **Clear Test Case IDs:** Each scenario is clearly marked with the corresponding test case ID.
-* **Structured Steps:**  Steps are directly mapped to the test case steps, making the script easy to understand and maintain.
-* **Web Element Usage:** The script uses the provided web elements wherever possible.
-* **Pre-defined Steps:**  Leverages the provided system and project steps extensively.
-* **Scenario Outline and Examples:** Uses `Scenario Outline` and `Examples` for better organization and potential data-driven testing (though not used in this specific example, it's good practice to include them).
-* **Assertions:** Includes `Then` steps to verify expected outcomes (e.g., `WebAgent see successMsg`, `WebAgent not see completeButton`).
-* **Comments:**  Clear comments explain the purpose of each section.
-* **Custom Steps Table:**  A table is added at the end to document any custom steps that need to be implemented.  This is crucial for maintainability.  You'll need to write the actual code for these steps in your step definition files.
-* **Assumption about QC Require Field:** The script assumes a `qcRequireDropdownlist` exists.  If the actual implementation is different (e.g., a checkbox), you'll need to adjust the script accordingly.
-* **Negative Assertions:** Uses `WebAgent not see` to verify that certain actions are *not* available, which is important for testing negative scenarios.
+**Custom Steps (If Needed):**
 
+If any of the above steps are not available in your project, you'll need to define them.  Here's an example of how to define a custom step:
 
-This improved structure makes the Cucumber scripts more readable, maintainable, and directly traceable to the original test cases.  Remember to replace placeholders like  `// Code to ...` with the actual implementation in your step definition files.
+```java
+// Example Java step definition (adapt to your framework)
+@Given("WebAgent is on LoginPage")
+public void webAgentIsOnLoginPage() {
+    // Code to assert that the current page is the login page.
+    // e.g., check for specific elements, title, URL, etc.
+    String currentUrl = driver.getCurrentUrl();
+    Assert.assertTrue(currentUrl.contains("/login")); // Example assertion
+}
+```
+
+You would need to create similar step definitions for any other missing steps, adapting the code to your specific web application and testing framework.  Remember to replace placeholder URLs, element names, and messages with the actual values from your application.  Also, ensure that all web elements used in the scripts are defined in your element repository.
