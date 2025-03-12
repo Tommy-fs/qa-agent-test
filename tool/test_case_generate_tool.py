@@ -43,7 +43,7 @@ class TestCaseGenerator:
             test_case_guide=parameters["test_case_guide"]
         )
 
-        agent = Agent(model_name="gemini-1.5-pro-002")
+        agent = Agent()
 
         test_case = agent.execute(prompt)
 

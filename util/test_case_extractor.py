@@ -19,7 +19,6 @@ def extract_test_steps(test_cases: str) -> list:
     return test_steps
 
 
-# 示例输入
 test_cases = """
 id: 4d319c0b-4378-48e4-abf5-3ecce88401c7
 Name: TicketingLogic-002
@@ -35,7 +34,6 @@ Priority: Critical
 | 5 | Open Test APP WebUI to check ticket XL002 | XL002 | Ticket XL002 is created with Subject2 |
 """
 
-# 调用方法
 test_steps = extract_test_steps(test_cases)
 
 # 输出结果

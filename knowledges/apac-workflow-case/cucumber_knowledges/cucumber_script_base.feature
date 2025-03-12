@@ -20,19 +20,19 @@ Feature:HongKong
         # Switch Platform to HK Loans
         Then Switch Platform to "HK Loans"
 
-        # Create New Instruction
+        # Create New Instruction(Mandatory)
         Then WebAgent click on createButton
         And WebAgent click on newInstructionItem
         And Wait 5 seconds
 
-        # Set fields value in MainSection
+        # Set fields value in MainSection(Mandatory)
         Then Select "New Drawdown" from transactionTypeDropdownlist
         And Select "Short Term Fixed Rate" from loanTypepropdownlist
         And Select "Yes" from thirdPartyPaymentDropdownlist
         And Select "No" from syndicatedLoanDropdownList
         And WebAgent click on workingCapitalNoRadio
 
-        # Set fields value in General Information Section
+        # Set fields value in General Information Section(Mandatory)
         And WebAgent type "GCM-TXN01-$TodayDate-$RN6" into customerNameTextbox
         And WebAgent clear input control baseNumberTextbox
         And WebAgent type "HKO$RN6" into baseNumberTextbox
@@ -41,20 +41,20 @@ Feature:HongKong
         And WebAgent type "$TodayDate" into valueDTDatepickerTextbox
         And Select "PASS" from classificationDropdownlist
 
-        # Set fields value in MATURITY DT Section
+        # Set fields value in MATURITY DT Section(Mandatory)
         And WebAgent clear input control tenorTextbox
         And WebAgent type "10" into tenorTextbox
         And WebAgent type "$RN6" into facilityNumberTextbox
         And WebAgent type "LINK-$RN6" into linkLcuTextbox
 
-        # Set fields value in Loans Detail Section
+        # Set fields value in Loans Detail Section(Mandatory)
         And Select "HKD" from loanCurrencyDropdownlist
         And WebAgent type "200,000,000.00" into bookingAmountTextbox
         And select "CHATS" from creditAccTypeDropdownlist
         And Select "Same Currency" from creditCurrencyTypepropdownlist
         And Select "YES FLOAT" from installmentDropdownlist
 
-        # Set fields value in Interest Rate,Cost Rate and Funding Section
+        # Set fields value in Interest Rate,Cost Rate and Funding Section(Mandatory)
         And WebAgent type "2.12345" into clientAllInRateTextbox
         And WebAgent type "1.12345" into marginTextbox
         And Select "HIBOR" from marginDropdownlist
@@ -66,7 +66,7 @@ Feature:HongKong
         And Select "Manual" from autoRepayDropdownlist
         And WebAgent type "DBNO$RN6" into debitCustomerAcNoTextbox
 
-        # Set fields value in Additional Remark Section
+        # Set fields value in Additional Remark Section(Mandatory)
         Then WebAgent type "TRAN REMARK -$RNText" into tranRemarkTextarea
         And WebAgent type "ST45611" into rmorBackUpSoeId1Textbox
         And WebAgent type "PMIS-$RN6" into pmisTextbox
@@ -74,34 +74,34 @@ Feature:HongKong
         And WebAgent type "EXP MIS-$RN6" into expMisTextbox
         And WebAgent check on ignoreWeekendTickbox if exist
 
-        # Set fields value in IMR Details Section
+        # Set fields value in IMR Details Section(Mandatory)
         And Select "P10110-Manufacturing Textiles cotton" from econSectorDropdownlist
         And Select "0 - Other" from loanPurposepropdownlist
         And Select "Use in HK" from countryLoanUsedDropdownlist
 
-        # Switch to Operation Tab
+        # Switch to Operation Tab(Mandatory)
         Then WebAgent is on OperationTab
-        #Indicate the blow actions repository is on Operation Tab
+        #Indicate the blow actions repository is on Operation Tab(Mandatory)
         Then WebAgent click on operationTab
 
-        # Set fields value in Operation Status Section
+        # Set fields value in Operation Status Section(Mandatory)
         Then WebAgent type "PENDING REMARK $RNText" into pendingRemarkTextarea
         And WebAgent check on kivTickbox
 
-        # Set fields value in Checklist Section
+        # Set fields value in Checklist Section(Mandatory)
         Then WebAgent click on 3ppBeneficiaryRadio
 
-        # Set fields value in Operation details Section
+        # Set fields value in Operation details Section(Mandatory)
         Then WebAgent type "PROCESS NOTE $RNText" into processingNoteTextarea
         And WebAgent type "New-Contract-Ref-$RN6" into newContractReferenceNoTextbox
         And WebAgent type "New-Custom-Ref-$RN6" into newCustomReferenceNoTextbox
 
-        # Set fields value in Booking Section
+        # Set fields value in Booking Section(Mandatory)
         And Select "Yes" from svsMakerDropdownlist
         And Select "AT" from atorotDropdownlist
         And Select "PASS" from classificationMakerDropdownlist
 
-        # Perform the action -Create and Maker Submit
+        # Perform the action -Create and Maker Submit(Mandatory)
         Then WebAgent click on createAndMakerSubmitButton
 
         # Check the success message to confirm the instruction is created successfully and get the Instruction ID

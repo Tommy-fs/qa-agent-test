@@ -1,64 +1,32 @@
-**Priority:** Critical
-**Name:** HK_GCM_Workflow_Enhancement-001
-**Summary:** Verify HK GCM Workflow enhancements for THIRD PARTY PAYMENT = Yes and QC REQUIRE = True
+```markdown
+Priority: Critical  
+Name: InstructionLogic-002  
+Summary: Validate Workflow Actions for HK GCM with Third Party Payment  
+Steps：  
+| No | Test Step                                                                 | Test Data                                      | Expected Result                                                                                     |  
+|----|---------------------------------------------------------------------------|------------------------------------------------|-----------------------------------------------------------------------------------------------------|  
+| 1  | Login XXX system as Processing Checker (PC123456)                        | Processing Checker account: PC123456          | Login successfully                                                                                  |  
+| 2  | Create a new instruction with THIRD PARTY PAYMENT = Yes and QC REQUIRE = No | Instruction data: {THIRD PARTY PAYMENT: Yes, QC REQUIRE: No} | Create new instruction in Test APP and current status is 'KL LOANS OPS', PROCESS STATUS is 'KL LOANS - PROCESSING-CHECKER' |  
+| 3  | Attempt to Complete the instruction                                        | Instruction created                            | Action 'Complete' is disabled due to THIRD PARTY PAYMENT being Yes and COMPLETED DATE being blank |  
+| 4  | Perform Action - Submit to Payment                                        | Instruction created                            | Instruction status changes to 'PAYMENT - MAKER', PROCESS STATUS is 'PAYMENT - MAKER'             |  
+| 5  | Login XXX system as Payment Maker (PM123456)                             | Payment Maker account: PM123456               | Login successfully                                                                                  |  
+| 6  | Perform Action - Submit Payment Checker                                    | Instruction created                            | Instruction status changes to 'PAYMENT CHECKER', PROCESS STATUS is 'PAYMENT-CHECKER'             |  
+| 7  | Attempt to Complete the instruction                                        | Instruction created                            | Instruction status changes to 'COMPLETED', PROCESS STATUS is 'COMPLETED'                          |  
+| 8  | Attempt to Return instruction to Processing Maker                          | Instruction created                            | Instruction returns successfully to 'KL LOANS OPS - PROCESSING - MAKER', PROCESS STATUS is 'PROCESSING - MAKER-MANUAL' |  
 
-**Steps:**
+---
 
-| No. | Test Step | Test Data | Expected Result |
-|---|---|---|---|
-| 1 | Login XXX system as KL LOANS OPS-PROCESSING-MAKER |  | Login successfully |
-| 2 | Create a new HK GCM Instruction | THIRD PARTY PAYMENT = Yes, QC REQUIRE = True, other fields filled as required | Instruction created successfully, CURRENT STATUS = "KL LOANS OPS", PROCESS STATUS = "KL LOANS - PROCESSING-CHECKER" |
-| 3 | Login XXX system as KL LOANS OPS-PROCESSING-CHECKER |  | Login successfully |
-| 4 | Open the created instruction |  | Instruction opens successfully |
-| 5 | Perform "Submit to QC" action |  | Action successful, CURRENT STATUS = "KL LOANS OPS", PROCESS STATUS = "DRAWDOWN-QC" |
-| 6 | Login XXX system as QC |  | Login successfully |
-| 7 | Open the created instruction |  | Instruction opens successfully |
-| 8 | Perform "Complete Drawdown QC" action |  | Action successful, CURRENT STATUS = "KL LOANS OPS", PROCESS STATUS = "PROCESSING-CHECKER-QC CHECKED" |
-| 9 | Verify available actions |  | Only "Submit to Payment" action is available, "Complete" action is disabled |
-| 10 | Perform "Submit to Payment" action |  | Action successful, CURRENT STATUS = "KL LOANS OPS", PROCESS STATUS = "PAYMENT - MAKER" |
-| 11 | Login XXX system as KL LOANS OPS-PROCESSING-PAYMENT MAKER |  | Login successfully |
-| 12 | Open the created instruction |  | Instruction opens successfully |
-| 13 | Perform "Submit Payment Checker" action |  | Action successful, CURRENT STATUS = "KL LOANS OPS", PROCESS STATUS = "PAYMENT-CHECKER" |
-| 14 | Login XXX system as KL LOANS OPS-PROCESSING-PAYMENT CHECKER |  | Login successfully |
-| 15 | Open the created instruction |  | Instruction opens successfully |
-| 16 | Perform "Complete" action |  | Action successful, CURRENT STATUS = "COMPLETED", PROCESS STATUS = "COMPLETED", COMPLETED DATE is populated with today's date |
-| 17 | Login XXX system as KL LOANS OPS-PROCESSING-CHECKER |  | Login successfully |
-| 18 | Create a new HK GCM Instruction | THIRD PARTY PAYMENT = Yes, QC REQUIRE = True, other fields filled as required | Instruction created successfully, CURRENT STATUS = "KL LOANS OPS", PROCESS STATUS = "KL LOANS - PROCESSING-CHECKER" |
-| 19 | Repeat steps 4-16 | Same data as previous iteration | Same results as previous iteration, except after step 16, verify both "Submit to Payment" and "Complete" actions are available |
-
-
-***
-
-**Priority:** High
-**Name:** HK_GCM_Workflow_Enhancement-002
-**Summary:** Verify HK GCM Workflow enhancements for THIRD PARTY PAYMENT = No and QC REQUIRE = False
-
-**Steps:**
-
-| No. | Test Step | Test Data | Expected Result |
-|---|---|---|---|
-| 1 | Login XXX system as KL LOANS OPS-PROCESSING-MAKER |  | Login successfully |
-| 2 | Create a new HK GCM Instruction | THIRD PARTY PAYMENT = No, QC REQUIRE = False, other fields filled as required | Instruction created successfully, CURRENT STATUS = "KL LOANS OPS", PROCESS STATUS = "KL LOANS - PROCESSING-CHECKER" |
-| 3 | Login XXX system as KL LOANS OPS-PROCESSING-CHECKER |  | Login successfully |
-| 4 | Open the created instruction |  | Instruction opens successfully |
-| 5 | Verify available actions |  | Only "Complete" action is available, "Submit to Payment" action is disabled |
-| 6 | Perform "Complete" action |  | Action successful, CURRENT STATUS = "COMPLETED", PROCESS STATUS = "COMPLETED", COMPLETED DATE is populated with today's date |
-
-
-***
-
-**Priority:** High
-**Name:** HK_GCM_Workflow_Enhancement-003
-**Summary:** Verify Return functionalities for Payment Maker and Payment Checker roles
-
-**Steps:**
-
-| No. | Test Step | Test Data | Expected Result |
-|---|---|---|---|
-| 1 | Follow steps 1-10 of HK_GCM_Workflow_Enhancement-001 | Same data | Same results |
-| 2 | Perform "Return" action as KL LOANS OPS-PROCESSING-PAYMENT MAKER |  | Action successful, CURRENT STATUS = "KL LOANS OPS", PROCESS STATUS = "PROCESSING-MAKER-MANUAL" |
-| 3 | Follow steps 1-13 of HK_GCM_Workflow_Enhancement-001 | Same data | Same results |
-| 4 | Perform "Return" action as KL LOANS OPS-PROCESSING-PAYMENT CHECKER to KL LOANS OPS-PROCESSING-MAKER |  | Action successful, CURRENT STATUS = "KL LOANS OPS", PROCESS STATUS = "PROCESSING-MAKER-MANUAL" |
-| 5 | Perform "Return" action as KL LOANS OPS-PROCESSING-PAYMENT CHECKER to KL LOANS OPS-PROCESSING-PAYMENT MAKER |  | Action successful, CURRENT STATUS = "KL LOANS OPS", PROCESS STATUS = "PAYMENT - MAKER" |
-
-
+Priority: High  
+Name: InstructionLogic-003  
+Summary: Validate Workflow Actions for HK GCM without Third Party Payment  
+Steps：  
+| No | Test Step                                                                 | Test Data                                      | Expected Result                                                                                     |  
+|----|---------------------------------------------------------------------------|------------------------------------------------|-----------------------------------------------------------------------------------------------------|  
+| 1  | Login XXX system as Processing Checker (PC123456)                        | Processing Checker account: PC123456          | Login successfully                                                                                  |  
+| 2  | Create a new instruction with THIRD PARTY PAYMENT = No and QC REQUIRE = No | Instruction data: {THIRD PARTY PAYMENT: No, QC REQUIRE: No} | Create new instruction in Test APP and current status is 'KL LOANS OPS', PROCESS STATUS is 'KL LOANS - PROCESSING-CHECKER' |  
+| 3  | Attempt to Complete the instruction                                        | Instruction created                            | Action 'Complete' is enabled due to THIRD PARTY PAYMENT being No                                   |  
+| 4  | Perform Action - Complete                                                  | Instruction created                            | Instruction status changes to 'COMPLETED', PROCESS STATUS is 'COMPLETED'                          |  
+| 5  | Attempt to Submit to Payment                                              | Instruction created                            | Action 'Submit to Payment' is disabled due to THIRD PARTY PAYMENT being No                          |  
+| 6  | Login XXX system as Processing Maker (PM123456)                          | Processing Maker account: PM123456            | Login successfully                                                                                  |  
+| 7  | Attempt to Return instruction to Processing Maker                          | Instruction created                            | Instruction returns successfully to 'KL LOANS OPS - PROCESSING - MAKER', PROCESS STATUS is 'PROCESSING - MAKER-MANUAL' |  
+```

@@ -64,7 +64,7 @@ def validate_test_steps(test_cases: str, script: str) -> dict:
     Strictly adhere to the above format and provide detailed feedback.
     """
 
-    # Use GPT to analyze the steps
+
     parameters = {"test_cases": test_cases, "script": script}
     gpt_response = (
         LLMChat().prompt_with_parameters(prompt, parameters,
@@ -72,7 +72,6 @@ def validate_test_steps(test_cases: str, script: str) -> dict:
                                                               desc='Cucumber Script steps validation')
         .replace("```json", '').replace("```", ''))
 
-    # Parse the GPT response into structured data
     results = {"missing_steps": [], "matched_steps": 0}
     lines = gpt_response.split("\n")
     for idx, line in enumerate(lines):
@@ -103,22 +102,15 @@ def validate_test_steps(test_cases: str, script: str) -> dict:
 
 
 def run_behave_tests(feature_path='features', result_file='result.json'):
-    """
-    执行 behave 测试并生成 JSON 格式的结果文件。
 
-    :param feature_path: 存放 .feature 文件的路径（默认是 'features'）
-    :param result_file: 结果文件保存路径（默认是 'result.json'）
-    """
-    # 确保 .feature 文件路径存在
     if not os.path.exists(feature_path):
         print(f"Feature path {feature_path} does not exist.")
         return
 
-    # 使用 subprocess 执行 behave 命令并将结果输出到 result_file
     command = [
         'behave', feature_path,
-        '--format', 'json',  # 输出为 JSON 格式
-        '--out', result_file  # 指定结果文件路径
+        '--format', 'json',
+        '--out', result_file
     ]
 
     try:
@@ -132,17 +124,11 @@ def run_behave_tests(feature_path='features', result_file='result.json'):
 
 
 def validate_behave_result(result_file='result.json'):
-    """
-    解析 behave 生成的 JSON 结果文件，并验证测试是否通过。
 
-    :param result_file: behave 结果的 JSON 文件路径
-    :return: None
-    """
     try:
         with open(result_file, 'r') as file:
             data = json.load(file)
 
-        # 检查每个 scenario 的状态
         all_passed = True
         for feature in data:
             for scenario in feature.get('elements', []):

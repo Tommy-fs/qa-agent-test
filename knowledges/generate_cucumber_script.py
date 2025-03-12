@@ -47,19 +47,19 @@ Use CUCUMBER SCRIPT TEMPLATE and GUIDELINE together to complete the creation of 
 #############
 
 # AVAILABLE WEB ELEMENTS #
-You must use the provided web elements as part of the script. 
+If AVAILABLE WEB ELEMENTS is provided, You must use the provided web elements as part of the script. Otherwise you need to write a new script file according to elements in CUCUMBER SCRIPT TEMPLATE
 
 {available_web_elements}
 
 #############
-
-You must use the provided web ui cucumber steps as part of the script. 
 
 # AVAILABLE WEBUI CUCUMBER SYSTEM STEPS #
 {available_webui_cucumber_system_steps}
 
 # AVAILABLE WEBUI CUCUMBER PROJECT STEPS #
 {available_webui_cucumber_project_steps}
+
+If AVAILABLE WEBUI CUCUMBER STEPS is provided, You must use the provided web ui cucumber steps as part of the script. Otherwise you need to write a new script file according to the steps in CUCUMBER SCRIPT TEMPLATE
 
 #############
 
@@ -92,7 +92,7 @@ Expected Results(optional): The expected outcome after executing the steps.
 Examples(mandatory): The defined parameters you need to use. These parameters need to be used in <>
 Comments(optional): If there are no available webui cucumber steps or web elements that you want to use. You can customize a new one and display it in a table
 
+Note: All Comments & Explanation & Considerations & Improvements should be written in cucumber's comment style(use #). You need to ensure that the generated scripts can be run directly.
 
 #############
-
 """
