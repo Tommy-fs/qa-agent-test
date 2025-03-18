@@ -1,37 +1,32 @@
-### Test Case 1
-**Priority:** Critical  
-**Name:** TicketingLogic-002  
-**Summary:** Function - Add 'Auto Test Ref#' field in Update Ticket action form for Normal DL  
-**Steps：**
-
-| No. | Test Step                                                                 | Test Data                                                                                                           | Expected Result                                   |
-|-----|---------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------|---------------------------------------------------|
-| 1   | Operation Manager login to XMC Loan web.                                 | User: *GT CN DevTest                                                                                              | User is logged in successfully.                   |
-| 2   | Create a Ticket for Normal DL by New Message.                            | Processing Team: *Test processing DL, From email address: TESTFROM1@CITI.COM, To email address: TESTTO1@CITI.COM, SUBJECT: Add Auto Test Ref#, Request Type: Normal DL | Ticket is created with status: Unassigned.        |
-| 3   | Open the created Ticket.                                                  |                                                                                                                  | Ticket details are displayed.                      |
-| 4   | Check for the presence of 'Auto Test Ref#' field in Update Ticket action form. |                                                                                                                  | 'Auto Test Ref#' field is present in the form.   |
-| 5   | Fill in the 'Auto Test Ref#' field with a value.                        | Auto Test Ref#: TEST123                                                                                           | Field accepts the input without errors.           |
-| 6   | Click Update Ticket Action.                                               |                                                                                                                  | Update Ticket action is initiated.                 |
-| 7   | Click Update Ticket button.                                              |                                                                                                                  | Ticket is updated successfully.                    |
-| 8   | Check 'Auto Test Ref#' value in Additional Details section.             |                                                                                                                  | 'Auto Test Ref#' value is displayed correctly.    |
-| 9   | Close the Ticket.                                                        |                                                                                                                  | Ticket status is updated to Closed.                |
-
----
-
-### Test Case 2
-**Priority:** High  
-**Name:** TicketingLogic-003  
-**Summary:** Function - Validate non-mandatory 'Auto Test Ref#' field behavior  
-**Steps：**
-
-| No. | Test Step                                                                 | Test Data                                                                                                           | Expected Result                                   |
-|-----|---------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------|---------------------------------------------------|
-| 1   | Operation Manager login to XMC Loan web.                                 | User: *GT CN DevTest                                                                                              | User is logged in successfully.                   |
-| 2   | Create a Ticket for Normal DL by New Message.                            | Processing Team: *Test processing DL, From email address: TESTFROM1@CITI.COM, To email address: TESTTO1@CITI.COM, SUBJECT: Validate Auto Test Ref#, Request Type: Normal DL | Ticket is created with status: Unassigned.        |
-| 3   | Open the created Ticket.                                                  |                                                                                                                  | Ticket details are displayed.                      |
-| 4   | Click Update Ticket Action.                                               |                                                                                                                  | Update Ticket action is initiated.                 |
-| 5   | Leave 'Auto Test Ref#' field empty and click Update Ticket button.      |                                                                                                                  | System does not prompt any error for empty field. |
-| 6   | Check 'Auto Test Ref#' value in Additional Details section.             |                                                                                                                  | 'Auto Test Ref#' field is empty in Additional Details. |
-| 7   | Close the Ticket.                                                        |                                                                                                                  | Ticket status is updated to Closed.                |
+```markdown
+Priority: Critical  
+Name: TicketingLogic-002  
+Summary: Function - Add 'Auto Test Ref#' field in Update Ticket action form  
+Steps：  
+| No. | Test Step                                                                 | Test Data                                                                                          | Expected Result                                   |
+|-----|---------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------|--------------------------------------------------|
+| 1   | Operation Manager login to XMC Loan web.                                 | User: Operations Manager, Password: ********                                                        | User is logged in successfully.                   |
+| 2   | Create a Ticket for Normal DL by New Message.                            | Processing Team: *GT CN DevTest, From email address: TESTFROM1@CITI.COM, To email address: TESTTO1@CITI.COM, SUBJECT: Test Ticket, Request Type: Normal DL | Ticket is created successfully.                   |
+| 3   | Open the created Ticket.                                                  |                                                                                                    | Ticket details are displayed.                     |
+| 4   | Check if 'Auto Test Ref#' field is present in Update Ticket action form. |                                                                                                    | 'Auto Test Ref#' field is displayed.             |
+| 5   | Click Update Ticket Action.                                               |                                                                                                    | Update Ticket action form is opened.             |
+| 6   | Verify 'Auto Test Ref#' field is present in the Update Ticket action form.|                                                                                                    | 'Auto Test Ref#' field is present.               |
+| 7   | Leave 'Auto Test Ref#' field empty and fill other mandatory fields.     | Processing Team: *GT CN DevTest, From email address: TESTFROM1@CITI.COM, To email address: TESTTO1@CITI.COM, SUBJECT: Test Ticket, Request Type: Normal DL | System allows submission without 'Auto Test Ref#'. |
+| 8   | Click Update Ticket button.                                               |                                                                                                    | Ticket is updated successfully.                   |
+| 9   | Check 'Auto Test Ref#' field in Additional Details section.              |                                                                                                    | 'Auto Test Ref#' field is not displayed in Additional Details. |
+| 10  | Close the Ticket.                                                         |                                                                                                    | Ticket is closed successfully.                    |
 
 ---
+
+Priority: High  
+Name: TicketingLogic-003  
+Summary: Function - Validate prompt for mandatory fields in New Message  
+Steps：  
+| No. | Test Step                                                                 | Test Data                                                                                          | Expected Result                                   |
+|-----|---------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------|--------------------------------------------------|
+| 1   | Operation Manager login to XMC Loan web.                                 | User: Operations Manager, Password: ********                                                        | User is logged in successfully.                   |
+| 2   | Click New Message to create a Ticket.                                    |                                                                                                    | New Message page is opened.                       |
+| 3   | Leave mandatory fields empty and click Send.                             |                                                                                                    | System prompts which mandatory fields are not filled. |
+| 4   | Fill in all mandatory fields and click Send.                             | Processing Team: *GT CN DevTest, From email address: TESTFROM1@CITI.COM, To email address: TESTTO1@CITI.COM, SUBJECT: Test Ticket, Request Type: Normal DL | Ticket is created successfully.                   |
+| 5   | Close the Ticket.                                                         |                                                                                                    | Ticket is closed successfully.                    |
+```

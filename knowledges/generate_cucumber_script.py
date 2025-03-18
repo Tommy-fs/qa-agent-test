@@ -35,6 +35,7 @@ I need you create cucumber scripts for the generated test cases and cucumber kno
 1. Some action script codes are provided in the template.The comment specifies which action
 2. When there is an action in the test case, you need to use the corresponding action code provided by the template as the basis
 3. Modify the parameters, steps and other contents in the corresponding template according to specific needs to generate new related script files
+
 {cucumber_script_basic_template}
 
 #############
@@ -47,11 +48,15 @@ Use CUCUMBER SCRIPT TEMPLATE and GUIDELINE together to complete the creation of 
 #############
 
 # AVAILABLE WEB ELEMENTS #
-If AVAILABLE WEB ELEMENTS is provided, You must use the provided web elements as part of the script. Otherwise you need to write a new script file according to elements in CUCUMBER SCRIPT TEMPLATE
+If AVAILABLE WEB ELEMENTS is provided, You must use the provided web elements as part of the script. 
+Otherwise you need to write a new script file according to elements in CUCUMBER SCRIPT TEMPLATE
 
 {available_web_elements}
 
 #############
+
+If AVAILABLE WEBUI CUCUMBER STEPS is provided, You must use the provided web ui cucumber steps as part of the script. 
+Otherwise you need to write a new script file according to the steps in CUCUMBER SCRIPT TEMPLATE
 
 # AVAILABLE WEBUI CUCUMBER SYSTEM STEPS #
 {available_webui_cucumber_system_steps}
@@ -59,7 +64,6 @@ If AVAILABLE WEB ELEMENTS is provided, You must use the provided web elements as
 # AVAILABLE WEBUI CUCUMBER PROJECT STEPS #
 {available_webui_cucumber_project_steps}
 
-If AVAILABLE WEBUI CUCUMBER STEPS is provided, You must use the provided web ui cucumber steps as part of the script. Otherwise you need to write a new script file according to the steps in CUCUMBER SCRIPT TEMPLATE
 
 #############
 

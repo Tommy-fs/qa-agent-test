@@ -26,25 +26,20 @@ class DocumentEvaluator(BaseEvaluator):
                                          context=context_manager.context_to_str()
                                          )
 
-        try:
-            evaluation_response = self._model.process(prompt_text)
-        except Exception as e:
-            self.logger.error("Error during model evaluation: %s", e)
-            return EvaluatorResult(
-                "Reject Code",
-                0,
-                {
-                    "score_breakdown": [],
-                    "raw_evaluation": "",
-                    "improvement_suggestions": "Model evaluation failed. Please try again.",
-                },
-            )
+        evaluation_response = self._model.process(prompt_text)
 
-        decision, total_score, scores = self.parse_scored_evaluation_response(
+        decision, score, suggestion, details = self.parse_scored_evaluation_response(
             evaluation_response
         )
-        details = {"score_breakdown": scores, "raw_evaluation": evaluation_response}
-        return EvaluatorResult(decision, total_score, details)
+
+        return EvaluatorResult(
+            name=self.name,
+            decision=decision,
+            score=score,
+            suggestion=suggestion,
+            details=details,
+            prompt=prompt_text,
+        )
 
     def default_prompt(self):
         return DOCUMENT_EVALUATOR_PROMPT

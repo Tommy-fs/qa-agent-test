@@ -54,6 +54,7 @@ class CucumberScriptGenerator:
         for case_name, case_content in test_cases_dict.items():
             parameters["generated_test_cases"] = case_content
             generate_script = self.generate_script(parameters, case_name)
+
             cucumber_scripts.append(generate_script)
 
         return json.dumps(cucumber_scripts)

@@ -96,17 +96,35 @@ At the end:
 - If output is incorrect tool arguments and unexpected result when invoke the tool, provide the change suggestion and the structure evaluation output still (Score 0 for each criteria)
 ---
 
-**Context**
-{context}
+# Test case generated#
+{test_case}
 
-**Description of ultimate task goal:**
-{root_task}
+# Cucumber script generated#
+{cucumber_script}
 
-**Request:**
-{request}
+# CUCUMBER SCRIPT TEMPLATE #
 
-**Response:**
-{response}
+{cucumber_script_basic_template}
 
-**Evaluation (JSON Format):**
+# GUIDELINE #
+Use CUCUMBER SCRIPT TEMPLATE and GUIDELINE together to complete the creation of the script(if have).
+
+{script_generate_guide}
+
+# AVAILABLE WEB ELEMENTS #
+If AVAILABLE WEB ELEMENTS is provided, You must use the provided web elements as part of the script. 
+Otherwise you need to write a new script file according to elements in CUCUMBER SCRIPT TEMPLATE
+
+{available_web_elements}
+
+# AVAILABLE WEBUI CUCUMBER SYSTEM STEPS #
+
+If AVAILABLE WEBUI CUCUMBER STEPS is provided, You must use the provided web ui cucumber steps as part of the script. 
+Otherwise you need to write a new script file according to the steps in CUCUMBER SCRIPT TEMPLATE
+
+{available_webui_cucumber_system_steps}
+
+# AVAILABLE WEBUI CUCUMBER PROJECT STEPS #
+{available_webui_cucumber_project_steps}
+
 """

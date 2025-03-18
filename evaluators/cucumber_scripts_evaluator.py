@@ -1,13 +1,12 @@
+import json
 from typing import Optional
-import re
 
-from agent_core.evaluators import BaseEvaluator
 from agent_core.evaluators.entities.evaluator_result import EvaluatorResult
 
 from evaluators.cucumber_evaluator_prompt import CUCUMBER_EVALUATOR_PROMPT
 
 
-class CucumberEvaluator(BaseEvaluator):
+class CucumberEvaluator():
 
     def __init__(
             self,
@@ -17,30 +16,20 @@ class CucumberEvaluator(BaseEvaluator):
     ):
         super().__init__(model_name, log_level, evaluation_threshold)
 
-    def evaluate(self, root_task, request, response, background, context_manager) -> EvaluatorResult:
+    def evaluate(self, test_case, cucumber_script) -> EvaluatorResult:
         """
         Evaluate the provided request and generated script response.
         """
-        prompt_text = self.prompt.format(root_task=root_task,
-                                         request=request, response=response, background=background,
-                                         context=context_manager.context_to_str()
+
+
+
+        prompt_text = self.prompt.format(test_case=test_case,
+                                         cucumber_script=cucumber_script,
                                          )
 
-        try:
-            evaluation_response = self._model.process(prompt_text)
-        except Exception as e:
-            self.logger.error("Error during model evaluation: %s", e)
-            return EvaluatorResult(
-                "Reject Code",
-                0,
-                {
-                    "score_breakdown": [],
-                    "raw_evaluation": "",
-                    "improvement_suggestions": "Model evaluation failed. Please try again.",
-                },
-            )
+        evaluation_response = self._model.process(prompt_text)
 
-        decision, total_score, scores = self.parse_scored_evaluation_response(
+        decision, score, suggestion, details = self.parse_scored_evaluation_response(
             evaluation_response
         )
         #
@@ -57,8 +46,14 @@ class CucumberEvaluator(BaseEvaluator):
         #     details["improvement_suggestions"] = ""
         #
         # return EvaluatorResult(decision, total_score, details)
-        details = {"score_breakdown": scores, "raw_evaluation": evaluation_response}
-        return EvaluatorResult(decision, total_score, details)
+        return EvaluatorResult(
+            name=self.name,
+            decision=decision,
+            score=score,
+            suggestion=suggestion,
+            details=details,
+            prompt=prompt_text,
+        )
 
     def default_prompt(self):
         return CUCUMBER_EVALUATOR_PROMPT
@@ -66,64 +61,50 @@ class CucumberEvaluator(BaseEvaluator):
     def parse_scored_evaluation_response(self, evaluation_response):
         """
         Attempts to parse numeric scores from the text and compute a total_score.
-        We also check if any single score < 3 triggers a rerun decision.
         """
-        scores = []
-        total_score = 0
 
-        lines = evaluation_response.strip().split("\n")
-        for line in lines:
-            # Several regex attempts to capture "Score: <digit>"
-            match_1 = re.match(
-                r"\d+\.\s\*\*([A-Za-z\s]+)\*\*\s\(Score\s1-5\):\s*Score:\s*(\d)", line
-            )
-            match_2 = re.match(r"\d+\.\s\*\*([A-Za-z\s]+) \(Score (\d+)\)", line)
-            match_3 = re.match(
-                r"\d+\.\s+\*\*([A-Za-z\s]+)\s*\(Score:? (\d+)\)\*\*", line
-            )
-            match_4 = re.match(r"\d+\.\s+\*\*([A-Za-z\s]+)\*\* \(Score (\d+)\):", line)
-            match_5 = re.match(r"\*\*([A-Za-z\s]+)\s*\(Score\s1-5\):\s*(\d+)\*\*", line)
-            match_6 = re.match(
-                r"\d+\.\s+\*\*([A-Za-z\s]+)\s*\(Score\s1-5\):\*\*\s*(\d+)", line
-            )
-            match_7 = re.match(
-                r"\d+\.\s+\*\*([A-Za-z\s]+)\s*\(Score\s1-5\):\s*(\d+)\*\*", line
-            )
-            match_8 = re.match(
-                r"\d+\.\s+\*\*([A-Za-z\s]+)\s*\(Score\s1-5\)\*\*:\s*(\d+)", line
-            )
-            match_9 = re.match(r"\d+\.\s+\*\*([A-Za-z\s]+)\s*\((\d+)/5\):\*\*", line)
-            match_10 = re.match(r"\d+\.\s+\*\*([A-Za-z\s]+)\s*\((\d+)\):\*\*", line)
-            match_11 = re.match(
-                r"\d+\.\s+\*\*([A-Za-z\s]+)\s*\(Score:\s*(\d+)\):\*\*", line
-            )
-            match = (
-                    match_1
-                    or match_2
-                    or match_3
-                    or match_4
-                    or match_5
-                    or match_6
-                    or match_7
-                    or match_8
-                    or match_9
-                    or match_10
-                    or match_11
-            )
+        response_json = evaluation_response.replace("```json", '').replace("```", '').strip()
 
-            if match:
-                criterion = match.group(1).strip()
-                score = int(match.group(2))
-                scores.append((criterion, score))
-                total_score += score
+        try:
+            data = json.loads(response_json)
 
-        # Check if any criterion scored below 3
-        any_low_scores = any(score < 3 for _, score in scores)
+            decision = data["Recommendation"]
+            total_score = data["total_score"]
+            scores = {k: v["score"] for k, v in data["evaluation"].items()}
 
-        # Final decision logic
-        if float(total_score) / 40.0 > self.evaluation_threshold and not any_low_scores:
-            decision = "Accept Output"
-        else:
-            decision = "Rerun Subtask"
+            return decision, total_score, scores
 
-        return decision, total_score, scores
+        except Exception as e:
+            print("Input is not valid JSON. Attempting to parse manually.")
+
+            decision = ""
+            total_score = 0
+            scores = {}
+
+            if "Recommendation" in response_json:
+                start = response_json.find("Recommendation") + len("Recommendation") + 3
+                end = response_json.find("\"", start)
+                decision = response_json[start:end]
+
+            if "total_score" in response_json:
+                start = response_json.find("total_score") + len("total_score") + 2
+                end = response_json.find(",", start)
+                total_score = int(response_json[start:end])
+
+            evaluation_start = response_json.find("evaluation")
+            evaluation_end = response_json.find("}", evaluation_start)
+            evaluation_str = response_json[evaluation_start:evaluation_end]
+
+            for line in evaluation_str.splitlines():
+                if "Score" in line:
+                    key_start = line.find("\"") + 1
+                    key_end = line.find("\"", key_start)
+                    key = line[key_start:key_end]
+
+                    score_start = line.find("score") + len("score") + 2
+                    score_end = line.find(",", score_start)
+                    score = int(line[score_start:score_end].strip())
+
+                    scores[key] = score
+
+            return decision, total_score, scores
