@@ -52,12 +52,12 @@ def score_gherkin_script(script: str, test_case: dict, resources: dict) -> dict:
 
 def optimization_gherkin_script(issues: str, test_case: str, script: str):
     cucumber_script_basic_example = readFile(
-        "../knowledges/apac-email-case/cucumber_knowledges/cucumber_script_base.feature")
-    available_web_elements = readFile("../knowledges/apac-email-case/cucumber_knowledges/WebElement.yml")
+        "../knowledge/apac-email-case/cucumber_knowledge/cucumber_script_base.feature")
+    available_web_elements = readFile("../knowledge/apac-email-case/cucumber_knowledge/WebElement.yml")
     available_webui_cucumber_system_steps = readFile(
-        "../knowledges/apac-email-case/cucumber_knowledges/fast_webui_cucumber_system_steps.txt")
+        "../knowledge/apac-email-case/cucumber_knowledge/fast_webui_cucumber_system_steps.txt")
     available_webui_cucumber_project_steps = readFile(
-        "../knowledges/apac-email-case/cucumber_knowledges/fast_webui_cucumber_project_steps.txt")
+        "../knowledge/apac-email-case/cucumber_knowledge/fast_webui_cucumber_project_steps.txt")
 
     prompt = f"""
         Optimize the following Gherkin script based on these issues and test cases:

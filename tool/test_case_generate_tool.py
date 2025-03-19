@@ -5,8 +5,8 @@ from typing import Annotated
 from agent_core.agents import Agent
 from langchain_core.tools import tool
 
-from knowledges.generate_test_case import GENERATE_TEST_CASE_KNOWLEDGE
-from knowledges.qa_context import QA_BACKGROUND, QA_OBJECT
+from knowledge.generate_test_case import GENERATE_TEST_CASE_KNOWLEDGE
+from knowledge.qa_context import QA_BACKGROUND, QA_OBJECT
 
 
 @tool("test_case_generate")
@@ -52,7 +52,7 @@ class TestCaseGenerator:
         args = parser.parse_args()
         case = args.case
 
-        file_path = "../knowledges/" + case + "/result/test_case_generated.txt"
+        file_path = "../knowledge/" + case + "/result/test_case_generated.txt"
         with open(file_path, 'w', encoding='utf-8') as file:
             file.write(test_case)
 

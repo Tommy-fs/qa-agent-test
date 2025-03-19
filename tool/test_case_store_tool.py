@@ -6,7 +6,7 @@ from langchain.pydantic_v1 import BaseModel, Field
 from core.llm_chat import LLMChat
 from core.log_handler import LoggingHandler
 from core.test_case_manager import TestCasesManager
-from knowledges.store_test_case import STORE_TEST_CASE_PROMPT
+from knowledge.store_test_case import STORE_TEST_CASE_PROMPT
 
 
 class Storer(BaseModel):

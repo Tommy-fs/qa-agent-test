@@ -15,7 +15,7 @@ from langchain_openai import ChatOpenAI
 from core.config import Config
 from core.log_handler import LoggingHandler
 
-from knowledges.system_context import SYSTEM_CONTEXT, SYSTEM_CONTEXT_WITH_TOOLS
+from knowledge.system_context import SYSTEM_CONTEXT, SYSTEM_CONTEXT_WITH_TOOLS
 
 set_debug(True)
 

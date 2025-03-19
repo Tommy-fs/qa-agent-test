@@ -6,7 +6,7 @@ from typing import Annotated
 from agent_core.agents import Agent
 from langchain_core.tools import tool
 
-from knowledges.generate_cucumber_script import GENERATE_CUCUMBER_SCRIPT_KNOWLEDGE
+from knowledge.generate_cucumber_script import GENERATE_CUCUMBER_SCRIPT_KNOWLEDGE
 
 
 @tool("cucumber_script_generate")
@@ -28,16 +28,16 @@ class CucumberScriptGenerator:
         case = args.case
 
         cucumber_script_basic_template = self.readFile(
-            "../knowledges/" + case + "/cucumber_knowledges/cucumber_script_base.feature")
-        available_web_elements = self.readFile("../knowledges/" + case + "/cucumber_knowledges/WebElement.yml")
+            "../knowledge/" + case + "/cucumber_knowledge/cucumber_script_base.feature")
+        available_web_elements = self.readFile("../knowledge/" + case + "/cucumber_knowledge/WebElement.yml")
         available_webui_cucumber_system_steps = self.readFile(
-            "../knowledges/" + case + "/cucumber_knowledges/fast_webui_cucumber_system_steps.txt")
+            "../knowledge/" + case + "/cucumber_knowledge/fast_webui_cucumber_system_steps.txt")
         available_webui_cucumber_project_steps = self.readFile(
-            "../knowledges/" + case + "/cucumber_knowledges/fast_webui_cucumber_project_steps.txt")
+            "../knowledge/" + case + "/cucumber_knowledge/fast_webui_cucumber_project_steps.txt")
         script_generate_guide = self.readFile(
-            "../knowledges/" + case + "/cucumber_knowledges/script_generate_guide.txt")
+            "../knowledge/" + case + "/cucumber_knowledge/script_generate_guide.txt")
         project_document = self.readFile(
-            "../knowledges/" + case + "/project_knowledges/project_document.py")
+            "../knowledge/" + case + "/project_knowledge/project_document.py")
 
         parameters = {
             "generated_test_cases": generated_test_cases,
@@ -117,7 +117,7 @@ class CucumberScriptGenerator:
         args = parser.parse_args()
         case = args.case
 
-        file_path = "../knowledges/" + case + "/result/script_generated-" + str(case_name) + ".feature"
+        file_path = "../knowledge/" + case + "/result/script_generated-" + str(case_name) + ".feature"
         self.writeFile(file_path, cucumber_script)
 
         logging.info("Test case script has been wrote in " + file_path)

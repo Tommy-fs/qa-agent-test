@@ -3,7 +3,7 @@ import json
 from core.llm_chat import LLMChat
 from core.step_manager import Step
 
-from knowledges.system_context import PLAN_FORMAT
+from knowledge.system_context import PLAN_FORMAT
 
 
 class Planner:

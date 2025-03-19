@@ -4,7 +4,7 @@ from langchain.pydantic_v1 import BaseModel, Field
 
 from core.llm_chat import LLMChat
 from core.log_handler import LoggingHandler
-from knowledges.test_case_suggestion import TEST_CASE_REVIEW
+from knowledge.test_case_suggestion import TEST_CASE_REVIEW
 
 
 class Suggester(BaseModel):

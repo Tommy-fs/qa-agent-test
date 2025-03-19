@@ -13,7 +13,7 @@ def test():
     args = parser.parse_args()
     case = args.case
 
-    module_path_k = "knowledges." + case + ".jira"
+    module_path_k = "knowledge." + case + ".jira"
     class_name_k = "JIRA"
 
     module_k = importlib.import_module(module_path_k)

@@ -5,7 +5,7 @@ from langchain.pydantic_v1 import BaseModel, Field
 
 from core.log_handler import LoggingHandler
 from core.test_case_manager import TestCasesManager
-from knowledges.test_case_search import TEST_CASE_SEARCH_PROMPT
+from knowledge.test_case_search import TEST_CASE_SEARCH_PROMPT
 
 
 class Searcher(BaseModel):

@@ -7,7 +7,7 @@ from agent_core.planners import GraphPlanner
 
 from evaluators.cucumber_scripts_evaluator import CucumberEvaluator
 from evaluators.document_gather_evaluator import DocumentEvaluator
-from knowledges.qa_context import QA_KNOWLEDGE, QA_BACKGROUND, QA_OBJECT
+from knowledge.qa_context import QA_KNOWLEDGE, QA_BACKGROUND, QA_OBJECT
 from tool.cucumber_script_generate_tool import cucumber_script_generate
 from tool.gather_jira_document_tool import gather_jira_document
 from tool.test_case_generate_tool import test_case_generate
@@ -32,7 +32,7 @@ class QAAgent:
         self.agent.enable_evaluators()
 
         # self.agent.add_evaluator("gather jira document", DocumentEvaluator(self.agent.model_name))
-        self.agent.add_evaluator("cucumber script generate", CucumberEvaluator(self.agent.model_name))
+        # self.agent.add_evaluator("cucumber script generate", CucumberEvaluator(self.agent.model_name))
 
         self.agent.planner = GraphPlanner()
         request = f"Generate test cases for the JIRA requirement\n" + jira_request
