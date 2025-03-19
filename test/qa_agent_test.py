@@ -5,7 +5,7 @@ import importlib
 from qa_agent import QAAgent
 
 
-def test(log_update=None):
+def test():
     print("test-begin")
 
     parser = argparse.ArgumentParser()

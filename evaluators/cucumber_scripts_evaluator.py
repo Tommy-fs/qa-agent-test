@@ -1,6 +1,5 @@
 import argparse
 import json
-from typing import Optional
 
 from agent_core.agents import Agent
 from agent_core.evaluators.entities.evaluator_result import EvaluatorResult
@@ -9,14 +8,6 @@ from evaluators.cucumber_evaluator_prompt import CUCUMBER_EVALUATOR_PROMPT
 
 
 class CucumberEvaluator:
-
-    def __init__(
-            self,
-            model_name: Optional[str] = None,
-            log_level: Optional[str] = None,
-            evaluation_threshold: Optional[float] = 0.8,
-    ):
-        super().__init__(model_name, log_level, evaluation_threshold)
 
     def evaluate(self, test_case, cucumber_script) -> EvaluatorResult:
         """
@@ -37,17 +28,16 @@ class CucumberEvaluator:
             "../knowledges/" + case + "/cucumber_knowledges/fast_webui_cucumber_project_steps.txt")
         script_generate_guide = self.readFile(
             "../knowledges/" + case + "/cucumber_knowledges/script_generate_guide.txt")
-        project_document = self.readFile(
-            "../knowledges/" + case + "/project_knowledges/project_document.py")
 
-        prompt_text = self.default_prompt.format(test_case=test_case,
-                                                 cucumber_script=cucumber_script,
-                                                 cucumber_script_basic_template=cucumber_script_basic_template,
-                                                 script_generate_guide=script_generate_guide,
-                                                 available_web_elements=available_web_elements,
-                                                 available_webui_cucumber_system_steps=available_webui_cucumber_system_steps,
-                                                 available_webui_cucumber_project_steps=available_webui_cucumber_project_steps
-                                                 )
+        prompt_text = (self.default_prompt()
+                       .format(test_case=test_case,
+                               cucumber_script=cucumber_script,
+                               cucumber_script_basic_template=cucumber_script_basic_template,
+                               script_generate_guide=script_generate_guide,
+                               available_web_elements=available_web_elements,
+                               available_webui_cucumber_system_steps=available_webui_cucumber_system_steps,
+                               available_webui_cucumber_project_steps=available_webui_cucumber_project_steps
+                               ))
 
         agent = Agent(model_name="gemini-1.5-pro-002")
 
