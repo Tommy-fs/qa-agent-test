@@ -6,6 +6,8 @@ from typing import Annotated
 from agent_core.agents import Agent
 from langchain_core.tools import tool
 
+from evaluators.cucumber_script_optimization import CucumberOptimization
+from evaluators.cucumber_scripts_evaluator import CucumberEvaluator
 from knowledge.generate_cucumber_script import GENERATE_CUCUMBER_SCRIPT_KNOWLEDGE
 
 
@@ -56,7 +58,7 @@ class CucumberScriptGenerator:
             generate_script = self.generate_script(parameters, case_name)
 
             cucumber_scripts.append(generate_script)
-
+            self.writeFile(case_name, generate_script)
         return json.dumps(cucumber_scripts)
 
     def readFile(self, file_path):
@@ -67,9 +69,17 @@ class CucumberScriptGenerator:
         except:
             return ""
 
-    def writeFile(self, file_path, file_content):
+    def writeFile(self, case_name, file_content):
+        parser = argparse.ArgumentParser()
+        parser.add_argument("--case", required=True)
+        args = parser.parse_args()
+        case = args.case
+
+        file_path = "../knowledge/" + case + "/result/script_generated-" + str(case_name) + ".feature"
         with open(file_path, 'w', encoding='utf-8') as file:
             file.write(file_content)
+
+        logging.info("Test case script has been wrote in " + file_path)
 
     def parseTestCases(self, test_cases):
         test_case_lines = test_cases.strip().splitlines()
@@ -112,14 +122,42 @@ class CucumberScriptGenerator:
 
         cucumber_script = agent.execute(prompt)
 
-        parser = argparse.ArgumentParser()
-        parser.add_argument("--case", required=True)
-        args = parser.parse_args()
-        case = args.case
-
-        file_path = "../knowledge/" + case + "/result/script_generated-" + str(case_name) + ".feature"
-        self.writeFile(file_path, cucumber_script)
-
-        logging.info("Test case script has been wrote in " + file_path)
-
         return cucumber_script
+
+    def evaluate_and_optimize(self, case_content, generate_script, max_iterations=3):
+        global evaluation_output
+        iteration_count = 0
+        evaluator = CucumberEvaluator()
+        optimization = CucumberOptimization()
+        while iteration_count < max_iterations:
+            iteration_count += 1
+            print(f"Iteration {iteration_count}: Evaluating the script...")
+
+            evaluation_output = evaluator.evaluate(case_content, generate_script)
+
+            decision = evaluation_output["decision"]
+            suggestions = evaluation_output["suggestions"]
+
+            if "accept" in decision.lower():
+                print("The script passed evaluation!")
+                return {
+                    "decision": "Pass",
+                    "total_score": evaluation_output["total_score"],
+                    "final_script": generate_script,
+                }
+            elif "reject" in decision.lower():
+                print("The script requires modifications. Applying suggestions...")
+                print(f"Suggestions: {suggestions}")
+
+                generate_script = optimization.optimization_gherkin_script(case_content, generate_script,
+                                                                                   "\n".join(suggestions))
+                print("Optimization applied. Re-evaluating the script...")
+            else:
+                raise ValueError(f"Unexpected decision: {decision}")
+
+        print("The script did not pass after the maximum number of iterations.")
+        return {
+            "decision": "Failed",
+            "total_score": evaluation_output["total_score"],
+            "final_script": generate_script
+        }

@@ -5,10 +5,10 @@ Note: The provided code may be a complete implementation or just a code fragment
 
 1. **Standardization of Feature Modules**(Score 1-5 or N/A)
    - [ ] The **Feature module** should include basic information about the script, such as:
-     - The name of the functional module being tested.
-     - Author information (e.g., name or team name).
-     - Creation date and last modification date.
-     - Other key information (e.g., version number, dependency environment, etc.).
+     - The Feature of the functional module being tested.
+     - Author information.
+     - Test Case ID.
+     - Description
    - [ ] The Feature description should be concise and accurately summarize the goals and scope of the test scenario.
 
 2. **Clarity of Scenario Outline**(Score 1-5 or N/A)
@@ -88,13 +88,11 @@ At the end:
 - Calculate the **Total Score**.
 - Provide a final recommendation:
 
-- **Accept Output** if the total score is above 80 and no criterion scored below 5.
-- **Rerun Subtask** if the total score is 80 or below, or if any criterion scored below 5.
+- **Accept Output** if the total score is above 80 
+- **Reject Output** if the total score is 80 or below.
 
-- If recommending a rerun, provide suggestions on how to improve the output.
+- If recommending is Reject Output, provide suggestions on how to improve the output.
 - If output is an incorrect and unexpected structure in response, provide the structure evaluation output still (Score 0 for each criteria)
-- If output is incorrect tool arguments and unexpected result when invoke the tool, provide the change suggestion and the structure evaluation output still (Score 0 for each criteria)
----
 
 # Test case generated#
 {test_case}
