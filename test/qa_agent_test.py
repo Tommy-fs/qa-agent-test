@@ -20,7 +20,7 @@ def test(log_update=None):
     jira = getattr(module_k, class_name_k)
 
     qa_agent = QAAgent()
-    result = qa_agent.run(jira)
+    qa_agent.run(jira)
 
 
 test()

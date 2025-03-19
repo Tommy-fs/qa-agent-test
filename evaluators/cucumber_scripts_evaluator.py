@@ -1,12 +1,14 @@
+import argparse
 import json
 from typing import Optional
 
+from agent_core.agents import Agent
 from agent_core.evaluators.entities.evaluator_result import EvaluatorResult
 
 from evaluators.cucumber_evaluator_prompt import CUCUMBER_EVALUATOR_PROMPT
 
 
-class CucumberEvaluator():
+class CucumberEvaluator:
 
     def __init__(
             self,
@@ -21,38 +23,44 @@ class CucumberEvaluator():
         Evaluate the provided request and generated script response.
         """
 
+        parser = argparse.ArgumentParser()
+        parser.add_argument("--case", required=True)
+        args = parser.parse_args()
+        case = args.case
 
+        cucumber_script_basic_template = self.readFile(
+            "../knowledges/" + case + "/cucumber_knowledges/cucumber_script_base.feature")
+        available_web_elements = self.readFile("../knowledges/" + case + "/cucumber_knowledges/WebElement.yml")
+        available_webui_cucumber_system_steps = self.readFile(
+            "../knowledges/" + case + "/cucumber_knowledges/fast_webui_cucumber_system_steps.txt")
+        available_webui_cucumber_project_steps = self.readFile(
+            "../knowledges/" + case + "/cucumber_knowledges/fast_webui_cucumber_project_steps.txt")
+        script_generate_guide = self.readFile(
+            "../knowledges/" + case + "/cucumber_knowledges/script_generate_guide.txt")
+        project_document = self.readFile(
+            "../knowledges/" + case + "/project_knowledges/project_document.py")
 
-        prompt_text = self.prompt.format(test_case=test_case,
-                                         cucumber_script=cucumber_script,
-                                         )
+        prompt_text = self.default_prompt.format(test_case=test_case,
+                                                 cucumber_script=cucumber_script,
+                                                 cucumber_script_basic_template=cucumber_script_basic_template,
+                                                 script_generate_guide=script_generate_guide,
+                                                 available_web_elements=available_web_elements,
+                                                 available_webui_cucumber_system_steps=available_webui_cucumber_system_steps,
+                                                 available_webui_cucumber_project_steps=available_webui_cucumber_project_steps
+                                                 )
 
-        evaluation_response = self._model.process(prompt_text)
+        agent = Agent(model_name="gemini-1.5-pro-002")
+
+        evaluation_response = agent.execute(prompt_text)
 
         decision, score, suggestion, details = self.parse_scored_evaluation_response(
             evaluation_response
         )
-        #
-        # details = {
-        #     "score_breakdown": scores,
-        #     "raw_evaluation": evaluation_response,
-        #     "total_applicable_score": total_score,
-        # }
-        #
-        # if decision == "Reject Code":
-        #     improvement_suggestions = generate_improvement_suggestions(scores)
-        #     details["improvement_suggestions"] = improvement_suggestions
-        # else:
-        #     details["improvement_suggestions"] = ""
-        #
-        # return EvaluatorResult(decision, total_score, details)
+
         return EvaluatorResult(
-            name=self.name,
             decision=decision,
             score=score,
             suggestion=suggestion,
-            details=details,
-            prompt=prompt_text,
         )
 
     def default_prompt(self):
@@ -108,3 +116,11 @@ class CucumberEvaluator():
                     scores[key] = score
 
             return decision, total_score, scores
+
+    def readFile(self, file_path):
+        try:
+            with open(file_path, 'r', encoding='utf-8') as file:
+                file_content = file.read()
+            return file_content
+        except:
+            return ""
