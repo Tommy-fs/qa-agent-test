@@ -1,0 +1,28 @@
+Priority: High
+Name: TicketField-001
+Summary: Verify "Auto Test Ref#" field functionality in Normal DL tickets.
+
+Steps：
+| No. | Test Step | Test Data | Expected Result |
+|---|---|---|---|
+| 1. | Operations Manager logs in to XMC Loan Web. |  | Successful login |
+| 2. | Create a new Normal DL ticket via "New Message". | Processing Team: *GT CN DevTest, From email address: TESTFROM1@CITI.COM, To email address: TESTTO1@CITI.COM, Subject: New Normal DL Ticket, Request Type: Normal DL | Ticket created successfully. Status: Unassigned, Sub Status: New |
+| 3. | Open the newly created ticket. |  | Ticket details page displayed. |
+| 4. | Click "Update Ticket" action button. |  | "Update Ticket" form displayed. |
+| 5. | Verify the presence of the "Auto Test Ref#" field in the form. |  | "Auto Test Ref#" field is displayed in the form. |
+| 6. | Submit the "Update Ticket" form without entering a value in "Auto Test Ref#" field. |  | Form submitted successfully, no error message related to "Auto Test Ref#" field is displayed. |
+| 7. | Verify the "Auto Test Ref#" field is displayed under the "Additional Details" section. |  | "Auto Test Ref#" field is displayed under "Additional Details" with no value. |
+| 8. | Enter a value in the "Auto Test Ref#" field in the "Update Ticket" form. | Auto Test Ref#: TEST-123 |  |
+| 9. | Submit the "Update Ticket" form. |  | Form submitted successfully. |
+| 10. | Verify the entered value is displayed under the "Additional Details" section. |  | "Auto Test Ref#" field displays the value "TEST-123" under "Additional Details". |
+| 11. | Create a new Normal DL ticket via incoming email. | From email address: TESTFROM2@CITI.COM, To email address: TESTTO2@CITI.COM, Subject: New Normal DL Ticket via Email, Body: This is a test email to create a Normal DL ticket. | Ticket created successfully. Status: Unassigned, Sub Status: New |
+| 12. | Open the newly created ticket. |  | Ticket details page displayed. |
+| 13. | Click "Update Ticket" action button. |  | "Update Ticket" form displayed. |
+| 14. | Verify the presence of the "Auto Test Ref#" field in the form. |  | "Auto Test Ref#" field is displayed in the form. |
+| 15. | Enter a value in the "Auto Test Ref#" field in the "Update Ticket" form. | Auto Test Ref#: TEST-456 |  |
+| 16. | Submit the "Update Ticket" form. |  | Form submitted successfully. |
+| 17. | Verify the entered value is displayed under the "Additional Details" section. |  | "Auto Test Ref#" field displays the value "TEST-456" under "Additional Details". |
+| 18. | Close both created tickets. |  | Tickets closed successfully. |
+
+
+---

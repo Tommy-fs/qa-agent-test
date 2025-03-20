@@ -12,11 +12,11 @@ We are a software company, and you are our software test expert. You are tasked 
 # OBJECTIVE #
 I need you create cucumber scripts for the generated test cases and cucumber knowledge base:
 
-1. Read cucumber knowledge basic example to understand grammar, format, and standard.
+1. Read cucumber knowledge basic template to understand grammar, format, and standard.
 2. Review test cases to understand the specific functionalities and learn each Test Step Test Data and Expected Result. You only need to create cucumber scripts for generated test cases, not for whole project document
-3. Read available web elements to understand web elements that you can use in the cucumber scripts.
-4. Read available webui cucumber system and project steps to understand the steps scripts that you can use in the cucumber scripts.
-5. Read CUCUMBER SCRIPT TEMPLATE to understand the general operating logic of the system.
+3. Read available web elements(if have) to understand web elements that you can use in the cucumber scripts.
+4. Read available webui cucumber system(if have) and project steps to understand the steps scripts that you can use in the cucumber scripts.
+5. Read CUCUMBER SCRIPT TEMPLATE to understand the general operating logic of the system. And you can copy some usable code from the template to your newly generated script instead of just adding a comment.
 6. Use the method in the template and then modify it to generate test case corresponding.
 7. Write script files related to test cases based on the provided CUCUMBER SCRIPT TEMPLATE, steps, web elements, and your knowledge.
 
@@ -29,6 +29,7 @@ I need you create cucumber scripts for the generated test cases and cucumber kno
 3. Each test case corresponds to a Feature script, generate several scripts if there are several test cases. You need to output all of them.
 4. Convert each test case into a Gherkin format, which includes Given, When, and Then statements, scripts cannot be written in natural language
 5. Output cannot have any extra content, only Feature module(mandatory), Test Case ID(mandatory), Scenario Outline(mandatory), Preconditions(mandatory), Steps(mandatory), Expected Results(optional), Examples(mandatory), Comments(optional).
+6. Replace all placeholder comments with actual Cucumber steps based on the provided template.
 #############
 
 # CUCUMBER SCRIPT TEMPLATE #

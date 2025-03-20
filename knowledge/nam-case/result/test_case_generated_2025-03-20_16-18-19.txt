@@ -1,0 +1,21 @@
+Priority: High
+Name: TicketField-001
+Summary: Verify "Auto Test Ref#" field functionality in Normal DL tickets.
+
+Steps:
+| No. | Test Step | Test Data | Expected Result |
+|---|---|---|---|
+| 1. | Operations Manager logs in to XMC Loan Web. |  | Successful login |
+| 2. | Create a new Normal DL ticket via "New Message". | Processing Team: *GT CN DevTest, From email address: TESTFROM1@CITI.COM, To email address: TESTTO1@CITI.COM, Subject: New Normal DL Ticket, Request Type: Normal DL | Ticket created successfully. Status: Unassigned, Sub Status: New |
+| 3. | Open the newly created ticket. |  | Ticket details page displayed. |
+| 4. | Click "Update Ticket" action button. |  | "Update Ticket" form displayed. |
+| 5. | Verify the presence of the "Auto Test Ref#" field in the form. |  | "Auto Test Ref#" field is displayed in the form. |
+| 6. | **Scenario 1: Leave "Auto Test Ref#" blank.** Submit the form without entering any value in "Auto Test Ref#". |  | Form submitted successfully. No error message related to "Auto Test Ref#" is displayed. |
+| 7. | Verify the "Additional Details" section. |  | "Auto Test Ref#" field is displayed in the "Additional Details" section with no value. |
+| 8. | Click "Update Ticket" action button again. |  | "Update Ticket" form displayed. |
+| 9. | **Scenario 2: Enter a value in "Auto Test Ref#".** Enter "TESTREF123" in the "Auto Test Ref#" field. Submit the form. | Auto Test Ref#: TESTREF123 | Form submitted successfully. |
+| 10. | Verify the "Additional Details" section. |  | "Auto Test Ref#" field is displayed in the "Additional Details" section with the value "TESTREF123". |
+| 11. | Close the ticket. |  | Ticket closed and archived. |
+
+
+---

@@ -1,0 +1,93 @@
+## Test Suite: Ticketing System - Email Reply Functionality
+
+**Test Case 1: Creating New Ticket via Email Reply with Subject Change**
+
+**Priority:** 1 (Critical)
+
+**Name:** Verify New Ticket Creation on Email Reply with Modified Subject
+
+**Summary:** This test case verifies that replying to an email with a changed subject creates a new ticket and does not update the original ticket.
+
+**Steps:**
+
+| No. | Test Step | Test Data | Expected Result |
+|---|---|---|---|
+| 1 | Send an email to the ticketing system. | Subject: Subject1 | Ticket XL001 is created with Subject1. |
+| 2 | Reply to the email received in step 1, changing the subject. | Subject: Subject2 | Ticket XL002 is created with Subject2. Ticket XL001 remains unchanged. |
+| 3 | Verify the details of the newly created ticket XL002. | N/A | Ticket XL002 details match the content of the reply email (excluding the subject). |
+| 4 | Verify the details of the original ticket XL001. | N/A | Ticket XL001 details remain unchanged and do not reflect the modifications made in the reply email. |
+
+
+---
+
+**Test Case 2: Creating New Ticket via Email Reply with Original Subject**
+
+**Priority:** 2 (High)
+
+**Name:** Verify New Ticket Creation on Email Reply with Original Subject
+
+**Summary:** This test case verifies that replying to an email without changing the subject creates a new ticket and does not update the original ticket.
+
+**Steps:**
+
+| No. | Test Step | Test Data | Expected Result |
+|---|---|---|---|
+| 1 | Send an email to the ticketing system. | Subject: Subject1 | Ticket XL003 is created with Subject1. |
+| 2 | Reply to the email received in step 1, keeping the original subject. | Subject: Subject1 | Ticket XL004 is created with Subject1. Ticket XL003 remains unchanged. |
+| 3 | Verify the details of the newly created ticket XL004. | N/A | Ticket XL004 details match the content of the reply email. |
+| 4 | Verify the details of the original ticket XL003. | N/A | Ticket XL003 details remain unchanged and do not reflect the modifications made in the reply email. |
+
+
+---
+
+**Test Case 3:  Email Reply with Empty Subject**
+
+**Priority:** 3 (Medium)
+
+**Name:** Verify System Behavior on Email Reply with Empty Subject
+
+**Summary:** This test case verifies the system's behavior when replying to an email with an empty subject line.
+
+**Steps:**
+
+| No. | Test Step | Test Data | Expected Result |
+|---|---|---|---|
+| 1 | Send an email to the ticketing system. | Subject: Subject1 | Ticket XL005 is created with Subject1. |
+| 2 | Reply to the email received in step 1, removing the subject. | Subject: (Empty) | Either a new ticket is created with a default subject or an error message is displayed indicating that a subject is required. Ticket XL005 remains unchanged. |
+
+
+---
+
+**Test Case 4: Email Reply with Special Characters in Subject**
+
+**Priority:** 4 (Low)
+
+**Name:** Verify Handling of Special Characters in Email Reply Subject
+
+**Summary:** This test case verifies the system's handling of special characters in the subject line of a reply email.
+
+**Steps:**
+
+| No. | Test Step | Test Data | Expected Result |
+|---|---|---|---|
+| 1 | Send an email to the ticketing system. | Subject: Subject1 | Ticket XL006 is created with Subject1. |
+| 2 | Reply to the email received in step 1, adding special characters to the subject. | Subject: Subject!@#$%^&*()_+=-` | A new ticket is created, and the subject is either correctly displayed with the special characters or sanitized to remove them. Ticket XL006 remains unchanged. |
+
+
+
+---
+
+**Test Case 5:  Email Reply with Extremely Long Subject**
+
+**Priority:** 5 (Lowest)
+
+**Name:** Verify Handling of Extremely Long Subject in Email Reply
+
+**Summary:** This test case verifies the system's behavior when replying to an email with an extremely long subject line.
+
+**Steps:**
+
+| No. | Test Step | Test Data | Expected Result |
+|---|---|---|---|
+| 1 | Send an email to the ticketing system. | Subject: Subject1 | Ticket XL007 is created with Subject1. |
+| 2 | Reply to the email received in step 1, using a very long subject (e.g., >255 characters). | Subject: [Long Subject exceeding character limit] | Either a new ticket is created with a truncated subject or an error message is displayed indicating the subject length limitation. Ticket XL007 remains unchanged. |

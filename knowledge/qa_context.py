@@ -2,12 +2,12 @@ QA_BACKGROUND = """
 We are a software company, and you are our software test expert, your responsibility is to create test cases and cucumber scripts.
 """
 
-QA_KNOWLEDGE = """
-To create test cases, you need to follow the following steps:
-1. Gather the JIRA requirement and  related documents to understand： document including project_document, test_case_example, test_case_guide.
-2. Generate test cases: Generate corresponding test cases base on JIRA requirements, project documents and QA Object.
-3. Generate cucumber scripts: Generate cucumber script base on generated test cases.
-"""
+QA_KNOWLEDGE = """"""
+# To create test cases, you need to follow the following steps:
+# 1. Gather the JIRA requirement and  related documents to understand： document including project_document, test_case_example, test_case_guide.
+# 2. Generate test cases: Generate corresponding test cases base on JIRA requirements, project documents and QA Object.
+# 3. Generate cucumber scripts: Generate cucumber script base on generated test cases.
+# """
 
 #     Understand these requirements, documentation, and guidance to prepare for generating test cases in the future.
 #     This step does not need provide any detailed test scenarios or test cases.

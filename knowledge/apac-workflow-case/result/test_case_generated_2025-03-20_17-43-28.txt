@@ -1,0 +1,66 @@
+**Priority:** Critical
+**Name:** HK_GCM_Workflow_Enhancement-001
+**Summary:** Validate HK GCM Workflow Enhancements for THIRD PARTY PAYMENT = Yes and QC REQUIRE = False
+
+**Steps:**
+
+| No. | Test Step | Test Data | Expected Result |
+|---|---|---|---|
+| 1 | Login system as KL LOANS OPS - PROCESSING - MAKER |  | Login successful |
+| 2 | Create a new HK GCM Instruction | THIRD PARTY PAYMENT = Yes, QC REQUIRE = False | Instruction created successfully. CURRENT STATUS = "KL LOANS OPS", PROCESS STATUS = "KL LOANS - PROCESSING-CHECKER" |
+| 3 | Login system as KL LOANS OPS - PROCESSING - CHECKER |  | Login successful |
+| 4 | Open the created instruction |  | Instruction opens successfully |
+| 5 | Verify available actions |  | Only "Submit to Payment" action is available. "Complete" action is disabled. |
+| 6 | Perform "Submit to Payment" action |  | Action successful. PROCESS STATUS = "PAYMENT - MAKER" |
+| 7 | Login system as KL LOANS OPS - PROCESSING - PAYMENT MAKER |  | Login successful |
+| 8 | Open the created instruction |  | Instruction opens successfully |
+| 9 | Verify available actions |  | "Submit Payment Checker" and "Return" (to KL LOANS OPS - PROCESSING - MAKER) actions are available. |
+| 10 | Perform "Submit Payment Checker" action |  | Action successful. PROCESS STATUS = "PAYMENT-CHECKER" |
+| 11 | Login system as KL LOANS OPS - PROCESSING - PAYMENT CHECKER |  | Login successful |
+| 12 | Open the created instruction |  | Instruction opens successfully |
+| 13 | Verify available actions |  | "Complete" and "Return" (to KL LOANS OPS - PROCESSING - MAKER or KL LOANS OPS -PROCESSING-PAYMENT MAKER) actions are available. |
+| 14 | Perform "Complete" action |  | Action successful. CURRENT STATUS = "COMPLETED", PROCESS STATUS = "COMPLETED", COMPLETED DATE is populated with today's date. |
+
+
+***
+
+**Priority:** Critical
+**Name:** HK_GCM_Workflow_Enhancement-002
+**Summary:** Validate HK GCM Workflow Enhancements for THIRD PARTY PAYMENT = No and QC REQUIRE = False
+
+**Steps:**
+
+| No. | Test Step | Test Data | Expected Result |
+|---|---|---|---|
+| 1 | Login system as KL LOANS OPS - PROCESSING - MAKER |  | Login successful |
+| 2 | Create a new HK GCM Instruction | THIRD PARTY PAYMENT = No, QC REQUIRE = False | Instruction created successfully. CURRENT STATUS = "KL LOANS OPS", PROCESS STATUS = "KL LOANS - PROCESSING-CHECKER" |
+| 3 | Login system as KL LOANS OPS - PROCESSING - CHECKER |  | Login successful |
+| 4 | Open the created instruction |  | Instruction opens successfully |
+| 5 | Verify available actions |  | Only "Complete" action is available. "Submit to Payment" action is disabled. |
+| 6 | Perform "Complete" action |  | Action successful. CURRENT STATUS = "COMPLETED", PROCESS STATUS = "COMPLETED", COMPLETED DATE is populated with today's date. |
+
+
+***
+
+**Priority:** Critical
+**Name:** HK_GCM_Workflow_Enhancement-003
+**Summary:** Validate HK GCM Workflow Enhancements for THIRD PARTY PAYMENT = Yes and QC REQUIRE = True
+
+**Steps:**
+
+| No. | Test Step | Test Data | Expected Result |
+|---|---|---|---|
+| 1 | Login system as KL LOANS OPS - PROCESSING - MAKER |  | Login successful |
+| 2 | Create a new HK GCM Instruction | THIRD PARTY PAYMENT = Yes, QC REQUIRE = True | Instruction created successfully. CURRENT STATUS = "KL LOANS OPS", PROCESS STATUS = "KL LOANS - PROCESSING-CHECKER" |
+| 3 | Login system as KL LOANS OPS - PROCESSING - CHECKER |  | Login successful |
+| 4 | Open the created instruction |  | Instruction opens successfully |
+| 5 | Perform "Submit to QC" action | | Action successful. CURRENT STATUS = "KL LOANS OPS", PROCESS STATUS = "DRAWDOWN-QC" |
+| 6 | Login system as QC |  | Login successful |
+| 7 | Open the created instruction |  | Instruction opens successfully |
+| 8 | Perform "Complete Drawdown QC" action |  | Action successful. CURRENT STATUS = "KL LOANS OPS", PROCESS STATUS = "PROCESSING-CHECKER-QC CHECKED" |
+| 9 | Login system as KL LOANS OPS - PROCESSING - CHECKER |  | Login successful |
+| 10 | Open the created instruction |  | Instruction opens successfully |
+| 11 | Verify available actions |  | Only "Submit to Payment" action is available. "Complete" action is disabled. |
+| 12 | Perform steps 6-14 from HK_GCM_Workflow_Enhancement-001 |  | Same expected results as in HK_GCM_Workflow_Enhancement-001 from step 6 onwards. |
+
+

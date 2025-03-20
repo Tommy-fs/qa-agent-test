@@ -52,18 +52,18 @@ class CucumberScriptGenerator:
         }
 
         cucumber_scripts = []
-        test_cases_dict = self.parseTestCases(generated_test_cases)
+        test_cases_dict = self.parse_test_cases(generated_test_cases)
         for case_name, case_content in test_cases_dict.items():
             parameters["generated_test_cases"] = case_content
             generate_script = self.generate_script(parameters)
-            self.writeFile(case_name + "original", generate_script)
+            self.write_script_to_file(case_name + "_original", generate_script)
 
             final_response = self.evaluate_and_optimize(case_content, generate_script)
             logging.info('evaluate_and_optimize result' + final_response["decision"])
 
             final_script = final_response["final_script"]
             cucumber_scripts.append(final_script)
-            self.writeFile(case_name + "optimized", final_script)
+            self.write_script_to_file(case_name + "_optimized", final_script)
         return json.dumps(cucumber_scripts)
 
     def readFile(self, file_path):
@@ -74,19 +74,25 @@ class CucumberScriptGenerator:
         except:
             return ""
 
-    def writeFile(self, case_name, file_content):
+    def write_script_to_file(self, case_name, file_content):
         parser = argparse.ArgumentParser()
         parser.add_argument("--case", required=True)
         args = parser.parse_args()
         case = args.case
 
+        try:
+            start = file_content.index('```cucumber') + len('```cucumber')
+            end = file_content.index('```', start)
+            script = file_content[start:end].strip()
+        except (ValueError, AttributeError):  # 处理找不到字符串或传入非字符串的情况
+            script = file_content
         file_path = "../knowledge/" + case + "/result/script_generated-" + str(case_name) + ".feature"
         with open(file_path, 'w', encoding='utf-8') as file:
-            file.write(file_content)
+            file.write(script)
 
         logging.info("Test case script has been wrote in " + file_path)
 
-    def parseTestCases(self, test_cases):
+    def parse_test_cases(self, test_cases):
         test_case_lines = test_cases.strip().splitlines()
 
         test_cases_dict = {}
@@ -130,7 +136,7 @@ class CucumberScriptGenerator:
         return cucumber_script
 
     def evaluate_and_optimize(self, case_content, generate_script, max_iterations=3):
-        global evaluation_output
+        global evaluation_output, total_score
         iteration_count = 0
         evaluator = CucumberEvaluator()
         optimization = CucumberOptimization()
@@ -142,15 +148,17 @@ class CucumberScriptGenerator:
 
             decision = evaluation_output["decision"]
             suggestions = evaluation_output["suggestions"]
+            total_score = evaluation_output["total_score"]
 
             if "accept" in decision.lower():
-                logging.info("The script passed evaluation!")
+                logging.info(f"The script passed evaluation! - {total_score}")
                 return {
                     "decision": "Pass",
-                    "total_score": evaluation_output["total_score"],
+                    "total_score": total_score,
                     "final_script": generate_script,
                 }
             elif "reject" in decision.lower():
+                logging.info(f"The script total score is {total_score}")
                 logging.info("The script requires modifications. Applying suggestions...")
                 logging.info(f"Suggestions: {suggestions}")
 
@@ -160,7 +168,7 @@ class CucumberScriptGenerator:
             else:
                 raise ValueError(f"Unexpected decision: {decision}")
 
-        logging.info("The script did not pass after the maximum number of iterations.")
+        logging.info(f"The script did not pass after the maximum number of iterations {total_score}.")
         return {
             "decision": "Failed",
             "total_score": evaluation_output["total_score"],
