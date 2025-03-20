@@ -46,9 +46,9 @@ class DocumentGather:
         module_k = importlib.import_module(module_path_k)
         jira = getattr(module_k, class_name_k)
 
-        context = f"\n<JIRA REQUIREMENT>\n{jira}\n</IRA REQUIREMENT>\n"
-        context += f"\n<PROJECT_DOCUMENT>\n{project_document}\n</PROJECT_DOCUMENT>\n"
-        context += f"\n<TEST_CASE_EXAMPLE>\n{test_case_example}\n</TEST_CASE_EXAMPLE>\n"
-        context += f"\n<TEST_CASE_GUIDE>\n{test_case_guide}\n</TEST_CASE_GUIDE>\n"
+        context = f"\n# JIRA REQUIREMENT #\n{jira}\n"
+        context += f"\n# PROJECT_DOCUMENT #\n{project_document}\n"
+        context += f"\n# TEST_CASE_EXAMPLE #\n{test_case_example}\n"
+        context += f"\n# TEST_CASE_GUIDE #\n{test_case_guide}\n"
 
         return context

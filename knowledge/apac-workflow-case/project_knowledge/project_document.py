@@ -1,6 +1,7 @@
 PROJECT_DOCUMENT = """
 This system is a system for creating instruction orders, which have many fields. 
 Some require user input, while others are automatically entered by the system and follow different workflows. 
+Additional: COMPLETED DATE This is a field that is automatically set by the system and cannot be modified manually by the user.
 Each order has a corresponding state at each step, 
 and users with corresponding permissions can operate the order in the corresponding state to perform actions, 
 and then proceed step by step.

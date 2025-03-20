@@ -88,8 +88,8 @@ At the end:
 - Calculate the **Total Score**.
 - Provide a final recommendation:
 
-- **Accept Output** if the total score is above 80 
-- **Reject Output** if the total score is 80 or below.
+- **Accept Output** if the total score is 80 or above
+- **Reject Output** if the total score below 80.
 
 - If recommending is Reject Output, provide suggestions on how to improve the output.
 - If output is an incorrect and unexpected structure in response, provide the structure evaluation output still (Score 0 for each criteria)

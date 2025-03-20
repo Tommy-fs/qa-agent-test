@@ -1,5 +1,6 @@
 import argparse
 import logging
+from datetime import datetime
 from typing import Annotated
 
 from agent_core.agents import Agent
@@ -11,10 +12,10 @@ from knowledge.qa_context import QA_BACKGROUND, QA_OBJECT
 
 @tool("test_case_generate")
 def test_case_generate(
-        jira_request: Annotated[str, 'the jira request'],
-        project_document: Annotated[str, 'the related project document'],
-        test_case_example: Annotated[str, 'the related test case example'],
-        test_case_guide: Annotated[str, 'the related test case guide']):
+        jira_request: Annotated[str, 'the actual jira request'],
+        project_document: Annotated[str, 'the related business project document'],
+        test_case_example: Annotated[str, 'the related existing test case example'],
+        test_case_guide: Annotated[str, 'the related QA test case guide']):
     """Generate test case base on JIRA Description and related Document"""
     test_case_generator = TestCaseGenerator()
     return test_case_generator.test_cases_generate(jira_request, project_document, test_case_example, test_case_guide)
@@ -43,22 +44,19 @@ class TestCaseGenerator:
             test_case_guide=parameters["test_case_guide"]
         )
 
-        agent = Agent()
+        agent = Agent(model_name="gemini-1.5-pro-002")
 
         test_case = agent.execute(prompt)
-
         parser = argparse.ArgumentParser()
         parser.add_argument("--case", required=True)
         args = parser.parse_args()
         case = args.case
 
-        file_path = "../knowledge/" + case + "/result/test_case_generated.txt"
+        file_path = "../knowledge/" + case + "/result/test_case_generated_" + datetime.now().strftime(
+            "%Y-%m-%d_%H-%M-%S") + ".txt"
         with open(file_path, 'w', encoding='utf-8') as file:
             file.write(test_case)
 
         logging.info("Test case result has been wrote in " + file_path)
 
-        # file_path = "../result/test_case_generated" + datetime.now().strftime("%Y-%m-%d") + ".txt"
-        # with open(file_path, 'w', encoding='utf-8') as file:
-        #     file.write(test_case)
         return test_case

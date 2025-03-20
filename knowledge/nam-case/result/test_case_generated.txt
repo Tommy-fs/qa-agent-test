@@ -1,37 +1,18 @@
-```markdown
-Priority: Critical  
-Name: TicketingLogic-002  
-Summary: Function - Add 'Auto Test Ref#' field in Update Ticket action form  
-Steps：  
-| No. | Test Step                                                                 | Test Data                                                                                       | Expected Result                                      |
-|-----|---------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------|-----------------------------------------------------|
-| 1   | Operation Manager login xxx system Loan Web.                             | A: *GT CN DevTest                                                                               | Processing Team: *GT CN DevTest                     |
-| 2   | Create a Ticket for Normal DL and fill in mandatory fields by New Message. | Processing Team: *Test processing DL, From email address: TESTFROM1@CITI.COM, To email address: TESTTO1@CITI.COM, SUBJECT: Add Auto Test Ref#, Request Type value: 3PDL | Status: Unassigned                                   |
-| 3   | Open Ticket created for Normal DL.                                       |                                                                                                 | Sub Status: New                                     |
-| 4   | Click Update Ticket Action.                                              |                                                                                                 | Update Ticket form is displayed                     |
-| 5   | Verify 'Auto Test Ref#' field is present in Update Ticket action form.  |                                                                                                 | 'Auto Test Ref#' field is displayed                 |
-| 6   | Leave 'Auto Test Ref#' field empty and click Update Ticket button.      |                                                                                                 | Ticket is updated successfully without error        |
-| 7   | Check Additional Details section in Ticket Detail page.                 |                                                                                                 | 'Auto Test Ref#' field is not displayed in Additional Details |
-| 8   | Enter value in 'Auto Test Ref#' field and click Update Ticket button.   | Auto Test Ref#: TEST123                                                                        | Ticket is updated successfully                       |
-| 9   | Check Additional Details section in Ticket Detail page again.           |                                                                                                 | 'Auto Test Ref#' field displays value TEST123       |
-| 10  | Close the Ticket.                                                        |                                                                                                 | Ticket status is changed to Closed                   |
+```plaintext
+Priority: Critical
+Name: TicketingLogic-002
+Summary: Function - Add 'Auto Test Ref#' field in Update Ticket action form for Normal DL
+Steps：
+| No. | Test Step                                                                 | Test Data                                                                                       | Expected Result                                   |
+|-----|---------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------|--------------------------------------------------|
+| 1   | Operation Manager login to xxx system Loan Web.                          | A: *GT CN DevTest                                                                              | Processing Team: *GT CN DevTest                  |
+| 2   | Create a Ticket for Normal DL and fill in mandatory fields via New Message. | Processing Team: *Test processing DL, From email address: TESTFROM1@CITI.COM, To email address: TESTTO1@CITI.COM, SUBJECT: Test Ticket, Request Type value: Normal DL | Status: Unassigned                                |
+| 3   | Open Ticket created for Normal DL.                                       |                                                                                                 | Sub Status: New                                   |
+| 4   | Click Update Ticket Action.                                              |                                                                                                 | Update Ticket form is displayed                   |
+| 5   | Verify 'Auto Test Ref#' field is present in Update Ticket action form.  |                                                                                                 | 'Auto Test Ref#' field is displayed              |
+| 6   | Leave 'Auto Test Ref#' field empty and click Update Ticket button.      |                                                                                                 | System does not prompt any error                  |
+| 7   | Enter a value in 'Auto Test Ref#' field and click Update Ticket button. | Auto Test Ref#: TEST123                                                                        | Ticket is updated successfully                    |
+| 8   | Check 'Auto Test Ref#' value in Additional Details section.             |                                                                                                 | 'Auto Test Ref#' value is displayed correctly     |
+| 9   | Close the Ticket.                                                        |                                                                                                 | Ticket status is changed to Closed                |
 
----
-
-Priority: High  
-Name: TicketingLogic-003  
-Summary: Function - Validate non-mandatory behavior of 'Auto Test Ref#' field  
-Steps：  
-| No. | Test Step                                                                 | Test Data                                                                                       | Expected Result                                      |
-|-----|---------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------|-----------------------------------------------------|
-| 1   | Operation Manager login xxx system Loan Web.                             | A: *GT CN DevTest                                                                               | Processing Team: *GT CN DevTest                     |
-| 2   | Create a Ticket for Normal DL and fill in mandatory fields by New Message. | Processing Team: *Test processing DL, From email address: TESTFROM1@CITI.COM, To email address: TESTTO1@CITI.COM, SUBJECT: Validate Auto Test Ref#, Request Type value: 3PDL | Status: Unassigned                                   |
-| 3   | Open Ticket created for Normal DL.                                       |                                                                                                 | Sub Status: New                                     |
-| 4   | Click Update Ticket Action.                                              |                                                                                                 | Update Ticket form is displayed                     |
-| 5   | Verify 'Auto Test Ref#' field is present in Update Ticket action form.  |                                                                                                 | 'Auto Test Ref#' field is displayed                 |
-| 6   | Click Update Ticket button without entering value in 'Auto Test Ref#'.   |                                                                                                 | Ticket is updated successfully without error        |
-| 7   | Check Additional Details section in Ticket Detail page.                 |                                                                                                 | 'Auto Test Ref#' field is not displayed in Additional Details |
-| 8   | Enter value in 'Auto Test Ref#' field and click Update Ticket button.   | Auto Test Ref#: TEST456                                                                        | Ticket is updated successfully                       |
-| 9   | Check Additional Details section in Ticket Detail page again.           |                                                                                                 | 'Auto Test Ref#' field displays value TEST456       |
-| 10  | Close the Ticket.                                                        |                                                                                                 | Ticket status is changed to Closed                   |
 ```

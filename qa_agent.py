@@ -29,7 +29,7 @@ class QAAgent:
         self.jira_request = jira_request
         self.add_context()
 
-        self.agent.enable_evaluators()
+        # self.agent.enable_evaluators()
 
         # self.agent.add_evaluator("gather jira document", DocumentEvaluator(self.agent.model_name))
         # self.agent.add_evaluator("cucumber script generate", CucumberEvaluator(self.agent.model_name))

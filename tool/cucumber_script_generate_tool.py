@@ -55,10 +55,15 @@ class CucumberScriptGenerator:
         test_cases_dict = self.parseTestCases(generated_test_cases)
         for case_name, case_content in test_cases_dict.items():
             parameters["generated_test_cases"] = case_content
-            generate_script = self.generate_script(parameters, case_name)
+            generate_script = self.generate_script(parameters)
+            self.writeFile(case_name + "original", generate_script)
 
-            cucumber_scripts.append(generate_script)
-            self.writeFile(case_name, generate_script)
+            final_response = self.evaluate_and_optimize(case_content, generate_script)
+            logging.info('evaluate_and_optimize result' + final_response["decision"])
+
+            final_script = final_response["final_script"]
+            cucumber_scripts.append(final_script)
+            self.writeFile(case_name + "optimized", final_script)
         return json.dumps(cucumber_scripts)
 
     def readFile(self, file_path):
@@ -107,7 +112,7 @@ class CucumberScriptGenerator:
 
         return test_cases_dict
 
-    def generate_script(self, parameters, case_name):
+    def generate_script(self, parameters):
         prompt = GENERATE_CUCUMBER_SCRIPT_KNOWLEDGE.format(
             generated_test_cases=parameters["generated_test_cases"],
             cucumber_script_basic_template=parameters["cucumber_script_basic_template"],
@@ -131,7 +136,7 @@ class CucumberScriptGenerator:
         optimization = CucumberOptimization()
         while iteration_count < max_iterations:
             iteration_count += 1
-            print(f"Iteration {iteration_count}: Evaluating the script...")
+            logging.info(f"Iteration {iteration_count}: Evaluating the script...")
 
             evaluation_output = evaluator.evaluate(case_content, generate_script)
 
@@ -139,23 +144,23 @@ class CucumberScriptGenerator:
             suggestions = evaluation_output["suggestions"]
 
             if "accept" in decision.lower():
-                print("The script passed evaluation!")
+                logging.info("The script passed evaluation!")
                 return {
                     "decision": "Pass",
                     "total_score": evaluation_output["total_score"],
                     "final_script": generate_script,
                 }
             elif "reject" in decision.lower():
-                print("The script requires modifications. Applying suggestions...")
-                print(f"Suggestions: {suggestions}")
+                logging.info("The script requires modifications. Applying suggestions...")
+                logging.info(f"Suggestions: {suggestions}")
 
                 generate_script = optimization.optimization_gherkin_script(case_content, generate_script,
-                                                                                   "\n".join(suggestions))
-                print("Optimization applied. Re-evaluating the script...")
+                                                                           "\n".join(suggestions))
+                logging.info("Optimization applied. Re-evaluating the script...")
             else:
                 raise ValueError(f"Unexpected decision: {decision}")
 
-        print("The script did not pass after the maximum number of iterations.")
+        logging.info("The script did not pass after the maximum number of iterations.")
         return {
             "decision": "Failed",
             "total_score": evaluation_output["total_score"],
