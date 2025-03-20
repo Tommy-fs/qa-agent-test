@@ -94,35 +94,19 @@ At the end:
 - If recommending is Reject Output, provide suggestions on how to improve the output.
 - If output is an incorrect and unexpected structure in response, provide the structure evaluation output still (Score 0 for each criteria)
 
-# Test case generated#
-{test_case}
+**Context**
+{context}
 
-# Cucumber script generated#
-{cucumber_script}
+**Description of ultimate task goal:**
+{root_task}
 
-# CUCUMBER SCRIPT TEMPLATE #
+**Request:**
+{request}
 
-{cucumber_script_basic_template}
+**Response:**
+{response}
 
-# GUIDELINE #
-Use CUCUMBER SCRIPT TEMPLATE and GUIDELINE together to complete the creation of the script(if have).
-
-{script_generate_guide}
-
-# AVAILABLE WEB ELEMENTS #
-If AVAILABLE WEB ELEMENTS is provided, You must use the provided web elements as part of the script. 
-Otherwise you need to write a new script file according to elements in CUCUMBER SCRIPT TEMPLATE
-
-{available_web_elements}
-
-# AVAILABLE WEBUI CUCUMBER SYSTEM STEPS #
-
-If AVAILABLE WEBUI CUCUMBER STEPS is provided, You must use the provided web ui cucumber steps as part of the script. 
-Otherwise you need to write a new script file according to the steps in CUCUMBER SCRIPT TEMPLATE
-
-{available_webui_cucumber_system_steps}
-
-# AVAILABLE WEBUI CUCUMBER PROJECT STEPS #
-{available_webui_cucumber_project_steps}
+**Background:**
+{background}
 
 """

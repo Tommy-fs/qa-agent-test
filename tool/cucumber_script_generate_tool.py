@@ -56,14 +56,14 @@ class CucumberScriptGenerator:
         for case_name, case_content in test_cases_dict.items():
             parameters["generated_test_cases"] = case_content
             generate_script = self.generate_script(parameters)
-            self.write_script_to_file(case_name + "_original", generate_script)
+            # self.write_script_to_file(case_name + "_original", generate_script)
 
-            final_response = self.evaluate_and_optimize(case_content, generate_script)
-            logging.info('evaluate_and_optimize result' + final_response["decision"])
+            # final_response = self.evaluate_and_optimize(case_content, generate_script)
+            # logging.info('evaluate_and_optimize result' + final_response["decision"])
 
-            final_script = final_response["final_script"]
-            cucumber_scripts.append(final_script)
-            self.write_script_to_file(case_name + "_optimized", final_script)
+            # final_script = final_response["final_script"]
+            # cucumber_scripts.append(final_script)
+            self.write_script_to_file(case_name + "_optimized", generate_script)
         return json.dumps(cucumber_scripts)
 
     def readFile(self, file_path):
@@ -130,7 +130,8 @@ class CucumberScriptGenerator:
         )
 
         agent = Agent(model_name="gemini-1.5-pro-002")
-
+        agent.enable_evaluators()
+        agent.add_evaluator()
         cucumber_script = agent.execute(prompt)
 
         return cucumber_script
