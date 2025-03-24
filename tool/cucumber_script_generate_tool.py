@@ -4,9 +4,11 @@ import logging
 from typing import Annotated
 
 from agent_core.agents import Agent
+from agent_core.planners import GraphPlanner
 from langchain_core.tools import tool
 
 from evaluators.cucumber_script_optimization import CucumberOptimization
+from evaluators.cucumber_scripts_evaluato_core import CucumberEvaluatorCore
 from evaluators.cucumber_scripts_evaluator import CucumberEvaluator
 from knowledge.generate_cucumber_script import GENERATE_CUCUMBER_SCRIPT_KNOWLEDGE
 
@@ -130,8 +132,14 @@ class CucumberScriptGenerator:
         )
 
         agent = Agent(model_name="gemini-1.5-pro-002")
+        agent.planner = GraphPlanner()
         agent.enable_evaluators()
-        agent.add_evaluator()
+        evaluator = CucumberEvaluatorCore(model_name="gemini-1.5-pro-002")
+        agent.add_evaluator("cucumber script generate", evaluator)
+        agent.knowledge = """cucumber script generate: Generate cucumber script base on generated test cases."""
+        agent.background = """We are a software company, and you are our software test expert, your responsibility is 
+        to create cucumber scripts."""
+
         cucumber_script = agent.execute(prompt)
 
         return cucumber_script

@@ -15,7 +15,7 @@ class CucumberEvaluatorCore(BaseEvaluator):
             self,
             model_name: Optional[str] = None,
             log_level: Optional[str] = None,
-            evaluation_threshold: Optional[float] = 0.8,
+            evaluation_threshold: Optional[float] = 80,
     ):
         super().__init__(model_name, log_level, evaluation_threshold)
 
