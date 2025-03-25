@@ -100,4 +100,12 @@ Comments(optional): If there are no available webui cucumber steps or web elemen
 Note: All Comments & Explanation & Considerations & Improvements should be written in cucumber's comment style(use #). You need to ensure that the generated scripts can be run directly.
 
 #############
+
+# Failed Cucumber Script Generated History #
+This is a CucumberScript that did not pass the review before. 
+Please modify the script you generated according to the suggestions and do not make the same mistake again.(if have)
+
+{failure_history}
+
+#############
 """

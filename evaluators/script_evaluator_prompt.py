@@ -30,7 +30,7 @@ Note: The provided code may be a complete implementation or just a code fragment
     - [ ] Comments should be concise and standardized. Avoid using too many non-standard or overly personalized comments. Ensure that the script can be executed smoothly among other members of the team.
       - Do not include redundant information in comments and avoid detailed explanations of known steps.
       - Follow the team or project's comment and naming conventions to ensure consistency.
-      
+
 5. **Initialization and Cleanup of Test Steps**(Score 1-10 or N/A)
    - [ ] At the beginning of each test scenario, clearly define initialization steps, such as:
      - Opening the browser and navigating to the target website.
@@ -64,7 +64,7 @@ Note: The provided code may be a complete implementation or just a code fragment
      - Using meaningful variable and method names.
      - Adding necessary comments to explain complex logic.
      - Following the project's code style guidelines.
-     
+
 9. **Reference document relevance**(Score 1-10 or N/A)
     - [ ] Some action script codes are provided in the template.The comment specifies which action
     - [ ] When there is an action in the test case, you need to use the corresponding action code provided by the template as the basis
@@ -94,19 +94,35 @@ At the end:
 - If recommending is Reject Output, provide suggestions on how to improve the output.
 - If output is an incorrect and unexpected structure in response, provide the structure evaluation output still (Score 0 for each criteria)
 
-**Context**
-{context}
+# Test case generated#
+{test_case}
 
-**Description of ultimate task goal:**
-{root_task}
+# Cucumber script generated#
+{cucumber_script}
 
-**Request:**
-{request}
+# CUCUMBER SCRIPT TEMPLATE #
 
-**Response:**
-{response}
+{cucumber_script_basic_template}
 
-**Background:**
-{background}
+# GUIDELINE #
+Use CUCUMBER SCRIPT TEMPLATE and GUIDELINE together to complete the creation of the script(if have).
+
+{script_generate_guide}
+
+# AVAILABLE WEB ELEMENTS #
+If AVAILABLE WEB ELEMENTS is provided, You must use the provided web elements as part of the script. 
+Otherwise you need to write a new script file according to elements in CUCUMBER SCRIPT TEMPLATE
+
+{available_web_elements}
+
+# AVAILABLE WEBUI CUCUMBER SYSTEM STEPS #
+
+If AVAILABLE WEBUI CUCUMBER STEPS is provided, You must use the provided web ui cucumber steps as part of the script. 
+Otherwise you need to write a new script file according to the steps in CUCUMBER SCRIPT TEMPLATE
+
+{available_webui_cucumber_system_steps}
+
+# AVAILABLE WEBUI CUCUMBER PROJECT STEPS #
+{available_webui_cucumber_project_steps}
 
 """

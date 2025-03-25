@@ -26,45 +26,20 @@ class CucumberScriptGenerator:
         logging.basicConfig(level=logging.INFO)
         logging.info('Generate cucumber script start')
 
-        parser = argparse.ArgumentParser()
-        parser.add_argument("--case", required=True)
-        args = parser.parse_args()
-        case = args.case
-
-        cucumber_script_basic_template = self.readFile(
-            "../knowledge/" + case + "/cucumber_knowledge/cucumber_script_base.feature")
-        available_web_elements = self.readFile("../knowledge/" + case + "/cucumber_knowledge/WebElement.yml")
-        available_webui_cucumber_system_steps = self.readFile(
-            "../knowledge/" + case + "/cucumber_knowledge/fast_webui_cucumber_system_steps.txt")
-        available_webui_cucumber_project_steps = self.readFile(
-            "../knowledge/" + case + "/cucumber_knowledge/fast_webui_cucumber_project_steps.txt")
-        script_generate_guide = self.readFile(
-            "../knowledge/" + case + "/cucumber_knowledge/script_generate_guide.txt")
-        project_document = self.readFile(
-            "../knowledge/" + case + "/project_knowledge/project_document.py")
-
-        parameters = {
-            "generated_test_cases": generated_test_cases,
-            "cucumber_script_basic_template": cucumber_script_basic_template,
-            "available_web_elements": available_web_elements,
-            "available_webui_cucumber_system_steps": available_webui_cucumber_system_steps,
-            "available_webui_cucumber_project_steps": available_webui_cucumber_project_steps,
-            "script_generate_guide": script_generate_guide,
-            "project_document": project_document
-        }
+        parameters = self.enrich_knowledge_parameters(generated_test_cases)
 
         cucumber_scripts = []
         test_cases_dict = self.parse_test_cases(generated_test_cases)
         for case_name, case_content in test_cases_dict.items():
             parameters["generated_test_cases"] = case_content
             generate_script = self.generate_script(parameters)
-            # self.write_script_to_file(case_name + "_original", generate_script)
+            self.write_script_to_file(case_name + "_original", generate_script)
 
-            # final_response = self.evaluate_and_optimize(case_content, generate_script)
-            # logging.info('evaluate_and_optimize result' + final_response["decision"])
+            evaluate_response = self.evaluate_and_optimize(case_content, generate_script)
+            logging.info('evaluate_and_optimize result' + evaluate_response["decision"])
 
-            # final_script = final_response["final_script"]
-            # cucumber_scripts.append(final_script)
+            final_script = evaluate_response["final_script"]
+            cucumber_scripts.append(final_script)
             self.write_script_to_file(case_name + "_optimized", generate_script)
         return json.dumps(cucumber_scripts)
 
@@ -86,7 +61,7 @@ class CucumberScriptGenerator:
             start = file_content.index('```cucumber') + len('```cucumber')
             end = file_content.index('```', start)
             script = file_content[start:end].strip()
-        except (ValueError, AttributeError):  # 处理找不到字符串或传入非字符串的情况
+        except (ValueError, AttributeError):
             script = file_content
         file_path = "../knowledge/" + case + "/result/script_generated-" + str(case_name) + ".feature"
         with open(file_path, 'w', encoding='utf-8') as file:
@@ -128,17 +103,18 @@ class CucumberScriptGenerator:
             available_webui_cucumber_system_steps=parameters["available_webui_cucumber_system_steps"],
             available_webui_cucumber_project_steps=parameters["available_webui_cucumber_project_steps"],
             script_generate_guide=parameters["script_generate_guide"],
-            project_document=parameters["project_document"]
+            project_document=parameters["project_document"],
+            failure_history=parameters["failure_history"]
         )
 
         agent = Agent(model_name="gemini-1.5-pro-002")
-        agent.planner = GraphPlanner()
-        agent.enable_evaluators()
-        evaluator = CucumberEvaluatorCore(model_name="gemini-1.5-pro-002")
-        agent.add_evaluator("cucumber script generate", evaluator)
-        agent.knowledge = """cucumber script generate: Generate cucumber script base on generated test cases."""
-        agent.background = """We are a software company, and you are our software test expert, your responsibility is 
-        to create cucumber scripts."""
+        # agent.planner = GraphPlanner()
+        # agent.enable_evaluators()
+        # evaluator = CucumberEvaluatorCore(model_name="gemini-1.5-pro-002")
+        # agent.add_evaluator("cucumber script generate", evaluator)
+        # agent.knowledge = """Generate cucumber script base on generated test cases."""
+        # agent.background = """We are a software company, and you are our software test expert, your responsibility is
+        # to create cucumber scripts."""
 
         cucumber_script = agent.execute(prompt)
 
@@ -148,7 +124,9 @@ class CucumberScriptGenerator:
         global evaluation_output, total_score
         iteration_count = 0
         evaluator = CucumberEvaluator()
-        optimization = CucumberOptimization()
+
+        failure_history = []
+
         while iteration_count < max_iterations:
             iteration_count += 1
             logging.info(f"Iteration {iteration_count}: Evaluating the script...")
@@ -171,8 +149,14 @@ class CucumberScriptGenerator:
                 logging.info("The script requires modifications. Applying suggestions...")
                 logging.info(f"Suggestions: {suggestions}")
 
-                generate_script = optimization.optimization_gherkin_script(case_content, generate_script,
-                                                                           "\n".join(suggestions))
+                failure_history.append((generate_script, suggestions))
+
+                failure_history_str = "\n".join([f"Failure Script: {script}\nSuggestions: {', '.join(suggestion)}"
+                                                 for script, suggestion in failure_history])
+
+                parameters = self.enrich_knowledge_parameters(case_content, failure_history_str)
+                generate_script = self.generate_script(parameters)
+
                 logging.info("Optimization applied. Re-evaluating the script...")
             else:
                 raise ValueError(f"Unexpected decision: {decision}")
@@ -183,3 +167,34 @@ class CucumberScriptGenerator:
             "total_score": evaluation_output["total_score"],
             "final_script": generate_script
         }
+
+    def enrich_knowledge_parameters(self, generated_test_cases, failure_history=""):
+        parser = argparse.ArgumentParser()
+        parser.add_argument("--case", required=True)
+        args = parser.parse_args()
+        case = args.case
+
+        cucumber_script_basic_template = self.readFile(
+            "../knowledge/" + case + "/cucumber_knowledge/cucumber_script_base.feature")
+        available_web_elements = self.readFile("../knowledge/" + case + "/cucumber_knowledge/WebElement.yml")
+        available_webui_cucumber_system_steps = self.readFile(
+            "../knowledge/" + case + "/cucumber_knowledge/fast_webui_cucumber_system_steps.txt")
+        available_webui_cucumber_project_steps = self.readFile(
+            "../knowledge/" + case + "/cucumber_knowledge/fast_webui_cucumber_project_steps.txt")
+        script_generate_guide = self.readFile(
+            "../knowledge/" + case + "/cucumber_knowledge/script_generate_guide.txt")
+        project_document = self.readFile(
+            "../knowledge/" + case + "/project_knowledge/project_document.py")
+
+        parameters = {
+            "generated_test_cases": generated_test_cases,
+            "cucumber_script_basic_template": cucumber_script_basic_template,
+            "available_web_elements": available_web_elements,
+            "available_webui_cucumber_system_steps": available_webui_cucumber_system_steps,
+            "available_webui_cucumber_project_steps": available_webui_cucumber_project_steps,
+            "script_generate_guide": script_generate_guide,
+            "project_document": project_document,
+            "failure_history": failure_history
+        }
+
+        return parameters
