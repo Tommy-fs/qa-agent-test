@@ -16,7 +16,7 @@ I need you create cucumber scripts for the generated test cases and cucumber kno
 2. Review test cases to understand the specific functionalities and learn each Test Step Test Data and Expected Result. You only need to create cucumber scripts for generated test cases, not for whole project document
 3. Read available web elements(if have) to understand web elements that you can use in the cucumber scripts.
 4. Read available webui cucumber system(if have) and project steps to understand the steps scripts that you can use in the cucumber scripts.
-5. Read CUCUMBER SCRIPT TEMPLATE to understand the general operating logic of the system. And you can copy some usable code from the template to your newly generated script instead of just adding a comment.
+5. Read CUCUMBER SCRIPT TEMPLATE to understand the general operating logic of the system. And you can copy some usable code from the template to your newly generated script.
 6. Use the method in the template and then modify it to generate test case corresponding.
 7. Write script files related to test cases based on the provided CUCUMBER SCRIPT TEMPLATE, steps, web elements, and your knowledge.
 
@@ -28,8 +28,9 @@ I need you create cucumber scripts for the generated test cases and cucumber kno
 2. Do not generate any scripts that do not comply with syntax standards.
 3. Each test case corresponds to a Feature script, generate several scripts if there are several test cases. You need to output all of them.
 4. Convert each test case into a Gherkin format, which includes Given, When, and Then statements, scripts cannot be written in natural language
-5. Output cannot have any extra content, only Feature module(mandatory), Test Case ID(mandatory), Scenario Outline(mandatory), Preconditions(mandatory), Steps(mandatory), Expected Results(optional), Examples(mandatory), Comments(optional).
+5. Output cannot have any extra content, only Feature module(mandatory), Test Case ID(mandatory), Scenario Outline(mandatory), Preconditions(mandatory), Steps(mandatory), Expected Results(optional), Examples(mandatory).
 6. Replace all placeholder comments with actual Cucumber steps based on the provided template.
+7. Generate a complete script that can run at once, do not add scripts that are not formatted correctly
 #############
 
 # CUCUMBER SCRIPT TEMPLATE #
@@ -95,9 +96,6 @@ Preconditions(mandatory): Any prerequisites that must be met before executing th
 Steps(mandatory): A detailed list of actions to be performed in the test case.
 Expected Results(optional): The expected outcome after executing the steps.
 Examples(mandatory): The defined parameters you need to use. These parameters need to be used in <>
-Comments(optional): If there are no available webui cucumber steps or web elements that you want to use. You can customize a new one and display it in a table
-
-Note: All Comments & Explanation & Considerations & Improvements should be written in cucumber's comment style(use #). You need to ensure that the generated scripts can be run directly.
 
 #############
 

@@ -36,11 +36,11 @@ class CucumberScriptGenerator:
             self.write_script_to_file(case_name + "_original", generate_script)
 
             evaluate_response = self.evaluate_and_optimize(case_content, generate_script)
-            logging.info('evaluate_and_optimize result' + evaluate_response["decision"])
+            logging.info(f'evaluate_and_optimize result' + evaluate_response["decision"])
 
             final_script = evaluate_response["final_script"]
             cucumber_scripts.append(final_script)
-            self.write_script_to_file(case_name + "_optimized", generate_script)
+            self.write_script_to_file(case_name + "_optimized", final_script)
         return json.dumps(cucumber_scripts)
 
     def readFile(self, file_path):
@@ -72,6 +72,8 @@ class CucumberScriptGenerator:
     def parse_test_cases(self, test_cases):
         test_case_lines = test_cases.strip().splitlines()
 
+        if len(test_case_lines) < 1:
+            test_case_lines = test_cases.strip().split("\n")
         test_cases_dict = {}
         current_case = []
         case_name = None
@@ -96,27 +98,31 @@ class CucumberScriptGenerator:
         return test_cases_dict
 
     def generate_script(self, parameters):
-        prompt = GENERATE_CUCUMBER_SCRIPT_KNOWLEDGE.format(
-            generated_test_cases=parameters["generated_test_cases"],
-            cucumber_script_basic_template=parameters["cucumber_script_basic_template"],
-            available_web_elements=parameters["available_web_elements"],
-            available_webui_cucumber_system_steps=parameters["available_webui_cucumber_system_steps"],
-            available_webui_cucumber_project_steps=parameters["available_webui_cucumber_project_steps"],
-            script_generate_guide=parameters["script_generate_guide"],
-            project_document=parameters["project_document"],
-            failure_history=parameters["failure_history"]
-        )
+        global cucumber_script
+        try:
+            prompt = GENERATE_CUCUMBER_SCRIPT_KNOWLEDGE.format(
+                generated_test_cases=parameters["generated_test_cases"],
+                cucumber_script_basic_template=parameters["cucumber_script_basic_template"],
+                available_web_elements=parameters["available_web_elements"],
+                available_webui_cucumber_system_steps=parameters["available_webui_cucumber_system_steps"],
+                available_webui_cucumber_project_steps=parameters["available_webui_cucumber_project_steps"],
+                script_generate_guide=parameters["script_generate_guide"],
+                project_document=parameters["project_document"],
+                failure_history=parameters["failure_history"]
+            )
 
-        agent = Agent(model_name="gemini-1.5-pro-002")
-        # agent.planner = GraphPlanner()
-        # agent.enable_evaluators()
-        # evaluator = CucumberEvaluatorCore(model_name="gemini-1.5-pro-002")
-        # agent.add_evaluator("cucumber script generate", evaluator)
-        # agent.knowledge = """Generate cucumber script base on generated test cases."""
-        # agent.background = """We are a software company, and you are our software test expert, your responsibility is
-        # to create cucumber scripts."""
+            agent = Agent(model_name="gemini-1.5-pro-002")
+            # agent.planner = GraphPlanner()
+            # agent.enable_evaluators()
+            # evaluator = CucumberEvaluatorCore(model_name="gemini-1.5-pro-002")
+            # agent.add_evaluator("cucumber script generate", evaluator)
+            # agent.knowledge = """Generate cucumber script base on generated test cases."""
+            # agent.background = """We are a software company, and you are our software test expert, your responsibility is
+            # to create cucumber scripts."""
 
-        cucumber_script = agent.execute(prompt)
+            cucumber_script = agent.execute(prompt)
+        except Exception as e:
+            logging.info(f"Test case script generate failed : {e} ")
 
         return cucumber_script
 
@@ -146,7 +152,7 @@ class CucumberScriptGenerator:
                 }
             elif "reject" in decision.lower():
                 logging.info(f"The script total score is {total_score}")
-                logging.info("The script requires modifications. Applying suggestions...")
+                logging.info(f"The script requires modifications. Applying suggestions...")
                 logging.info(f"Suggestions: {suggestions}")
 
                 failure_history.append((generate_script, suggestions))
@@ -157,7 +163,7 @@ class CucumberScriptGenerator:
                 parameters = self.enrich_knowledge_parameters(case_content, failure_history_str)
                 generate_script = self.generate_script(parameters)
 
-                logging.info("Optimization applied. Re-evaluating the script...")
+                logging.info(f"Optimization applied. Re-evaluating the script...")
             else:
                 raise ValueError(f"Unexpected decision: {decision}")
 

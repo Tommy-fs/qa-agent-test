@@ -61,7 +61,7 @@ Test cases should be detailed and easy to understood, junior tester will test sy
 
 1. Output test cases with name, summary, priority and steps.
 2. Output test cases steps as table with  table heads : |No.| Test Step | Test Data | Expected Result |, Test Data means the input in Test Step
-3. If there are multiple test cases output, use split lines for each test case table
+3. If there are multiple test cases output, use split lines (---) to split each test case
 
 #############
 

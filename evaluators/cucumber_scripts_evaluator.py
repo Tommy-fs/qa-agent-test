@@ -1,4 +1,5 @@
 import argparse
+import logging
 import re
 
 from agent_core.agents import Agent
@@ -13,6 +14,7 @@ class CucumberEvaluator:
         Evaluate the provided request and generated script response.
         """
 
+        global evaluation_response
         parser = argparse.ArgumentParser()
         parser.add_argument("--case", required=True)
         args = parser.parse_args()
@@ -28,19 +30,22 @@ class CucumberEvaluator:
         script_generate_guide = readFile(
             "../knowledge/" + case + "/cucumber_knowledge/script_generate_guide.txt")
 
-        prompt_text = (default_prompt()
-                       .format(test_case=test_case,
-                               cucumber_script=cucumber_script,
-                               cucumber_script_basic_template=cucumber_script_basic_template,
-                               script_generate_guide=script_generate_guide,
-                               available_web_elements=available_web_elements,
-                               available_webui_cucumber_system_steps=available_webui_cucumber_system_steps,
-                               available_webui_cucumber_project_steps=available_webui_cucumber_project_steps
-                               ))
+        try:
+            prompt_text = (default_prompt()
+                           .format(test_case=test_case,
+                                   cucumber_script=cucumber_script,
+                                   cucumber_script_basic_template=cucumber_script_basic_template,
+                                   script_generate_guide=script_generate_guide,
+                                   available_web_elements=available_web_elements,
+                                   available_webui_cucumber_system_steps=available_webui_cucumber_system_steps,
+                                   available_webui_cucumber_project_steps=available_webui_cucumber_project_steps
+                                   ))
 
-        agent = Agent(model_name="gemini-1.5-pro-002")
+            agent = Agent(model_name="gemini-1.5-pro-002")
 
-        evaluation_response = agent.execute(prompt_text)
+            evaluation_response = agent.execute(prompt_text)
+        except Exception as e:
+            logging.info(f"Test case evaluator tool failed : {e} ")
 
         return parse_scored_evaluation_response(evaluation_response)
 
