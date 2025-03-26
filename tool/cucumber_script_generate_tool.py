@@ -1,6 +1,7 @@
 import argparse
 import json
 import logging
+from datetime import datetime
 from typing import Annotated
 
 from agent_core.agents import Agent
@@ -8,7 +9,7 @@ from agent_core.planners import GraphPlanner
 from langchain_core.tools import tool
 
 from evaluators.cucumber_script_optimization import CucumberOptimization
-from evaluators.cucumber_scripts_evaluato_core import CucumberEvaluatorCore
+from evaluators.cucumber_scripts_evaluator_core import CucumberEvaluatorCore
 from evaluators.cucumber_scripts_evaluator import CucumberEvaluator
 from knowledge.generate_cucumber_script import GENERATE_CUCUMBER_SCRIPT_KNOWLEDGE
 
@@ -28,20 +29,33 @@ class CucumberScriptGenerator:
 
         parameters = self.enrich_knowledge_parameters(generated_test_cases)
 
-        cucumber_scripts = []
-        test_cases_dict = self.parse_test_cases(generated_test_cases)
-        for case_name, case_content in test_cases_dict.items():
-            parameters["generated_test_cases"] = case_content
-            generate_script = self.generate_script(parameters)
-            self.write_script_to_file(case_name + "_original", generate_script)
+        # cucumber_scripts = []
+        # test_cases_dict = self.parse_test_cases(generated_test_cases)
+        # for case_name, case_content in test_cases_dict.items():
+        #     parameters["generated_test_cases"] = case_content
+        #     generate_script = self.generate_script(parameters)
+        #     self.write_script_to_file(case_name + "_original", generate_script)
+        #
+        #     evaluate_response = self.evaluate_and_optimize(case_content, generate_script)
+        #     logging.info(f'evaluate_and_optimize result' + evaluate_response["decision"])
+        #
+        #     final_script = evaluate_response["final_script"]
+        #     cucumber_scripts.append(final_script)
+        #     self.write_script_to_file(case_name + "_optimized", final_script)
 
-            evaluate_response = self.evaluate_and_optimize(case_content, generate_script)
-            logging.info(f'evaluate_and_optimize result' + evaluate_response["decision"])
+        generate_script = self.generate_script(parameters)
+        self.write_script_to_file("test_script_generated" + datetime.now().strftime(
+            "%Y-%m-%d_%H-%M-%S") + "_original", generate_script)
 
-            final_script = evaluate_response["final_script"]
-            cucumber_scripts.append(final_script)
-            self.write_script_to_file(case_name + "_optimized", final_script)
-        return json.dumps(cucumber_scripts)
+        evaluate_response = self.evaluate_and_optimize(generated_test_cases, generate_script)
+        logging.info(f'evaluate_and_optimize result' + evaluate_response["decision"])
+
+        final_script = evaluate_response["final_script"]
+        # cucumber_scripts.append(final_script)
+        self.write_script_to_file("test_script_generated" + datetime.now().strftime(
+            "%Y-%m-%d_%H-%M-%S") + "_optimized", final_script)
+
+        return json.dumps(final_script)
 
     def readFile(self, file_path):
         try:
@@ -98,7 +112,7 @@ class CucumberScriptGenerator:
         return test_cases_dict
 
     def generate_script(self, parameters):
-        global cucumber_script
+        cucumber_script = ""
         try:
             prompt = GENERATE_CUCUMBER_SCRIPT_KNOWLEDGE.format(
                 generated_test_cases=parameters["generated_test_cases"],
@@ -111,7 +125,7 @@ class CucumberScriptGenerator:
                 failure_history=parameters["failure_history"]
             )
 
-            agent = Agent(model_name="gemini-1.5-pro-002")
+            agent = Agent(model_name="gemini-2.0-flash-001")
             # agent.planner = GraphPlanner()
             # agent.enable_evaluators()
             # evaluator = CucumberEvaluatorCore(model_name="gemini-1.5-pro-002")
@@ -172,6 +186,23 @@ class CucumberScriptGenerator:
             "decision": "Failed",
             "total_score": evaluation_output["total_score"],
             "final_script": generate_script
+        }
+
+    def evaluate(self, case_content, generate_script, max_iterations=3):
+        evaluator = CucumberEvaluator()
+
+        logging.info(f"Evaluating the script...")
+
+        output = evaluator.evaluate(case_content, generate_script)
+
+        decision = output["decision"]
+        suggestions = output["suggestions"]
+        score = output["total_score"]
+
+        return {
+            "decision": decision,
+            "total_score": score,
+            "suggestions": suggestions
         }
 
     def enrich_knowledge_parameters(self, generated_test_cases, failure_history=""):

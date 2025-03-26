@@ -16,7 +16,7 @@ Steps:
 | 10 | Verify available actions |  | 'Submit Payment Checker' and 'Return to KL LOANS OPS -PROCESSING -MAKER' actions are available |
 
 
-***
+---
 
 Priority: Critical
 Name: HK_GCM_Workflow-002
@@ -27,7 +27,7 @@ Steps:
 | 1 | Login system as KL LOANS OPS-PROCESSING -MAKER | User with KL LOANS OPS-PROCESSING -MAKER role | Login successful |
 | 2 | Create a new HK GCM Instruction | THIRD PARTY PAYMENT: Yes | Instruction created successfully |
 | 3 | Perform 'Maker Submit' action |  | Instruction status changes to 'KL LOANS OPS', Process Status changes to 'KL LOANS - PROCESSING-CHECKER' |
-| 4 | Simulate system setting COMPLETED DATE (This step is for simulating the scenario, not an actual user action) |  | COMPLETED DATE is populated |
+| 4 | Simulate system setting COMPLETED DATE (This step is for testing purposes only, as the system automatically sets this field upon completion) |  | COMPLETED DATE is populated |
 | 5 | Login system as KL LOANS OPS - PROCESSING -CHECKER | User with KL LOANS OPS - PROCESSING -CHECKER role | Login successful |
 | 6 | Open the created instruction |  | Instruction opens successfully |
 | 7 | Verify available actions |  | Both 'Submit to Payment' and 'Complete' actions are available |
@@ -38,7 +38,7 @@ Steps:
 | 12 | Go back to step 6 and perform 'Complete' action instead of 'Submit to Payment' | | Current Status changes to 'COMPLETED', Process Status changes to 'COMPLETED' |
 
 
-***
+---
 
 Priority: Critical
 Name: HK_GCM_Workflow-003
@@ -53,5 +53,27 @@ Steps:
 | 5 | Open the created instruction |  | Instruction opens successfully |
 | 6 | Verify available actions |  | Only 'Complete' action is available, 'Submit to Payment' action is disabled |
 | 7 | Perform 'Complete' action |  | Current Status changes to 'COMPLETED', Process Status changes to 'COMPLETED' |
+
+
+---
+
+Priority: High
+Name: HK_GCM_Workflow-004
+Summary: Verify Payment Checker Actions and Return scenarios.
+Steps:
+| No. | Test Step | Test Data | Expected Result |
+|---|---|---|---|
+| 1 | Follow steps 1-7 from HK_GCM_Workflow-001 or HK_GCM_Workflow-002 |  | Process Status is 'PAYMENT - MAKER' |
+| 2 | Login system as KL LOANS OPS-PROCESSING-PAYMENT MAKER | User with KL LOANS OPS-PROCESSING-PAYMENT MAKER role | Login successful |
+| 3 | Open the created instruction |  | Instruction opens successfully |
+| 4 | Perform 'Submit Payment Checker' action |  | Process Status changes to 'PAYMENT-CHECKER' |
+| 5 | Login system as KL LOANS OPS -PROCESSING - PAYMENT CHECKER | User with KL LOANS OPS -PROCESSING - PAYMENT CHECKER role | Login successful |
+| 6 | Open the created instruction |  | Instruction opens successfully |
+| 7 | Verify available actions |  | 'Complete', 'Return to KL LOANS OPS -PROCESSING -MAKER', and 'Return to KL LOANS OPS -PROCESSING-PAYMENT MAKER' actions are available |
+| 8 | Perform 'Complete' action |  | Current Status changes to 'COMPLETED', Process Status changes to 'COMPLETED' |
+| 9 | Repeat steps 5-6 | | Instruction opens successfully |
+| 10 | Perform 'Return to KL LOANS OPS -PROCESSING -MAKER' action |  | Process Status changes to 'PROCESSING- MAKER-MANUAL' |
+| 11 | Repeat steps 5-6 | | Instruction opens successfully |
+| 12 | Perform 'Return to KL LOANS OPS -PROCESSING-PAYMENT MAKER' action |  | Process Status changes to 'PAYMENT - MAKER' |
 
 

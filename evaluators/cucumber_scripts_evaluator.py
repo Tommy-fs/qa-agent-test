@@ -14,7 +14,7 @@ class CucumberEvaluator:
         Evaluate the provided request and generated script response.
         """
 
-        global evaluation_response
+        evaluation_response = ""
         parser = argparse.ArgumentParser()
         parser.add_argument("--case", required=True)
         args = parser.parse_args()
@@ -31,15 +31,14 @@ class CucumberEvaluator:
             "../knowledge/" + case + "/cucumber_knowledge/script_generate_guide.txt")
 
         try:
-            prompt_text = (default_prompt()
-                           .format(test_case=test_case,
-                                   cucumber_script=cucumber_script,
-                                   cucumber_script_basic_template=cucumber_script_basic_template,
-                                   script_generate_guide=script_generate_guide,
-                                   available_web_elements=available_web_elements,
-                                   available_webui_cucumber_system_steps=available_webui_cucumber_system_steps,
-                                   available_webui_cucumber_project_steps=available_webui_cucumber_project_steps
-                                   ))
+            prompt_text = default_prompt().format(test_case=test_case,
+                                                  cucumber_script=cucumber_script,
+                                                  cucumber_script_basic_template=cucumber_script_basic_template,
+                                                  script_generate_guide=script_generate_guide,
+                                                  available_web_elements=available_web_elements,
+                                                  available_webui_cucumber_system_steps=available_webui_cucumber_system_steps,
+                                                  available_webui_cucumber_project_steps=available_webui_cucumber_project_steps
+                                                  )
 
             agent = Agent(model_name="gemini-1.5-pro-002")
 

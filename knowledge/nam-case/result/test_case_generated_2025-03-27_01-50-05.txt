@@ -1,0 +1,33 @@
+Priority: High
+Name: TicketField-001
+Summary: Verify "Auto Test Ref#" field functionality in Normal DL Ticket creation and update.
+Steps:
+| No. | Test Step | Test Data | Expected Result |
+|---|---|---|---|
+| 1. | Operations Manager logs in to XMC Loan Web. | N/A | Login successful. |
+| 2. | Create a new Normal DL Ticket via "New Message". | Processing Team: *GT CN DevTest<br>From email address: TESTFROM1@CITI.COM<br>To email address: TESTTO1@CITI.COM<br>Subject: New Normal DL Ticket<br>Request Type: Normal DL | Ticket created successfully. Status: Unassigned, Sub Status: New |
+| 3. | Open the newly created ticket. | N/A | Ticket details page opens. |
+| 4. | Verify the presence of "Auto Test Ref#" field in the "Update Ticket" action form. | N/A | "Auto Test Ref#" field is displayed in the "Update Ticket" action form. |
+| 5. | Click "Update Ticket" action button without entering a value in "Auto Test Ref#" field. | N/A | No error message related to "Auto Test Ref#" field is displayed. Update successful. |
+| 6. | Verify the presence of "Auto Test Ref#" field in the "Additional Details" section. | N/A | "Auto Test Ref#" field is displayed in the "Additional Details" section with no value. |
+| 7. | Click "Update Ticket" action button. | Auto Test Ref#: TESTREF123 | Update successful. |
+| 8. | Verify the value of "Auto Test Ref#" field in the "Additional Details" section. | N/A | "Auto Test Ref#" field displays the value "TESTREF123". |
+| 9. | Close the ticket. | N/A | Ticket closed successfully. |
+
+
+---
+
+Priority: Medium
+Name: TicketField-002
+Summary: Verify "Auto Test Ref#" field behavior with existing Normal DL Tickets.
+Steps:
+| No. | Test Step | Test Data | Expected Result |
+|---|---|---|---|
+| 1. | Operations Manager logs in to XMC Loan Web. | N/A | Login successful. |
+| 2. | Open an existing Normal DL Ticket. | N/A | Ticket details page opens. |
+| 3. | Verify the presence of "Auto Test Ref#" field in the "Update Ticket" action form. | N/A | "Auto Test Ref#" field is displayed in the "Update Ticket" action form. |
+| 4. |  Click "Update Ticket" action button without modifying any fields. | N/A | Update successful. No changes are observed in the ticket details. |
+| 5. | Click "Update Ticket" action button. | Auto Test Ref#: TESTREF456 | Update successful. |
+| 6. | Verify the value of "Auto Test Ref#" field in the "Additional Details" section. | N/A | "Auto Test Ref#" field displays the value "TESTREF456". |
+| 7. | Close the ticket. | N/A | Ticket closed successfully. |
+
