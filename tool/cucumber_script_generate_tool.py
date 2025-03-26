@@ -72,7 +72,7 @@ class CucumberScriptGenerator:
     def parse_test_cases(self, test_cases):
         test_case_lines = test_cases.strip().splitlines()
 
-        if len(test_case_lines) < 1:
+        if len(test_case_lines) <= 1:
             test_case_lines = test_cases.strip().split("\n")
         test_cases_dict = {}
         current_case = []
