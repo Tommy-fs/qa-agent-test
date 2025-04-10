@@ -21,6 +21,13 @@ summary_parameters = {
     human language understanding and machine-generated text, with profound implications for fields ranging from education 
     and healthcare to business and entertainment."""
 }
-response = LLMChat().prompt_with_parameters("Summarize the following content;{}", summary_parameters, 'Summary')
+
+summary_prompt = """
+Based on below content, please give a brief summary:
+
+Content:
+{content}
+"""
+response = LLMChat().prompt_with_parameters(summary_prompt, summary_parameters, 'Summary')
 
 print(response)

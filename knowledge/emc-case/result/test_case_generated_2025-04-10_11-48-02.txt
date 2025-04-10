@@ -1,0 +1,55 @@
+Priority: High
+Name: Linking Rule - Two Persons Linked to One Resume
+Summary: Verify that two PERSONS can link to the same RESUME if they meet the linking rule criteria, and validate the link count and linking rule code.
+
+Steps：
+| No. | Test Step | Test Data | Expected Result |
+|---|---|---|---|
+| 1 | Clear existing linking rules, overwrite rules, and test data. |  | System clear |
+| 2 | Insert the predefined linking rule for this test case. |  See `001_C20250101A-0102_RuleData.json` with Jira No. 0102 | Rule inserted successfully |
+| 3 | Insert the predefined overwrite rule for this test case. | See `001_C20250101A-0102_RuleData.json` with Jira No. 0102, ensuring it corresponds to the COMPANY used in test data. | Rule inserted successfully |
+| 4 | Insert PERSON1 data with a unique Human Info Code and COMPANY_0102 as the ChannelCode. | See `010_Testing_Data.xlsx` with Jira No. 0102, using a unique Human Info Code and Announcement Date. | PERSON1 data inserted successfully |
+| 5 | Trigger COMPONENT1 to process PERSON1. |  | RESUME created for PERSON1 |
+| 6 | Insert PERSON2 data with a different Human Info Code but the same COMPANY_0102 as the ChannelCode and a different Announcement Date. | See `010_Testing_Data.xlsx` with Jira No. 0102, using a unique Human Info Code and a different Announcement Date than PERSON1. | PERSON2 data inserted successfully |
+| 7 | Trigger COMPONENT1 to process PERSON2. |  | PERSON2 linked to PERSON1's RESUME |
+| 8 | Retrieve the RESUME linked to PERSON1. |  | RESUME retrieved successfully |
+| 9 | Get the count of PERSONS linked to the retrieved RESUME. |  | Actual Count = 2 |
+| 10 | Get the linking rule code used to link PERSON2 to the RESUME. |  | Actual Linking Rule Code =  Expected Linking Rule Code (from `001_C20250101A-0102_RuleData.json`) |
+| 11 | Compare the actual count of PERSONS linked to the RESUME with the expected count (2). | Expected Count = 2 | Counts match |
+| 12 | Compare the actual linking rule code with the expected linking rule code. | Expected Linking Rule Code (from `001_C20250101A-0102_RuleData.json`) | Linking rule codes match |
+| 13 | Clear inserted linking rules, overwrite rules, and test data. |  | System clear |
+
+
+---
+
+Priority: Medium
+Name: Linking Rule - Person Fails to Link Due to No Matching Group
+Summary: Verify that a PERSON is marked as failed if they cannot match any GROUP based on their COMPANY information.
+
+Steps：
+| No. | Test Step | Test Data | Expected Result |
+|---|---|---|---|
+| 1 | Clear existing linking rules, overwrite rules, and test data. |  | System clear |
+| 2 | Insert the predefined linking rule for this test case. | See `001_C20250101A-0102_RuleData.json` with Jira No. 0102 | Rule inserted successfully |
+| 3 | Insert PERSON data with a ChannelCode that does not correspond to any existing COMPANY. | See `010_Testing_Data.xlsx` with Jira No. 0102, using an invalid ChannelCode. | PERSON data inserted successfully |
+| 4 | Trigger COMPONENT1 to process the PERSON. |  | PERSON marked as failed |
+| 5 | Verify that the PERSON is marked as failed. |  | PERSON status = Failed |
+| 6 | Clear inserted linking rules and test data. |  | System clear |
+
+
+---
+
+Priority: Medium
+Name: Linking Rule - Person Fails to Link Due to Matching Linking Rule
+Summary: Verify that a PERSON is marked as failed if they match a linking rule associated with their GROUP. (This seems contradictory to the project document, needs clarification, assuming it means no matching *criteria* within the rule)
+
+Steps：
+| No. | Test Step | Test Data | Expected Result |
+|---|---|---|---|
+| 1 | Clear existing linking rules, overwrite rules, and test data. |  | System clear |
+| 2 | Insert a linking rule with criteria that will not match any existing RESUME. | See `001_C20250101A-0102_RuleData.json` with Jira No. 0102, modify the linking criteria to ensure no match. | Rule inserted successfully |
+| 3 | Insert PERSON data with a ChannelCode corresponding to the COMPANY associated with the linking rule. | See `010_Testing_Data.xlsx` with Jira No. 0102 | PERSON data inserted successfully |
+| 4 | Trigger COMPONENT1 to process the PERSON. |  | New RESUME created for the PERSON |
+| 5 | Verify that a new RESUME is created for the PERSON. |  | RESUME created successfully |
+| 6 | Clear inserted linking rules and test data. |  | System clear |
+
