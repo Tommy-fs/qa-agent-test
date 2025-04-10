@@ -21,9 +21,9 @@ class DocumentGather:
 
         project_document = knowledge_util.get_project_knowledge("PROJECT_DOCUMENT", "project_document")
 
-        test_case_example = knowledge_util.get_project_knowledge("TEST_CASE_EXAMPLE", "test_case_example")
+        test_case_example = knowledge_util.get_project_knowledge("TEST_CASE_EXAMPLE", "special_qa_knowledge")
 
-        test_case_guide = knowledge_util.get_project_knowledge("TEST_CASE_GUIDE", "test_case_example")
+        test_case_guide = knowledge_util.get_project_knowledge("TEST_CASE_GUIDE", "special_qa_knowledge")
 
         context = f"\n# PROJECT_DOCUMENT #\n{project_document}\n"
         context += f"\n# TEST_CASE_EXAMPLE #\n{test_case_example}\n"
