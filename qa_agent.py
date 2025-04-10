@@ -1,5 +1,3 @@
-import argparse
-import importlib
 import logging
 
 from agent_core.agents import Agent
@@ -9,7 +7,8 @@ from evaluators.cucumber_scripts_evaluator import CucumberEvaluator
 from evaluators.document_gather_evaluator import DocumentEvaluator
 from knowledge.qa_context import QA_KNOWLEDGE, QA_BACKGROUND, QA_OBJECT
 from tool.cucumber_script_generate_tool import cucumber_script_generate
-from tool.gather_jira_document_tool import gather_jira_document
+from tool.gather_background_document_tool import gather_background_document
+from tool.gather_jira_tool import gather_jira
 from tool.test_case_generate_tool import test_case_generate
 
 
@@ -22,7 +21,7 @@ class QAAgent:
     def run(self, jira_request):
         logging.basicConfig(level=logging.INFO)
 
-        self.agent.tools = [gather_jira_document, test_case_generate, cucumber_script_generate]
+        self.agent.tools = [gather_jira, gather_background_document, test_case_generate, cucumber_script_generate]
         self.agent.knowledge = QA_KNOWLEDGE
         self.agent.background = QA_BACKGROUND
 

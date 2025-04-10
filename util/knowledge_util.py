@@ -25,11 +25,11 @@ def get_jira_info(class_name, module_file):
         args = parser.parse_args()
         case = args.case
 
-        module_path = "knowledge." + case + module_file
+        module_path = "knowledge." + case + "." + module_file
 
         return get_class_module(class_name, module_path)
     except Exception as e:
-        logging.error("get project knowledge error")
+        logging.error("get jira info error")
         raise
 
 
@@ -45,7 +45,7 @@ def get_cucumber_knowledge(module_file):
 
         return knowledge
     except Exception as e:
-        logging.error("get project knowledge error")
+        logging.error("get cucumber knowledge error: %s", module_file)
         raise
 
 
@@ -64,5 +64,5 @@ def get_class_module(class_name, module_path):
         res = getattr(module, class_name)
         return res
     except Exception as e:
-        logging.error("get class module content error")
+        logging.error("get class module content error: %s", class_name)
         raise
