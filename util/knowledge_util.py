@@ -49,6 +49,22 @@ def get_cucumber_knowledge(module_file):
         raise
 
 
+def get_other_knowledge(module_file):
+    try:
+        parser = argparse.ArgumentParser()
+        parser.add_argument("--case", required=True)
+        args = parser.parse_args()
+        case = args.case
+
+        knowledge = readFile(
+            "../knowledge/" + case + "/" + module_file)
+
+        return knowledge
+    except Exception as e:
+        logging.error("get cucumber knowledge error: %s", module_file)
+        raise
+
+
 def readFile(file_path):
     try:
         with open(file_path, 'r', encoding='utf-8') as file:
