@@ -1,0 +1,188 @@
+{
+  "linkRuleList": [
+    {
+      "vlsCd": "VLSCD_C20250101A_0102_1",
+      "group": {
+        "groupCd": "VS_C20250101A_0102_1",
+        "groupAssociation": {
+          "type": "LINKING",
+          "rank": 99,
+          "companyCd": "COMP1"
+        },
+        "elementList": [
+          {
+            "elemCd": "VSSLE_C20250101A_0102_1",
+            "personDcaPath": "HumanModel.HumanIdentityInfo.Identity",
+            "condition": "Nnull"
+          },
+          {
+            "elemCd": "VSSLE_C20250101A_0102_2",
+            "personDcaPath": "HumanModel.HumanClassification.Nationality",
+            "condition": "Nnull"
+          },
+          {
+            "elemCd": "VSSLE_C20250101A_0102_3",
+            "personDcaPath": "HumanModel.HumanClassification.Required",
+            "condition": "Nnull"
+          }
+        ]
+      },
+      "rank": 1,
+      "criteriaList": [
+        {
+          "v1cCd": "VLCCD_C20250101A_0102_1",
+          "rank": 3,
+          "elementList": [
+            {
+              "e1emCd": "CRELE_C20250101A_0102_1",
+              "personDcaPath": "HumanModel.HumanIdentityInfo.Identity",
+              "resumeDcaPath": "HumanModel.HumanIdentityInfo.Identity",
+              "condition": "EQ"
+            },
+            {
+              "e1emCd": "CRELE_C20250101A_0102_2",
+              "personDcaPath": "HumanModel.HumanClassification.Nationality",
+              "resumeDcaPath": "HumanModel.HumanClassification.Nationality",
+              "condition": "EQ"
+            }
+          ]
+        }
+      ]
+    },
+	{
+      "vlsCd": "VLSCD_C20250101A_0102_2",
+      "group": {
+        "groupCd": "VS_C20250101A_0102_1",
+        "groupAssociation": {
+          "type": "LINKING",
+          "rank": 10,
+          "companyCd": "COMP1"
+        },
+        "elementList": [
+          {
+            "elemCd": "VSSLE_C20250101A_0102_1",
+            "personDcaPath": "HumanModel.HumanIdentityInfo.Identity",
+            "condition": "Nnull"
+          },
+          {
+            "elemCd": "VSSLE_C20250101A_0102_2",
+            "personDcaPath": "HumanModel.HumanClassification.Nationality",
+            "condition": "Nnull"
+          },
+          {
+            "elemCd": "VSSLE_C20250101A_0102_3",
+            "personDcaPath": "HumanModel.HumanClassification.Required",
+            "condition": "Nnull"
+          }
+        ]
+      },
+      "rank": 1,
+      "criteriaList": [
+        {
+          "v1cCd": "VLCCD_C20250101A_0102_1",
+          "rank": 3,
+          "elementList": [
+            {
+              "e1emCd": "CRELE_C20250101A_0102_1",
+              "personDcaPath": "HumanModel.HumanIdentityInfo.Identity",
+              "resumeDcaPath": "HumanModel.HumanIdentityInfo.Identity",
+              "condition": "EQ"
+            },
+            {
+              "e1emCd": "CRELE_C20250101A_0102_2",
+              "personDcaPath": "HumanModel.HumanClassification.Required",
+              "resumeDcaPath": "HumanModel.HumanClassification.Required",
+              "condition": "EQ"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "owRuleList": [
+    {
+      "group": {
+        "groupCd": "VS_C20250101A_0102_BOSS",
+        "groupAssociation": {
+          "type": "OVERWRITE",
+          "rank": 20,
+          "companyCd": "COMP1"
+        },
+        "elementList": [
+          {
+            "elemCd": "VSELE_C20250101A_0102_12",
+            "personDcaPath": "HumanModel.Human.ChannelCode",
+            "condition": "EQ",
+            "param": "COMP1-BOSS"
+          },
+          {
+            "elemCd": "VSELE_C20250101A_0102_2",
+            "personDcaPath": "HumanModel.HumanClassification.Nationality",
+            "condition": "EQ",
+            "param": "US"
+          }
+        ]
+      },
+      "defaultRank": 12,
+      "canCreate": true,
+      "companyOwRuleList": [
+        {
+          "companyCd": "COMP1",
+          "useCentralRanking": true,
+          "dcRankList": [],
+          "dcaRankList": []
+        }
+      ],
+      "dcRankList": [
+        {
+          "dcPath": "HumanModel",
+          "rank": 20,
+          "canCreate": true
+        }
+      ],
+      "dcaRankList": []
+    },
+    {
+      "group": {
+        "groupCd": "VS_C20250101A_0102_LAGOU",
+        "groupAssociation": {
+          "type": "OVERWRITE",
+          "rank": 10,
+          "companyCd": "COMP1"
+        },
+        "elementList": [
+          {
+            "elemCd": "VSELE_C20250101A_0102_11",
+            "personDcaPath": "HumanModel.Human.ChannelCode",
+            "condition": "EQ",
+            "param": "COMP1-LAGOU"
+          },
+          {
+            "elemCd": "VSELE_C20250101A_0102_2",
+            "personDcaPath": "HumanModel.HumanClassification.Nationality",
+            "condition": "EQ",
+            "param": "China"
+          }
+        ]
+      },
+      "defaultRank": 11,
+      "canCreate": true,
+      "companyOwRuleList": [
+        {
+          "companyCd": "COMP1",
+          "useCentralRanking": true,
+          "dcRankList": [],
+          "dcaRankList": []
+        }
+      ],
+      "dcRankList": [
+        {
+          "dcPath": "HumanModel",
+          "rank": 20,
+          "canCreate": true
+        }
+      ],
+      "dcaRankList": []
+    }
+  ]
+}

@@ -1,0 +1,34 @@
+Priority: High
+Name: NormalDL-AutoTestRef-001
+Summary: Verify the "Auto Test Ref#" field functionality in Normal DL tickets.
+Steps:
+| No. | Test Step | Test Data | Expected Result |
+|---|---|---|---|
+| 1. | Operations Manager logs in to XMC Loan Web. |  | Successful login |
+| 2. | Create a new Normal DL ticket via "New Message". | Processing Team: *GT CN DevTest, From email address: TESTFROM1@CITI.COM, To email address: TESTTO1@CITI.COM, Subject: New Normal DL Ticket, Request Type: Normal DL | Ticket created successfully. Status: Unassigned, Sub Status: New |
+| 3. | Open the newly created ticket. |  | Ticket details page displayed. |
+| 4. | Click the "Update Ticket" action button. |  | "Update Ticket" action form displayed. |
+| 5. | Verify the presence of the "Auto Test Ref#" field in the "Update Ticket" form. |  | "Auto Test Ref#" field is displayed. |
+| 6. | **Scenario 1: Leave "Auto Test Ref#" blank.** Submit the "Update Ticket" form without entering any value in the "Auto Test Ref#" field. |  | Form submitted successfully. No error message related to "Auto Test Ref#" is displayed. |
+| 7. | Verify the "Auto Test Ref#" field under the "Additional Details" section on the ticket details page. |  | "Auto Test Ref#" field is displayed under "Additional Details" with no value. |
+| 8. | Click the "Update Ticket" action button again. |  | "Update Ticket" action form displayed. |
+| 9. | **Scenario 2: Enter a value in "Auto Test Ref#".** Enter a value in the "Auto Test Ref#" field. | Auto Test Ref#: TEST-123 |  |
+| 10. | Submit the "Update Ticket" form. |  | Form submitted successfully. |
+| 11. | Verify the "Auto Test Ref#" field under the "Additional Details" section on the ticket details page. |  | "Auto Test Ref#" field is displayed under "Additional Details" with the value "TEST-123". |
+| 12. | Close the ticket. |  | Ticket closed and archived. |
+
+
+---
+
+Priority: Medium
+Name: NormalDL-AutoTestRef-IncomingEmail-002
+Summary: Verify "Auto Test Ref#" field is not available for tickets created via incoming email.
+Steps:
+| No. | Test Step | Test Data | Expected Result |
+|---|---|---|---|
+| 1. | Send an email to the XMC Loan system's designated email address to generate a new Normal DL ticket. | From email address: EXTERNAL@EMAIL.COM, To email address: XMCLOAN@CITI.COM, Subject: Incoming Email Ticket, Body: This is a test email to generate a ticket. | A new Normal DL ticket is created in XMC Loan. |
+| 2. | Open the newly created ticket. |  | Ticket details page displayed. |
+| 3. | Click the "Update Ticket" action button. |  | "Update Ticket" action form displayed. |
+| 4. | Verify the presence of the "Auto Test Ref#" field in the "Update Ticket" form. |  | "Auto Test Ref#" field is NOT displayed. |
+| 5. | Close the ticket. |  | Ticket closed and archived. |
+

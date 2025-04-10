@@ -12,6 +12,7 @@ from evaluators.cucumber_script_optimization import CucumberOptimization
 from evaluators.cucumber_scripts_evaluator_core import CucumberEvaluatorCore
 from evaluators.cucumber_scripts_evaluator import CucumberEvaluator
 from knowledge.generate_cucumber_script import GENERATE_CUCUMBER_SCRIPT_KNOWLEDGE
+from util import knowledge_util
 
 
 @tool("cucumber_script_generate")
@@ -44,7 +45,7 @@ class CucumberScriptGenerator:
         #     self.write_script_to_file(case_name + "_optimized", final_script)
 
         generate_script = self.generate_script(parameters)
-        self.write_script_to_file("test_script_generated" + datetime.now().strftime(
+        self.write_script_to_file("_" + datetime.now().strftime(
             "%Y-%m-%d_%H-%M-%S") + "_original", generate_script)
 
         evaluate_response = self.evaluate_and_optimize(generated_test_cases, generate_script)
@@ -52,18 +53,10 @@ class CucumberScriptGenerator:
 
         final_script = evaluate_response["final_script"]
         # cucumber_scripts.append(final_script)
-        self.write_script_to_file("test_script_generated" + datetime.now().strftime(
+        self.write_script_to_file("_" + datetime.now().strftime(
             "%Y-%m-%d_%H-%M-%S") + "_optimized", final_script)
 
         return json.dumps(final_script)
-
-    def readFile(self, file_path):
-        try:
-            with open(file_path, 'r', encoding='utf-8') as file:
-                file_content = file.read()
-            return file_content
-        except:
-            return ""
 
     def write_script_to_file(self, case_name, file_content):
         parser = argparse.ArgumentParser()
@@ -159,6 +152,13 @@ class CucumberScriptGenerator:
 
             if "accept" in decision.lower():
                 logging.info(f"The script passed evaluation! - {total_score}")
+                suggestion_history_str = "\n".join([
+                    f"Suggestions: {', '.join(suggestion)}"
+                    for script, suggestion in failure_history
+                ])
+                self.write_script_to_file("suggestion_history_" + datetime.now().strftime(
+                    "%Y-%m-%d_%H-%M-%S"), suggestion_history_str)
+
                 return {
                     "decision": "Pass",
                     "total_score": total_score,
@@ -182,6 +182,14 @@ class CucumberScriptGenerator:
                 raise ValueError(f"Unexpected decision: {decision}")
 
         logging.info(f"The script did not pass after the maximum number of iterations {total_score}.")
+
+        suggestion_history_str = "\n".join([
+            f"Suggestions: {', '.join(suggestion)}"
+            for script, suggestion in failure_history[:-1]
+        ])
+
+        self.write_script_to_file("suggestion_history_" + datetime.now().strftime(
+            "%Y-%m-%d_%H-%M-%S"), suggestion_history_str)
         return {
             "decision": "Failed",
             "total_score": evaluation_output["total_score"],
@@ -211,17 +219,19 @@ class CucumberScriptGenerator:
         args = parser.parse_args()
         case = args.case
 
-        cucumber_script_basic_template = self.readFile(
-            "../knowledge/" + case + "/cucumber_knowledge/cucumber_script_base.feature")
-        available_web_elements = self.readFile("../knowledge/" + case + "/cucumber_knowledge/WebElement.yml")
-        available_webui_cucumber_system_steps = self.readFile(
-            "../knowledge/" + case + "/cucumber_knowledge/fast_webui_cucumber_system_steps.txt")
-        available_webui_cucumber_project_steps = self.readFile(
-            "../knowledge/" + case + "/cucumber_knowledge/fast_webui_cucumber_project_steps.txt")
-        script_generate_guide = self.readFile(
-            "../knowledge/" + case + "/cucumber_knowledge/script_generate_guide.txt")
-        project_document = self.readFile(
-            "../knowledge/" + case + "/project_knowledge/project_document.py")
+        cucumber_script_basic_template = knowledge_util.get_cucumber_knowledge("cucumber_script_base.feature")
+
+        available_web_elements = knowledge_util.get_cucumber_knowledge("WebElement.yml")
+
+        available_webui_cucumber_system_steps = knowledge_util.get_cucumber_knowledge(
+            "fast_webui_cucumber_system_steps.txt")
+
+        available_webui_cucumber_project_steps = knowledge_util.get_cucumber_knowledge(
+            "fast_webui_cucumber_project_steps.txt")
+
+        script_generate_guide = knowledge_util.get_cucumber_knowledge("script_generate_guide.txt")
+
+        project_document = knowledge_util.get_cucumber_knowledge("project_document.py")
 
         parameters = {
             "generated_test_cases": generated_test_cases,

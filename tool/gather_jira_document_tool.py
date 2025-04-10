@@ -1,9 +1,8 @@
-import importlib
-import argparse
-import json
+import logging
 
 from langchain_core.tools import tool
-import logging
+
+from util import knowledge_util
 
 
 @tool("gather_jira_document")
@@ -20,31 +19,13 @@ class DocumentGather:
         logging.info(
             'Collect the JIRA requirement and any related project documents necessary for generating test cases')
 
-        parser = argparse.ArgumentParser()
-        parser.add_argument("--case", required=True)
-        args = parser.parse_args()
-        case = args.case
+        project_document = knowledge_util.get_project_knowledge("PROJECT_DOCUMENT", "project_document")
 
-        module_path_k = "knowledge." + case + ".project_knowledge.project_document"
-        class_name_k = "PROJECT_DOCUMENT"
+        test_case_example = knowledge_util.get_project_knowledge("TEST_CASE_EXAMPLE", "test_case_example")
 
-        module_k = importlib.import_module(module_path_k)
-        project_document = getattr(module_k, class_name_k)
+        test_case_guide = knowledge_util.get_project_knowledge("TEST_CASE_GUIDE", "test_case_example")
 
-        module_path_c = "knowledge." + case + ".project_knowledge.test_case_example"
-        class_name_c = "TEST_CASE_EXAMPLE"
-
-        module_c = importlib.import_module(module_path_c)
-        test_case_example = getattr(module_c, class_name_c)
-
-        class_name_g = "TEST_CASE_GUIDE"
-        test_case_guide = getattr(module_c, class_name_g)
-
-        module_path_k = "knowledge." + case + ".jira"
-        class_name_k = "JIRA"
-
-        module_k = importlib.import_module(module_path_k)
-        jira = getattr(module_k, class_name_k)
+        jira = knowledge_util.get_jira_info("JIRA", "jira")
 
         context = f"\n# JIRA REQUIREMENT #\n{jira}\n"
         context += f"\n# PROJECT_DOCUMENT #\n{project_document}\n"

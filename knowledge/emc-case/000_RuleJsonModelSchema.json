@@ -1,0 +1,342 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "properties": {
+    "linkuleList": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "description": "Define Ranked person Linking Rule for group to be used for linking",
+        "properties": {
+          "v1cdn": {
+            "type": "string",
+            "description": "Unique link rule code"
+          },
+          "group": {
+            "type": "object",
+            "description": "Define Vendor or subset of Vendor to have it's own Linking Rule or overwrite Rule",
+            "properties": {
+              "groupc0p": {
+                "type": "string",
+                "description": "Unique group code"
+              },
+              "groupAssociation": {
+                "type": "object",
+                "description": "Define Company associated group with their ranking",
+                "properties": {
+                  "companycdn": {
+                    "type": "string",
+                    "description": "Company for which the linking/overwrite is defined for this group"
+                  },
+                  "rank": {
+                    "type": "number",
+                    "description": "Rank the group for Company (in case person is part of two group and both are linked to Company - high ranked associated group will be used to",
+                    "minimum": 0,
+                    "maximum": 100
+                  }
+                }
+              },
+              "type": {
+                "type": "string",
+                "description": "Define which processes group applies to",
+                "enum": [
+                  "LINKING",
+                  "OVERWRITE",
+                  "CREATE-resume"
+                ]
+              }
+            },
+            "required": [
+              "groupc0p",
+              "groupAssociation"
+            ]
+          },
+          "elementList": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "elendd": {
+                  "type": "string",
+                  "description": "Unique group element code"
+                },
+                "personDcaPath": {
+                  "type": "string",
+                  "description": "Vendor/person DCA path that to be used to define the Set"
+                },
+                "condition": {
+                  "type": "string",
+                  "description": "Criteria Formula to be used to compare Element",
+                  "enum": [
+                    "EQ",
+                    "like",
+                    "neq",
+                    "in",
+                    "min",
+                    "Null",
+                    "Nnull",
+                    "query",
+                    "persontoresume"
+                  ]
+                },
+                "param": {
+                  "type": "string",
+                  "description": "Parameter when need to validate the person Value compared with some parameter"
+                },
+                "elemGroupOrder": {
+                  "type": "number"
+                }
+              },
+              "required": [
+                "elendd",
+                "condition",
+                "personDcaPath"
+              ]
+            }
+          },
+          "rank": {
+            "type": "number",
+            "description": "Rank/Processing Order for person Linking Criteria",
+            "minimum": 0,
+            "maximum": 100
+          }
+        },
+        "required": [
+          "group",
+          "elementList",
+          "rank"
+        ]
+      }
+    },
+    "criteriaList": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "description": "Define Ranked person Linking Criteria(s) to be used for person Linking Rule",
+        "properties": {
+          "v1c02": {
+            "type": "string",
+            "description": "Unique link rule criteria code"
+          },
+          "rank": {
+            "type": "number",
+            "description": "Rank/Processing Order for person Linking Criteria",
+            "minimum": 0,
+            "maximum": 100
+          },
+          "elementList": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "description": "Define Linking Criteria Elements (DCAs) and their order for the Linking Criteria (LC) Logic",
+              "properties": {
+                "elencd": {
+                  "type": "string",
+                  "description": "Unique link rule criteria element code"
+                },
+                "personDcaPath": {
+                  "type": "string",
+                  "description": "Event/resume DCA ID that to be used to link"
+                },
+                "condition": {
+                  "type": "string",
+                  "description": "Criteria Formula to be used to compare Element",
+                  "enum": [
+                    "FO",
+                    "like",
+                    "neg",
+                    "nin",
+                    "Null",
+                    "Wound1",
+                    "query",
+                    "persontoresume"
+                  ]
+                },
+                "resumeDcaPath": {
+                  "type": "string",
+                  "description": "Vendor/person DCA path that to be used to link"
+                },
+                "param": {
+                  "type": "string",
+                  "description": "Parameter when need to validate the resume Value compared with some parameter"
+                },
+                "clennGroupOrder": {
+                  "type": "number"
+                },
+                "isItemNullPermitted": {
+                  "type": "boolean"
+                },
+                "docCompareParentsClean": {
+                  "type": "boolean"
+                },
+                "parentEventOriginInVIOd": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "elencd",
+                "personDcaPath",
+                "condition"
+              ]
+            }
+          }
+        },
+        "required": [
+          "rank",
+          "elementList",
+          "v1c02"
+        ]
+      }
+    },
+    "CompanyOverwriteist": {
+      "type": "array",
+      "description": "Define Company group Overwrite Rule",
+      "items": {
+        "type": "object",
+        "properties": {
+          "companycd": {
+            "type": "string",
+            "description": "Company code for which custom rank is defined for Company Overwrite Rule"
+          },
+          "dcRankList": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "dcPath": {
+                  "type": "string",
+                  "description": "Data Concept path for which Overwrite rank is defined"
+                },
+                "rank": {
+                  "type": "number",
+                  "description": "RANK (1 as lowest and 100 as highest)",
+                  "minimum": 0,
+                  "maximum": 100
+                },
+                "doNotWrite": {
+                  "type": "boolean",
+                  "description": "Enable Company to ignore/not process this data concept even if it is getting Processed as per Central Overwrite Rule"
+                }
+              },
+              "required": [
+                "dcPath",
+                "rank"
+              ]
+            }
+          },
+          "dataInMList": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "rank": {
+                  "type": "number",
+                  "description": "RANK (1 as lowest and 100 as highest)",
+                  "minimum": 0,
+                  "maximum": 100
+                },
+                "dataPath": {
+                  "type": "string",
+                  "description": "Data Concept Attribute path for which Overwrite rank is defined"
+                },
+                "doNotWrite": {
+                  "type": "boolean",
+                  "description": "Enable Company to ignore/not process this data concept even if it is getting Processed as per Central Overwrite Rule"
+                }
+              }
+            }
+          },
+          "usCentralRanking": {
+            "type": "boolean",
+            "description": "Whether to use the core ranking or not"
+          },
+          "canCreate": {
+            "type": "boolean",
+            "description": "Whether can it create new event when no existing event Linked"
+          },
+          "processingLogicType": {
+            "type": "string",
+            "enum": [
+              "STP",
+              "ANUAL",
+              "MARXING",
+              "INFORMATION"
+            ]
+          }
+        },
+        "required": [
+          "companycd",
+          "dcRankList",
+          "usCentralRanking"
+        ]
+      }
+    },
+    "defaultist": {
+      "type": "array",
+      "description": "Define group Core Overwrite Rule Ranking at Data Concept Level",
+      "items": {
+        "type": "object",
+        "properties": {
+          "default": {
+            "type": "string",
+            "description": "Data Concept path for which Overwrite rank is defined"
+          },
+          "rank": {
+            "type": "number",
+            "description": "RAXR (1 as lowest and 100 as highest)",
+            "minimum": 0,
+            "maximum": 100
+          },
+          "canCreate": {
+            "type": "boolean",
+            "description": "If this concept was not created by other vendor can this vendor create this concept"
+          },
+          "canDelete": {
+            "type": "boolean",
+            "description": "If attribute is created by other vendor can this vendor delete this attribute if higher ranked"
+          }
+        },
+        "required": [
+          "default",
+          "rank"
+        ]
+      }
+    },
+    "dcsRanklist": {
+      "type": "array",
+      "description": "Define group Core Overwrite Rule Ranking at Data Concept Attribute Level",
+      "items": {
+        "type": "object",
+        "properties": {
+          "dcaPath": {
+            "type": "string",
+            "description": "Data Concept Attributes path for which overwrite rank is defined"
+          },
+          "rank": {
+            "type": "number",
+            "description": "RAXR (1 as lowest and 100 as highest)",
+            "minimum": 0,
+            "maximum": 100
+          },
+          "canCreate": {
+            "type": "boolean",
+            "description": "If this attribute was not created by other vendor can this vendor create this attribute"
+          },
+          "canDelete": {
+            "type": "boolean",
+            "description": "If attribute is created by other vendor can this vendor delete this attribute if higher ranked"
+          }
+        },
+        "required": [
+          "dcaPath",
+          "rank"
+        ]
+      }
+    }
+  },
+  "required": [
+    "linkuleList",
+    "criteriaList",
+    "CompanyOverwriteist"
+  ]
+}

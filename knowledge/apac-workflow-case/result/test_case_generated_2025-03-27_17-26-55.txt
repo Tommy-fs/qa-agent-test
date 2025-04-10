@@ -1,0 +1,45 @@
+Priority: Critical
+Name: HK_GCM_Workflow-001
+Summary: Verify KL LOANS OPS - PROCESS CHECK actions based on THIRD PARTY PAYMENT and COMPLETED DATE for HK GCM Workflow.
+Steps:
+| No. | Test Step | Test Data | Expected Result |
+|---|---|---|---|
+| 1 | Create a new instruction in the system. | Instruction details (including setting THIRD PARTY PAYMENT to 'Yes') | Instruction created successfully. |
+| 2 | Login as KL LOANS OPS - PROCESS CHECK. | KL LOANS OPS - PROCESS CHECK credentials | Login successful. |
+| 3 | Access the newly created instruction. | Instruction ID | Instruction details displayed. |
+| 4 | Verify available actions before COMPLETED DATE is reached. | N/A | Specific actions available as per HK GCM Workflow with THIRD PARTY PAYMENT 'Yes' and before completion date. |
+| 5 | Wait for the system to set the COMPLETED DATE. | N/A | COMPLETED DATE populated by the system. |
+| 6 | Refresh the instruction view. | N/A | Instruction details displayed with COMPLETED DATE. |
+| 7 | Verify available actions after COMPLETED DATE is reached. | N/A | Specific actions available as per HK GCM Workflow with THIRD PARTY PAYMENT 'Yes' and after completion date. These actions should differ from step 4. |
+
+
+---
+
+Priority: High
+Name: HK_GCM_Workflow-002
+Summary: Verify KL LOANS OPS - PROCESS CHECK actions based on THIRD PARTY PAYMENT and COMPLETED DATE for HK GCM Workflow.
+Steps:
+| No. | Test Step | Test Data | Expected Result |
+|---|---|---|---|
+| 1 | Create a new instruction in the system. | Instruction details (including setting THIRD PARTY PAYMENT to 'No') | Instruction created successfully. |
+| 2 | Login as KL LOANS OPS - PROCESS CHECK. | KL LOANS OPS - PROCESS CHECK credentials | Login successful. |
+| 3 | Access the newly created instruction. | Instruction ID | Instruction details displayed. |
+| 4 | Verify available actions before COMPLETED DATE is reached. | N/A | Specific actions available as per HK GCM Workflow with THIRD PARTY PAYMENT 'No' and before completion date. |
+| 5 | Wait for the system to set the COMPLETED DATE. | N/A | COMPLETED DATE populated by the system. |
+| 6 | Refresh the instruction view. | N/A | Instruction details displayed with COMPLETED DATE. |
+| 7 | Verify available actions after COMPLETED DATE is reached. | N/A | Specific actions available as per HK GCM Workflow with THIRD PARTY PAYMENT 'No' and after completion date. These actions should differ from step 4 and also differ from test case HK_GCM_Workflow-001 step 7. |
+
+---
+
+Priority: Medium
+Name: HK_GCM_Workflow-003
+Summary: Verify COMPLETED DATE cannot be manually modified.
+Steps:
+| No. | Test Step | Test Data | Expected Result |
+|---|---|---|---|
+| 1 | Create a new instruction in the system. | Instruction details | Instruction created successfully. |
+| 2 | Login as KL LOANS OPS - PROCESS CHECK. | KL LOANS OPS - PROCESS CHECK credentials | Login successful. |
+| 3 | Access the newly created instruction. | Instruction ID | Instruction details displayed. |
+| 4 | Attempt to manually modify the COMPLETED DATE field. | Any date | The system should prevent manual modification of the COMPLETED DATE field. An error message may be displayed. |
+
+
