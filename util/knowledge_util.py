@@ -61,7 +61,7 @@ def get_other_knowledge(module_file):
 
         return knowledge
     except Exception as e:
-        logging.error("get cucumber knowledge error: %s", module_file)
+        logging.error("get other knowledge error: %s", module_file)
         raise
 
 
