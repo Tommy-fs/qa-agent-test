@@ -4,8 +4,8 @@ Prepare a json file, jira number is {jira_number}
 generate a new json for me by json schema and following blow needs
 
 1. logic of data
--common set
-    -- one ison rule file can have multi group which are associated with CoMpANy, then associated with linking rule and Overwrite Rule
+-group
+    -- one json rule file can have multi group which are associated with COMPANY, then associated with linking rule and Overwrite Rule
 
 -linking rule
     --one json rule file can have multi linking rules which can be associated with one group or multi group
@@ -15,7 +15,7 @@ generate a new json for me by json schema and following blow needs
 
 -Overwrite Rule
     --one json rule file can have multi overwrite rules--
-    --one Overwrite Rule is only associated with one common set
+    --one Overwrite Rule is only associated with one group
     --one Overwrite Rule can be associated with multi COMPANY
 
 -"canCreate" setting
@@ -36,7 +36,8 @@ generate a new json for me by json schema and following blow needs
     --RuleJsonModelschema.json,generate the json file according to this schema
 -example
     --001 C20250101A-0102 RuleData.json,generate the json file according to this example
-    --keep the file structure of RuleData.json if i only provide the jira number
+    --Content of generated file is same with the RuleData.json if only provide the jira number
+    --priority:99
 -priority of provided rules
     --if provided rules are conflict with each other, higher priority take precedence
     --higher rank higher priority
@@ -64,10 +65,7 @@ generate a new json for me by json schema and following blow needs
     -elemcd under criterialist ->for example, CRELE C20250101A 8102 1, CRELE C20250101A 0102 2, only ned to replace 8182 by provided ira number
     -vlccd->for example, VLCCD C28258181A 8102 1, VLCCD C20258101A 8102 2, only need to replace 8102 by provided jira number
 
--PERSONDcaPath/RESUMEDcaPath, refer to file 000_DC_DCA_DEF.xlsx
-    - if I input one DCA value, such as Identity, you need to complete the entire path "HumanModel. HumanIdentityInfo. Identity"
-
--for common set elements
+-for group elements
     -- using provided values, else using default values
     -- for special element "ChannelCode", default value format is "JIRA_0102_COMPANY-DS1_0102", for example, "JIRA_0102_COMPANY-DS1_0102",
     "JIRA_0102_COMPANY-DS2_0102", replace the 0102 by provided jira number
@@ -142,11 +140,11 @@ owStrategyList.companyOwStrategyList.dcRankListorowStrategyList.companyOwStrateg
 
 -example 2
     -jira number, 999
-    - common set 1， elements are ChannelCode and Language (value is "EN");
+    - group 1， elements are ChannelCode and Language (value is "EN");
         - linking rule 1， criteria elements are "Identity"+"Skill1"+"EffectiveDate"(can be null)
         - linking rule 2， child linking
         - Overwrite Rule 1， set common DC rank as 80
-    - common set 2，
+    - group 2，
         - linking rule 3， criteria elements are "Identity"+"Language"+"EffectiveDate"(can be null)+"OriginLevel"(value is "global")
         - Overwrite Rule 2， set common DC rank as 85
 
