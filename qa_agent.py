@@ -10,6 +10,7 @@ from tool.cucumber_script_generate_tool import cucumber_script_generate
 from tool.gather_background_document_tool import gather_background_document
 from tool.gather_jira_tool import gather_jira
 from tool.test_case_generate_tool import test_case_generate
+from util import knowledge_util
 
 
 class QAAgent:
@@ -22,7 +23,14 @@ class QAAgent:
         logging.basicConfig(level=logging.INFO)
 
         self.agent.tools = [gather_jira, gather_background_document, test_case_generate, cucumber_script_generate]
-        self.agent.knowledge = QA_KNOWLEDGE
+        qa_knowledge = QA_KNOWLEDGE
+        try:
+            qa_knowledge = knowledge_util.get_project_knowledge("QA_KNOWLEDGE", "special_qa_knowledge")
+            logging.info(f"Using special QA knowledge")
+        except Exception as e:
+            logging.info(f"No special QA knowledge, use default QA knowledge")
+
+        self.agent.knowledge = qa_knowledge
         self.agent.background = QA_BACKGROUND
 
         self.jira_request = jira_request

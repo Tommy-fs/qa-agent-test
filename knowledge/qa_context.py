@@ -6,8 +6,8 @@ QA_KNOWLEDGE = """
 To create test cases, you need to follow the following steps:
 1. Gather the JIRA requirement to understand requirement.
 2. Gather related documents to understand background, document including project_document, test_case_example, test_case_guide.
-2. Generate test cases: Generate corresponding test cases base on JIRA requirements, project documents and QA Object.
-3. Generate cucumber scripts: Generate cucumber script base on generated test cases.
+3. Generate test cases: Generate corresponding test cases base on JIRA requirements, project documents and QA Object.
+4. Generate cucumber scripts: Generate cucumber script base on generated test cases.
 """
 
 #     Understand these requirements, documentation, and guidance to prepare for generating test cases in the future.

@@ -44,6 +44,16 @@ prepare two pCOMPONENT1ce of data with different human info code but same COMPAN
 
 """
 
+QA_KNOWLEDGE = """
+To create test cases, you need to follow the following steps:
+1. Gather the JIRA requirement to understand requirement.
+2. Gather related documents to understand background, document including project_document, test_case_example, test_case_guide.
+3. Generate test cases: Generate corresponding test cases base on JIRA requirements, project documents and QA Object.
+4. Prepare rule data: Prepare rule data based on the provided files.
+5. Prepare test data: Prepare test data based on the provided files.
+6. Generate cucumber scripts: Generate cucumber script base on generated test cases.
+"""
+
 # TEST_CASE_GUIDE = """
 # general rules:
 # 1.prepare linking rules and overwrite rules file by provided JsonSchema(000_RuleJsonModelSchema.json),data

@@ -70,8 +70,9 @@ def readFile(file_path):
         with open(file_path, 'r', encoding='utf-8') as file:
             file_content = file.read()
         return file_content
-    except:
-        return ""
+    except Exception as e:
+        logging.error("readFile error: %s", e)
+        raise
 
 
 def get_class_module(class_name, module_path):
