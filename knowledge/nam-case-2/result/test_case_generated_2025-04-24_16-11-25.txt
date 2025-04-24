@@ -1,0 +1,51 @@
+Priority: High
+Name: System Email Rule - Add New Email Address to Distribution List
+Summary: Verify the addition of a new external email address to an existing distribution list (DL) updates the system email rule correctly.
+
+Steps:
+| No. | Test Step | Test Data | Expected Result |
+|---|---|---|---|
+| 1. | Admin user logs into XMC Loans. |  | Successful login |
+| 2. | Navigate to the System Email Rule page. |  | System Email Rule page loads successfully |
+| 3. | Locate the rule associated with *DL NAME. |  | Rule for *DL NAME is found |
+| 4. | Verify the current email addresses associated with the rule. |  | Existing email addresses are displayed |
+| 5. | Add the new external email address: address@citi.com to the DL. | address@citi.com | Email address is successfully added to the DL |
+| 6. | Return to the System Email Rule page and locate the rule for *DL NAME. |  | Rule for *DL NAME is found |
+| 7. | Verify the updated email addresses associated with the rule. |  | The new email address (address@citi.com) is included in the list of email addresses associated with the rule. |
+| 8. | Send a test email to the *DL NAME from an external email account. | Test Email Subject and Body | A new ticket is created in XMC Loans associated with the *DL NAME. |
+| 9. | Send a test email to the *DL NAME from the newly added email address (address@citi.com). | Test Email Subject and Body | A new ticket is created in XMC Loans associated with the *DL NAME. |
+| 10. | Inactivate the email rule for *DL NAME. | | Rule status changes to inactive |
+| 11. | Send a test email to the *DL NAME from an external email account. | Test Email Subject and Body | No new ticket is created in XMC Loans. |
+| 12. | Activate the email rule for *DL NAME. | | Rule status changes to active |
+
+
+---
+
+Priority: Medium
+Name: Ticket Creation and Field Population - New Email Address
+Summary: Verify ticket creation and field population via email from the newly added external email address.
+
+Steps:
+| No. | Test Step | Test Data | Expected Result |
+|---|---|---|---|
+| 1. | Send an email to the *DL NAME from the newly added email address (address@citi.com) with data for all mandatory fields (Processing Team, Subject, Request Type). | Processing Team: *DL NAME, Subject: Test Ticket, Request Type: <Select a valid request type> | A new ticket is created in XMC Loans. |
+| 2. | Open the newly created ticket. | | Ticket details page opens successfully. |
+| 3. | Verify the ticket details are populated correctly based on the email content. |  | All fields on the ticket match the information sent in the email, including "Additional Details" section. |
+| 4. | Close the ticket. | | Ticket status changes to closed. |
+
+
+---
+
+Priority: Low
+Name: Export Functionality - After Adding New Email Address
+Summary: Verify the export functionality of system email rules after adding a new email address.
+
+Steps:
+| No. | Test Step | Test Data | Expected Result |
+|---|---|---|---|
+| 1. | Admin user logs into XMC Loans. |  | Successful login |
+| 2. | Navigate to the System Email Rule page. |  | System Email Rule page loads successfully |
+| 3. | Click the "Export" button. |  | The system email rules are exported successfully (format to be determined based on the application - e.g., CSV, Excel). |
+| 4. | Verify the exported data contains the updated rule for *DL NAME, including the newly added email address (address@citi.com). |  | Exported data includes the correct rule information for *DL NAME and the new email address. |
+
+

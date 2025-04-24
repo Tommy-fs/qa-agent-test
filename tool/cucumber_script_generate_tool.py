@@ -228,7 +228,7 @@ class CucumberScriptGenerator:
 
         script_generate_guide = knowledge_util.get_cucumber_knowledge("script_generate_guide.txt")
 
-        project_document = knowledge_util.get_cucumber_knowledge("project_document.py")
+        project_document = knowledge_util.get_project_knowledge("PROJECT_DOCUMENT", "project_document")
 
         parameters = {
             "generated_test_cases": generated_test_cases,

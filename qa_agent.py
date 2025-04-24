@@ -42,7 +42,7 @@ class QAAgent:
         # self.agent.add_evaluator("cucumber script generate", CucumberEvaluator(self.agent.model_name))
 
         self.agent.planner = GraphPlanner()
-        request = f"Generate test cases for the JIRA requirement\n" + jira_request
+        request = f"Generate test cases for the JIRA requirement"
         self.agent.execute(request)
 
         execution_history = self.agent.execution_history

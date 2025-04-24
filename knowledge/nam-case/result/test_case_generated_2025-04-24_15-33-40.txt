@@ -1,0 +1,38 @@
+Priority: High
+Name: NormalDL-001
+Summary: Verify "Auto Test Ref#" field functionality in Normal DL tickets.
+
+Steps：
+| No. | Test Step | Test Data | Expected Result |
+|---|---|---|---|
+| 1. | Operations Manager logs in to XMC Loan Web. |  | Successful login |
+| 2. | Create a new Normal DL ticket via "New Message". | Processing Team: *GT CN DevTest, From email address: TESTFROM1@CITI.COM, To email address: TESTTO1@CITI.COM, Subject: New Normal DL Ticket, Request Type: Normal DL | Ticket created successfully. Status: Unassigned, Sub Status: New |
+| 3. | Open the newly created ticket. |  | Ticket details page displayed. |
+| 4. | Click "Update Ticket" action button. |  | "Update Ticket" form displayed. |
+| 5. | Verify the presence of the "Auto Test Ref#" field in the form. |  | "Auto Test Ref#" field is displayed. |
+| 6. | **Scenario 1: Leave "Auto Test Ref#" blank.** Submit the form without entering any value in "Auto Test Ref#". |  | Form submitted successfully. No error message related to "Auto Test Ref#" is displayed. |
+| 7. | Verify the "Additional Details" section. |  | "Auto Test Ref#" field is displayed with no value. |
+| 8. | Click "Update Ticket" action button again. |  | "Update Ticket" form displayed. |
+| 9. | **Scenario 2: Enter a value in "Auto Test Ref#".** Enter "TESTREF123" in the "Auto Test Ref#" field. Submit the form. | Auto Test Ref#: TESTREF123 | Form submitted successfully. |
+| 10. | Verify the "Additional Details" section. |  | "Auto Test Ref#" field is displayed with the value "TESTREF123". |
+| 11. | Close the ticket. |  | Ticket status changed to Closed. |
+
+
+---
+
+Priority: Medium
+Name: NormalDL-002
+Summary: Verify "Auto Test Ref#" field behavior with incoming email for Normal DL.
+
+Steps：
+| No. | Test Step | Test Data | Expected Result |
+|---|---|---|---|
+| 1. | Send an email to the XMC Loan inbox. | From: external_email@test.com, To: xmc_loan_inbox@citi.com, Subject: Incoming Email Test for Normal DL | A new Normal DL ticket is created in XMC Loan. |
+| 2. | Open the newly created ticket. |  | Ticket details page displayed. |
+| 3. | Verify the presence of the "Auto Test Ref#" field in the "Additional Details" section. |  | "Auto Test Ref#" field is displayed with no value. |
+| 4. | Click "Update Ticket" action button. |  | "Update Ticket" form displayed. |
+| 5. | Enter a value in "Auto Test Ref#". Submit the form. | Auto Test Ref#: INCOMINGREF456 | Form submitted successfully. |
+| 6. | Verify the "Additional Details" section. |  | "Auto Test Ref#" field is displayed with the value "INCOMINGREF456". |
+| 7. | Close the ticket. |  | Ticket status changed to Closed. |
+
+

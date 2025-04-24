@@ -1,0 +1,208 @@
+
+{
+  "linkRuleList": [
+    {
+      "vlsCd": "VLSCD_C20250101A_999_1",
+      "group": {
+        "groupCd": "VS_C20250101A_999_1",
+        "groupAssociation": {
+          "type": "LINKING",
+          "rank": 99,
+          "companyCd": "COMP1"
+        },
+        "elementList": [
+          {
+            "elemCd": "VSSLE_C20250101A_999_1",
+            "personDcaPath": "HumanModel.Human.ChannelCode",
+            "condition": "Nnull"
+          },
+          {
+            "elemCd": "VSSLE_C20250101A_999_2",
+            "personDcaPath": "HumanModel.Human.Language",
+            "condition": "Nnull"
+          }
+        ]
+      },
+      "rank": 10,
+      "criteriaList": [
+        {
+          "v1cCd": "VLCCD_C20250101A_999_1",
+          "rank": 10,
+          "elementList": [
+            {
+              "elencd": "CRELE_C20250101A_999_1",
+              "personDcaPath": "HumanModel.HumanIdentityInfo.Identity",
+              "resumeDcaPath": "HumanModel.HumanIdentityInfo.Identity",
+              "condition": "EQ"
+            },
+            {
+              "elencd": "CRELE_C20250101A_999_2",
+              "personDcaPath": "HumanModel.Human.Skill1",
+              "resumeDcaPath": "HumanModel.Human.Skill1",
+              "condition": "EQ"
+            },
+            {
+              "elencd": "CRELE_C20250101A_999_3",
+              "personDcaPath": "HumanModel.Human.EffectiveDate",
+              "resumeDcaPath": "HumanModel.Human.EffectiveDate",
+              "condition": "EQ",
+              "isItemNullPermitted": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "vlsCd": "VLSCD_C20250101A_999_2",
+      "group": {
+        "groupCd": "VS_C20250101A_999_1",
+        "groupAssociation": {
+          "type": "LINKING",
+          "rank": 1,
+          "companyCd": "COMP1"
+        },
+        "elementList": [
+          {
+            "elemCd": "VSSLE_C20250101A_999_1",
+            "personDcaPath": "HumanModel.Human.ChannelCode",
+            "condition": "Nnull"
+          },
+          {
+            "elemCd": "VSSLE_C20250101A_999_2",
+            "personDcaPath": "HumanModel.Human.Language",
+            "condition": "Nnull"
+          }
+        ]
+      },
+      "rank": 1,
+      "criteriaList": [
+        {
+          "v1cCd": "VLCCD_C20250101A_999_2",
+          "rank": 1,
+          "elementList": [
+            {
+              "elencd": "CRELE_C20250101A_999_1",
+              "personDcaPath": "HumanModel.HumanIdentityInfo.Identity",
+              "resumeDcaPath": "HumanModel.HumanIdentityInfo.Identity",
+              "condition": "EQ"
+            },
+            {
+              "elencd": "CRELE_C20250101A_999_2",
+              "personDcaPath": "HumanModel.Human.ParentHumanPERSON",
+              "resumeDcaPath": "HumanModel.Human.ParentHumanPERSON",
+              "condition": "persontoresume"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "vlsCd": "VLSCD_C20250101A_999_3",
+      "group": {
+        "groupCd": "VS_C20250101A_999_2",
+        "groupAssociation": {
+          "type": "LINKING",
+          "rank": 99,
+          "companyCd": "COMP1"
+        },
+        "elementList": [
+          {
+            "elemCd": "VSSLE_C20250101A_999_1",
+            "personDcaPath": "HumanModel.Human.ChannelCode",
+            "condition": "Nnull"
+          }
+        ]
+      },
+      "rank": 10,
+      "criteriaList": [
+        {
+          "v1cCd": "VLCCD_C20250101A_999_3",
+          "rank": 10,
+          "elementList": [
+            {
+              "elencd": "CRELE_C20250101A_999_1",
+              "personDcaPath": "HumanModel.HumanIdentityInfo.Identity",
+              "resumeDcaPath": "HumanModel.HumanIdentityInfo.Identity",
+              "condition": "EQ"
+            },
+            {
+              "elencd": "CRELE_C20250101A_999_2",
+              "personDcaPath": "HumanModel.Human.Language",
+              "resumeDcaPath": "HumanModel.Human.Language",
+              "condition": "EQ"
+            },
+            {
+              "elencd": "CRELE_C20250101A_999_3",
+              "personDcaPath": "HumanModel.Human.EffectiveDate",
+              "resumeDcaPath": "HumanModel.Human.EffectiveDate",
+              "condition": "EQ",
+              "isItemNullPermitted": true
+            },
+            {
+              "elencd": "CRELE_C20250101A_999_4",
+              "personDcaPath": "HumanModel.Human.Scope",
+              "resumeDcaPath": "HumanModel.Human.Scope",
+              "condition": "EQ",
+              "param": "earth"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "CompanyOverwriteist": [
+    {
+      "companycd": "COMP1",
+      "dcRankList": [],
+      "dataInMList": [],
+      "usCentralRanking": true,
+      "canCreate": true,
+      "processingLogicType": "STP"
+    }
+  ],
+  "defaultist": [
+    {
+      "default": "HumanModel.Human",
+      "rank": 10,
+      "canCreate": true,
+      "canDelete": false
+    },
+    {
+      "default": "HumanModel.Human.Dates",
+      "rank": 10,
+      "canCreate": true,
+      "canDelete": false
+    },
+    {
+      "default": "HumanModel.HumanClassification",
+      "rank": 10,
+      "canCreate": true,
+      "canDelete": false
+    },
+    {
+      "default": "HumanModel.HumanResume",
+      "rank": 10,
+      "canCreate": true,
+      "canDelete": false
+    },
+    {
+      "default": "HumanModel.HumanIdentityInfo",
+      "rank": 10,
+      "canCreate": true,
+      "canDelete": false
+    },
+    {
+      "default": "HumanModel.HumanHierarchicalRelation",
+      "rank": 10,
+      "canCreate": true,
+      "canDelete": false
+    },
+    {
+      "default": "HumanModel.HumanUpdateInfo",
+      "rank": 10,
+      "canCreate": true,
+      "canDelete": false
+    }
+  ],
+  "dcsRanklist": []
+}
