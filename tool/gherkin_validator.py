@@ -18,7 +18,7 @@ class GherkinValidator:
         self.warnings = []
         self.step_patterns = self.load_step_patterns(step_pattern_file)
         self.element_dict = self.load_element_dict(element_dict_file)
-        self.enable_semantics_validation = False
+        self.enable_semantics_validation = True
 
     def validate_file(self, file_path: str) -> bool:
         self.errors.clear()
