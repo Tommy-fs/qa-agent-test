@@ -133,7 +133,6 @@ class CucumberScriptGenerator:
     def evaluate_and_optimize(self, case_content, generate_script, max_iterations=3):
         global evaluation_output, total_score
         iteration_count = 0
-        evaluator = CucumberEvaluator()
 
         failure_history = []
 
@@ -141,7 +140,7 @@ class CucumberScriptGenerator:
             iteration_count += 1
             logging.info(f"Iteration {iteration_count}: Evaluating the script...")
 
-            evaluation_output = evaluator.evaluate(case_content, generate_script)
+            evaluation_output = self.evaluate(case_content, generate_script)
 
             decision = evaluation_output["decision"]
             suggestions = evaluation_output["suggestions"]
@@ -193,7 +192,7 @@ class CucumberScriptGenerator:
             "final_script": generate_script
         }
 
-    def evaluate(self, case_content, generate_script, max_iterations=3):
+    def evaluate(self, case_content, generate_script):
         evaluator = CucumberEvaluator()
 
         logging.info(f"Evaluating the script...")

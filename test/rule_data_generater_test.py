@@ -1,5 +1,5 @@
-from tool.rule_data_generate_tool import RuleDataGenerator
+from tool.rule_data_prepare_tool import RuleDataGenerator
 
 ruleDataGenerator = RuleDataGenerator()
 
-ruleDataGenerator.rule_data_generate(jira_number="999")
+ruleDataGenerator.rule_data_generate()

@@ -1,4 +1,8 @@
-JIRA = """
+from tool.testing_data_prepare_tool import TestingDataGenerator
+
+testDataGenerator = TestingDataGenerator()
+
+jira = """
 Summary: link one vin to an existing cain if the vin meet the linking strategy
 Role: BA
 Goal: not generate duplicate cain
@@ -18,3 +22,4 @@ Data:
 - prepare two piece of data with different vendor code but same HUB info, announcement date is different
 - provide more info - pending on result
 """
+testDataGenerator.testing_data_generate(jira)

@@ -1,0 +1,114 @@
+prepare a json file, following below needs:
+- jira number: C20250101A_888
+- group 1:
+  - elements: ChannelCode, Language (value: "CN")
+  - linking rules:
+    - strategy 1:
+		- rank: 90
+		- criteria elements: Identity, Skill1, EffectiveDate (nullable)
+	- strategy 2:
+		- rank: 80
+		- criteria elements: Identity, ParentHumanVIN (VINtoCAIN with ParentHumanCAIN)
+  - overwrite rule 1:
+		- Channel DC rank:
+			- HumanModel:
+				- Human: 99
+				- HumanDates: 99
+				- HumanClassification: 99
+				- HumanResume: 99
+				- HumanIdentityInfo: 99
+				- HumanAdditionalInfo: 88
+				- HumanUpdateInfo: 78
+		- Channel DCA rank:
+			- HumanModel.Human:
+				- CanBeUpdated: 66
+				- IsVirtual: None
+			- HumanModel.HumanDates:
+				- EffectiveDate: None
+				- BirthDate: 44
+			- HumanModel.HumanClassification:
+				- Nationality: None
+				- Required: None
+				- Language: None
+				- Skill1: None
+				- Skill2: None
+			- HumanModel.HumanIdentityInfo:
+				- Version: None
+			- HumanModel.TextualInfo:
+				- AdditionalCode: None
+				- AdditionalValue: None
+			- HumanModel.HumanUpdateInfo:
+				- UpdatedQualifier: None
+				- OldValue: None
+				- NewValue: None
+		- Company DC rank:
+			- HumanModel:
+				- Human: 55
+				- HumanDates: None
+				- HumanClassification: None
+				- HumanResume: None
+				- HumanIdentityInfo: 33
+				- HumanAdditionalInfo: None
+				- HumanUpdateInfo: None
+		- Company DCA rank:
+			- HumanModel.Human:
+				- CanBeUpdated: None
+				- IsVirtual: None
+			- HumanModel.HumanDates:
+				- EffectiveDate: None
+				- BirthDate: None
+			- HumanModel.HumanClassification:
+				- Nationality: 20
+				- Required: None
+				- Language: None
+				- Skill1: 21
+				- Skill2: None
+			- HumanModel.HumanIdentityInfo:
+				- Version: None
+				- HumanModel.TextualInfo:
+				- AdditionalCode: None
+				- AdditionalValue: None
+			- HumanModel.HumanUpdateInfo:
+				- UpdatedQualifier: 10
+				- OldValue: None
+				- NewValue: None
+
+- group 2:
+	- elements: ChannelCode
+	- linking rule 3:
+	  - rank: 10
+	  - criteria elements: Identity, Language, EffectiveDate (nullable), Scope (value: "earth")
+	- overwrite rule 2:
+		- Channel DC rank:
+		  - HumanModel:
+			- Human: 85
+			- HumanDates: 85
+			- HumanClassification: 85
+			- HumanResume: 85
+			- HumanIdentityInfo: 85
+			- HumanAdditionalInfo: 85
+			- HumanUpdateInfo: 85
+		- Channel DCA rank:
+			- HumanModel.Human:
+				- CanBeUpdated: None
+				- IsVirtual: None
+			- HumanModel.HumanDates:
+				- EffectiveDate: None
+				- BirthDate: None
+			- HumanModel.HumanClassification:
+				- Nationality: None
+				- Required: None
+				- Language: None
+				- Skill1: None
+				- Skill2: None
+			- HumanModel.HumanIdentityInfo:
+				- Version: None
+			- HumanModel.TextualInfo:
+				- AdditionalCode: None
+				- AdditionalValue: None
+			- HumanModel.HumanUpdateInfo:
+				- UpdatedQualifier: None
+				- OldValue: None
+				- NewValue: None
+		- Company DC rank: None
+		- Company DCA rank: None

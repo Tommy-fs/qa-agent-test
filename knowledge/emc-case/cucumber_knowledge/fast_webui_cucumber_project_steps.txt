@@ -1,0 +1,97 @@
+# before all COMPONENT1 test cases, we need to clear the COMPONENT1 config data, including linking rules, overwrite rules, basic data,
+# testing data(dummy PERSON and RESUMES)
+# 1st parameter is company name
+# result, clear all testing rules and testing data related to the company
+"Clear COMPONENT1 config data with company "([^"]')"$
+
+# prepare testing rules, including linking rules and overwrite rules, will prepare the rules in json file
+# 1st parameter is path of json file
+# result, read the file and transform the json data into sql and execute the sql in db
+"Insert COMPONENT1 rule data with json "(.*")"$
+
+# prepare testing data which is raw message in Excel, the step will read the file and transform the data into sql and execute the sql in db
+# 1st parameter is path of raw message, 2nd parameter is PERSON number which will be provided in Excel
+# result is PERSON will be generated
+Insert channel data "([^"]')" with PERSON "([^"]')"$
+
+# update channel data by raw message and PERSON number and the order of the PERSON
+# 1st parameter is path of raw message, 2nd parameter is PERSON number, 3rd parameter is order number of the PERSON
+# result, update the PERSON data by provided raw message which can be found by provided PERSON number and order number
+"Update channel data "([^"]')" with PERSON "([^"]')" and order "([^"]')"$
+
+# trigger PERSON number to COMPONENT1 process
+# 1st parameter is PERSON number
+# result, insert the into COMPONENT1 process table, COMPONENT1 will pick up the PERSON and process it
+"Trigger PERSON "([^"]')" to COMPONENT1 process$
+
+# trigger PERSON number to COMPONENT1 process with version
+# 1st parameter is PERSON number, 2nd parameter is version number
+# result, insert the into COMPONENT1 process table, COMPONENT1 will pick up the PERSON and process it
+"Trigger PERSON "([^"]')" with version "([^"]')" to COMPONENT1 process$
+
+# get status of the PERSON number and store the value into one variable
+# 1st parameter is PERSON number, 2nd parameter is variable name
+# result, get the status of the PERSON number and store the value into variable
+Get status with PERSON "([^"]')" into (@\w+)$
+
+# get PERSON version with PERSON number and store the value into one variable
+# 1st parameter is PERSON number, 2nd parameter is variable name
+# result, get the version of the PERSON number and store the value into variable
+Get PERSON version with PERSON "((^")>" into (@\w+)$
+
+# get RESUME with PERSON number and store the value into one variable
+# 1st parameter is PERSON number, 2nd parameter is variable name
+# result, get the RESUME links to the PERSON number and store the value into variable
+Get RESUME with PERSON "(^")>" into (@\w+)$
+
+# get latest RESUME version with RESUME number and store the value into one variable
+# 1st parameter is RESUME number, 2nd parameter is variable name
+# result, get the latest RESUME version with RESUME number and store the value into variable
+Get latest RESUME version with RESUME "(^")>" into (@\w+)$
+
+# common function, get the value from table by column name and column value
+# 1st parameter is column name, 2nd parameter is table name, 3rd parameter is column name, 4th parameter is variable name
+# result, get the value from table by column name and column value and store the value into variable
+Get "(^")>" from table "((^")>" where "((^")>"="((^")>" into (@\w+)$
+
+# common function, get count of records from table by column name and column value
+# 1st parameter is column name, 2nd parameter is table name, 3rd parameter is column name, 4th parameter is variable name
+Get count "((^")>" from table "((^")>" where "((^")>"="((^")>" into (@\w+)$
+
+# get RESUME version from sum table by RESUME number and store the value into one variable
+# 1st parameter is RESUME number, 2nd parameter is variable name
+# result, get the RESUME version from sum table by RESUME number and store the value into variable
+Get version of RESUME "((^")>" from sum table into (@\w+)$
+
+# get event data with RESUME number and store the value into one variable
+# lst parameter is RESUME number, 2nd parameter is variable name
+# result, get the event data with RESUME number and store the value into variable
+Get event data with "([^"]*)" into (@\w+)$
+
+# get number of PERSON linked to one RESUME number and store the value into one variable
+# lst number is RESUME number, 2nd parameter is variable name
+# result, get count of PERSON linked to one RESUME number and store the value into variable
+Get count of PERSON linked to RESUME "([^"]*)" into (@\w+)$
+
+# get link strategy code with PERSON number and store the value into one variable
+# lst parameter is PERSON number, 2nd parameter is variable name
+# result, get the link strategy code with PERSON number and store the value into variable
+Get link strategy code with PERSON "([^"]*)" into (@\w+)$
+
+# get ow strategy code with PERSON number and store the value into one variable
+# lst parameter is PERSON number, 2nd parameter is variable name
+# result, get the ow strategy code with PERSON number and store the value into variable
+Get ow strategy code with PERSON "([^"]*)" into (@\w+)$
+
+# get link strategy criteria code with PERSON number and store the value into one variable
+# lst parameter is PERSON number, 2nd parameter is variable name
+# result, get the link strategy criteria code with PERSON number and store the value into variable
+Get link strategy criteria code with PERSON "([^"]*)" into (@\w+)$
+
+# read expect file and store the value into one variable
+# lst parameter is path of expected file, 2nd parameter is variable name
+*Read expect file "([^"]*)" into (@\w+)$
+
+# generate report with report compared result
+# 1st parameter is compared result
+^Generate report with "([^"]*)"$

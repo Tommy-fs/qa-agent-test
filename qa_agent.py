@@ -9,7 +9,9 @@ from knowledge.qa_context import QA_KNOWLEDGE, QA_BACKGROUND, QA_OBJECT
 from tool.cucumber_script_generate_tool import cucumber_script_generate
 from tool.gather_background_document_tool import gather_background_document
 from tool.gather_jira_tool import gather_jira
+from tool.rule_data_prepare_tool import rule_data_prepare_tool
 from tool.test_case_generate_tool import test_case_generate
+from tool.testing_data_prepare_tool import testing_data_prepare_tool
 from util import knowledge_util
 
 
@@ -22,7 +24,8 @@ class QAAgent:
     def run(self, jira_request):
         logging.basicConfig(level=logging.INFO)
 
-        self.agent.tools = [gather_jira, gather_background_document, test_case_generate, cucumber_script_generate]
+        self.agent.tools = [gather_jira, gather_background_document, test_case_generate, cucumber_script_generate,
+                            rule_data_prepare_tool, testing_data_prepare_tool]
         qa_knowledge = QA_KNOWLEDGE
         try:
             qa_knowledge = knowledge_util.get_project_knowledge("QA_KNOWLEDGE", "special_qa_knowledge")
