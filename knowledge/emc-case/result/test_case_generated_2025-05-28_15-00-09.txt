@@ -1,0 +1,45 @@
+Priority: Critical
+Name: LinkingLogic-001
+Summary: Verify VIN linking to existing CAIN based on linking strategy and prevent duplicate CAIN creation.
+Steps：
+| No. | Test Step | Test Data | Expected Result |
+|---|---|---|---|
+| 1 | Clear existing linking rules, overwrite rules, and test data. |  |  |
+| 2 | Insert the predefined linking rule for the specific COMPANY (derived from ChannelCode). | Refer to 000_RuleJsonModelSchema.json and 001_C20250101A-0102_RuleData.json, Jira No: 0102 | Linking rule inserted successfully. |
+| 3 | Insert the predefined overwrite rule for the specific COMPANY (derived from ChannelCode). | Refer to 000_RuleJsonModelSchema.json and 001_C20250101A-0102_RuleData.json, Jira No: 0102 | Overwrite rule inserted successfully. |
+| 4 | Insert an existing CAIN. | CAIN data from 010_Testing_Data.xlsx | CAIN created successfully. |
+| 5 | Insert a VIN with matching criteria to the existing CAIN and ChannelCode 'COMPANY_0102-DS_0102'. | VIN data from 010_Testing_Data.xlsx, Jira No: 0102 | VIN inserted successfully. |
+| 6 | Trigger COMPONENT1 process for the VIN. |  | COMPONENT1 process completes successfully. |
+| 7 | Check the VIN status. |  | Completed |
+| 8 | Retrieve the count of CAINs. |  | 1 |
+| 9 | Retrieve the count of VINs linked to the CAIN. |  | 2 |
+| 10 | Retrieve the CAIN version. |  | 2 |
+| 11 | Insert a second VIN with matching criteria to the existing CAIN, different attributes impacting versioning, and ChannelCode 'COMPANY_0102-DS_0102'. | VIN data from 010_Testing_Data.xlsx, Jira No: 0102, higher priority attributes | VIN inserted successfully. |
+| 12 | Trigger COMPONENT1 process for the second VIN. |  | COMPONENT1 process completes successfully. |
+| 13 | Check the second VIN status. |  | Completed |
+| 14 | Retrieve the count of CAINs. |  | 1 |
+| 15 | Retrieve the count of VINs linked to the CAIN. |  | 3 |
+| 16 | Retrieve the CAIN version. |  | 3 |
+| 17 | Clear existing linking rules, overwrite rules, and test data. |  |  |
+
+
+---
+
+Priority: High
+Name: LinkingLogic-002
+Summary: Verify VIN processing when no matching CAIN exists.
+Steps：
+| No. | Test Step | Test Data | Expected Result |
+|---|---|---|---|
+| 1 | Clear existing linking rules, overwrite rules, and test data. |  |  |
+| 2 | Insert the predefined linking rule for the specific COMPANY (derived from ChannelCode). | Refer to 000_RuleJsonModelSchema.json and 001_C20250101A-0102_RuleData.json, Jira No: 0102 | Linking rule inserted successfully. |
+| 3 | Insert the predefined overwrite rule for the specific COMPANY (derived from ChannelCode). | Refer to 000_RuleJsonModelSchema.json and 001_C20250101A-0102_RuleData.json, Jira No: 0102 | Overwrite rule inserted successfully. |
+| 4 | Insert a VIN with ChannelCode 'COMPANY_0102-DS_0102' that does *not* match any existing CAIN. | VIN data from 010_Testing_Data.xlsx, Jira No: 0102 | VIN inserted successfully. |
+| 5 | Trigger COMPONENT1 process for the VIN. |  | COMPONENT1 process completes successfully. |
+| 6 | Check the VIN status. |  | Completed |
+| 7 | Retrieve the count of CAINs. |  | 1 |
+| 8 | Retrieve the count of VINs linked to the newly created CAIN. |  | 1 |
+| 9 | Retrieve the CAIN version. |  | 1 |
+| 10 | Clear existing linking rules, overwrite rules, and test data. |  |  |
+
+

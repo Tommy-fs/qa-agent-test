@@ -1,0 +1,245 @@
+
+{
+  "linkRuleList": [
+    {
+      "vlsCd": "VLSCD_C20250101A_888_1",
+      "group": {
+        "groupCd": "VS_C20250101A_888_1",
+        "groupAssociation": {
+          "type": "LINKING",
+          "rank": 90,
+          "companyCd": "JIRA_C20250101A_888_COMPANY"
+        },
+        "elementList": [
+          {
+            "elemCd": "VSELE_C20250101A_888_1",
+            "personDcaPath": "HumanModel.Human.ChannelCode",
+            "condition": "EQ",
+            "param": "JIRA_C20250101A_888_COMPANY-DS1_888"
+          },
+          {
+            "elemCd": "VSELE_C20250101A_888_2",
+            "personDcaPath": "HumanModel.HumanClassification.Language",
+            "condition": "EQ",
+            "param": "CN"
+          }
+        ]
+      },
+      "rank": 90,
+      "criteriaList": [
+        {
+          "v1cCd": "VLCCD_C20250101A_888_1",
+          "rank": 90,
+          "elementList": [
+            {
+              "elemCd": "CRELE_C20250101A_888_1",
+              "personDcaPath": "HumanModel.HumanIdentityInfo.Identity",
+              "resumeDcaPath": "HumanModel.HumanIdentityInfo.Identity",
+              "condition": "EQ"
+            },
+            {
+              "elemCd": "CRELE_C20250101A_888_2",
+              "personDcaPath": "HumanModel.HumanClassification.Skill1",
+              "resumeDcaPath": "HumanModel.HumanClassification.Skill1",
+              "condition": "EQ"
+            },
+            {
+              "elemCd": "CRELE_C20250101A_888_3",
+              "personDcaPath": "HumanModel.HumanDates.EffectiveDate",
+              "resumeDcaPath": "HumanModel.HumanDates.EffectiveDate",
+              "condition": "EQ",
+              "isElemNullPermitted": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "vlsCd": "VLSCD_C20250101A_888_2",
+      "group": {
+        "groupCd": "VS_C20250101A_888_1",
+        "groupAssociation": {
+          "type": "LINKING",
+          "rank": 80,
+          "companyCd": "JIRA_C20250101A_888_COMPANY"
+        }
+      },
+      "rank": 80,
+      "criteriaList": [
+        {
+          "v1cCd": "VLCCD_C20250101A_888_2",
+          "rank": 80,
+          "elementList": [
+            {
+              "elemCd": "CRELE_C20250101A_888_4",
+              "personDcaPath": "HumanModel.HumanIdentityInfo.Identity",
+              "resumeDcaPath": "HumanModel.HumanIdentityInfo.Identity",
+              "condition": "EQ"
+            },
+            {
+              "elemCd": "CRELE_C20250101A_888_5",
+              "personDcaPath": "HumanModel.HumanIdentityInfo.ParentHumanVIN",
+              "resumeDcaPath": "HumanModel.HumanIdentityInfo.ParentHumanCAIN",
+              "condition": "PERSONtoRESUME"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "vlsCd": "VLSCD_C20250101A_888_3",
+      "group": {
+        "groupCd": "VS_C20250101A_888_2",
+        "groupAssociation": {
+          "type": "LINKING",
+          "rank": 10,
+          "companyCd": "JIRA_C20250101A_888_COMPANY"
+        },
+        "elementList": [
+          {
+            "elemCd": "VSELE_C20250101A_888_3",
+            "personDcaPath": "HumanModel.Human.ChannelCode",
+            "condition": "EQ",
+            "param": "JIRA_C20250101A_888_COMPANY-DS2_888"
+          }
+        ]
+      },
+      "rank": 10,
+      "criteriaList": [
+        {
+          "v1cCd": "VLCCD_C20250101A_888_3",
+          "rank": 10,
+          "elementList": [
+            {
+              "elemCd": "CRELE_C20250101A_888_6",
+              "personDcaPath": "HumanModel.HumanIdentityInfo.Identity",
+              "resumeDcaPath": "HumanModel.HumanIdentityInfo.Identity",
+              "condition": "EQ"
+            },
+            {
+              "elemCd": "CRELE_C20250101A_888_7",
+              "personDcaPath": "HumanModel.HumanClassification.Language",
+              "resumeDcaPath": "HumanModel.HumanClassification.Language",
+              "condition": "EQ"
+            },
+            {
+              "elemCd": "CRELE_C20250101A_888_8",
+              "personDcaPath": "HumanModel.HumanDates.EffectiveDate",
+              "resumeDcaPath": "HumanModel.HumanDates.EffectiveDate",
+              "condition": "EQ",
+              "isElemNullPermitted": true
+            },
+            {
+              "elemCd": "CRELE_C20250101A_888_9",
+              "personDcaPath": "HumanModel.HumanClassification.Scope",
+              "resumeDcaPath": "HumanModel.HumanClassification.Scope",
+              "condition": "EQ",
+              "param": "earth"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "owRuleList": [
+    {
+      "group": {
+        "groupCd": "VS_C20250101A_888_1",
+        "groupAssociation": {
+          "type": "OVERWRITE",
+          "rank": 99,
+          "companyCd": "JIRA_C20250101A_888_COMPANY"
+        }
+      },
+      "defaultRank": 99,
+      "canCreate": true,
+      "companyOwRuleList": [
+        {
+          "companyCd": "JIRA_C20250101A_888_COMPANY",
+          "useCentralRanking": true,
+          "dcRankList": [
+            {
+              "dcPath": "HumanModel",
+              "rank": 55
+            },
+            {
+              "dcPath": "HumanModel.HumanIdentityInfo",
+              "rank": 33
+            }
+          ],
+          "dcaRankList": [
+            {
+              "dcaPath": "HumanModel.HumanClassification.Nationality",
+              "rank": 20
+            },
+            {
+              "dcaPath": "HumanModel.HumanClassification.Skill1",
+              "rank": 21
+            },
+            {
+              "dcaPath": "HumanModel.HumanUpdateInfo.UpdatedQualifier",
+              "rank": 10
+            }
+          ]
+        }
+      ],
+      "dcRankList": [
+        {
+          "dcPath": "HumanModel",
+          "rank": 99,
+          "canCreate": true
+        },
+        {
+          "dcPath": "HumanModel.HumanAdditionalInfo",
+          "rank": 88,
+          "canCreate": true
+        },
+        {
+          "dcPath": "HumanModel.HumanUpdateInfo",
+          "rank": 78,
+          "canCreate": true
+        }
+      ],
+      "dcaRankList": [
+        {
+          "dcaPath": "HumanModel.Human.CanBeUpdated",
+          "rank": 66,
+          "canCreate": true
+        },
+        {
+          "dcaPath": "HumanModel.HumanDates.BirthDate",
+          "rank": 44,
+          "canCreate": true
+        }
+      ]
+    },
+    {
+      "group": {
+        "groupCd": "VS_C20250101A_888_2",
+        "groupAssociation": {
+          "type": "OVERWRITE",
+          "rank": 85,
+          "companyCd": "JIRA_C20250101A_888_COMPANY"
+        }
+      },
+      "defaultRank": 85,
+      "canCreate": true,
+      "companyOwRuleList": [
+        {
+          "companyCd": "JIRA_C20250101A_888_COMPANY",
+          "useCentralRanking": true,
+          "dcRankList": [],
+          "dcaRankList": []
+        }
+      ],
+      "dcRankList": [
+        {
+          "dcPath": "HumanModel",
+          "rank": 85,
+          "canCreate": true
+        }
+      ],
+      "dcaRankList": []
+    }
+  ]
+}
